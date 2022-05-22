@@ -1,0 +1,38 @@
+@use './colors' as *;
+
+.main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: auto;
+  padding: 1rem 8rem;
+
+  .main__menu {
+    width: 13rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 20px;
+    background-color: $primary;
+  }
+
+  .main__board {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4rem;
+    border-radius: 20px;
+    padding-top: 6rem;
+    background-color: $primary;
+  }
+}

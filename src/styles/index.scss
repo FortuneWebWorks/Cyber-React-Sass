@@ -11,10 +11,19 @@
 body,
 html {
   box-sizing: border-box;
+  height: 100vh;
   background-color: $primary-dark;
   font-family: 'Roboto', sans-serif;
 
-  @media (max-width: 1190px) {
+  @media (max-width: 1400px) {
     font-size: 11px;
   }
+
+  @media (max-width: 1050px) {
+    font-size: 10px;
+  }
+}
+
+#root {
+  height: 100%;
 }

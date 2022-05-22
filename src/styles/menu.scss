@@ -1,0 +1,29 @@
+@use './colors' as *;
+
+.menu {
+  width: 100%;
+  aspect-ratio: 1/1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+
+  svg {
+    width: 55%;
+    height: 50%;
+  }
+
+  span {
+    white-space: pre;
+  }
+
+  &.active {
+    background-color: $primary-light;
+  }
+}
