@@ -1,9 +1,11 @@
 import '../styles/menu.scss';
-// icnos
+// Icnos
 import { ReactComponent as DashboardIcon } from '../assets/icons/dashboard.svg';
 import { ReactComponent as SnipeIcon } from '../assets/icons/snipe.svg';
 import { ReactComponent as AutoMintIcon } from '../assets/icons/auto-mint.svg';
 import { ReactComponent as BulkIcon } from '../assets/icons/bulk.svg';
+// Menus
+import AutoMint from './AutoMint';
 
 const renderIcon = (title) => {
   switch (title) {
@@ -20,11 +22,27 @@ const renderIcon = (title) => {
   }
 };
 
-const Menu = ({ title, active }) => {
+const renderMenu = (title) => {
+  switch (title) {
+    // case 'Dashboard':
+    //   return <DashboardIcon />;
+    // case 'Snipe':
+    //   return <SnipeIcon />;
+    case 'Auto Mint':
+      return <AutoMint />;
+    // case 'Bulk Bidder':
+    //   return <BulkIcon />;
+    default:
+      break;
+  }
+};
+
+const Menu = ({ title, active, noMenu }) => {
   return (
     <div className={`menu ${active && 'active'}`}>
       {renderIcon(title)}
       <span>{title}</span>
+      {!noMenu && renderMenu(title)}
     </div>
   );
 };

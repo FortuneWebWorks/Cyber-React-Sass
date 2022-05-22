@@ -1,0 +1,62 @@
+@use './colors' as *;
+
+.dropdown__container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 1rem;
+
+  .dropdown {
+    position: relative;
+    width: 100%;
+    min-height: 3rem;
+    background-color: $primary;
+    border-radius: 7px;
+    padding: 0.7rem;
+    cursor: pointer;
+  }
+
+  .dropdown__placeholder {
+    opacity: 0.5;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .dropdown__items {
+    position: absolute;
+    top: 120%;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    border-radius: 7px;
+    background-color: $primary-dark;
+    font-size: 1.4rem;
+    font-weight: normal;
+    opacity: 0;
+    z-index: -1;
+    transition: all 0.2s ease-in-out;
+
+    &.open {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    li {
+      width: 100%;
+      border-bottom: 1px solid $primary;
+      border-radius: inherit;
+      padding: 1rem;
+      cursor: pointer;
+
+      &:hover {
+        background-color: lighten($color: $primary-dark, $amount: 2%);
+      }
+    }
+  }
+}
