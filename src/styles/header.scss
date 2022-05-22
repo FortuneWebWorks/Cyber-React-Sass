@@ -2,13 +2,13 @@
 
 .header {
   width: 100%;
-  height: 6rem;
+  height: 9rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 3px solid #333;
   padding: 0 8rem;
   background-color: $primary;
+  
 
   .header__logo {
     width: 11rem;
@@ -18,9 +18,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 2rem;
+    gap: 4rem;
     color: #fff;
-    font-size: 1rem;
+    font-size: 1.6em;
     font-weight: bold;
     letter-spacing: 1px;
   }
@@ -38,6 +38,7 @@
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
+    font-size: 1.4rem;
   }
 
   .header__contact__contact-icons {
