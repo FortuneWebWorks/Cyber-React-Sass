@@ -4,6 +4,7 @@ import Input from './Input';
 import Button from './Button';
 import ButtonGroup from './ButtonGroup';
 import Proggress from './Proggress';
+import Switch from './Switch';
 
 const dropdownData = [
   { title: 'Your Wallet', data: 'Your Wallet' },
@@ -25,6 +26,7 @@ const AutoMint = () => {
         activeDefault={2}
       />
       <Proggress min={0} max={100} sign="%" />
+      <Switch />
     </div>
   );
 };
