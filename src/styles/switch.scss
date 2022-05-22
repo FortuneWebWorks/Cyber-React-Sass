@@ -10,7 +10,7 @@
     visibility: hidden;
 
     &:checked + label {
-      background: $primary;
+      background: $success;
     }
 
     &:checked + label:after {
@@ -43,7 +43,7 @@
     }
 
     &:active:after {
-      width: 40%;
+      width: 50%;
     }
   }
 }
