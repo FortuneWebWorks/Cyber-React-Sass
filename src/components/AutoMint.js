@@ -1,5 +1,6 @@
 import '../styles/autoMint.scss';
 import DropDown from './DropDown';
+import Input from './Input';
 
 const dropdownData = [
   { title: 'item1', data: 'item1data' },
@@ -16,6 +17,7 @@ const AutoMint = () => {
         placeholder={'Your Wallet'}
         items={dropdownData}
       />
+      <Input title="Collection Slug *" placeholder="bolderthanever" />
     </div>
   );
 };
