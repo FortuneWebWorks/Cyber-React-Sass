@@ -1,6 +1,7 @@
 import '../styles/autoMint.scss';
 import DropDown from './DropDown';
 import Input from './Input';
+import Button from './Button';
 
 const dropdownData = [
   { title: 'item1', data: 'item1data' },
@@ -18,6 +19,7 @@ const AutoMint = () => {
         items={dropdownData}
       />
       <Input title="Collection Slug *" placeholder="bolderthanever" />
+      <Button text="Get" />
     </div>
   );
 };
