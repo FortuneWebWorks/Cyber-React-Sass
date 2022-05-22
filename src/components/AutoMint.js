@@ -2,12 +2,11 @@ import '../styles/autoMint.scss';
 import DropDown from './DropDown';
 import Input from './Input';
 import Button from './Button';
+import ButtonGroup from './ButtonGroup';
 
 const dropdownData = [
-  { title: 'item1', data: 'item1data' },
-  { title: 'item2', data: 'item2data' },
-  { title: 'item3', data: 'item3data' },
-  { title: 'item4', data: 'item4data' },
+  { title: 'Your Wallet', data: 'Your Wallet' },
+  { title: 'Private', data: 'priveate' },
 ];
 
 const AutoMint = () => {
@@ -20,6 +19,10 @@ const AutoMint = () => {
       />
       <Input title="Collection Slug *" placeholder="bolderthanever" />
       <Button text="Get" />
+      <ButtonGroup
+        items={['sfdsdfadsa', 'asfd', 'button3']}
+        activeDefault={2}
+      />
     </div>
   );
 };

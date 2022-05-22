@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import '../styles/dropdown.scss';
+import { ReactComponent as Arrow } from '../assets/icons/arrow_down.svg';
 
 const DropDown = ({ title, placeholder, items, callBack }) => {
   const [value, setValue] = useState('');
@@ -23,7 +24,10 @@ const DropDown = ({ title, placeholder, items, callBack }) => {
     <div className="dropdown__container">
       <span className="title">{title}</span>
       <ul className="dropdown" onClick={onClick}>
-        <span className="dropdown__placeholder">{placeHolder}</span>
+        <div className="dropdown__placeholder__icon">
+          <span className="dropdown__placeholder">{placeHolder}</span>
+          <Arrow />
+        </div>
         <ul className={`dropdown__items ${open && 'open'}`}>
           {items.map((item) => (
             <li key={item.title} data={item.data}>

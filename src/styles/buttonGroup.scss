@@ -1,0 +1,33 @@
+@use './colors.scss' as *;
+
+.buttons__container {
+  width: 100%;
+  padding: 1rem;
+
+  .buttons__second-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    border-radius: 30px;
+    background-color: $primary;
+    overflow: hidden;
+  }
+
+  button {
+    width: 100%;
+    min-height: 3rem;
+    border: none;
+    outline: none;
+    padding: 1.5rem 1rem;
+    background-color: transparent;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  button.active {
+    border-radius: 30px;
+    background-color: $primary-lighter;
+  }
+}

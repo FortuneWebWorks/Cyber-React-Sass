@@ -19,6 +19,24 @@
     cursor: pointer;
   }
 
+  .dropdown__placeholder__icon {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    user-select: none;
+    pointer-events: none;
+
+    svg {
+      height: 1rem;
+      width: fit-content;
+      user-select: none;
+      pointer-events: none;
+    }
+  }
+
   .dropdown__placeholder {
     font-weight: normal;
     opacity: 0.5;
