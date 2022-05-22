@@ -3,6 +3,7 @@ import DropDown from './DropDown';
 import Input from './Input';
 import Button from './Button';
 import ButtonGroup from './ButtonGroup';
+import Proggress from './Proggress';
 
 const dropdownData = [
   { title: 'Your Wallet', data: 'Your Wallet' },
@@ -23,6 +24,7 @@ const AutoMint = () => {
         items={['sfdsdfadsa', 'asfd', 'button3']}
         activeDefault={2}
       />
+      <Proggress min={0} max={100} sign="%" />
     </div>
   );
 };
