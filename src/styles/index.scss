@@ -24,21 +24,28 @@ html {
   }
 
   @media (max-width: 1235px) {
-    font-size: 7px;
+    font-size: 8px;
   }
 
   @media (max-width: 1050px) {
     font-size: 7px;
   }
 
-  @media (max-width: 1050px) {
+  @media (max-width: 900px) {
     font-size: 6px;
   }
   
-  @media (max-width: 1050px) {
-    font-size: 5px;
+  @media (max-width: 800px) {
+    font-size: 4px;
   }
   
+  @media (max-width: 600px) {
+    font-size: 3px;
+  }
+
+  @media (max-width: 500px) {
+    font-size: 2px;
+  }
 }
 
 #root {
