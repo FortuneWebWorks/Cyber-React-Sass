@@ -1,5 +1,12 @@
-function App() {
-  return <div className="App"></div>;
-}
+import './styles/app.scss';
+import Header from './components/Header';
+
+const App = () => {
+  return (
+    <div className="App">
+      <Header />
+    </div>
+  );
+};
 
 export default App;
