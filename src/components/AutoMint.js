@@ -8,6 +8,7 @@ import Proggress from './Proggress';
 import Switch from './Switch';
 
 import ApiHandler from '../apiHandler/node';
+import Result from './Result';
 
 const dropdownData = [
   { title: 'Your Wallet', data: 'Your Wallet' },
@@ -134,12 +135,53 @@ const AutoMint = () => {
             placeholder="50000"
             callBack={getContractAddress}
           />
-          <div>
-            <span>Estimated Total:</span>
-            <h3>--,-- ETH</h3>
-          </div>
+
+          <Result />
         </div>
+
         <Switch title="Timer Enable?" mode="row" />
+
+        <div className="container__multi-input">
+          <DropDown
+            title="Years"
+            placeholder={'8'}
+            items={flagAbi}
+            callBack={flagCallBack}
+          />
+          <DropDown
+            title="Mounth"
+            placeholder={'8'}
+            items={flagAbi}
+            callBack={flagCallBack}
+          />
+          <DropDown
+            title="Day"
+            placeholder={'8'}
+            items={flagAbi}
+            callBack={flagCallBack}
+          />
+        </div>
+
+        <div className="container__multi-input">
+          <DropDown
+            title="Hours"
+            placeholder={'8'}
+            items={flagAbi}
+            callBack={flagCallBack}
+          />
+          <DropDown
+            title="Minutes"
+            placeholder={'8'}
+            items={flagAbi}
+            callBack={flagCallBack}
+          />
+          <DropDown
+            title="Seconds"
+            placeholder={'8'}
+            items={flagAbi}
+            callBack={flagCallBack}
+          />
+        </div>
       </div>
     </div>
   );
