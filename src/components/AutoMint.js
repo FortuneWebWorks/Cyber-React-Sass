@@ -43,7 +43,8 @@ const AutoMint = () => {
   };
 
   const flagCallBack = (key, data) => {
-    console.log(data);
+    console.log(data.outputs);
+    setFlagOutputs(data.outputs);
   };
 
   return (
@@ -83,7 +84,7 @@ const AutoMint = () => {
       {/* Mint function input generating */}
       {mintInputs.map((item, index) => (
         <Fragment key={index}>
-          <Input title={item.name} placeholder="[1]" />
+          <Input title={item.name} placeholder={item.name} />
         </Fragment>
       ))}
 
@@ -103,8 +104,13 @@ const AutoMint = () => {
           items={flagAbi}
           callBack={flagCallBack}
         />
-        <Input title="Flip State Caller" placeholder="3" />
       </div>
+      {/* Flag function input generating */}
+      {flagOutputs.map((item, index) => (
+        <Fragment key={index}>
+          <Input title={item.type} placeholder={item.type} />
+        </Fragment>
+      ))}
 
       <Switch />
     </div>

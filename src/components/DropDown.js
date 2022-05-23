@@ -32,13 +32,15 @@ const DropDown = ({ title, placeholder, items, callBack }) => {
           <span className="dropdown__placeholder">{placeHolder}</span>
           <Arrow />
         </div>
-        <ul className={`dropdown__items ${open ? 'open' : ''}`}>
-          {items.map((item) => (
-            <li key={item.name || item.title} data={JSON.stringify(item)}>
-              {item.name || item.title}
-            </li>
-          ))}
-        </ul>
+        <div className="dropdown__scroll">
+          <ul className={`dropdown__items ${open ? 'open' : ''}`}>
+            {items.map((item) => (
+              <li key={item.name || item.title} data={JSON.stringify(item)}>
+                {item.name || item.title}
+              </li>
+            ))}
+          </ul>
+        </div>
       </ul>
     </div>
   );
