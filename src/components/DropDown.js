@@ -16,7 +16,11 @@ const DropDown = ({ title, placeholder, items, callBack }) => {
       setValue(e.target.getAttribute('data'));
       setPlaceHolder(e.target.textContent);
       setOpen((prev) => !prev);
-      callBack && callBack(e.target.textContent, e.target.getAttribute('data'));
+      callBack &&
+        callBack(
+          e.target.textContent,
+          JSON.parse(e.target.getAttribute('data'))
+        );
     }
   };
 
@@ -30,8 +34,8 @@ const DropDown = ({ title, placeholder, items, callBack }) => {
         </div>
         <ul className={`dropdown__items ${open ? 'open' : ''}`}>
           {items.map((item) => (
-            <li key={item.title} data={item.data}>
-              {item.title}
+            <li key={item.name || item.title} data={JSON.stringify(item)}>
+              {item.name || item.title}
             </li>
           ))}
         </ul>

@@ -1,4 +1,4 @@
-import React from 'react';
+import { Fragment } from 'react';
 import '../styles/listItem.scss';
 import { ReactComponent as DeleteIcon } from '../assets/icons/delete.svg';
 import { ReactComponent as CopyIcon } from '../assets/icons/copy.svg';
@@ -20,7 +20,7 @@ const ListItem = ({ items = [], onDelete }) => {
       </thead>
       <tbody>
         {items.map((item) => (
-          <>
+          <Fragment key={item.id}>
             <tr className="table__body__row">
               <td>{item.contractAddress}</td>
               <td>{item.mintPrice}</td>
@@ -44,7 +44,7 @@ const ListItem = ({ items = [], onDelete }) => {
               </td>
             </tr>
             <tr className="table__space"></tr>
-          </>
+          </Fragment>
         ))}
       </tbody>
     </table>

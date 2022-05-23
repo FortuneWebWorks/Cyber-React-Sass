@@ -3,6 +3,7 @@ import ListItem from './ListItem';
 
 const items = [
   {
+    id: '1',
     contractAddress: 'ljksdfl',
     mintPrice: '5',
     fee: '12',
@@ -10,6 +11,7 @@ const items = [
     status: 'idl',
   },
   {
+    id: '2',
     contractAddress: 'sdfsadffdsfasd',
     mintPrice: '5',
     fee: '12',
@@ -17,6 +19,7 @@ const items = [
     status: 'idl',
   },
   {
+    id: '3',
     contractAddress: 'ljkssdfadfssdafdfsaadfsdfl',
     mintPrice: '5',
     fee: '12',
