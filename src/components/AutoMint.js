@@ -87,13 +87,13 @@ const AutoMint = () => {
         />
 
         {/* Mint function input generating */}
-        <div className="container__multi-input">
-          {mintInputs.map((item, index) => (
-            <Fragment key={index}>
-              <Input title={item.name} placeholder={item.name} />
-            </Fragment>
-          ))}
-        </div>
+        {/* <div className="container__multi-input"> */}
+        {mintInputs.map((item, index) => (
+          <Fragment key={index}>
+            <Input title={item.name} placeholder={item.name} />
+          </Fragment>
+        ))}
+        {/* </div> */}
 
         <div className="container__multi-input">
           <Input title="Mint Price *" placeholder="[1]" />
@@ -122,7 +122,24 @@ const AutoMint = () => {
           </div>
         ))}
 
-        <Switch />
+        <Input
+          title="Custom Hex Data"
+          placeholder="dsf21135413541sdfa"
+          callBack={getContractAddress}
+        />
+
+        <div className="container__multi-input">
+          <Input
+            title="Custom Gas Limit"
+            placeholder="50000"
+            callBack={getContractAddress}
+          />
+          <div>
+            <span>Estimated Total:</span>
+            <h3>--,-- ETH</h3>
+          </div>
+        </div>
+        <Switch title="Timer Enable?" mode="row" />
       </div>
     </div>
   );

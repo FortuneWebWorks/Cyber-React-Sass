@@ -91,7 +91,8 @@
     }
 
     &.open {
-      height: 20rem;
+      height: fit-content;
+      max-height: 20rem;
       overflow: hidden;
       overflow-y: auto;
       opacity: 1;

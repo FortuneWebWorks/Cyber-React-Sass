@@ -15,22 +15,17 @@
     overflow: hidden;
 
     &.over {
-      display: flex;
-      justify-content: flex-end;
-
       span {
-        transform: translateX(-5%);
         display: block;
         animation: 10s infinite forwards longLabel ease-in-out;
-        text-align: right;
       }
 
       @keyframes longLabel {
         0% {
-          transform: translateX(-5%);
+          transform: translateX(0);
         }
         100% {
-          transform: translateX(105%);
+          transform: translateX(-80%);
         }
       }
     }
