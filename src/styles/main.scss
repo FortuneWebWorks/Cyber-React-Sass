@@ -1,4 +1,5 @@
 @use './colors' as *;
+@use './variables' as *;
 
 .main {
   width: 100%;
@@ -20,7 +21,7 @@
     align-items: center;
     gap: 1rem;
     padding: 1rem;
-    border-radius: 20px;
+    border-radius: $border-radius-md;
     background-color: $primary;
   }
 
@@ -32,8 +33,7 @@
     justify-content: flex-start;
     align-items: center;
     gap: 4rem;
-    border-radius: 20px;
-    padding-top: 6rem;
+    border-radius: $border-radius-md;
     background-color: $primary;
   }
 }

@@ -1,0 +1,13 @@
+.list__container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 3rem;
+  color: #fff;
+
+  h2 {
+    font-size: 1.7rem;
+  }
+}

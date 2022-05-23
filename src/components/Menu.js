@@ -33,16 +33,19 @@ const renderMenu = (title) => {
     // case 'Bulk Bidder':
     //   return <BulkIcon />;
     default:
-      break;
+      return;
   }
 };
 
-const Menu = ({ title, active, noMenu }) => {
+const Menu = ({ title, active, noMenu, callBack }) => {
   return (
-    <div className={`menu ${active ? 'active' : ''}`}>
+    <div
+      className={`menu ${active ? 'active' : ''}`}
+      onClick={callBack && callBack.bind(null, title)}
+    >
       {renderIcon(title)}
       <span>{title}</span>
-      {!noMenu && renderMenu(title)}
+      {/* {!noMenu && renderMenu(title)} */}
     </div>
   );
 };
