@@ -10,6 +10,8 @@ import Switch from './Switch';
 import ApiHandler from '../apiHandler/node';
 import Result from './Result';
 
+import { toast } from 'react-toastify';
+
 const dropdownData = [
   { title: 'Your Wallet', data: 'Your Wallet' },
   { title: 'Private', data: 'priveate' },
@@ -26,11 +28,17 @@ const AutoMint = () => {
   const getFromContractAdress = async () => {
     try {
       let response = await node.checkContract(contractAddress.current);
-      console.log(response);
       setFlagAbi(response.flagAbi.allFlagFunctions);
       setMintAbi(response.mintAbi.allMintFunctions);
+      toast('Success', {
+        type: 'success',
+        style: { fontSize: '1.5rem' },
+      });
     } catch (error) {
-      console.log(error);
+      toast('The contract isn’t correct, check the address again', {
+        type: 'error',
+        style: { fontSize: '1.5rem' },
+      });
     }
   };
 
@@ -39,12 +47,10 @@ const AutoMint = () => {
   };
 
   const mintCallBack = (key, data) => {
-    console.log(data.inputs);
     setMintInputs(data.inputs);
   };
 
   const flagCallBack = (key, data) => {
-    console.log(data.outputs);
     setFlagOutputs(data.outputs);
   };
 

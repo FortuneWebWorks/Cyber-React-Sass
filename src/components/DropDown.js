@@ -2,7 +2,7 @@ import { useState } from 'react';
 import '../styles/dropdown.scss';
 import { ReactComponent as Arrow } from '../assets/icons/arrow_down.svg';
 
-const DropDown = ({ title, placeholder, items, callBack }) => {
+const DropDown = ({ title, placeholder, items, callBack, fontSize }) => {
   const [value, setValue] = useState('');
   const [placeHolder, setPlaceHolder] = useState(placeholder);
   const [open, setOpen] = useState(false);
@@ -26,7 +26,9 @@ const DropDown = ({ title, placeholder, items, callBack }) => {
 
   return (
     <div className="dropdown__container">
-      <span className="title">{title}</span>
+      <span className="title" style={{ fontSize: fontSize || '' }}>
+        {title}
+      </span>
       <ul className="dropdown" onClick={onClick}>
         <div className="dropdown__placeholder__icon">
           <span className="dropdown__placeholder">{placeHolder}</span>

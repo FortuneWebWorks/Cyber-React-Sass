@@ -6,6 +6,8 @@ import { ReactComponent as AutoMintIcon } from '../assets/icons/auto-mint.svg';
 import { ReactComponent as BulkIcon } from '../assets/icons/bulk.svg';
 // Menus
 import AutoMint from './AutoMint';
+import Snipe from './Snipe';
+import Bulk from './Bulk';
 
 const renderIcon = (title) => {
   switch (title) {
@@ -27,11 +29,11 @@ const renderMenu = (title) => {
     case 'Dashboard':
       return;
     case 'Snipe':
-      return <SnipeIcon />;
+      return <Snipe />;
     case 'Auto Mint':
       return <AutoMint />;
     case 'Bulk Bidder':
-      return <BulkIcon />;
+      return <Bulk />;
     default:
       return;
   }
