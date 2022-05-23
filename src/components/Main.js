@@ -25,7 +25,7 @@ const Main = () => {
         ))}
       </div>
       <div className="main__board">
-        <Board />
+        <Board route={active} />
       </div>
     </div>
   );

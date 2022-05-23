@@ -6,12 +6,16 @@ import ButtonGroup from './ButtonGroup';
 import Proggress from './Proggress';
 import Switch from './Switch';
 
+import ApiHandler from '../apiHandler/node';
+
 const dropdownData = [
   { title: 'Your Wallet', data: 'Your Wallet' },
   { title: 'Private', data: 'priveate' },
 ];
 
 const AutoMint = () => {
+  const node = new ApiHandler();
+
   return (
     <div className="container">
       <DropDown

@@ -24,14 +24,14 @@ const renderIcon = (title) => {
 
 const renderMenu = (title) => {
   switch (title) {
-    // case 'Dashboard':
-    //   return <DashboardIcon />;
-    // case 'Snipe':
-    //   return <SnipeIcon />;
+    case 'Dashboard':
+      return;
+    case 'Snipe':
+      return <SnipeIcon />;
     case 'Auto Mint':
       return <AutoMint />;
-    // case 'Bulk Bidder':
-    //   return <BulkIcon />;
+    case 'Bulk Bidder':
+      return <BulkIcon />;
     default:
       return;
   }
@@ -45,7 +45,7 @@ const Menu = ({ title, active, noMenu, callBack }) => {
     >
       {renderIcon(title)}
       <span>{title}</span>
-      {/* {!noMenu && renderMenu(title)} */}
+      {!noMenu && active && renderMenu(title)}
     </div>
   );
 };
