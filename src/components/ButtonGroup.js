@@ -15,7 +15,7 @@ const ButtonGroup = ({ items, activeDefault, callBack }) => {
         {items.map((item) => (
           <button
             key={item}
-            className={item === active && 'active'}
+            className={item === active ? 'active' : ''}
             onClick={() => onClick(item)}
           >
             {item}

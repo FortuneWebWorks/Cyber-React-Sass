@@ -39,7 +39,7 @@ const renderMenu = (title) => {
 
 const Menu = ({ title, active, noMenu }) => {
   return (
-    <div className={`menu ${active && 'active'}`}>
+    <div className={`menu ${active ? 'active' : ''}`}>
       {renderIcon(title)}
       <span>{title}</span>
       {!noMenu && renderMenu(title)}
