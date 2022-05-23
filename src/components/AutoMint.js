@@ -49,70 +49,81 @@ const AutoMint = () => {
 
   return (
     <div className="container">
-      <DropDown
-        title="Select Wallet"
-        placeholder={'Your Wallet'}
-        items={dropdownData}
-      />
-
-      <DropDown title="RPC" placeholder={'Your Wallet'} items={dropdownData} />
-
-      <Input title="RPC HTTPS URL *" placeholder="https://google.com" />
-
-      <Input title="RPC WSS URL *" placeholder="https://google.com" />
-
-      <Input
-        title="Contract Address *"
-        placeholder="dsf21135413541sdfa"
-        callBack={getContractAddress}
-      />
-
-      <div className="container__multi-input">
-        <Input title="ABI *" placeholder="Fetch" />
-        <Button text="Get" callBack={getFromContractAdress} />
-      </div>
-
-      <DropDown title="Mode" placeholder={'Normal'} items={dropdownData} />
-
-      <DropDown
-        title="Mint Function"
-        placeholder={'Mint -[1]'}
-        items={mintAbi}
-        callBack={mintCallBack}
-      />
-
-      {/* Mint function input generating */}
-      {mintInputs.map((item, index) => (
-        <Fragment key={index}>
-          <Input title={item.name} placeholder={item.name} />
-        </Fragment>
-      ))}
-
-      <div className="container__multi-input">
-        <Input title="Mint Price *" placeholder="[1]" />
-        <Input title="Ton Count/Repeat" placeholder="3" />
-      </div>
-
-      <ButtonGroup items={['Auto', 'Multiplier', 'Custom']} activeDefault={2} />
-
-      <Proggress min={0} max={100} sign="%" />
-
-      <div className="container__multi-input">
+      <div className="container__scroll">
         <DropDown
-          title="Flip State Function"
-          placeholder={'Mint -[1]'}
-          items={flagAbi}
-          callBack={flagCallBack}
+          title="Select Wallet"
+          placeholder={'Your Wallet'}
+          items={dropdownData}
         />
-      </div>
-      {/* Flag function input generating */}
-      {flagOutputs.map((item, index) => (
-        <Fragment key={index}>
-          <Input title={item.type} placeholder={item.type} />
-        </Fragment>
-      ))}
 
-      <Switch />
+        <DropDown
+          title="RPC"
+          placeholder={'Your Wallet'}
+          items={dropdownData}
+        />
+
+        <Input title="RPC HTTPS URL *" placeholder="https://google.com" />
+
+        <Input title="RPC WSS URL *" placeholder="https://google.com" />
+
+        <Input
+          title="Contract Address *"
+          placeholder="dsf21135413541sdfa"
+          callBack={getContractAddress}
+        />
+
+        <div className="container__multi-input">
+          <Input title="ABI *" placeholder="Fetch" />
+          <Button text="Get" callBack={getFromContractAdress} />
+        </div>
+
+        <DropDown title="Mode" placeholder={'Normal'} items={dropdownData} />
+
+        <DropDown
+          title="Mint Function"
+          placeholder={'Mint -[1]'}
+          items={mintAbi}
+          callBack={mintCallBack}
+        />
+
+        {/* Mint function input generating */}
+        <div className="container__multi-input">
+          {mintInputs.map((item, index) => (
+            <Fragment key={index}>
+              <Input title={item.name} placeholder={item.name} />
+            </Fragment>
+          ))}
+        </div>
+
+        <div className="container__multi-input">
+          <Input title="Mint Price *" placeholder="[1]" />
+          <Input title="Ton Count/Repeat" placeholder="3" />
+        </div>
+
+        <ButtonGroup
+          items={['Auto', 'Multiplier', 'Custom']}
+          activeDefault={2}
+        />
+
+        <Proggress min={0} max={100} sign="%" />
+
+        <div className="container__multi-input">
+          <DropDown
+            title="Flip State Function"
+            placeholder={'Mint -[1]'}
+            items={flagAbi}
+            callBack={flagCallBack}
+          />
+        </div>
+        {/* Flag function input generating */}
+        {flagOutputs.map((item, index) => (
+          <div className="container__multi-input" key={index}>
+            <Input title={item.type} placeholder={item.type} />
+          </div>
+        ))}
+
+        <Switch />
+      </div>
     </div>
   );
 };

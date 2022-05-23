@@ -10,6 +10,27 @@
   gap: 0.5rem;
   padding: 1rem;
 
+  .input__title-contianer {
+    max-width: 13rem;
+    overflow: hidden;
+
+    &.over {
+      span {
+        display: block;
+        animation: 10s infinite forwards longLabel ease-in-out;
+      }
+
+      @keyframes longLabel {
+        0% {
+          transform: translateX(-160%);
+        }
+        100% {
+          transform: translateX(105%);
+        }
+      }
+    }
+  }
+
   .input__input {
     width: 100%;
     min-height: 3rem;

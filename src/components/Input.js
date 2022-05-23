@@ -3,7 +3,11 @@ import '../styles/input.scss';
 const Input = ({ title, placeholder, callBack }) => {
   return (
     <div className="input__container">
-      <span className="input__title">{title}</span>
+      <div
+        className={`input__title-contianer ${title.length > 22 ? 'over' : ''}`}
+      >
+        <span className="">{title}</span>
+      </div>
       <input
         onChange={(e) => callBack && callBack(e.target.value)}
         className="input__input"
