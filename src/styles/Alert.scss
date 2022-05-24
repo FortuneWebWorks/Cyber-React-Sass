@@ -56,7 +56,7 @@
   }
 
   .alert__message {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   }
 
   .alert__buttons {
@@ -66,6 +66,7 @@
   button {
     width: 100%;
     border: none;
+
     border-radius: $border-radius-lg;
     padding: 1.5rem 2rem;
     background-color: transparent;
@@ -85,5 +86,23 @@
   svg {
     user-select: none;
     pointer-events: none;
+  }
+
+  @media (max-width: 500px) {
+    .alert {
+      width: 80%;
+      height: 25%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 3rem 2rem;
+      background-color: $primary-dark;
+      border-radius: $border-radius-sm;
+    }
+
+    .alert__message {
+      font-size: 2rem;
+    }
   }
 }
