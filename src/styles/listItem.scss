@@ -6,6 +6,11 @@
   font-size: 1.5rem;
   border-spacing: 0;
   text-align: left;
+  display: block;
+
+  * {
+    max-width: 100%;
+  }
 
   svg {
     * {
@@ -18,6 +23,7 @@
   & th {
     padding: 1rem;
     padding-left: 1.5rem;
+    text-align: left;
   }
 
   .table__body__row {
@@ -50,6 +56,14 @@
   .active {
     svg {
       stroke: red;
+    }
+  }
+
+  @media (max-width: 500px) {
+    width: 500px;
+
+    th {
+      min-width: 15rem;
     }
   }
 }

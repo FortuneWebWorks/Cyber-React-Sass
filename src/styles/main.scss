@@ -36,4 +36,19 @@
     border-radius: $border-radius-md;
     background-color: $primary;
   }
+
+  @media (max-width: 500px) {
+    padding: 1rem 0;
+    justify-content: space-between;
+
+    .main__board,
+    .main__menu {
+      border-radius: 5px;
+      max-width: 75%;
+    }
+
+    .main__board {
+      overflow: hidden;
+    }
+  }
 }
