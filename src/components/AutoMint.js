@@ -17,6 +17,16 @@ const dropdownData = [
   { title: 'Private', data: 'priveate' },
 ];
 
+const selectWalletData = [
+  { title: 'Your Wallet', data: 'Your Wallet' },
+  { title: 'Private Key', data: 'priveate' },
+];
+
+const modeData = [
+  { title: 'Signed', data: 'Signed' },
+  { title: 'Pre Signed', data: 'Pre Signed' },
+];
+
 const AutoMint = () => {
   const node = new ApiHandler();
   const contractAddress = useRef('');
@@ -24,6 +34,8 @@ const AutoMint = () => {
   const [mintAbi, setMintAbi] = useState([]);
   const [mintInputs, setMintInputs] = useState([]);
   const [flagOutputs, setFlagOutputs] = useState([]);
+  const [activeBtn, setActiveBtn] = useState('Auto');
+  const [selectWallet, setSelectWallet] = useState('');
 
   const getFromContractAdress = async () => {
     try {
@@ -54,14 +66,27 @@ const AutoMint = () => {
     setFlagOutputs(data.outputs);
   };
 
+  const onButtonGroupChange = (activeBtn) => {
+    setActiveBtn(activeBtn);
+  };
+
+  const onSelectWalletChange = (key, data) => {
+    setSelectWallet(key);
+  };
+
   return (
     <div className="container">
       <div className="container__scroll">
         <DropDown
           title="Select Wallet"
           placeholder={'Your Wallet'}
-          items={dropdownData}
+          items={selectWalletData}
+          callBack={onSelectWalletChange}
         />
+
+        {selectWallet === 'Private Key' && (
+          <Input title="Your Private Key" placeholder="54132136463fdsa" />
+        )}
 
         <DropDown
           title="RPC"
@@ -69,9 +94,9 @@ const AutoMint = () => {
           items={dropdownData}
         />
 
-        <Input title="RPC HTTPS URL *" placeholder="https://google.com" />
+        {/* <Input title="RPC HTTPS URL *" placeholder="https://google.com" />
 
-        <Input title="RPC WSS URL *" placeholder="https://google.com" />
+        <Input title="RPC WSS URL *" placeholder="https://google.com" /> */}
 
         <Input
           title="Contract Address *"
@@ -84,7 +109,13 @@ const AutoMint = () => {
           <Button text="Get" callBack={getFromContractAdress} />
         </div>
 
-        <DropDown title="Mode" placeholder={'Normal'} items={dropdownData} />
+        {selectWallet !== 'Private Key' && (
+          <DropDown
+            title="Signature Type"
+            placeholder={'Normal'}
+            items={modeData}
+          />
+        )}
 
         <DropDown
           title="Mint Function"
@@ -94,25 +125,29 @@ const AutoMint = () => {
         />
 
         {/* Mint function input generating */}
-        {/* <div className="container__multi-input"> */}
-        {mintInputs.map((item, index) => (
-          <Fragment key={index}>
-            <Input title={item.name} placeholder={item.name} />
-          </Fragment>
-        ))}
-        {/* </div> */}
+        <div className="container__2row-input">
+          {mintInputs.map((item, index) => (
+            <Fragment key={index}>
+              <Input title={item.name} placeholder={item.name} />
+            </Fragment>
+          ))}
+        </div>
 
         <div className="container__multi-input">
           <Input title="Mint Price *" placeholder="[1]" />
-          <Input title="Ton Count/Repeat" placeholder="3" />
+
+          {selectWallet === 'Private Key' && (
+            <Input title="Ton Count/Repeat" placeholder="3" />
+          )}
         </div>
 
         <ButtonGroup
           items={['Auto', 'Multiplier', 'Custom']}
-          activeDefault={2}
+          activeDefault={0}
+          callBack={onButtonGroupChange}
         />
 
-        <Proggress min={0} max={100} sign="%" />
+        {activeBtn === 'Multiplier' && <Proggress min={0} max={100} sign="%" />}
 
         <div className="container__multi-input">
           <DropDown
@@ -135,15 +170,17 @@ const AutoMint = () => {
           callBack={getContractAddress}
         />
 
-        <div className="container__multi-input">
-          <Input
-            title="Custom Gas Limit"
-            placeholder="50000"
-            callBack={getContractAddress}
-          />
+        {activeBtn !== 'Multiplier' && (
+          <div className="container__multi-input">
+            <Input
+              title="Custom Gas Limit"
+              placeholder="50000"
+              callBack={getContractAddress}
+            />
 
-          <Result />
-        </div>
+            <Result />
+          </div>
+        )}
 
         <Switch title="Timer Enable?" mode="row" />
 

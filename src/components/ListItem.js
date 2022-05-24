@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Fragment } from 'react';
 import '../styles/listItem.scss';
 import { ReactComponent as DeleteIcon } from '../assets/icons/delete.svg';
@@ -7,6 +8,12 @@ import { ReactComponent as PauseIcon } from '../assets/icons/pause.svg';
 import { ReactComponent as FlagIcon } from '../assets/icons/flag.svg';
 
 const ListItem = ({ items = [], onDelete }) => {
+  // const [flag, setFlag] = useState(false);
+
+  const onFlagChange = (e) => {
+    e.target.classList.toggle('active');
+  };
+
   return (
     <table className="table">
       <thead>
@@ -27,19 +34,22 @@ const ListItem = ({ items = [], onDelete }) => {
               <td>{item.fee}</td>
               <td>{item.mode}</td>
               <td>{item.status}</td>
-              <td>
+              <td
+                onClick={onFlagChange && onFlagChange}
+                className="action-icon"
+              >
                 <FlagIcon />
               </td>
-              <td>
+              <td className="action-icon">
                 <PauseIcon />
               </td>
-              <td>
+              <td className="action-icon">
                 <EditIcon />
               </td>
-              <td>
+              <td className="action-icon">
                 <CopyIcon />
               </td>
-              <td onClick={onDelete && onDelete}>
+              <td onClick={onDelete && onDelete} className="action-icon">
                 <DeleteIcon />
               </td>
             </tr>

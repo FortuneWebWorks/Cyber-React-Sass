@@ -8,8 +8,6 @@
   text-align: left;
 
   svg {
-    cursor: pointer;
-
     * {
       user-select: none;
       pointer-events: none;
@@ -38,5 +36,20 @@
 
   .table__space {
     height: 1rem;
+  }
+
+  .action-icon {
+    cursor: pointer;
+  }
+
+  svg {
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .active {
+    svg {
+      stroke: red;
+    }
   }
 }

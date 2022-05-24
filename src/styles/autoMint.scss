@@ -45,5 +45,13 @@
       justify-content: center;
       align-items: flex-end;
     }
+
+    .container__2row-input {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      justify-items: center;
+      align-content: space-between;
+    }
   }
 }
