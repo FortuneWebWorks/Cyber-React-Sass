@@ -52,7 +52,7 @@
     position: absolute;
     top: 120%;
     left: 0;
-    width: fit-content;
+    width: 100%;
     height: fit-content;
     border-radius: $border-radius-sm;
     overflow: hidden;
@@ -60,7 +60,7 @@
   }
 
   .dropdown__items {
-    width: fit-content;
+    width: 100%;
     height: 0;
     display: flex;
     flex-direction: column;
