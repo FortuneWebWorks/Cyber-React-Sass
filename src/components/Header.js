@@ -6,6 +6,7 @@ import { ReactComponent as TwitterIcon } from '../assets/images/twitter.svg';
 import { ReactComponent as LinkedinIcon } from '../assets/images/linkdin.svg';
 import { ReactComponent as GasIcon } from '../assets/images/gas.svg';
 import HeaderMenu from './HeaderMenu';
+import Search from './Search';
 import { toast } from 'react-toastify';
 
 import { MetaMask, Node } from '../libs/wallets';
@@ -65,6 +66,8 @@ const Header = () => {
   return (
     <header className="header">
       <img className="header__logo" src={logo} alt="logo" />
+
+      <Search />
 
       <div className="header__menu-item">
         <span>Pricing</span>

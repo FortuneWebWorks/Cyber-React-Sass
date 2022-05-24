@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import '../styles/menu.scss';
 // Icnos
 import { ReactComponent as DashboardIcon } from '../assets/icons/dashboard.svg';
@@ -40,6 +41,12 @@ const renderMenu = (title) => {
 };
 
 const Menu = ({ title, active, noMenu, callBack }) => {
+  useEffect(() => {
+    window && window.addEventListener('click', (e) => {
+      console.log(e.target)
+    })
+  }, [])
+
   return (
     <div
       className={`menu ${active ? 'active' : ''}`}
