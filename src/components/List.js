@@ -47,7 +47,7 @@ const List = () => {
 
   return (
     <div className="list__container">
-      <h2>Tasks</h2>
+      <h2 className="list_title">Tasks</h2>
       <ListItem items={items} onDelete={onDeleteHandler} />
       <Alert
         message={'Are you sure you want to delete this task?'}
