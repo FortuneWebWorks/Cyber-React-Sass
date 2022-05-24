@@ -12,6 +12,7 @@
   transform: translateY(-50%);
   cursor: default;
   overflow: hidden;
+  z-index: 10;
 
   .container__scroll {
     width: 100%;
