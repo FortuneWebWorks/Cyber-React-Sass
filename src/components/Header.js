@@ -4,6 +4,7 @@ import { ReactComponent as DiscordIcon } from '../assets/images/discord.svg';
 import { ReactComponent as TwitterIcon } from '../assets/images/twitter.svg';
 import { ReactComponent as LinkedinIcon } from '../assets/images/linkdin.svg';
 import { ReactComponent as GasIcon } from '../assets/images/gas.svg';
+import HeaderMenu from './HeaderMenu'
 
 const Header = () => {
   return (
@@ -31,6 +32,7 @@ const Header = () => {
         </div>
 
         <button className="header__connect-wallet">Connect Wallet</button>
+        <HeaderMenu />
       </div>
     </header>
   );

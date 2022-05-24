@@ -1,0 +1,39 @@
+.headermenu__container {
+  position: relative;
+  display: none;
+
+  svg {
+    width: 5rem;
+    cursor: pointer;
+
+    * {
+      user-select: none;
+      pointer-events: none;
+    }
+  }
+
+  .headermenu__items {
+    position: absolute;
+    top: 100%;
+    right: 100%;
+    width: 16rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+    border-radius: 5px;
+    padding: 1rem;
+    background-color: #f4f4f4;
+    color: #000;
+    font-size: 1.8rem;
+
+    li {
+      cursor: pointer;
+    }
+  }
+
+  @media (max-width: 1000px) {
+    display: flex;
+  }
+}

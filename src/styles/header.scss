@@ -60,4 +60,19 @@
     font-size: 1rem;
     font-weight: bold;
   }
+
+  @media (max-width: 1000px) {
+    .header__menu-item {
+      display: none;
+    }
+    .header__contact__gas {
+      display: none;
+    }
+    .header__contact__contact-icons {
+      display: none;
+    }
+    .header__connect-wallet {
+      width: 100%;
+    }
+  }
 }
