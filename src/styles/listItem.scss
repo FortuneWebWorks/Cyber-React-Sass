@@ -7,6 +7,15 @@
   border-spacing: 0;
   text-align: left;
 
+  svg {
+    cursor: pointer;
+
+    * {
+      user-select: none;
+      pointer-events: none;
+    }
+  }
+
   & td,
   & th {
     padding: 1rem;

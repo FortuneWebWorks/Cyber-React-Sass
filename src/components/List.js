@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import '../styles/list.scss';
 import ListItem from './ListItem';
+import Alert from './Alert';
 
 const items = [
   {
@@ -29,10 +31,31 @@ const items = [
 ];
 
 const List = () => {
+  const [isAlert, setIsAlert] = useState(false);
+
+  const onDeleteHandler = () => {
+    setIsAlert(true);
+  };
+
+  const onCancelHandler = () => {
+    setIsAlert(false);
+  };
+
+  const onContinueHandler = () => {
+    setIsAlert(false);
+  };
+
   return (
     <div className="list__container">
       <h2>Tasks</h2>
-      <ListItem items={items} />
+      <ListItem items={items} onDelete={onDeleteHandler} />
+      <Alert
+        message={'Are you sure you want to delete this task?'}
+        title="Delete task"
+        open={isAlert}
+        cancelHandler={onCancelHandler}
+        continueHandler={onContinueHandler}
+      />
     </div>
   );
 };

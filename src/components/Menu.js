@@ -43,7 +43,9 @@ const Menu = ({ title, active, noMenu, callBack }) => {
   return (
     <div
       className={`menu ${active ? 'active' : ''}`}
-      onClick={callBack && callBack.bind(null, title)}
+      onClick={(e) => {
+        e.target.classList.contains('menu') && callBack && callBack(title);
+      }}
     >
       {renderIcon(title)}
       <span>{title}</span>

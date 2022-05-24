@@ -6,10 +6,10 @@ import Board from './Board';
 const menuItems = ['Dashboard', 'Snipe', 'Auto Mint', 'Bulk Bidder'];
 
 const Main = () => {
-  const [active, setActive] = useState('Auto Mint');
+  const [active, setActive] = useState('Dashboard');
 
-  const onClick = (manuName) => {
-    setActive(manuName);
+  const onClick = (menuName) => {
+    setActive((prev) => (menuName === prev ? '' : menuName));
   };
 
   return (

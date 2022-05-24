@@ -19,10 +19,14 @@
   svg {
     width: 55%;
     height: 50%;
+    user-select: none;
+    pointer-events: none;
   }
 
   span {
     white-space: pre;
+    user-select: none;
+    pointer-events: none;
   }
 
   &.active {
