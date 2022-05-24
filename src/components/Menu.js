@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import '../styles/menu.scss';
 // Icnos
 import { ReactComponent as DashboardIcon } from '../assets/icons/dashboard.svg';
@@ -25,6 +25,7 @@ const renderIcon = (title) => {
   }
 };
 
+let resetHandler;
 const renderMenu = (title) => {
   switch (title) {
     case 'Dashboard':
@@ -32,7 +33,7 @@ const renderMenu = (title) => {
     case 'Snipe':
       return <Snipe />;
     case 'Auto Mint':
-      return <AutoMint />;
+      return <AutoMint callBack={resetHandler} />;
     case 'Bulk Bidder':
       return <Bulk />;
     default:
@@ -41,22 +42,28 @@ const renderMenu = (title) => {
 };
 
 const Menu = ({ title, active, noMenu, callBack }) => {
+  const [activeState, setActiveState] = useState(active);
+
   useEffect(() => {
-    window && window.addEventListener('click', (e) => {
-      console.log(e.target)
-    })
-  }, [])
+    setActiveState(active);
+  }, [active]);
+
+  resetHandler = () => {
+    setActiveState(false);
+    callBack('');
+  };
 
   return (
     <div
       className={`menu ${active ? 'active' : ''}`}
+      id={title}
       onClick={(e) => {
         e.target.classList.contains('menu') && callBack && callBack(title);
       }}
     >
       {renderIcon(title)}
       <span>{title}</span>
-      {!noMenu && active && renderMenu(title)}
+      {!noMenu && activeState && renderMenu(title)}
     </div>
   );
 };

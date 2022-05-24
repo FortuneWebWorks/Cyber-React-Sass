@@ -11,10 +11,11 @@ const Input = ({ title, placeholder, callBack, fontSize }) => {
         </span>
       </div>
       <input
-        onChange={(e) => callBack && callBack(e.target.value)}
+        onChange={(e) => callBack && callBack(e.target.value, title)}
         className="input__input"
         type="text"
         placeholder={placeholder}
+        defaultValue=""
       />
     </div>
   );

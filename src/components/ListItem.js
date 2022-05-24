@@ -27,7 +27,7 @@ const ListItem = ({ items = [], onDelete }) => {
       </thead>
       <tbody>
         {items.map((item) => (
-          <Fragment key={item.id}>
+          <Fragment key={item.contractAddress}>
             <tr className="table__body__row">
               <td>{item.contractAddress}</td>
               <td>{item.mintPrice}</td>
@@ -49,7 +49,10 @@ const ListItem = ({ items = [], onDelete }) => {
               <td className="action-icon">
                 <CopyIcon />
               </td>
-              <td onClick={onDelete && onDelete} className="action-icon">
+              <td
+                onClick={onDelete && onDelete.bind(null, item.contractAddress)}
+                className="action-icon"
+              >
                 <DeleteIcon />
               </td>
             </tr>

@@ -1,4 +1,4 @@
-import { useRef, useState, Fragment } from 'react';
+import { useRef, Fragment, useContext } from 'react';
 import '../styles/autoMint.scss';
 import DropDown from './DropDown';
 import Input from './Input';
@@ -6,6 +6,8 @@ import Button from './Button';
 import ButtonGroup from './ButtonGroup';
 import Proggress from './Proggress';
 import Switch from './Switch';
+import { AutoMintContext } from '../contexts/autoMintContext';
+import { VcheckValidateMintInputs } from '../apiHandler/inputChecking';
 
 import ApiHandler from '../apiHandler/node';
 import Result from './Result';
@@ -22,20 +24,38 @@ const selectWalletData = [
   { title: 'Private Key', data: 'priveate' },
 ];
 
-const modeData = [
+const signatureData = [
   { title: 'Signed', data: 'Signed' },
   { title: 'Pre Signed', data: 'Pre Signed' },
 ];
 
-const AutoMint = () => {
+const modeData = [
+  { title: 'Main Flag', data: 'Main Flag' },
+  { title: 'Condition', data: 'Condition' },
+];
+
+const AutoMint = ({ callBack }) => {
+  const {
+    contractAddress,
+    flagAbi,
+    setFlagAbi,
+    mintAbi,
+    setMintAbi,
+    mintInputs,
+    setMintInputs,
+    flagOutputs,
+    setFlagOutputs,
+    activeBtn,
+    setActiveBtn,
+    selectWallet,
+    setSelectWallet,
+    mode,
+    setMode,
+    setTasks,
+    mintPrice,
+    mintInputsRendered,
+  } = useContext(AutoMintContext);
   const node = new ApiHandler();
-  const contractAddress = useRef('');
-  const [flagAbi, setFlagAbi] = useState([]);
-  const [mintAbi, setMintAbi] = useState([]);
-  const [mintInputs, setMintInputs] = useState([]);
-  const [flagOutputs, setFlagOutputs] = useState([]);
-  const [activeBtn, setActiveBtn] = useState('Auto');
-  const [selectWallet, setSelectWallet] = useState('');
 
   const getFromContractAdress = async () => {
     try {
@@ -60,6 +80,8 @@ const AutoMint = () => {
 
   const mintCallBack = (key, data) => {
     setMintInputs(data.inputs);
+
+    mintInputsRendered.current = {};
   };
 
   const flagCallBack = (key, data) => {
@@ -74,8 +96,46 @@ const AutoMint = () => {
     setSelectWallet(key);
   };
 
+  const onModeChange = (key, data) => {
+    setMode(key);
+  };
+
+  const onSetMintPrice = (value) => {
+    mintPrice.current = value;
+  };
+
+  const onMintInputsChange = (value, title) => {
+    mintInputsRendered.current = {
+      ...mintInputsRendered.current,
+      [title]: value,
+    };
+  };
+
+  const reset = () => {
+    contractAddress.current = '';
+    mintPrice.current = '';
+  };
+
+  // Create Task
+  const onCreateTask = () => {
+    console.log(contractAddress.current);
+    setTasks((prev) => [
+      ...prev,
+      {
+        contractAddress: contractAddress.current,
+        mintPrice: mintPrice.current,
+        fee: 12,
+        mode: mode,
+        status: 'idl',
+      },
+    ]);
+
+    callBack();
+  };
+
   return (
     <div className="container">
+      {console.log('render')}
       <div className="container__scroll">
         <DropDown
           title="Select Wallet"
@@ -113,9 +173,16 @@ const AutoMint = () => {
           <DropDown
             title="Signature Type"
             placeholder={'Normal'}
-            items={modeData}
+            items={signatureData}
           />
         )}
+
+        <DropDown
+          title="Mode"
+          placeholder={'Normal'}
+          items={modeData}
+          callBack={onModeChange}
+        />
 
         <DropDown
           title="Mint Function"
@@ -128,13 +195,21 @@ const AutoMint = () => {
         <div className="container__2row-input">
           {mintInputs.map((item, index) => (
             <Fragment key={index}>
-              <Input title={item.name} placeholder={item.name} />
+              <Input
+                title={item.name}
+                placeholder={item.name}
+                callBack={onMintInputsChange}
+              />
             </Fragment>
           ))}
         </div>
 
         <div className="container__multi-input">
-          <Input title="Mint Price *" placeholder="[1]" />
+          <Input
+            title="Mint Price *"
+            placeholder="[1]"
+            callBack={onSetMintPrice}
+          />
 
           {selectWallet === 'Private Key' && (
             <Input title="Ton Count/Repeat" placeholder="3" />
@@ -149,14 +224,39 @@ const AutoMint = () => {
 
         {activeBtn === 'Multiplier' && <Proggress min={0} max={100} sign="%" />}
 
-        <div className="container__multi-input">
-          <DropDown
-            title="Flip State Function"
-            placeholder={'Mint -[1]'}
-            items={flagAbi}
-            callBack={flagCallBack}
-          />
-        </div>
+        {activeBtn === 'Custom' && (
+          <div className="container__multi-input">
+            <DropDown
+              title="Max Fee Per Gas"
+              placeholder={'8'}
+              items={dropdownData}
+              fontSize="1rem"
+            />
+            <DropDown
+              title="Max Peiority Fee"
+              placeholder={'8'}
+              items={dropdownData}
+              fontSize="1rem"
+            />
+            <DropDown
+              title="Gas Limit"
+              placeholder={'8'}
+              items={dropdownData}
+              fontSize="1rem"
+            />
+          </div>
+        )}
+
+        {mode !== 'Main Flag' && (
+          <div className="container__multi-input">
+            <DropDown
+              title="Flip State Function"
+              placeholder={'Mint -[1]'}
+              items={flagAbi}
+              callBack={flagCallBack}
+            />
+          </div>
+        )}
         {/* Flag function input generating */}
         {flagOutputs.map((item, index) => (
           <div className="container__multi-input" key={index}>
@@ -172,11 +272,13 @@ const AutoMint = () => {
 
         {activeBtn !== 'Multiplier' && (
           <div className="container__multi-input">
-            <Input
-              title="Custom Gas Limit"
-              placeholder="50000"
-              callBack={getContractAddress}
-            />
+            {activeBtn !== 'Custom' && (
+              <Input
+                title="Custom Gas Limit"
+                placeholder="50000"
+                callBack={getContractAddress}
+              />
+            )}
 
             <Result />
           </div>
@@ -226,7 +328,7 @@ const AutoMint = () => {
           />
         </div>
 
-        <Button text="Create Task" />
+        <Button text="Create Task" callBack={onCreateTask} />
       </div>
     </div>
   );

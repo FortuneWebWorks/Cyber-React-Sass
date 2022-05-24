@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useContext, useRef } from 'react';
 import '../styles/list.scss';
 import ListItem from './ListItem';
 import Alert from './Alert';
+import { AutoMintContext } from '../contexts/autoMintContext';
 
 const items = [
   {
@@ -31,9 +32,12 @@ const items = [
 ];
 
 const List = () => {
+  const { tasks, setTasks } = useContext(AutoMintContext);
+  const deleteTarget = useRef('');
   const [isAlert, setIsAlert] = useState(false);
 
-  const onDeleteHandler = () => {
+  const onDeleteHandler = (id) => {
+    deleteTarget.current = id;
     setIsAlert(true);
   };
 
@@ -42,13 +46,19 @@ const List = () => {
   };
 
   const onContinueHandler = () => {
+    const newTasks = tasks.filter(
+      (item) => item.contractAddress !== deleteTarget.current
+    );
+
+    setTasks(newTasks);
+
     setIsAlert(false);
   };
 
   return (
     <div className="list__container">
       <h2 className="list_title">Tasks</h2>
-      <ListItem items={items} onDelete={onDeleteHandler} />
+      <ListItem items={tasks || []} onDelete={onDeleteHandler} />
       <Alert
         message={'Are you sure you want to delete this task?'}
         title="Delete task"
