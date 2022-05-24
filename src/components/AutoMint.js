@@ -225,6 +225,8 @@ const AutoMint = () => {
             callBack={flagCallBack}
           />
         </div>
+
+        <Button text="Create Task" />
       </div>
     </div>
   );
