@@ -6,6 +6,7 @@ const MintContextProvider = ({ children }) => {
   const contractAddress = useRef('');
   const mintPrice = useRef('');
   const mintInputsRendered = useRef([]);
+  const edit = useRef(null);
   const [flagAbi, setFlagAbi] = useState([]);
   const [mintAbi, setMintAbi] = useState([]);
   const [mintInputs, setMintInputs] = useState([]);
@@ -17,10 +18,14 @@ const MintContextProvider = ({ children }) => {
   // All tasks
   const [tasks, setTasks] = useState([]);
 
+  // Menu
+  const [active, setActive] = useState('Dashboard');
+
   const value = {
     contractAddress,
     mintPrice,
     mintInputsRendered,
+    edit,
     flagAbi,
     setFlagAbi,
     mintAbi,
@@ -37,6 +42,8 @@ const MintContextProvider = ({ children }) => {
     setMode,
     tasks,
     setTasks,
+    active,
+    setActive,
   };
 
   return (

@@ -2,9 +2,9 @@ import { useState } from 'react';
 import '../styles/dropdown.scss';
 import { ReactComponent as Arrow } from '../assets/icons/arrow_down.svg';
 
-const DropDown = ({ title, placeholder, items, callBack, fontSize }) => {
-  const [value, setValue] = useState('');
-  const [placeHolder, setPlaceHolder] = useState(placeholder);
+const DropDown = ({ title, placeholder, items, callBack, fontSize, value }) => {
+  const [data, setData] = useState('');
+  const [placeHolder, setPlaceHolder] = useState(value || placeholder);
   const [open, setOpen] = useState(false);
 
   const onClick = (e) => {
@@ -13,7 +13,7 @@ const DropDown = ({ title, placeholder, items, callBack, fontSize }) => {
     }
 
     if (e.target.tagName === 'LI') {
-      setValue(e.target.getAttribute('data'));
+      setData(e.target.getAttribute('data'));
       setPlaceHolder(e.target.textContent);
       setOpen((prev) => !prev);
       callBack &&

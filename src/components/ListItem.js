@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Fragment } from 'react';
 import '../styles/listItem.scss';
 import { ReactComponent as DeleteIcon } from '../assets/icons/delete.svg';
@@ -7,7 +6,7 @@ import { ReactComponent as EditIcon } from '../assets/icons/edit.svg';
 import { ReactComponent as PauseIcon } from '../assets/icons/pause.svg';
 import { ReactComponent as FlagIcon } from '../assets/icons/flag.svg';
 
-const ListItem = ({ items = [], onDelete, onCopy }) => {
+const ListItem = ({ items = [], onDelete, onCopy, onEdit }) => {
   // const [flag, setFlag] = useState(false);
 
   const onFlagChange = (e) => {
@@ -43,7 +42,10 @@ const ListItem = ({ items = [], onDelete, onCopy }) => {
               <td className="action-icon">
                 <PauseIcon />
               </td>
-              <td className="action-icon">
+              <td
+                className="action-icon"
+                onClick={onEdit && onEdit.bind(null, item.id)}
+              >
                 <EditIcon />
               </td>
               <td

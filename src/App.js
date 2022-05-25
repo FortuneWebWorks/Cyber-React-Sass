@@ -3,12 +3,15 @@ import Header from './components/Header';
 import Main from './components/Main';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import MintContextProvider from './contexts/autoMintContext';
 
 const App = () => {
   return (
     <div className="App">
       <Header />
-      <Main />
+      <MintContextProvider>
+        <Main />
+      </MintContextProvider>
       <ToastContainer
         position="bottom-right"
         autoClose={4000}

@@ -1,6 +1,6 @@
 import '../styles/input.scss';
 
-const Input = ({ title, placeholder, callBack, fontSize }) => {
+const Input = ({ title, placeholder, callBack, fontSize, value }) => {
   return (
     <div className="input__container">
       <div
@@ -15,7 +15,7 @@ const Input = ({ title, placeholder, callBack, fontSize }) => {
         className="input__input"
         type="text"
         placeholder={placeholder}
-        defaultValue=""
+        defaultValue={value}
       />
     </div>
   );

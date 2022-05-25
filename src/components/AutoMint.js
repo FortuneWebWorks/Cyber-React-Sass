@@ -1,4 +1,4 @@
-import { useRef, Fragment, useContext } from 'react';
+import { Fragment, useContext } from 'react';
 import '../styles/autoMint.scss';
 import DropDown from './DropDown';
 import Input from './Input';
@@ -7,7 +7,7 @@ import ButtonGroup from './ButtonGroup';
 import Proggress from './Proggress';
 import Switch from './Switch';
 import { AutoMintContext } from '../contexts/autoMintContext';
-import { VcheckValidateMintInputs } from '../apiHandler/inputChecking';
+// import { VcheckValidateMintInputs } from '../apiHandler/inputChecking';
 
 import ApiHandler from '../apiHandler/node';
 import Result from './Result';
@@ -55,6 +55,7 @@ const AutoMint = ({ callBack }) => {
     setTasks,
     mintPrice,
     mintInputsRendered,
+    edit,
   } = useContext(AutoMintContext);
   const node = new ApiHandler();
 
@@ -114,17 +115,27 @@ const AutoMint = ({ callBack }) => {
 
   // Create Task
   const onCreateTask = () => {
-    setTasks((prev) => [
-      ...prev,
-      {
-        id: tasks.length,
-        contractAddress: contractAddress.current,
-        mintPrice: mintPrice.current,
-        fee: 12,
-        mode: mode,
-        status: 'idl',
-      },
-    ]);
+    const editTarget = tasks.filter((task) => task.id === edit.current.id)[0];
+
+    if (editTarget) {
+      editTarget.contractAddress = contractAddress.current;
+      editTarget.mintPrice = mintPrice.current;
+      editTarget.mode = mode;
+    } else {
+      setTasks((prev) => [
+        ...prev,
+        {
+          id: tasks.length,
+          contractAddress: contractAddress.current,
+          mintPrice: mintPrice.current,
+          fee: 12,
+          mode: mode,
+          status: 'idl',
+        },
+      ]);
+    }
+
+    edit.current = null;
 
     callBack();
   };
@@ -157,6 +168,7 @@ const AutoMint = ({ callBack }) => {
           title="Contract Address *"
           placeholder="dsf21135413541sdfa"
           callBack={getContractAddress}
+          value={edit?.current?.contractAddress}
         />
 
         <div className="container__multi-input">
@@ -177,6 +189,7 @@ const AutoMint = ({ callBack }) => {
           placeholder={'Normal'}
           items={modeData}
           callBack={onModeChange}
+          value={edit?.current?.mode}
         />
 
         <DropDown
@@ -204,6 +217,7 @@ const AutoMint = ({ callBack }) => {
             title="Mint Price *"
             placeholder="[1]"
             callBack={onSetMintPrice}
+            value={edit?.current?.mintPrice}
           />
 
           {selectWallet === 'Private Key' && (
@@ -323,7 +337,10 @@ const AutoMint = ({ callBack }) => {
           />
         </div>
 
-        <Button text="Create Task" callBack={onCreateTask} />
+        <Button
+          text={edit?.current ? 'Update Task' : 'Create Task'}
+          callBack={onCreateTask}
+        />
       </div>
     </div>
   );

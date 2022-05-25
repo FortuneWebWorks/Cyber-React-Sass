@@ -4,35 +4,8 @@ import ListItem from './ListItem';
 import Alert from './Alert';
 import { AutoMintContext } from '../contexts/autoMintContext';
 
-const items = [
-  {
-    id: '1',
-    contractAddress: 'ljksdfl',
-    mintPrice: '5',
-    fee: '12',
-    mode: 'sdfa',
-    status: 'idl',
-  },
-  {
-    id: '2',
-    contractAddress: 'sdfsadffdsfasd',
-    mintPrice: '5',
-    fee: '12',
-    mode: 'sdfa',
-    status: 'idl',
-  },
-  {
-    id: '3',
-    contractAddress: 'ljkssdfadfssdafdfsaadfsdfl',
-    mintPrice: '5',
-    fee: '12',
-    mode: 'sdfa',
-    status: 'idl',
-  },
-];
-
 const List = () => {
-  const { tasks, setTasks } = useContext(AutoMintContext);
+  const { tasks, setTasks, setActive, edit } = useContext(AutoMintContext);
   const deleteTarget = useRef('');
   const [isAlert, setIsAlert] = useState(false);
 
@@ -61,6 +34,11 @@ const List = () => {
     setTasks((prev) => [...prev, copy]);
   };
 
+  const onEditHandler = (id) => {
+    edit.current = tasks.filter((task) => task.id === id)[0];
+    setActive('Auto Mint');
+  };
+
   return (
     <div className="list__container">
       <h2 className="list_title">Tasks</h2>
@@ -68,6 +46,7 @@ const List = () => {
         items={tasks || []}
         onDelete={onDeleteHandler}
         onCopy={onCopyHandler}
+        onEdit={onEditHandler}
       />
       <Alert
         message={'Are you sure you want to delete this task?'}
