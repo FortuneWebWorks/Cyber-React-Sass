@@ -64,7 +64,7 @@ const AutoMint = ({ callBack }) => {
       let response = await node.checkContract(contractAddress.current);
       setFlagAbi(response.flagAbi.allFlagFunctions);
       setMintAbi(response.mintAbi.allMintFunctions);
-      console.log(response.mintAbi.allMintFunctions);
+
       toast('Success', {
         type: 'success',
         style: { fontSize: '1.5rem' },
