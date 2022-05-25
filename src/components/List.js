@@ -46,19 +46,29 @@ const List = () => {
   };
 
   const onContinueHandler = () => {
-    const newTasks = tasks.filter(
-      (item) => item.contractAddress !== deleteTarget.current
-    );
+    const newTasks = tasks.filter((item) => item.id !== deleteTarget.current);
 
     setTasks(newTasks);
 
     setIsAlert(false);
   };
 
+  const onCopyHandler = (id) => {
+    const copy = {
+      ...tasks.filter((task) => task.id === id)[0],
+      id: tasks.length,
+    };
+    setTasks((prev) => [...prev, copy]);
+  };
+
   return (
     <div className="list__container">
       <h2 className="list_title">Tasks</h2>
-      <ListItem items={tasks || []} onDelete={onDeleteHandler} />
+      <ListItem
+        items={tasks || []}
+        onDelete={onDeleteHandler}
+        onCopy={onCopyHandler}
+      />
       <Alert
         message={'Are you sure you want to delete this task?'}
         title="Delete task"

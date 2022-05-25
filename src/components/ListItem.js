@@ -7,7 +7,7 @@ import { ReactComponent as EditIcon } from '../assets/icons/edit.svg';
 import { ReactComponent as PauseIcon } from '../assets/icons/pause.svg';
 import { ReactComponent as FlagIcon } from '../assets/icons/flag.svg';
 
-const ListItem = ({ items = [], onDelete }) => {
+const ListItem = ({ items = [], onDelete, onCopy }) => {
   // const [flag, setFlag] = useState(false);
 
   const onFlagChange = (e) => {
@@ -27,7 +27,7 @@ const ListItem = ({ items = [], onDelete }) => {
       </thead>
       <tbody>
         {items.map((item) => (
-          <Fragment key={item.contractAddress}>
+          <Fragment key={item.id}>
             <tr className="table__body__row">
               <td>{item.contractAddress}</td>
               <td>{item.mintPrice}</td>
@@ -46,11 +46,14 @@ const ListItem = ({ items = [], onDelete }) => {
               <td className="action-icon">
                 <EditIcon />
               </td>
-              <td className="action-icon">
+              <td
+                className="action-icon"
+                onClick={onCopy && onCopy.bind(null, item.id)}
+              >
                 <CopyIcon />
               </td>
               <td
-                onClick={onDelete && onDelete.bind(null, item.contractAddress)}
+                onClick={onDelete && onDelete.bind(null, item.id)}
                 className="action-icon"
               >
                 <DeleteIcon />

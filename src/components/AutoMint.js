@@ -51,6 +51,7 @@ const AutoMint = ({ callBack }) => {
     setSelectWallet,
     mode,
     setMode,
+    tasks,
     setTasks,
     mintPrice,
     mintInputsRendered,
@@ -111,17 +112,12 @@ const AutoMint = ({ callBack }) => {
     };
   };
 
-  const reset = () => {
-    contractAddress.current = '';
-    mintPrice.current = '';
-  };
-
   // Create Task
   const onCreateTask = () => {
-    console.log(contractAddress.current);
     setTasks((prev) => [
       ...prev,
       {
+        id: tasks.length,
         contractAddress: contractAddress.current,
         mintPrice: mintPrice.current,
         fee: 12,
@@ -135,7 +131,6 @@ const AutoMint = ({ callBack }) => {
 
   return (
     <div className="container">
-      {console.log('render')}
       <div className="container__scroll">
         <DropDown
           title="Select Wallet"
