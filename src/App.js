@@ -4,13 +4,19 @@ import Main from './components/Main';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import MintContextProvider from './contexts/autoMintContext';
+import SnipeContextProvider from './contexts/snipeContext';
+import BulkContextProvider from './contexts/bulkContext';
 
 const App = () => {
   return (
     <div className="App">
       <Header />
       <MintContextProvider>
-        <Main />
+        <SnipeContextProvider>
+          <BulkContextProvider>
+            <Main />
+          </BulkContextProvider>
+        </SnipeContextProvider>
       </MintContextProvider>
       <ToastContainer
         position="bottom-right"

@@ -1,6 +1,7 @@
 import '../styles/board.scss';
 import List from './List';
 import Menu from './Menu';
+import Button from './Button';
 
 const Board = ({ route }) => {
   return route === 'Dashboard' ? (

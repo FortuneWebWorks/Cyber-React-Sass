@@ -72,7 +72,7 @@
     font-weight: normal;
     opacity: 0;
     z-index: -1;
-    transition: all 0.2s ease-in-out;
+    transition: opacity 0, all 0.1s ease-in-out;
     user-select: none;
     pointer-events: none;
     overflow: hidden;

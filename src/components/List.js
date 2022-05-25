@@ -3,6 +3,7 @@ import '../styles/list.scss';
 import ListItem from './ListItem';
 import Alert from './Alert';
 import { AutoMintContext } from '../contexts/autoMintContext';
+import Button from './Button';
 
 const List = () => {
   const { tasks, setTasks, setActive, edit } = useContext(AutoMintContext);
@@ -39,6 +40,10 @@ const List = () => {
     setActive('Auto Mint');
   };
 
+  const onDeleteAll = () => {
+    setTasks([]);
+  };
+
   return (
     <div className="list__container">
       <h2 className="list_title">Tasks</h2>
@@ -48,6 +53,41 @@ const List = () => {
         onCopy={onCopyHandler}
         onEdit={onEditHandler}
       />
+
+      <div className="list__Buttons">
+        <Button
+          text="Create Task"
+          borderRadius="10px"
+          bgColor="#fff"
+          color="#244677"
+          padding="2rem 1rem"
+          fontSize="1.5rem"
+          call
+        />
+        <Button
+          text="Start All"
+          borderRadius="10px"
+          bgColor="#25CE8C"
+          padding="2rem 1rem"
+          fontSize="1.5rem"
+        />
+        <Button
+          text="Stop All"
+          borderRadius="10px"
+          bgColor="#FD2F7A"
+          padding="2rem 1rem"
+          fontSize="1.5rem"
+        />
+        <Button
+          text="Delete All"
+          borderRadius="10px"
+          bgColor="#434248"
+          padding="2rem 1rem"
+          fontSize="1.5rem"
+          callBack={onDeleteAll}
+        />
+      </div>
+
       <Alert
         message={'Are you sure you want to delete this task?'}
         title="Delete task"

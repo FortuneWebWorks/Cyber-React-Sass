@@ -1,6 +1,14 @@
 import '../styles/input.scss';
 
-const Input = ({ title, placeholder, callBack, fontSize, value }) => {
+const Input = ({
+  title,
+  type,
+  placeholder,
+  callBack,
+  fontSize,
+  value,
+  require,
+}) => {
   return (
     <div className="input__container">
       <div
@@ -13,9 +21,10 @@ const Input = ({ title, placeholder, callBack, fontSize, value }) => {
       <input
         onChange={(e) => callBack && callBack(e.target.value, title)}
         className="input__input"
-        type="text"
+        type={type || 'text'}
         placeholder={placeholder}
         defaultValue={value}
+        required={require || false}
       />
     </div>
   );

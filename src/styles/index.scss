@@ -14,14 +14,14 @@ html {
   height: 100vh;
   background-color: $primary-dark;
   font-family: 'Roboto', sans-serif;
-  font-size: 17px;
+  font-size: 15px;
 
   @media (max-width: 1900px) {
     font-size: 10px;
   }
 
   @media (max-width: 1400px) {
-    font-size: 10px;
+    font-size: 9px;
   }
 
   @media (max-width: 1235px) {
@@ -55,4 +55,14 @@ html {
 
 li {
   list-style: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  display: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield; /* Firefox */
 }

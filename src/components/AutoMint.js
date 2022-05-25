@@ -64,6 +64,7 @@ const AutoMint = ({ callBack }) => {
       let response = await node.checkContract(contractAddress.current);
       setFlagAbi(response.flagAbi.allFlagFunctions);
       setMintAbi(response.mintAbi.allMintFunctions);
+      console.log(response.mintAbi.allMintFunctions);
       toast('Success', {
         type: 'success',
         style: { fontSize: '1.5rem' },
@@ -115,6 +116,8 @@ const AutoMint = ({ callBack }) => {
 
   // Create Task
   const onCreateTask = () => {
+    // Placeholder for validate
+
     const editTarget = tasks.filter((task) => task.id === edit.current.id)[0];
 
     if (editTarget) {
@@ -169,11 +172,16 @@ const AutoMint = ({ callBack }) => {
           placeholder="dsf21135413541sdfa"
           callBack={getContractAddress}
           value={edit?.current?.contractAddress}
+          require={true}
         />
 
         <div className="container__multi-input">
           <Input title="ABI *" placeholder="Fetch" />
-          <Button text="Get" callBack={getFromContractAdress} />
+          <Button
+            text="Get"
+            callBack={getFromContractAdress}
+            padding="0.7rem 1rem"
+          />
         </div>
 
         {selectWallet !== 'Private Key' && (

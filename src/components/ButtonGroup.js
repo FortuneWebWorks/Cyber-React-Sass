@@ -2,7 +2,7 @@ import { useState } from 'react';
 import '../styles/buttonGroup.scss';
 
 const ButtonGroup = ({ items, activeDefault, callBack }) => {
-  const [active, setActive] = useState(items[activeDefault]);
+  const [active, setActive] = useState(items[activeDefault] || activeDefault);
 
   const onClick = (item) => {
     setActive(item);

@@ -4,7 +4,7 @@
 .search {
   width: 14rem;
   border: none;
-  border-radius: 0.4rem;
+  border-radius: $border-radius-lg;
   padding: 0.7rem 1rem;
   background-color: $primary-light;
   color: $primary;
@@ -36,5 +36,9 @@
   &::placeholder {
     /* Most modern browsers support this now. */
     color: $primary;
+  }
+
+  @media (max-width: 1000px) {
+    width: 30%;
   }
 }
