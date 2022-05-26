@@ -1,0 +1,50 @@
+.traits {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 4.5rem 10rem;
+
+  .traits__title {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    color: #fff;
+
+    h2 {
+      font: normal normal bold 22px/25px Roboto;
+    }
+
+    p {
+      font: normal normal normal 16px/19px Roboto;
+      letter-spacing: 0px;
+    }
+  }
+
+  .traist__sort_timer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .traits__sort-details {
+    width: 29rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #fff;
+
+    span {
+      font: normal normal bold 12px/14px Roboto;
+      white-space: pre;
+    }
+  }
+
+  .traits__timers {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12.7rem;
+    margin-left: auto;
+  }
+}

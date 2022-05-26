@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import '../styles/main.scss';
-import Menu from './Menu';
-import Board from './Board';
+import Menu from '../components/Menu';
+import Board from '../components/Board';
 import { AutoMintContext } from '../contexts/autoMintContext';
 
 const menuItems = ['Dashboard', 'Snipe', 'Auto Mint', 'Bulk Bidder'];
