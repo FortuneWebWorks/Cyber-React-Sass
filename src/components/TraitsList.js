@@ -18,7 +18,7 @@ const TraitsList = ({ items }) => {
         {items.map((item) => (
           <Fragment key={item.id}>
             <tr className="table__body__row">
-              <td className='table__user-container'>
+              <td className="table__user-container">
                 <div className="table__details">
                   <img src={item.user.userImage} alt="" />
                   <div>
@@ -28,12 +28,35 @@ const TraitsList = ({ items }) => {
                 </div>
               </td>
               <td>
-                <div className="">{item.floor}</div>
+                <div className="table__changes">
+                  <span>{item.floor.hl}</span>
+                  <span>{item.floor.change}</span>
+                </div>
               </td>
-              <td>{item.saies}</td>
-              <td>{item.listings}</td>
-              <td>{item.volume}</td>
-              <td>{item.marketCap}</td>
+              <td>
+                <div className="table__changes">
+                  <span>{item.saies.hl}</span>
+                  <span>{item.saies.change}</span>
+                </div>
+              </td>
+              <td>
+                <div className="table__changes">
+                  <span>{item.listings.hl}</span>
+                  <span>{item.listings.change}</span>
+                </div>
+              </td>
+              <td>
+                <div className="table__changes">
+                  <span>{item.volume.hl}</span>
+                  <span>{item.volume.change}</span>
+                </div>
+              </td>
+              <td>
+                <div className="table__changes">
+                  <span>{item.marketCap.hl}</span>
+                  <span>{item.marketCap.change}</span>
+                </div>
+              </td>
             </tr>
             <tr className="table__space"></tr>
           </Fragment>

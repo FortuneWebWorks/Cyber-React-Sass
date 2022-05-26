@@ -25,6 +25,10 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+
+    svg {
+      margin-left: 5rem;
+    }
   }
 
   .traits__sort-details {

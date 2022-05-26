@@ -2,6 +2,7 @@ import '../styles/traits.scss';
 import ButtonGroup from '../components/ButtonGroup';
 import Timer from '../components/Timer';
 import TraitsList from '../components/TraitsList';
+import { ReactComponent as FilterIcon } from '../assets/icons/filtr.svg';
 
 const timings = ['1d', '7d', '30d', '90d', '1y'];
 const timings2 = ['5m', '30m', '1h', '6h'];
@@ -10,15 +11,30 @@ const tableItems = [
   {
     id: 1,
     user: {
-      userImage: 'https://picsum.photos/50',
+      userImage: 'https://picsum.photos/51',
       nftName: 'NFT NAME',
       time: '35 days ago',
     },
-    floor: ['10', '10%'],
-    saies: ['10', '10%'],
-    listings: ['10', '10%'],
-    volume: ['10', '10%'],
-    marketCap: ['10', '10%'],
+    floor: {
+      hl: '10%',
+      change: '10',
+    },
+    saies: {
+      hl: '10%',
+      change: '10',
+    },
+    listings: {
+      hl: '10%',
+      change: '10',
+    },
+    volume: {
+      hl: '10%',
+      change: '10',
+    },
+    marketCap: {
+      hl: '10%',
+      change: '10',
+    },
   },
   {
     id: 2,
@@ -27,11 +43,26 @@ const tableItems = [
       nftName: 'NFT NAME',
       time: '35 days ago',
     },
-    floor: ['10', '10%'],
-    saies: ['10', '10%'],
-    listings: ['10', '10%'],
-    volume: ['10', '10%'],
-    marketCap: ['10', '10%'],
+    floor: {
+      hl: '10%',
+      change: '10',
+    },
+    saies: {
+      hl: '10%',
+      change: '10',
+    },
+    listings: {
+      hl: '10%',
+      change: '10',
+    },
+    volume: {
+      hl: '10%',
+      change: '10',
+    },
+    marketCap: {
+      hl: '10%',
+      change: '10',
+    },
   },
 ];
 
@@ -58,11 +89,7 @@ const Traits = () => {
           <Timer items={timings2} defaultActive={timings[2]} />
         </div>
 
-        <img
-          style={{ marginLeft: '5.1rem' }}
-          src="https://picsum.photos/22/20"
-          alt=""
-        />
+        <FilterIcon />
       </div>
 
       <div>

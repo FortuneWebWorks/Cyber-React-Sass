@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import '../styles/timer.scss';
+import { ReactComponent as Clock } from '../assets/icons/clock.svg';
 
 const Timer = ({ items, defaultActive }) => {
   const [active, setActive] = useState(defaultActive || '');
@@ -10,11 +11,7 @@ const Timer = ({ items, defaultActive }) => {
 
   return (
     <div className="timer">
-      <img
-        src="https://picsum.photos/17"
-        alt=""
-        style={{ borderRaius: '50%' }}
-      />
+      <Clock />
 
       {items &&
         items.map((item) => (
