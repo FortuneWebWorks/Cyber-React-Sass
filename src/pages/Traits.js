@@ -1,9 +1,39 @@
 import '../styles/traits.scss';
 import ButtonGroup from '../components/ButtonGroup';
 import Timer from '../components/Timer';
+import TraitsList from '../components/TraitsList';
 
 const timings = ['1d', '7d', '30d', '90d', '1y'];
 const timings2 = ['5m', '30m', '1h', '6h'];
+
+const tableItems = [
+  {
+    id: 1,
+    user: {
+      userImage: 'https://picsum.photos/50',
+      nftName: 'NFT NAME',
+      time: '35 days ago',
+    },
+    floor: ['10', '10%'],
+    saies: ['10', '10%'],
+    listings: ['10', '10%'],
+    volume: ['10', '10%'],
+    marketCap: ['10', '10%'],
+  },
+  {
+    id: 2,
+    user: {
+      userImage: 'https://picsum.photos/50',
+      nftName: 'NFT NAME',
+      time: '35 days ago',
+    },
+    floor: ['10', '10%'],
+    saies: ['10', '10%'],
+    listings: ['10', '10%'],
+    volume: ['10', '10%'],
+    marketCap: ['10', '10%'],
+  },
+];
 
 const Traits = () => {
   return (
@@ -35,7 +65,9 @@ const Traits = () => {
         />
       </div>
 
-      <div></div>
+      <div>
+        <TraitsList items={tableItems} />
+      </div>
     </div>
   );
 };
