@@ -2,7 +2,7 @@ import { useState } from 'react';
 import '../styles/trending.scss';
 import ButtonGroup from '../components/ButtonGroup';
 import Timer from '../components/Timer';
-import TraitsList from '../components/Trending';
+import TraitsList from '../components/TrendingList';
 import { ReactComponent as FilterIcon } from '../assets/icons/filtr.svg';
 import Footer from '../components/Footer';
 import Filter from '../components/Filter';

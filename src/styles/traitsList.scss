@@ -112,13 +112,13 @@
     align-items: flex-start;
     color: $success;
     color: #fff;
-    font-size: 2rem;
+    font: normal normal bold 18px/21px Roboto;
 
     span:last-child {
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 1.8rem;
+      font: normal normal normal 12px/14px Roboto;
     }
 
     .green {
@@ -128,6 +128,26 @@
     .red {
       color: $danger-color;
     }
+  }
+
+  .head_items {
+    position: relative;
+  }
+
+  .info__details {
+    position: absolute;
+    top: 100%;
+    left: 25%;
+    width: 25rem;
+    max-width: unset;
+    height: fit-content;
+    border-radius: 10px;
+    padding: 2rem;
+    background-color: $primary;
+    color: rgba(255, 255, 255, 0.534);
+    user-select: none;
+    pointer-events: none;
+    z-index: 10;
   }
 
   @media (max-width: 500px) {

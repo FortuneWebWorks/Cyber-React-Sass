@@ -1,44 +1,48 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import '../styles/traitsList.scss';
 import { ReactComponent as InfoIcon } from '../assets/images/information.svg';
 import { ReactComponent as FlashDownIcon } from '../assets/images/flash-down.svg';
 import { ReactComponent as FlashUpIcon } from '../assets/images/flash_up.svg';
 
+const headerItems = [
+  'Collection',
+  'Floor',
+  'Saies',
+  'Listings',
+  'Volume',
+  'Market Cap',
+];
+
 const TraitsList = ({ items }) => {
+  const [showDetail, setShowDetail] = useState(headerItems[0]);
+
+  const showDetails = (item) => {
+    console.log(item);
+    setShowDetail((prev) => (item === prev ? '' : item));
+  };
+
   return (
     <table className="table">
       <thead>
         <tr className="table__head__row">
-          <th>
-            <div>
-              Collection <InfoIcon />
-            </div>
-          </th>
-          <th>
-            <div>
-              Floor <InfoIcon />
-            </div>
-          </th>
-          <th>
-            <div>
-              Saies <InfoIcon />
-            </div>
-          </th>
-          <th>
-            <div>
-              Listings <InfoIcon />
-            </div>
-          </th>
-          <th>
-            <div>
-              Volume <InfoIcon />
-            </div>
-          </th>
-          <th>
-            <div>
-              Market Cap <InfoIcon />
-            </div>
-          </th>
+          {headerItems.map((item) => (
+            <th key={item}>
+              <div
+                className="head_items"
+                onClick={showDetails.bind(null, item)}
+              >
+                {item} <InfoIcon />
+                {showDetail === item && (
+                  <p className="info__details">
+                    The Nansen NFT indexes present a reliable way of navigating
+                    the NFT markets. This update raises the bar for quality
+                    financial infrastructure that supports the growing depth of
+                    the NFT industry
+                  </p>
+                )}
+              </div>
+            </th>
+          ))}
         </tr>
       </thead>
       <tbody>
