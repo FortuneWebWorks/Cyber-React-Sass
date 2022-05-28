@@ -2,9 +2,9 @@ import { useState } from 'react';
 import '../styles/trending.scss';
 import ButtonGroup from '../components/ButtonGroup';
 import Timer from '../components/Timer';
-import TraitsList from '../components/TraitsList';
+import TraitsList from '../components/Trending';
 import { ReactComponent as FilterIcon } from '../assets/icons/filtr.svg';
-import Footer from '../components/Footer2';
+import Footer from '../components/Footer';
 import Filter from '../components/Filter';
 
 const timings = ['1d', '7d', '30d', '90d', '1y'];

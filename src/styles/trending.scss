@@ -57,10 +57,6 @@
     margin-left: auto;
   }
 
-  #filter {
-    display: none;
-  }
-
   @media (max-width: 500px) {
     .traist__sort_timer {
       flex-direction: column;
@@ -79,6 +75,10 @@
       align-items: flex-start;
       gap: 2rem;
       margin-left: 0;
+    }
+
+    #filter {
+      display: none;
     }
   }
 }

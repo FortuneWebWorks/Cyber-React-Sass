@@ -94,7 +94,23 @@
     }
   }
 
+  @media (max-width: 800px) {
+    min-height: 12rem;
+
+    .header__connect-wallet {
+      padding: 1.7rem 2rem;
+      font: normal normal bold 2.2rem/19px Roboto;
+      // font-size: 2rem;
+    }
+  }
+
   @media (max-width: 500px) {
     padding: 0 2rem;
+
+    .header__connect-wallet {
+      padding: 1.7rem 2rem;
+      font: normal normal bold 1.5rem/19px Roboto;
+      // font-size: 2rem;
+    }
   }
 }
