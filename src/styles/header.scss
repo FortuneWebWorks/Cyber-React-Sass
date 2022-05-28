@@ -20,7 +20,7 @@
     align-items: center;
     gap: 4rem;
     color: #fff;
-    font: normal normal bold 16px/19px Roboto;
+    font: normal normal bold 1.7rem/19px Roboto;
     letter-spacing: 1px;
     white-space: pre;
   }
@@ -39,7 +39,7 @@
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-    font: normal normal normal 14px/16px Roboto;
+    font: normal normal normal 1.5rem/16px Roboto;
 
     svg {
       width: 2rem;
@@ -67,7 +67,7 @@
     padding: 1.5rem 2rem;
     background-color: transparent;
     color: #fff;
-    font: normal normal bold 16px/19px Roboto;
+    font: normal normal bold 1.7rem/19px Roboto;
     font-weight: bold;
     cursor: pointer;
     white-space: pre;
@@ -85,6 +85,12 @@
     }
     .header__connect-wallet {
       width: 100%;
+      padding: 0.5rem 1rem;
+      font-size: 1.5rem;
+    }
+
+    .header__logo {
+      width: 12rem;
     }
   }
 
