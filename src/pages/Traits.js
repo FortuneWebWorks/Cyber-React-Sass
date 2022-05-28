@@ -3,6 +3,7 @@ import ButtonGroup from '../components/ButtonGroup';
 import Timer from '../components/Timer';
 import TraitsList from '../components/TraitsList';
 import { ReactComponent as FilterIcon } from '../assets/icons/filtr.svg';
+import Footer from '../components/Footer';
 
 const timings = ['1d', '7d', '30d', '90d', '1y'];
 const timings2 = ['5m', '30m', '1h', '6h'];
@@ -16,25 +17,19 @@ const tableItems = [
       time: '35 days ago',
     },
     floor: {
-      hl: '10%',
+      hl: '-10',
       change: '10',
     },
     saies: {
-      hl: '10%',
+      hl: '10',
       change: '10',
     },
     listings: {
-      hl: '10%',
+      hl: '10',
       change: '10',
     },
-    volume: {
-      hl: '10%',
-      change: '10',
-    },
-    marketCap: {
-      hl: '10%',
-      change: '10',
-    },
+    volume: '15422',
+    marketCap: '6356745',
   },
   {
     id: 2,
@@ -44,25 +39,19 @@ const tableItems = [
       time: '35 days ago',
     },
     floor: {
-      hl: '10%',
+      hl: '10',
       change: '10',
     },
     saies: {
-      hl: '10%',
+      hl: '-10',
       change: '10',
     },
     listings: {
-      hl: '10%',
+      hl: '10',
       change: '10',
     },
-    volume: {
-      hl: '10%',
-      change: '10',
-    },
-    marketCap: {
-      hl: '10%',
-      change: '10',
-    },
+    volume: '15422',
+    marketCap: '6356745',
   },
 ];
 
@@ -95,6 +84,8 @@ const Traits = () => {
       <div>
         <TraitsList items={tableItems} />
       </div>
+
+      <Footer />
     </div>
   );
 };

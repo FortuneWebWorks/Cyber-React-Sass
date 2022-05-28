@@ -1,17 +1,44 @@
 import { Fragment } from 'react';
 import '../styles/traitsList.scss';
+import { ReactComponent as InfoIcon } from '../assets/images/information.svg';
+import { ReactComponent as FlashDownIcon } from '../assets/images/flash-down.svg';
+import { ReactComponent as FlashUpIcon } from '../assets/images/flash_up.svg';
 
 const TraitsList = ({ items }) => {
   return (
     <table className="table">
       <thead>
         <tr className="table__head__row">
-          <th>Collection</th>
-          <th>Floor</th>
-          <th>Saies</th>
-          <th>Listings</th>
-          <th>Volume</th>
-          <th>Market Cap</th>
+          <th>
+            <div>
+              Collection <InfoIcon />
+            </div>
+          </th>
+          <th>
+            <div>
+              Floor <InfoIcon />
+            </div>
+          </th>
+          <th>
+            <div>
+              Saies <InfoIcon />
+            </div>
+          </th>
+          <th>
+            <div>
+              Listings <InfoIcon />
+            </div>
+          </th>
+          <th>
+            <div>
+              Volume <InfoIcon />
+            </div>
+          </th>
+          <th>
+            <div>
+              Market Cap <InfoIcon />
+            </div>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -29,32 +56,43 @@ const TraitsList = ({ items }) => {
               </td>
               <td>
                 <div className="table__changes">
-                  <span>{item.floor.hl}</span>
                   <span>{item.floor.change}</span>
+                  <span className={item.floor.hl > 0 ? 'green' : 'red'}>
+                    {+item.floor.hl > 0 ? <FlashUpIcon /> : <FlashDownIcon />}
+                    {item.floor.hl.replace('-', '')}%
+                  </span>
                 </div>
               </td>
               <td>
                 <div className="table__changes">
-                  <span>{item.saies.hl}</span>
                   <span>{item.saies.change}</span>
+                  <span className={item.saies.hl > 0 ? 'green' : 'red'}>
+                    {+item.saies.hl > 0 ? <FlashUpIcon /> : <FlashDownIcon />}
+                    {item.saies.hl.replace('-', '')}%
+                  </span>
                 </div>
               </td>
               <td>
                 <div className="table__changes">
-                  <span>{item.listings.hl}</span>
                   <span>{item.listings.change}</span>
+                  <span className={item.listings.hl > 0 ? 'green' : 'red'}>
+                    {+item.listings.hl > 0 ? (
+                      <FlashUpIcon />
+                    ) : (
+                      <FlashDownIcon />
+                    )}
+                    {item.listings.hl.replace('-', '')}%
+                  </span>
                 </div>
               </td>
               <td>
                 <div className="table__changes">
-                  <span>{item.volume.hl}</span>
-                  <span>{item.volume.change}</span>
+                  <span>{item.volume}</span>
                 </div>
               </td>
               <td>
                 <div className="table__changes">
-                  <span>{item.marketCap.hl}</span>
-                  <span>{item.marketCap.change}</span>
+                  <span>{item.marketCap}</span>
                 </div>
               </td>
             </tr>

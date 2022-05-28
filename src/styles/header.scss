@@ -3,15 +3,15 @@
 
 .header {
   width: 100%;
-  height: 9rem;
+  min-height: 7.7rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 8rem;
+  padding: 0 10.4rem;
   background-color: $primary;
 
   .header__logo {
-    width: 11rem;
+    width: 13rem;
   }
 
   .header__menu-item {
@@ -20,8 +20,7 @@
     align-items: center;
     gap: 4rem;
     color: #fff;
-    font-size: 1.6em;
-    font-weight: bold;
+    font: normal normal bold 1.6rem/19px Roboto;
     letter-spacing: 1px;
     white-space: pre;
   }
@@ -40,7 +39,7 @@
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-    font-size: 1.4rem;
+    font: normal normal normal 14px/16px Roboto;
 
     svg {
       width: 2rem;
@@ -68,7 +67,7 @@
     padding: 1rem 2rem;
     background-color: transparent;
     color: #fff;
-    font-size: 1.2rem;
+    font: normal normal bold 1.6rem/19px Roboto;
     font-weight: bold;
     cursor: pointer;
     white-space: pre;
