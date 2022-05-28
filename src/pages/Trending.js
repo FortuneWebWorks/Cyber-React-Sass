@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../styles/traits.scss';
+import '../styles/trending.scss';
 import ButtonGroup from '../components/ButtonGroup';
 import Timer from '../components/Timer';
 import TraitsList from '../components/TraitsList';
@@ -77,6 +77,7 @@ const Traits = () => {
           <span>Sorted By: </span>
           <ButtonGroup
             items={['High/Low', '%Change']}
+            activeDefault="High/Low"
             font="normal normal bold 12px/14px Roboto"
             containerStyles={{ border: '1px solid #1956E2', height: '30px' }}
           />
@@ -92,7 +93,7 @@ const Traits = () => {
         </div>
       </div>
 
-      <div>
+      <div className="table__container">
         <TraitsList items={tableItems} />
       </div>
 
