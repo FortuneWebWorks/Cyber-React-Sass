@@ -4,7 +4,7 @@ import ButtonGroup from '../components/ButtonGroup';
 import Timer from '../components/Timer';
 import TraitsList from '../components/TraitsList';
 import { ReactComponent as FilterIcon } from '../assets/icons/filtr.svg';
-import Footer from '../components/Footer';
+import Footer from '../components/Footer2';
 import Filter from '../components/Filter';
 
 const timings = ['1d', '7d', '30d', '90d', '1y'];

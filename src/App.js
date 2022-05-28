@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './styles/app.scss';
-import Header from './components/Header';
+import Header2 from './components/Header2';
 import Main from './pages/Main';
 import Traits from './pages/Trending';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,7 +12,7 @@ import BulkContextProvider from './contexts/bulkContext';
 const App = () => {
   return (
     <div className="App">
-      <Header />
+      <Header2 />
       <Router>
         <MintContextProvider>
           <SnipeContextProvider>
