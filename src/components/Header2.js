@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import '../styles/header.scss';
 import { ReactComponent as DiscordIcon } from '../assets/images/discord.svg';
 import { ReactComponent as TwitterIcon } from '../assets/images/twitter.svg';
-import { ReactComponent as LinkedinIcon } from '../assets/images/linkdin.svg';
-import { ReactComponent as EtherScanIcon } from '../assets/images/etherscanLogo.svg';
+import { ReactComponent as OpenSea } from '../assets/images/opensea.svg';
 import { ReactComponent as GasIcon } from '../assets/images/gas.svg';
 import HeaderMenu from './HeaderMenu';
 import Search from './Search';
@@ -82,8 +81,7 @@ const Header = () => {
         <div className="header__contact__contact-icons">
           <TwitterIcon />
           <DiscordIcon />
-          <LinkedinIcon />
-          <EtherScanIcon />
+          <OpenSea />
         </div>
 
         <button

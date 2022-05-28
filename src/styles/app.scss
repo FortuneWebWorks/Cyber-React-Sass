@@ -1,6 +1,8 @@
 .App {
+  max-width: 1366px;
   height: 100%;
   display: flex;
   flex-direction: column;
+  margin: auto;
   padding: 0.3rem;
 }

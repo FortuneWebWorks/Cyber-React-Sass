@@ -14,10 +14,9 @@ const headerItems = [
 ];
 
 const TraitsList = ({ items }) => {
-  const [showDetail, setShowDetail] = useState(headerItems[0]);
+  const [showDetail, setShowDetail] = useState('');
 
   const showDetails = (item) => {
-    console.log(item);
     setShowDetail((prev) => (item === prev ? '' : item));
   };
 

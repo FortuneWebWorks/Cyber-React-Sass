@@ -4,7 +4,7 @@ import ButtonGroup from '../components/ButtonGroup';
 import Timer from '../components/Timer';
 import TraitsList from '../components/TrendingList';
 import { ReactComponent as FilterIcon } from '../assets/icons/filtr.svg';
-import Footer from '../components/Footer';
+import Footer from '../components/Footer2';
 import Filter from '../components/Filter';
 
 const timings = ['1d', '7d', '30d', '90d', '1y'];
@@ -59,10 +59,13 @@ const tableItems = [
 
 const Traits = () => {
   const [openFilter, setOpenFiter] = useState(false);
+  // const [sort, setSort]
 
   const onClick = (e) => {
     setOpenFiter((prev) => !prev);
   };
+
+  const dropDownChange = (key) => {};
 
   return (
     <div className="traits">
@@ -80,6 +83,7 @@ const Traits = () => {
             activeDefault="High/Low"
             font="normal normal bold 12px/14px Roboto"
             containerStyles={{ border: '1px solid #1956E2', height: '30px' }}
+            callBack={dropDownChange}
           />
         </div>
 

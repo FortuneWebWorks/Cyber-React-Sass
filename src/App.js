@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './styles/app.scss';
-import Header from './components/Header';
+import Header from './components/Header2';
 import Main from './pages/Main';
 import Traits from './pages/Trending';
 import 'react-toastify/dist/ReactToastify.css';
