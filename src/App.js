@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './styles/app.scss';
 import Header from './components/Header';
 import Main from './pages/Main';
-import Traits from './pages/Traits';
+import Traits from './pages/Trending';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import MintContextProvider from './contexts/autoMintContext';
@@ -19,7 +19,7 @@ const App = () => {
             <BulkContextProvider>
               <Routes>
                 <Route path="/" element={<Main />} />
-                <Route path="/traits" element={<Traits />} />
+                <Route path="/Trending" element={<Traits />} />
               </Routes>
             </BulkContextProvider>
           </SnipeContextProvider>

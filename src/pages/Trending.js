@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import '../styles/traits.scss';
 import ButtonGroup from '../components/ButtonGroup';
 import Timer from '../components/Timer';
 import TraitsList from '../components/TraitsList';
 import { ReactComponent as FilterIcon } from '../assets/icons/filtr.svg';
 import Footer from '../components/Footer';
+import Filter from '../components/Filter';
 
 const timings = ['1d', '7d', '30d', '90d', '1y'];
 const timings2 = ['5m', '30m', '1h', '6h'];
@@ -56,8 +58,15 @@ const tableItems = [
 ];
 
 const Traits = () => {
+  const [openFilter, setOpenFiter] = useState(false);
+
+  const onClick = (e) => {
+    setOpenFiter((prev) => !prev);
+  };
+
   return (
     <div className="traits">
+      {openFilter && <Filter />}
       <div className="traits__title">
         <h2>Trending NFT Collections</h2>
         <p>See what's selling and listing in real time!</p>
@@ -78,7 +87,9 @@ const Traits = () => {
           <Timer items={timings2} defaultActive={timings[2]} />
         </div>
 
-        <FilterIcon />
+        <div id="filter" onClick={onClick}>
+          <FilterIcon />
+        </div>
       </div>
 
       <div>

@@ -71,11 +71,10 @@ const Header = () => {
       <Search />
 
       <div className="header__menu-item">
-        <span>Pricing</span>
-        <span>Resources</span>
-        <span>Cyberdash Alpha</span>
-        <span>Institutions</span>
-        <span>About us</span>
+        <span>Drops</span>
+        <span>Trending</span>
+        <span>FAQ</span>
+        <span>Trending Kit</span>
       </div>
 
       <div className="header__contact">
