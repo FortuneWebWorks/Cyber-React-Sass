@@ -28,8 +28,8 @@ const TraitsList = ({ items }) => {
           {headerItems.map((item) => (
             <th key={item}>
               <div
-                className="head_items"
                 onClick={showDetails.bind(null, item)}
+                className={`head_items ${item === showDetail ? 'det' : ''}`}
               >
                 {item} <InfoIcon />
                 {showDetail === item && (

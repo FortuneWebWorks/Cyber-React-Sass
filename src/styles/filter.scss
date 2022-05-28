@@ -15,12 +15,14 @@
   background-color: $primary-light;
   color: #fff;
   font-size: 2rem;
+  z-index: 10;
 
   .filter__header {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font: normal normal bold 18px/21px Roboto;
   }
 
   .filter__menu {
@@ -56,6 +58,11 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    font: normal normal bold 14px/16px Roboto;
+
+    svg {
+      width: 2rem;
+    }
   }
 
   .filter__menu_switch {
@@ -89,7 +96,7 @@
       border: none;
       border-radius: 10px;
       background-color: $primary;
-      font-size: 1.8rem;
+      font: normal normal normal 14px/16px Roboto;
       color: #fff;
     }
   }
@@ -107,6 +114,7 @@
     justify-content: flex-start;
     align-items: center;
     gap: 1.5rem;
+    font: normal normal normal 14px/16px Roboto;
 
     input {
       width: 20%;

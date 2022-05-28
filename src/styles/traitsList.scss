@@ -132,6 +132,12 @@
 
   .head_items {
     position: relative;
+
+    &.det {
+      svg {
+        stroke: #1956e2;
+      }
+    }
   }
 
   .info__details {
