@@ -1,20 +1,27 @@
 import { useState } from 'react';
 import '../styles/filter.scss';
 import { ReactComponent as ArrowDown } from '../assets/icons/arrow_down.svg';
+import { ReactComponent as CancelIcon } from '../assets/images/cancel.svg';
 import SwitchJs from './SwitchJs';
 
-const Filter = ({ title = 'Filter' }) => {
+const Filter = ({ title = 'Filter', callBack }) => {
   const [openItem, setOpenItem] = useState('Sales Count');
 
   const openMenuHandler = (value) => {
     setOpenItem((prev) => (value === prev ? '' : value));
   };
 
+  const closeCancel = () => {
+    callBack();
+  };
+
   return (
     <div className="filter">
       <div className="filter__header">
         <h3>{title}</h3>
-        <span>close</span>
+        <span onClick={closeCancel} className="filter__header_closer">
+          <CancelIcon />
+        </span>
       </div>
 
       <div className="filter__menu">

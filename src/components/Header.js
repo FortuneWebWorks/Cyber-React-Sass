@@ -64,41 +64,43 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="header">
-      <img className="header__logo" src={logo} alt="logo" />
+    <header className="max-width-header-limiter">
+      <div className="header">
+        <img className="header__logo" src={logo} alt="logo" />
 
-      <Search />
+        <Search />
 
-      <div className="header__menu-item">
-        <span>Drops</span>
-        <span>Trending</span>
-        <span>FAQ</span>
-        <span>Trending Kit</span>
-      </div>
-
-      <div className="header__contact">
-        <div className="header__contact__gas">
-          <GasIcon />
-          <span>{gasValue} gwei</span>
+        <div className="header__menu-item">
+          <span>Drops</span>
+          <span>Trending</span>
+          <span>FAQ</span>
+          <span>Trending Kit</span>
         </div>
 
-        <div className="header__contact__contact-icons">
-          <TwitterIcon />
-          <DiscordIcon />
-          <OpenSeaIcon />
-        </div>
+        <div className="header__contact">
+          <div className="header__contact__gas">
+            <GasIcon />
+            <span>{gasValue} gwei</span>
+          </div>
 
-        <button
-          className="header__connect-wallet"
-          onClick={handleConnectWallet}
-        >
-          {wallet
-            ? `${wallet.substring(0, 5)}...${wallet.substring(
-                wallet.length - 5
-              )}`
-            : 'Connect Wallet'}
-        </button>
-        <HeaderMenu />
+          <div className="header__contact__contact-icons">
+            <TwitterIcon />
+            <DiscordIcon />
+            <OpenSeaIcon />
+          </div>
+
+          <button
+            className="header__connect-wallet"
+            onClick={handleConnectWallet}
+          >
+            {wallet
+              ? `${wallet.substring(0, 5)}...${wallet.substring(
+                  wallet.length - 5
+                )}`
+              : 'Connect Wallet'}
+          </button>
+          <HeaderMenu />
+        </div>
       </div>
     </header>
   );

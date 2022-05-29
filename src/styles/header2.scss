@@ -1,14 +1,20 @@
 @use './colors' as *;
 @use './variables' as *;
 
+.max-width-header-limiter {
+  width: 100%;
+  background-color: $primary;
+}
+
 .header {
   width: 100%;
+  max-width: 1366px;
   min-height: 7.7rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: auto;
   padding: 0 10.4rem;
-  background-color: $primary;
 
   .header__logo {
     width: 16.2rem;

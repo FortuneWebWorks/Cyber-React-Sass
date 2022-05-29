@@ -25,6 +25,15 @@
     font: normal normal bold 1.7rem/21px Roboto;
   }
 
+  .filter__header_closer {
+    cursor: pointer;
+
+    & * {
+      user-select: none;
+      pointer-events: none;
+    }
+  }
+
   .filter__menu {
     width: 100%;
     display: flex;

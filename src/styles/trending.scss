@@ -1,8 +1,12 @@
 .traits {
+  width: 100%;
+  max-width: 1366px;
   display: flex;
   flex-direction: column;
   gap: 3rem;
+  margin: auto;
   padding: 4.5rem 10rem;
+  overflow-x: hidden;
 
   .table__container {
     overflow: hidden;

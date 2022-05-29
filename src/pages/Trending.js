@@ -83,9 +83,13 @@ const Traits = () => {
     };
   }, []);
 
+  const closer = () => {
+    setOpenFiter(false);
+  };
+
   return (
     <div className="traits">
-      {openFilter && <Filter />}
+      {openFilter && <Filter callBack={closer} />}
       <div className="traits__title">
         <h2>Trending NFT Collections</h2>
         <p>See what's selling and listing in real time!</p>
