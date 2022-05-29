@@ -25,7 +25,15 @@
     margin-right: auto;
     padding: 0 5rem;
 
-    @media (max-width: 500px) {
+    @media (max-width: 800px) {
+      width: 100%;
+    }
+
+    @media (max-width: 670px) {
+      padding: 0 2rem;
+    }
+
+    @media (max-width: 530px) {
       width: 200%;
     }
   }

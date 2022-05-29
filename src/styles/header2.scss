@@ -20,7 +20,7 @@
     align-items: center;
     gap: 4rem;
     color: #fff;
-    font: normal normal bold 16px/19px Roboto;
+    font: normal normal bold 1.7rem/19px Roboto;
     letter-spacing: 1px;
     white-space: pre;
   }
@@ -39,7 +39,7 @@
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-    font: normal normal normal 14px/16px Roboto;
+    font: normal normal normal 1.5rem/16px Roboto;
 
     svg {
       width: 2rem;
@@ -64,13 +64,19 @@
     width: 44%;
     border: 1px solid #fff;
     border-radius: $border-radius-lg;
-    padding: 1.5rem 2rem;
+    padding: 1.3rem 1.5rem;
     background-color: transparent;
     color: #fff;
-    font: normal normal bold 16px/19px Roboto;
+    font: normal normal bold 1.7rem/19px Roboto;
     font-weight: bold;
     cursor: pointer;
     white-space: pre;
+  }
+
+  @media (max-width: 1100px) {
+    .header__connect-wallet {
+      padding: 1.1rem 1.5rem;
+    }
   }
 
   @media (max-width: 1000px) {
@@ -85,6 +91,16 @@
     }
     .header__connect-wallet {
       width: 100%;
+      padding: 0.8rem 2rem;
+    }
+  }
+
+  @media (max-width: 800px) {
+    min-height: 8rem;
+
+    .header__connect-wallet {
+      width: 100%;
+      padding: 0.8rem 2rem;
     }
   }
 

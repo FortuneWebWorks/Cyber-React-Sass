@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import '../styles/header.scss';
+import '../styles/header2.scss';
 import { ReactComponent as DiscordIcon } from '../assets/images/discord.svg';
 import { ReactComponent as TwitterIcon } from '../assets/images/twitter.svg';
 import { ReactComponent as OpenSea } from '../assets/images/opensea.svg';
