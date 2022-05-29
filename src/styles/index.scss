@@ -6,12 +6,26 @@
   margin: 0;
   padding: 0;
   box-sizing: inherit;
+
+  // Mozilla
+  scrollbar-width: 5px;
+  scrollbar-color: $primary-dark;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background-color: $primary-dark;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $primary;
+  }
 }
 
 body,
 html {
   box-sizing: border-box;
-  height: 100vh;
+  min-height: 100vh;
   background-color: $primary-dark;
   font-family: 'Roboto', sans-serif;
   font-size: 10px;

@@ -2,8 +2,8 @@
 
 .filter {
   position: absolute;
-  right: 10%;
-  width: 40rem;
+  right: 6%;
+  width: 320px;
   height: fit-content;
   display: flex;
   flex-direction: column;
@@ -22,7 +22,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font: normal normal bold 1.7rem/21px Roboto;
+    font: normal normal bold 1.77rem/21px Roboto;
   }
 
   .filter__header_closer {
@@ -35,6 +35,7 @@
   }
 
   .filter__menu {
+    max-width: 287px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -81,7 +82,6 @@
     justify-content: center;
     align-items: flex-start;
     margin-left: auto;
-    // transform: translateY(10%);
 
     div:last-child {
       position: absolute;
@@ -97,7 +97,7 @@
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    font-weight: normal;
+    font: normal normal normal 1.5rem/16px Roboto;
 
     input {
       width: 100%;
@@ -116,6 +116,7 @@
     justify-content: center;
     align-items: center;
     gap: 1rem;
+    font: normal normal normal 1.5rem/16px Roboto;
   }
 
   .filter__menu_item_content_average {
@@ -123,7 +124,7 @@
     justify-content: flex-start;
     align-items: center;
     gap: 1.5rem;
-    font: normal normal normal 14px/16px Roboto;
+    font: normal normal normal 1.5rem/16px Roboto;
 
     input {
       width: 20%;
@@ -150,14 +151,32 @@
       }
     }
   }
+
   .filter__menu_switch {
     position: relative;
     width: 50%;
+    min-width: 12rem;
     display: flex;
     justify-content: center;
     align-items: flex-start;
     margin-left: auto;
-    padding-right: 1rem;
+    padding-right: 15%;
+  }
+
+  #second {
+    min-width: 10rem;
+    padding-right: 40%;
+    font: normal normal normal 1.8rem/16px Roboto;
+
+    @media (max-width: 1400px) {
+      min-width: 10rem;
+      padding-right: 60%;
+    }
+
+    @media (max-width: 1235px) {
+      min-width: 15rem;
+      padding-right: 60%;
+    }
   }
 
   .filter__buttons {

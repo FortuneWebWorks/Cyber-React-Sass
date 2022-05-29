@@ -103,6 +103,11 @@
         font-weight: bold;
       }
     }
+
+    img {
+      border: 1px solid #244677;
+      border-radius: 10px;
+    }
   }
 
   .table__changes {
@@ -154,6 +159,12 @@
     user-select: none;
     pointer-events: none;
     z-index: 10;
+  }
+
+  .single {
+    span {
+      font: normal normal bold 2rem/21px Roboto !important;
+    }
   }
 
   @media (max-width: 500px) {

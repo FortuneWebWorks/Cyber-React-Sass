@@ -145,12 +145,12 @@ const TraitsList = ({ items, sort }) => {
                 </div>
               </td>
               <td>
-                <div className="table__changes">
+                <div className="table__changes single">
                   <span>{item.volume}</span>
                 </div>
               </td>
               <td>
-                <div className="table__changes">
+                <div className="table__changes single">
                   <span>{item.marketCap}</span>
                 </div>
               </td>
