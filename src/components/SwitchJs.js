@@ -3,11 +3,9 @@ import '../styles/SwitchJs.scss';
 const SwitchJs = () => {
   return (
     <div>
-      {/* <h2>Toggle Switch</h2> */}
-
-      <label class="switch">
+      <label className="switch">
         <input type="checkbox" />
-        <div class="slider"></div>
+        <div className="slider"></div>
       </label>
     </div>
   );

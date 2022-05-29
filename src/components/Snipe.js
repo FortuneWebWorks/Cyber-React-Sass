@@ -106,7 +106,6 @@ const Snipe = () => {
 
   return (
     <div className="container">
-      {console.log(snipeBelowRank.current)}
       <div className="container__scroll">
         <DropDown
           title="Select Wallet"

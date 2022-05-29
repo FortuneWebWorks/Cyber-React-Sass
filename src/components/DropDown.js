@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../styles/dropdown.scss';
 import { ReactComponent as Arrow } from '../assets/icons/arrow_down.svg';
 
@@ -24,20 +24,42 @@ const DropDown = ({ title, placeholder, items, callBack, fontSize, value }) => {
     }
   };
 
+  useEffect(() => {
+    window &&
+      window.addEventListener('pointerdown', (e) => {
+        if (!e.target.getAttribute('dropdown')) {
+          setOpen(false);
+        }
+      });
+  }, []);
+
   return (
-    <div className="dropdown__container">
-      <span className="title" style={{ fontSize: fontSize || '' }}>
+    <div className="dropdown__container" dropdown="true">
+      <span
+        className="title"
+        style={{ fontSize: fontSize || '' }}
+        dropdown="true"
+      >
         {title}
       </span>
-      <ul className="dropdown" onClick={onClick}>
-        <div className="dropdown__placeholder__icon">
-          <span className="dropdown__placeholder">{placeHolder}</span>
+      <ul className="dropdown" onClick={onClick} dropdown="true">
+        <div className="dropdown__placeholder__icon" dropdown="true">
+          <span className="dropdown__placeholder" dropdown="true">
+            {placeHolder}
+          </span>
           <Arrow />
         </div>
-        <div className="dropdown__scroll">
-          <ul className={`dropdown__items ${open ? 'open' : ''}`}>
+        <div className="dropdown__scroll" dropdown="true">
+          <ul
+            className={`dropdown__items ${open ? 'open' : ''}`}
+            dropdown="true"
+          >
             {items.map((item) => (
-              <li key={item.name || item.title} data={JSON.stringify(item)}>
+              <li
+                key={item.name || item.title}
+                data={JSON.stringify(item)}
+                dropdown="true"
+              >
                 {item.name || item.title}
               </li>
             ))}
