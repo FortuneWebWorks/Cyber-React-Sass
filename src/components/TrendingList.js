@@ -13,7 +13,7 @@ const headerItems = [
   'Market Cap',
 ];
 
-const TraitsList = ({ items }) => {
+const TraitsList = ({ items, sort }) => {
   const [showDetail, setShowDetail] = useState('');
 
   const showDetails = (item) => {
@@ -59,33 +59,89 @@ const TraitsList = ({ items }) => {
               </td>
               <td>
                 <div className="table__changes">
-                  <span>{item.floor.change}</span>
-                  <span className={item.floor.hl > 0 ? 'green' : 'red'}>
-                    {+item.floor.hl > 0 ? <FlashUpIcon /> : <FlashDownIcon />}
-                    {item.floor.hl.replace('-', '')}%
-                  </span>
+                  {sort === 'High/Low' ? (
+                    <>
+                      <span>{item.floor.change}</span>
+                      <span className={item.floor.hl > 0 ? 'green' : 'red'}>
+                        {+item.floor.hl > 0 ? (
+                          <FlashUpIcon />
+                        ) : (
+                          <FlashDownIcon />
+                        )}
+                        {item.floor.hl.replace('-', '')}%
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span className={item.floor.hl > 0 ? 'green' : 'red'}>
+                        {+item.floor.hl > 0 ? (
+                          <FlashUpIcon />
+                        ) : (
+                          <FlashDownIcon />
+                        )}
+                        {item.floor.hl.replace('-', '')}%
+                      </span>
+                      <span>{item.floor.change}</span>
+                    </>
+                  )}
                 </div>
               </td>
               <td>
                 <div className="table__changes">
-                  <span>{item.saies.change}</span>
-                  <span className={item.saies.hl > 0 ? 'green' : 'red'}>
-                    {+item.saies.hl > 0 ? <FlashUpIcon /> : <FlashDownIcon />}
-                    {item.saies.hl.replace('-', '')}%
-                  </span>
+                  {sort === 'High/Low' ? (
+                    <>
+                      <span>{item.saies.change}</span>
+                      <span className={item.saies.hl > 0 ? 'green' : 'red'}>
+                        {+item.saies.hl > 0 ? (
+                          <FlashUpIcon />
+                        ) : (
+                          <FlashDownIcon />
+                        )}
+                        {item.saies.hl.replace('-', '')}%
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span className={item.saies.hl > 0 ? 'green' : 'red'}>
+                        {+item.saies.hl > 0 ? (
+                          <FlashUpIcon />
+                        ) : (
+                          <FlashDownIcon />
+                        )}
+                        {item.saies.hl.replace('-', '')}%
+                      </span>
+                      <span>{item.saies.change}</span>
+                    </>
+                  )}
                 </div>
               </td>
               <td>
                 <div className="table__changes">
-                  <span>{item.listings.change}</span>
-                  <span className={item.listings.hl > 0 ? 'green' : 'red'}>
-                    {+item.listings.hl > 0 ? (
-                      <FlashUpIcon />
-                    ) : (
-                      <FlashDownIcon />
-                    )}
-                    {item.listings.hl.replace('-', '')}%
-                  </span>
+                  {sort === 'High/Low' ? (
+                    <>
+                      <span>{item.listings.change}</span>
+                      <span className={item.listings.hl > 0 ? 'green' : 'red'}>
+                        {+item.listings.hl > 0 ? (
+                          <FlashUpIcon />
+                        ) : (
+                          <FlashDownIcon />
+                        )}
+                        {item.listings.hl.replace('-', '')}%
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span className={item.listings.hl > 0 ? 'green' : 'red'}>
+                        {+item.listings.hl > 0 ? (
+                          <FlashUpIcon />
+                        ) : (
+                          <FlashDownIcon />
+                        )}
+                        {item.listings.hl.replace('-', '')}%
+                      </span>
+                      <span>{item.listings.change}</span>
+                    </>
+                  )}
                 </div>
               </td>
               <td>

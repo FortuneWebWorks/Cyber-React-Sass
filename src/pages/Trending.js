@@ -59,13 +59,15 @@ const tableItems = [
 
 const Traits = () => {
   const [openFilter, setOpenFiter] = useState(false);
-  // const [sort, setSort]
+  const [sort, setSort] = useState('High/Low');
 
   const onClick = (e) => {
     setOpenFiter((prev) => !prev);
   };
 
-  const dropDownChange = (key) => {};
+  const activeButtonsChange = (value) => {
+    setSort(value);
+  };
 
   return (
     <div className="traits">
@@ -83,7 +85,7 @@ const Traits = () => {
             activeDefault="High/Low"
             font="normal normal bold 12px/14px Roboto"
             containerStyles={{ border: '1px solid #1956E2', height: '30px' }}
-            callBack={dropDownChange}
+            callBack={activeButtonsChange}
           />
         </div>
 
@@ -98,7 +100,7 @@ const Traits = () => {
       </div>
 
       <div className="table__container">
-        <TraitsList items={tableItems} />
+        <TraitsList items={tableItems} sort={sort} />
       </div>
 
       <Footer />
