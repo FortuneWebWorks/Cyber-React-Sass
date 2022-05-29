@@ -46,11 +46,23 @@ const Menu = ({ title, active, noMenu, callBack }) => {
 
   useEffect(() => {
     setActiveState(active);
+
+    const closer = (e) => {
+      if (!e.target.closest('.menu')) {
+        resetHandler();
+      }
+    };
+
+    window && window.addEventListener('mouseup', closer);
+
+    return () => {
+      window.removeEventListener('mouseup', closer);
+    };
   }, [active]);
 
   resetHandler = () => {
     setActiveState(false);
-    callBack('');
+    callBack && callBack('');
   };
 
   return (

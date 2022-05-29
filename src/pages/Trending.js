@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../styles/trending.scss';
 import ButtonGroup from '../components/ButtonGroup';
 import Timer from '../components/Timer';
@@ -68,6 +68,20 @@ const Traits = () => {
   const activeButtonsChange = (value) => {
     setSort(value);
   };
+
+  useEffect(() => {
+    const closer = (e) => {
+      if (!e.target.closest('.filter')) {
+        setOpenFiter(false);
+      }
+    };
+
+    window && window.addEventListener('mouseup', closer);
+
+    return () => {
+      window.removeEventListener('mouseup', closer);
+    };
+  }, []);
 
   return (
     <div className="traits">

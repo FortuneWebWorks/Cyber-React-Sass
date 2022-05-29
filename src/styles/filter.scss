@@ -22,7 +22,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font: normal normal bold 18px/21px Roboto;
+    font: normal normal bold 1.7rem/21px Roboto;
   }
 
   .filter__menu {
@@ -58,7 +58,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    font: normal normal bold 14px/16px Roboto;
+    font: normal normal bold 1.5rem/16px Roboto;
 
     svg {
       width: 2rem;
@@ -96,7 +96,7 @@
       border: none;
       border-radius: 10px;
       background-color: $primary;
-      font: normal normal normal 14px/16px Roboto;
+      font: normal normal normal 1.5rem/16px Roboto;
       color: #fff;
     }
   }
@@ -160,6 +160,7 @@
 
     button {
       width: 100%;
+      min-height: 5rem;
       border: none;
       border-radius: 50px;
       padding: 1rem;
