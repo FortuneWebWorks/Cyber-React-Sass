@@ -2,7 +2,7 @@ import '../styles/SwitchJs.scss';
 
 const SwitchJs = () => {
   return (
-    <div>
+    <div className="switchjs__container">
       <label className="switch">
         <input type="checkbox" />
         <div className="slider"></div>

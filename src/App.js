@@ -1,8 +1,7 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Routes from './routes/index';
 import './styles/app.scss';
 import Header from './components/Header2';
-import Main from './pages/Main';
-import Traits from './pages/Trending';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import MintContextProvider from './contexts/autoMintContext';
@@ -13,18 +12,17 @@ const App = () => {
   return (
     <div className="App">
       <Header />
+
       <Router>
         <MintContextProvider>
           <SnipeContextProvider>
             <BulkContextProvider>
-              <Routes>
-                <Route path="/" element={<Main />} />
-                <Route path="/Trending" element={<Traits />} />
-              </Routes>
+              <Routes />
             </BulkContextProvider>
           </SnipeContextProvider>
         </MintContextProvider>
       </Router>
+
       <ToastContainer
         position="bottom-right"
         autoClose={4000}

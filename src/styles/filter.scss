@@ -87,6 +87,10 @@
       position: absolute;
       right: 0;
       transform: translateY(-12%);
+
+      @media (max-width: 1235px) {
+        transform: translateY(-5%);
+      }
     }
   }
 
@@ -161,6 +165,16 @@
     align-items: flex-start;
     margin-left: auto;
     padding-right: 15%;
+
+    @media (max-width: 1235px) {
+      width: 45%;
+      padding-right: 0;
+    }
+
+    @media (max-width: 1050px) {
+      width: 40%;
+      padding-right: 0;
+    }
   }
 
   #second {
@@ -174,8 +188,8 @@
     }
 
     @media (max-width: 1235px) {
-      min-width: 15rem;
-      padding-right: 60%;
+      min-width: 12rem;
+      padding-right: 30%;
     }
   }
 
