@@ -11,7 +11,11 @@
 
   .table__container {
     overflow: hidden;
-    overflow-x: auto;
+    transition: overflow 0.2s ease;
+
+    &:hover {
+      overflow-x: auto;
+    }
   }
 
   .traits__title {

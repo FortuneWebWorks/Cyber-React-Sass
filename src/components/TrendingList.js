@@ -1,5 +1,5 @@
 import { Fragment, useState, useEffect } from 'react';
-import '../styles/traitsList.scss';
+import '../styles/trendingList.scss';
 import { ReactComponent as InfoIcon } from '../assets/images/information.svg';
 import { ReactComponent as FlashDownIcon } from '../assets/images/flash-down.svg';
 import { ReactComponent as FlashUpIcon } from '../assets/images/flash_up.svg';
