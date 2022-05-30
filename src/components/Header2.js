@@ -65,6 +65,8 @@ const Header = () => {
   return (
     <header className="max-width-header-limiter">
       <div className="header">
+        <h2>NFToolkit</h2>
+
         <Search />
 
         <div className="header__menu-item">
