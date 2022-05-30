@@ -12,10 +12,6 @@
   .table__container {
     overflow: hidden;
     transition: overflow 0.2s ease;
-
-    &:hover {
-      overflow-x: auto;
-    }
   }
 
   .traits__title {
@@ -64,6 +60,17 @@
     align-items: center;
     gap: 12.7rem;
     margin-left: auto;
+  }
+
+  @media (max-width: 1000px) {
+    .table__container {
+      overflow: hidden;
+      transition: overflow 0.2s ease;
+
+      &:hover {
+        overflow-x: auto;
+      }
+    }
   }
 
   @media (max-width: 500px) {

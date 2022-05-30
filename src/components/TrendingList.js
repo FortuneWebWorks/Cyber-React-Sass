@@ -14,45 +14,20 @@ const headerItems = [
 ];
 
 const TraitsList = ({ items, sort }) => {
-  const [showDetail, setShowDetail] = useState('');
-
-  const showDetails = (item) => {
-    setShowDetail((prev) => (item === prev ? '' : item));
-  };
-
-  useEffect(() => {
-    const closer = (e) => {
-      if (!e.target.closest('.menu')) {
-        setShowDetail('');
-      }
-    };
-
-    window && window.addEventListener('mouseup', closer);
-
-    return () => {
-      window.removeEventListener('mouseup', closer);
-    };
-  }, []);
-
   return (
     <table className="table">
       <thead>
         <tr className="table__head__row">
           {headerItems.map((item) => (
             <th key={item}>
-              <div
-                onClick={showDetails.bind(null, item)}
-                className={`head_items ${item === showDetail ? 'det' : ''}`}
-              >
+              <div className={`head_items`}>
                 {item} <InfoIcon />
-                {showDetail === item && (
-                  <p className="info__details">
-                    The Nansen NFT indexes present a reliable way of navigating
-                    the NFT markets. This update raises the bar for quality
-                    financial infrastructure that supports the growing depth of
-                    the NFT industry
-                  </p>
-                )}
+                <p className="info__details">
+                  The Nansen NFT indexes present a reliable way of navigating
+                  the NFT markets. This update raises the bar for quality
+                  financial infrastructure that supports the growing depth of
+                  the NFT industry
+                </p>
               </div>
             </th>
           ))}

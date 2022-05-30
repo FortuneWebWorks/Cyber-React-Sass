@@ -79,16 +79,18 @@
   }
 
   .table__user-container {
-    display: flex;
-    justify-content: flex-start;
+    display: table-cell;
   }
 
   .table__details {
+    max-height: 4rem;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    margin-right: auto;
     gap: 1rem;
+    border-radius: 10px;
+    margin-right: auto;
+    background-color: transparent;
 
     div {
       display: flex;
@@ -107,6 +109,7 @@
     img {
       border: 1px solid #244677;
       border-radius: 10px;
+      max-height: inherit;
     }
   }
 
@@ -138,9 +141,16 @@
   .head_items {
     position: relative;
 
-    &.det {
-      svg {
+    svg {
+      user-select: auto;
+      pointer-events: all;
+
+      &:hover {
         stroke: #1956e2;
+
+        & + p {
+          opacity: 1;
+        }
       }
     }
   }
@@ -159,6 +169,8 @@
     user-select: none;
     pointer-events: none;
     z-index: 10;
+    // transition: opacity 0.1s ease;
+    opacity: 0;
   }
 
   .single {
