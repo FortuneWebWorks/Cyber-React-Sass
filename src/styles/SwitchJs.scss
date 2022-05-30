@@ -28,10 +28,10 @@
   .slider:before {
     position: absolute;
     content: '';
-    height: 2.3rem;
-    width: 2.3rem;
-    left: 4px;
-    bottom: 4px;
+    height: 2.8rem;
+    width: 2.8rem;
+    left: 0;
+    bottom: 2px;
     border-radius: 50px;
     background-color: #fff;
     -webkit-transition: 0.4s;
@@ -47,11 +47,17 @@
   }
 
   input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+    -webkit-transform: translateX(2.8rem);
+    -ms-transform: translateX(2.8rem);
+    transform: translateX(2.8rem);
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 1000px) {
+    .slider:before {
+      height: 2.8rem;
+      width: 2.8rem;
+      left: 0;
+      bottom: 1px;
+    }
   }
 }
