@@ -1,6 +1,7 @@
 .headermenu__container {
   position: relative;
   display: none;
+  z-index: 10;
 
   svg {
     width: 5rem;

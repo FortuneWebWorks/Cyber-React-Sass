@@ -95,7 +95,7 @@ const Header = () => {
                 )}`
               : 'Connect Wallet'}
           </button>
-          <HeaderMenu />
+          <HeaderMenu second={true} />
         </div>
       </div>
     </header>

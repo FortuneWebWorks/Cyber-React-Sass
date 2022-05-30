@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import '../styles/headerMenu.scss';
 
-const HeaderMenu = () => {
+const HeaderMenu = ({ second }) => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -35,11 +35,21 @@ const HeaderMenu = () => {
 
       {open && (
         <ul className="headermenu__items">
-          <li>Pricing</li>
-          <li>Resources</li>
-          <li>Cyberdash Alpha</li>
-          <li>Institutions</li>
-          <li>About us</li>
+          {!second ? (
+            <>
+              <li>Pricing</li>
+              <li>Resources</li>
+              <li>Cyberdash Alpha</li>
+              <li>Institutions</li>
+              <li>About us</li>
+            </>
+          ) : (
+            <>
+              <li>Drops</li>
+              <li>Trending</li>
+              <li>FAQ</li>
+            </>
+          )}
         </ul>
       )}
     </div>
