@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import '../styles/traitsList.scss';
 import { ReactComponent as InfoIcon } from '../assets/images/information.svg';
 import { ReactComponent as FlashDownIcon } from '../assets/images/flash-down.svg';
@@ -19,6 +19,20 @@ const TraitsList = ({ items, sort }) => {
   const showDetails = (item) => {
     setShowDetail((prev) => (item === prev ? '' : item));
   };
+
+  useEffect(() => {
+    const closer = (e) => {
+      if (!e.target.closest('.menu')) {
+        setShowDetail('');
+      }
+    };
+
+    window && window.addEventListener('mouseup', closer);
+
+    return () => {
+      window.removeEventListener('mouseup', closer);
+    };
+  }, []);
 
   return (
     <table className="table">
