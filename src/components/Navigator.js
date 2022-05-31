@@ -3,30 +3,25 @@ import { useState, useRef } from 'react';
 
 const Navigator = ({
   items = [
-    { name: 'Bijan maa' },
-    { name: 'fdadfsdf maa' },
-    { name: 'sadf adfs' },
-    { name: 'sdfad maa' },
-    { name: 'Milad maa' },
-    { name: 'Saman' },
-    { name: 'cow' },
+    { name: 'Bijan maa', image: 'https:picsum.photos/5' },
+    { name: 'fdadfsdf maa', image: 'https:picsum.photos/5' },
+    { name: 'sadf adfs', image: 'https:picsum.photos/5' },
+    { name: 'sdfad maa', image: 'https:picsum.photos/5' },
+    { name: 'Milad maa', image: 'https:picsum.photos/5' },
+    { name: 'Saman', image: 'https:picsum.photos/5' },
+    { name: 'cow', image: 'https:picsum.photos/5' },
   ],
 }) => {
   const [active, setActive] = useState(0);
   let navigator = useRef(null);
   const moveStep = -290.3;
+  const allSteps = items.slice(3, items.length);
 
   const navigateHandler = (e) => {
     if (e.target.id) {
       setActive(+e.target.id);
 
-      if (e.target.id > 3) {
-        navigator.style.transform = `translateX(${
-          moveStep * (e.target.id - 3)
-        }px)`;
-      } else {
-        navigator.style.transform = `translateX(0)`;
-      }
+      navigator.style.transform = `translateX(${moveStep * e.target.id}px)`;
     }
   };
 
@@ -46,7 +41,7 @@ const Navigator = ({
               >
                 <img
                   className="navigator__card_image"
-                  src="https:picsum.photos/58"
+                  src={item.image + (8 + index).toString()}
                   alt=""
                 />
 
@@ -66,7 +61,7 @@ const Navigator = ({
       </div>
 
       <div className="navigator__buttons" onClick={navigateHandler}>
-        {items.map((item, index) => (
+        {allSteps.map((_, index) => (
           <button
             key={index}
             id={index}
