@@ -1,11 +1,14 @@
 @use './colors' as *;
 
 .switchjs__container {
+  width: 4.22rem;
+  height: 2.22rem;
+
   .switch {
     position: relative;
     display: inline-block;
-    width: 5.5rem;
-    height: 3.2rem;
+    width: 4.22rem;
+    height: 2.22rem;
   }
 
   .switch input {
@@ -28,9 +31,9 @@
   .slider:before {
     position: absolute;
     content: '';
-    height: 2.8rem;
-    width: 2.8rem;
-    left: 0;
+    height: 1.77rem;
+    width: 1.77rem;
+    left: 2px;
     bottom: 2px;
     border-radius: 50px;
     background-color: #fff;
@@ -39,7 +42,7 @@
   }
 
   input:checked + .slider {
-    background-color: $success;
+    background-color: #1956e2;
   }
 
   input:focus + .slider {
@@ -47,17 +50,8 @@
   }
 
   input:checked + .slider:before {
-    -webkit-transform: translateX(2.8rem);
-    -ms-transform: translateX(2.8rem);
-    transform: translateX(2.8rem);
-  }
-
-  @media (max-width: 1000px) {
-    .slider:before {
-      height: 2.8rem;
-      width: 2.8rem;
-      left: 0;
-      bottom: 1px;
-    }
+    -webkit-transform: translateX(2rem);
+    -ms-transform: translateX(2rem);
+    transform: translateX(2rem);
   }
 }

@@ -108,9 +108,9 @@
       font-weight: normal;
       cursor: pointer;
 
-      &:hover {
-        background-color: lighten($color: $primary-dark, $amount: 2%);
-      }
+      // &:hover {
+      //   background-color: lighten($color: $primary-dark, $amount: 2%);
+      // }
     }
   }
 }

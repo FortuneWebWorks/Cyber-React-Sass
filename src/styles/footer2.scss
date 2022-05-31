@@ -16,6 +16,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    margin: auto;
     color: #fff;
     font-size: 1.8rem;
   }
@@ -27,7 +28,14 @@
     justify-content: space-between;
     align-items: flex-start;
     gap: 3rem;
+    margin: auto;
+    text-align: center;
     font: normal normal normal 14px/16px Roboto;
+
+    p {
+      width: 100%;
+      text-align: center;
+    }
   }
 
   .footer__us {

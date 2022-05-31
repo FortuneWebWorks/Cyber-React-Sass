@@ -2,7 +2,15 @@ import { useEffect, useState } from 'react';
 import '../styles/dropdown.scss';
 import { ReactComponent as Arrow } from '../assets/icons/arrow_down.svg';
 
-const DropDown = ({ title, placeholder, items, callBack, fontSize, value }) => {
+const DropDown = ({
+  title,
+  placeholder,
+  items,
+  callBack,
+  fontSize,
+  value,
+  innerColor,
+}) => {
   // const [data, setData] = useState('');
   const [placeHolder, setPlaceHolder] = useState(value || placeholder);
   const [open, setOpen] = useState(false);
@@ -53,6 +61,7 @@ const DropDown = ({ title, placeholder, items, callBack, fontSize, value }) => {
           <ul
             className={`dropdown__items ${open ? 'open' : ''}`}
             dropdown="true"
+            style={{ backgroundColor: innerColor }}
           >
             {items.map((item) => (
               <li

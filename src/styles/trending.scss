@@ -64,6 +64,10 @@
     margin-left: auto;
   }
 
+  @media (min-height: 1100px) {
+    margin-top: 0;
+  }
+
   @media (max-width: 1000px) {
     .table__container {
       overflow: hidden;
@@ -76,12 +80,14 @@
   }
 
   @media (max-width: 500px) {
-    padding: 4.5rem 0;
+    padding: 4.5rem 0.5rem;
 
     .traist__sort_timer {
-      flex-direction: column;
+      flex-direction: row;
+      flex-wrap: wrap;
       align-items: flex-start;
       gap: 2rem;
+      margin-bottom: 0;
 
       svg {
         margin-left: 0;
@@ -95,6 +101,10 @@
       align-items: flex-start;
       gap: 2rem;
       margin-left: 0;
+    }
+
+    .traits__sort-details {
+      width: 35.5rem;
     }
   }
 }

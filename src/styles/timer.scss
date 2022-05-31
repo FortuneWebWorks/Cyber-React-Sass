@@ -14,12 +14,14 @@
     padding: 0.5rem 1rem;
     outline: none;
     background-color: transparent;
-    color: #fff;
+    color: #d1d1d1;
     font: normal normal normal 12px/14px Roboto;
     cursor: pointer;
   }
 
   button.active {
     background-color: $primary-lighter;
+    color: #fff;
+    font: normal normal 600 12px/14px Roboto;
   }
 }

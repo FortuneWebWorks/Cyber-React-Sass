@@ -38,6 +38,12 @@
       align-items: center;
       gap: 0.5rem;
     }
+
+    th:first-child {
+      div {
+        padding-left: 5rem;
+      }
+    }
   }
 
   .table__body__row {
@@ -148,6 +154,7 @@
 
   .head_items {
     position: relative;
+    font-weight: 500;
 
     svg {
       user-select: auto;
@@ -188,7 +195,17 @@
   }
 
   @media (max-width: 500px) {
-    width: 500px;
+    width: fit-content;
     display: block;
+
+    .table__body__row {
+      td {
+        min-width: 15rem;
+      }
+
+      td:first-child {
+        min-width: 30rem;
+      }
+    }
   }
 }

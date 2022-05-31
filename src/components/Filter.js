@@ -178,7 +178,11 @@ const Filter = ({ title = 'Filter', callBack }) => {
           <div className="filter__menu_item_content_compare">
             <div className="filter__menu_item_content_minmax">
               <span>Sales</span>
-              <DropDown items={compareItems} fontSize="1.5rem" />
+              <DropDown
+                items={compareItems}
+                fontSize="1.5rem"
+                innerColor="#244677"
+              />
               <span>Listings</span>
             </div>
             <div className="filter__menu_item_content_average">

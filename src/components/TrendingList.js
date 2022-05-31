@@ -13,20 +13,26 @@ const headerItems = [
   'Market Cap',
 ];
 
+const headerItemsInof = [
+  'The collections with the highest number of sales in the selected timeframe',
+  'Floor price on Opensea',
+  'The number of sales',
+  'The number of listings',
+  'The trading volume of Collections in the selected timeframe',
+  'The total volume of collections from the beginning until now',
+];
+
 const TraitsList = ({ items, sort }) => {
   return (
     <table className="table">
       <thead>
         <tr className="table__head__row">
-          {headerItems.map((item) => (
+          {headerItems.map((item, index) => (
             <th key={item}>
               <div className={`head_items`}>
                 {item} <InfoIcon />
                 <p className="info__details">
-                  The Nansen NFT indexes present a reliable way of navigating
-                  the NFT markets. This update raises the bar for quality
-                  financial infrastructure that supports the growing depth of
-                  the NFT industry
+                  {headerItemsInof[index]}
                 </p>
               </div>
             </th>
