@@ -1,21 +1,28 @@
 import '../styles/navigator.scss';
-import { useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 const Navigator = ({
   items = [
     { name: 'Bijan maa', image: 'https:picsum.photos/5' },
-    { name: 'fdadfsdf maa', image: 'https:picsum.photos/5' },
-    { name: 'sadf adfs', image: 'https:picsum.photos/5' },
-    { name: 'sdfad maa', image: 'https:picsum.photos/5' },
-    { name: 'Milad maa', image: 'https:picsum.photos/5' },
-    { name: 'Saman', image: 'https:picsum.photos/5' },
-    { name: 'cow', image: 'https:picsum.photos/5' },
+    { name: 'Bijan maa', image: 'https:picsum.photos/5' },
+    { name: 'Bijan maa', image: 'https:picsum.photos/5' },
+    { name: 'Bijan maa', image: 'https:picsum.photos/5' },
+    { name: 'Bijan maa', image: 'https:picsum.photos/5' },
+    { name: 'Bijan maa', image: 'https:picsum.photos/5' },
+    { name: 'Bijan maa', image: 'https:picsum.photos/5' },
+    { name: 'Bijan maa', image: 'https:picsum.photos/5' },
   ],
 }) => {
   const [active, setActive] = useState(0);
   let navigator = useRef(null);
   const moveStep = -290.3;
   const allSteps = items.slice(3, items.length);
+
+  useEffect(() => {
+    items.length === 1
+      ? (navigator.style.justifyContent = 'center')
+      : (navigator.style.justifyContent = 'space-evenly');
+  }, [items]);
 
   const navigateHandler = (e) => {
     if (e.target.id) {

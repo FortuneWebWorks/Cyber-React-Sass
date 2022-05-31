@@ -4,7 +4,7 @@ import ButtonGroup from '../components/ButtonGroup';
 import Navigator from '../components/Navigator';
 import TraitsList from '../components/TrendingList';
 import { ReactComponent as FilterIcon } from '../assets/icons/filtr.svg';
-import Footer from '../components/Footer2';
+import Footer from '../components/Footer';
 import Filter from '../components/Filter';
 import Search from '../components/Search';
 

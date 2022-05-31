@@ -3,21 +3,27 @@
 
 .max-width-header-limiter {
   width: 100%;
-  max-width: 1366px;
+  background-color: $primary;
 }
 
 .header {
   width: 100%;
+  max-width: 1366px;
   min-height: 7.7rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: auto;
   padding: 0 10.4rem;
-  background-color: $primary;
+
+  h2 {
+    color: #fff;
+    font-size: 2.66rem;
+  }
 
   .header__logo {
     width: 16.2rem;
+    font: normal normal bold 1.7rem/19px Roboto;
   }
 
   .header__menu-item {
@@ -26,7 +32,7 @@
     align-items: center;
     gap: 4rem;
     color: #fff;
-    font: normal normal bold 1.7rem/19px Roboto;
+    font: normal normal 600 1.7rem/19px Roboto;
     letter-spacing: 1px;
     white-space: pre;
   }
@@ -70,13 +76,19 @@
     width: 44%;
     border: 1px solid #fff;
     border-radius: $border-radius-lg;
-    padding: 1.5rem 2rem;
+    padding: 1.3rem 1.5rem;
     background-color: transparent;
     color: #fff;
-    font: normal normal bold 1.7rem/19px Roboto;
+    font: normal normal 600 1.6rem/19px Roboto;
     font-weight: bold;
     cursor: pointer;
     white-space: pre;
+  }
+
+  @media (max-width: 1100px) {
+    .header__connect-wallet {
+      padding: 1.1rem 1.5rem;
+    }
   }
 
   @media (max-width: 1000px) {
@@ -91,32 +103,20 @@
     }
     .header__connect-wallet {
       width: 100%;
-      padding: 0.5rem 1rem;
-      font-size: 1.5rem;
-    }
-
-    .header__logo {
-      width: 12rem;
+      padding: 0.8rem 2rem;
     }
   }
 
   @media (max-width: 800px) {
-    min-height: 12rem;
+    min-height: 8rem;
 
     .header__connect-wallet {
-      padding: 1.7rem 2rem;
-      font: normal normal bold 2.2rem/19px Roboto;
-      // font-size: 2rem;
+      width: 100%;
+      padding: 0.8rem 2rem;
     }
   }
 
   @media (max-width: 500px) {
     padding: 0 2rem;
-
-    .header__connect-wallet {
-      padding: 1.7rem 2rem;
-      font: normal normal bold 1.5rem/19px Roboto;
-      // font-size: 2rem;
-    }
   }
 }
