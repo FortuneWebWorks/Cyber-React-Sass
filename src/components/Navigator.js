@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 
 const Navigator = ({
   items = [
+    { name: '1', image: 'https:picsum.photos/5' },
     { name: 'Bijan maa', image: 'https:picsum.photos/5' },
     { name: 'Bijan maa', image: 'https:picsum.photos/5' },
     { name: 'Bijan maa', image: 'https:picsum.photos/5' },
@@ -10,7 +11,7 @@ const Navigator = ({
     { name: 'Bijan maa', image: 'https:picsum.photos/5' },
     { name: 'Bijan maa', image: 'https:picsum.photos/5' },
     { name: 'Bijan maa', image: 'https:picsum.photos/5' },
-    { name: 'Bijan maa', image: 'https:picsum.photos/5' },
+    { name: '9', image: 'https:picsum.photos/5' },
   ],
 }) => {
   const [active, setActive] = useState(0);
@@ -19,9 +20,13 @@ const Navigator = ({
   const allSteps = items.slice(3, items.length);
 
   useEffect(() => {
-    items.length === 1
-      ? (navigator.style.justifyContent = 'center')
-      : (navigator.style.justifyContent = 'space-evenly');
+    if (items.length === 1) {
+      navigator.style.justifyContent = 'center';
+    } else if (items.length === 2 || items.length === 3) {
+      navigator.style.justifyContent = 'space-evenly';
+    } else {
+      navigator.style.justifyContent = 'flex-start';
+    }
   }, [items]);
 
   const navigateHandler = (e) => {
