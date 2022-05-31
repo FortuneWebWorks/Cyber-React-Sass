@@ -4,12 +4,9 @@ import ButtonGroup from '../components/ButtonGroup';
 import Navigator from '../components/Navigator';
 import TraitsList from '../components/TrendingList';
 import { ReactComponent as FilterIcon } from '../assets/icons/filtr.svg';
-import Footer from '../components/Footer';
+import Footer from '../components/Footer2';
 import Filter from '../components/Filter';
 import Search from '../components/Search';
-
-const timings = ['1d', '7d', '30d', '90d', '1y'];
-const timings2 = ['5m', '30m', '1h', '6h'];
 
 const tableItems = [
   {
