@@ -3,6 +3,15 @@ import '../styles/filter.scss';
 import { ReactComponent as ArrowDown } from '../assets/icons/arrow_down.svg';
 import { ReactComponent as CancelIcon } from '../assets/images/cancel.svg';
 import SwitchJs from './SwitchJs';
+import DropDown from '../components/DropDown';
+
+const compareItems = [
+  { name: '==' },
+  { name: '>=' },
+  { name: '<=' },
+  { name: '>' },
+  { name: '<' },
+];
 
 const Filter = ({ title = 'Filter', callBack }) => {
   const [openItem, setOpenItem] = useState('Sales Count');
@@ -18,7 +27,7 @@ const Filter = ({ title = 'Filter', callBack }) => {
   return (
     <div className="filter">
       <div className="filter__header">
-        <h3>{title}</h3>
+        <span>{title}</span>
         <span onClick={closeCancel} className="filter__header_closer">
           <CancelIcon />
         </span>
@@ -169,7 +178,7 @@ const Filter = ({ title = 'Filter', callBack }) => {
           <div className="filter__menu_item_content_compare">
             <div className="filter__menu_item_content_minmax">
               <span>Sales</span>
-              <input type="text" placeholder="" />
+              <DropDown items={compareItems} fontSize="1.5rem" />
               <span>Listings</span>
             </div>
             <div className="filter__menu_item_content_average">

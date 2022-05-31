@@ -22,7 +22,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font: normal normal bold 1.77rem/21px Roboto;
+    font: normal normal 600 1.8rem/21px Roboto;
+    letter-spacing: 1px;
   }
 
   .filter__header_closer {
@@ -35,7 +36,7 @@
   }
 
   .filter__menu {
-    max-width: 287px;
+    max-width: 297px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -100,7 +101,8 @@
     font: normal normal normal 1.5rem/16px Roboto;
 
     input {
-      width: 100%;
+      width: 120px;
+      height: 30px;
       padding: 0.9rem 1.5rem;
       border: none;
       border-radius: 10px;
@@ -150,6 +152,16 @@
         font-size: 1.8rem;
         color: #fff;
       }
+
+      ul {
+        width: 70px;
+        padding: 1.1rem;
+        padding-right: 0.3rem;
+      }
+
+      .dropdown__container .dropdown__placeholder__icon svg {
+        margin-left: 1rem;
+      }
     }
   }
 
@@ -179,12 +191,11 @@
 
     button {
       width: 100%;
-      min-height: 5rem;
+      min-height: 4rem;
       border: none;
       border-radius: 50px;
       padding: 1rem;
-      font-size: 1.8rem;
-      font-weight: bold;
+      font: normal normal bold 1.5rem/16px Roboto;
       background-color: $primary-lighter;
       color: #fff;
     }

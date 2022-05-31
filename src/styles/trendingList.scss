@@ -111,6 +111,14 @@
       border-radius: 10px;
       max-height: inherit;
     }
+
+    .table__details_nftName {
+      font: normal normal bold 14px/16px Roboto;
+    }
+
+    .table__details_time {
+      font: normal normal normal 12px/14px Roboto;
+    }
   }
 
   .table__changes {

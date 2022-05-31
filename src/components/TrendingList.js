@@ -41,8 +41,12 @@ const TraitsList = ({ items, sort }) => {
                 <div className="table__details">
                   <img src={item.user.userImage} alt="" />
                   <div>
-                    <span>{item.user.nftName}</span>
-                    <span>{item.user.time}</span>
+                    <span className="table__details_nftName">
+                      {item.user.nftName}
+                    </span>
+                    <span className="table__details_time">
+                      {item.user.time}
+                    </span>
                   </div>
                 </div>
               </td>
