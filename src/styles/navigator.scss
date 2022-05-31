@@ -2,7 +2,7 @@
 
 .navigator {
   width: 1180px;
-  height: 173px;
+  height: 175px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -41,21 +41,21 @@
     flex-grow: 0;
     flex-shrink: 0;
     width: 275px;
-    height: 68px;
+    height: 7.55rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
     border: 1px solid #244677;
     border-radius: 10px;
-    padding: 0.5rem;
+    padding: 5px;
     background: #244677 0% 0% no-repeat padding-box;
     transition: all 1s ease-in-out;
   }
 
   .navigator__card_image {
-    width: 58px;
-    height: 58px;
+    width: 6.44rem;
+    height: 6.44rem;
     border-radius: 10px;
   }
 
