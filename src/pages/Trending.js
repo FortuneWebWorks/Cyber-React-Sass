@@ -107,13 +107,15 @@ const Traits = () => {
           />
         </div>
 
-        <div className="traits__timers">
-          <Timer items={timings} defaultActive={timings[2]} />
-          <Timer items={timings2} defaultActive={timings[2]} />
-        </div>
+        <div className="timers__filter__container">
+          <div className="traits__timers">
+            <Timer items={timings} defaultActive={timings[2]} />
+            <Timer items={timings2} defaultActive={timings[2]} />
+          </div>
 
-        <div id="filter" onClick={onClick}>
-          <FilterIcon />
+          <div id="filter" onClick={onClick}>
+            <FilterIcon />
+          </div>
         </div>
       </div>
 

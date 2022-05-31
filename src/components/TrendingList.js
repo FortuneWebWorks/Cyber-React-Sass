@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect } from 'react';
+import { Fragment } from 'react';
 import '../styles/trendingList.scss';
 import { ReactComponent as InfoIcon } from '../assets/images/information.svg';
 import { ReactComponent as FlashDownIcon } from '../assets/images/flash-down.svg';
@@ -31,9 +31,7 @@ const TraitsList = ({ items, sort }) => {
             <th key={item}>
               <div className={`head_items`}>
                 {item} <InfoIcon />
-                <p className="info__details">
-                  {headerItemsInof[index]}
-                </p>
+                <p className="info__details">{headerItemsInof[index]}</p>
               </div>
             </th>
           ))}
