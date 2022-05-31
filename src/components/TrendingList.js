@@ -4,15 +4,6 @@ import { ReactComponent as InfoIcon } from '../assets/images/information.svg';
 import { ReactComponent as FlashDownIcon } from '../assets/images/flash-down.svg';
 import { ReactComponent as FlashUpIcon } from '../assets/images/flash_up.svg';
 
-const headerItems = [
-  'Collection',
-  'Floor',
-  'Saies',
-  'Listings',
-  'Volume',
-  'Market Cap',
-];
-
 const headerItemsInof = [
   'The collections with the highest number of sales in the selected timeframe',
   'Floor price on Opensea',
@@ -22,7 +13,7 @@ const headerItemsInof = [
   'The total volume of collections from the beginning until now',
 ];
 
-const TraitsList = ({ items, sort }) => {
+const TraitsList = ({ items, headerItems, sort, info }) => {
   return (
     <table className="table">
       <thead>
@@ -30,7 +21,7 @@ const TraitsList = ({ items, sort }) => {
           {headerItems.map((item, index) => (
             <th key={item}>
               <div className={`head_items`}>
-                {item} <InfoIcon />
+                {item} {info && <InfoIcon />}
                 <p className="info__details">{headerItemsInof[index]}</p>
               </div>
             </th>

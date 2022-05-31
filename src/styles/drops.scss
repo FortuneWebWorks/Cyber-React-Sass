@@ -9,7 +9,7 @@
   padding: 4.5rem 10rem;
   overflow-x: hidden;
 
-  .table__container {
+  .drops__table__container {
     overflow: hidden;
     transition: overflow 0.2s ease;
   }
@@ -30,6 +30,10 @@
       font: normal normal normal 16px/19px Roboto;
       letter-spacing: 0px;
     }
+  }
+
+  .drops__title2 {
+    margin-top: 4rem;
   }
 
   .drops__sort_timer {
@@ -75,7 +79,7 @@
   }
 
   @media (max-width: 1000px) {
-    .table__container {
+    .drops__table__container {
       overflow: hidden;
       overflow-x: auto;
       transition: overflow 0.2s ease;

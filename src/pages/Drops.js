@@ -55,16 +55,34 @@ const tableItems = [
   },
 ];
 
+const headerItems = [
+  'Collection',
+  'Supply',
+  'Twitter Member',
+  'Discord Member',
+  'Presale Price',
+  'Public Sale Price',
+  'Max Mint',
+  'Presale Mint Time',
+  'Public Sale Mint Time',
+  'Category',
+  'Social Media',
+];
+
 const Drops = () => {
   const [openFilter, setOpenFiter] = useState(false);
-  const [sort, setSort] = useState('High/Low');
+  const [reveal, setReveal] = useState('Reveal');
 
   const onClick = (e) => {
     setOpenFiter((prev) => !prev);
   };
 
   const activeButtonsChange = (value) => {
-    setSort(value);
+    setReveal(value);
+    if (value === 'Reveal') {
+      // headerItems.push('Reveal');
+    } else {
+    }
   };
 
   useEffect(() => {
@@ -95,14 +113,23 @@ const Drops = () => {
 
       <Navigator />
 
+      <div className="drops__title drops__title2">
+        <h2>Upcomming Calendar</h2>
+        <p>In this table you can find upcoming NFT Projects</p>
+      </div>
+
       <div className="drops__sort_timer">
         <div className="drops__sort-details">
           <span>Sorted By: </span>
           <ButtonGroup
-            items={['High/Low', '%Change']}
-            activeDefault="High/Low"
+            items={['Upcoming', 'Reveal']}
+            activeDefault="Reveal"
             font="normal normal bold 12px/14px Roboto"
-            containerStyles={{ border: '1px solid #1956E2', height: '30px' }}
+            containerStyles={{
+              border: '1px solid #1956E2',
+              height: '30px',
+              width: '20rem',
+            }}
             callBack={activeButtonsChange}
           />
         </div>
@@ -118,8 +145,13 @@ const Drops = () => {
         </div>
       </div>
 
-      <div className="table__container">
-        <TraitsList items={tableItems} sort={sort} />
+      <div className="drops__table__container">
+        <TraitsList
+          items={tableItems}
+          headerItems={headerItems}
+          sort={false}
+          info={false}
+        />
       </div>
 
       <Footer />

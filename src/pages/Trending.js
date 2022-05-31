@@ -57,6 +57,15 @@ const tableItems = [
   },
 ];
 
+const headerItems = [
+  'Collection',
+  'Floor',
+  'Saies',
+  'Listings',
+  'Volume',
+  'Market Cap',
+];
+
 const Traits = () => {
   const [openFilter, setOpenFiter] = useState(false);
   const [sort, setSort] = useState('High/Low');
@@ -102,7 +111,11 @@ const Traits = () => {
             items={['High/Low', '%Change']}
             activeDefault="High/Low"
             font="normal normal bold 12px/14px Roboto"
-            containerStyles={{ border: '1px solid #1956E2', height: '30px' }}
+            containerStyles={{
+              border: '1px solid #1956E2',
+              height: '30px',
+              width: '20rem',
+            }}
             callBack={activeButtonsChange}
           />
         </div>
@@ -120,7 +133,12 @@ const Traits = () => {
       </div>
 
       <div className="table__container">
-        <TraitsList items={tableItems} sort={sort} />
+        <TraitsList
+          items={tableItems}
+          headerItems={headerItems}
+          sort={sort}
+          info={true}
+        />
       </div>
 
       <Footer />

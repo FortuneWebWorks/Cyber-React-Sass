@@ -50,6 +50,14 @@
     background-color: $primary-dark;
     width: 100%;
 
+    td {
+      min-width: 15rem;
+    }
+
+    td:first-child {
+      min-width: 35rem;
+    }
+
     td:first-child {
       border-top-left-radius: 10px;
       border-bottom-left-radius: 10px;
@@ -103,13 +111,6 @@
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
-      font-size: 1.5rem;
-
-      span:first-child {
-        color: #fff;
-        font-size: 1.8rem;
-        font-weight: bold;
-      }
     }
 
     img {
