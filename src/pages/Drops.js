@@ -1,73 +1,104 @@
 import { useEffect, useState } from 'react';
 import '../styles/drops.scss';
+import '../styles/mTableDrops.scss';
 import ButtonGroup from '../components/ButtonGroup';
 import Navigator from '../components/Navigator';
-import TraitsList from '../components/TrendingList';
 import { ReactComponent as FilterIcon } from '../assets/icons/filtr.svg';
 import Footer from '../components/Footer2';
 import Filter from '../components/Filter';
 import Search from '../components/Search';
+import MTable from '../components/MTable';
 
-const tableItems = [
-  {
-    id: 1,
-    user: {
-      userImage: 'https://picsum.photos/51',
-      nftName: 'NFT NAME',
-      time: '35 days ago',
+const tableData = {
+  headers: [
+    'Collection',
+    'Supply',
+    'Twitter Member',
+    'Discord Member',
+    'Presale Price',
+    'Public Sale Price',
+    'Max Mint',
+    'Presale Mint Time',
+    'Public Sale Mint Time',
+    'Category',
+    'Social Media',
+  ],
+  items: [
+    {
+      id: 1,
+      user: {
+        userImage: 'https://picsum.photos/51',
+        nftName: 'NFT Name',
+        time: '35 days ago',
+      },
+      supply: '11221',
+      twitterrMember: '12',
+      discordMember: '420',
+      presalePrice: '420',
+      publicSalePrice: '420',
+      maxMint: '1',
+      presaleMintTime: {
+        time: '0s',
+        date: 'Apr 4, 12:45',
+      },
+      publicSaleMintTime: {
+        time: '0s',
+        date: 'Apr 4, 12:45',
+      },
+      category: ['Cat1', 'Cat2', 'category 3'],
+      socialMedia: ['discord', 'twitter', 'discord'],
     },
-    floor: {
-      hl: '-10',
-      change: '10',
+    {
+      id: 1,
+      user: {
+        userImage: 'https://picsum.photos/51',
+        nftName: 'NFT Name',
+        time: '35 days ago',
+      },
+      supply: '11221',
+      twitterrMember: '12',
+      discordMember: '420',
+      presalePrice: '420',
+      publicSalePrice: '420',
+      maxMint: '1',
+      presaleMintTime: {
+        time: '0s',
+        date: 'Apr 4, 12:45',
+      },
+      publicSaleMintTime: {
+        time: '0s',
+        date: 'Apr 4, 12:45',
+      },
+      category: ['Cat1', 'Cat2', 'category 3'],
+      socialMedia: ['discord', 'twitter', 'discord'],
     },
-    saies: {
-      hl: '10',
-      change: '10',
+    {
+      id: 1,
+      user: {
+        userImage: 'https://picsum.photos/51',
+        nftName: 'NFT Name',
+        time: '35 days ago',
+      },
+      supply: '11221',
+      twitterrMember: '12',
+      discordMember: '420',
+      presalePrice: '420',
+      publicSalePrice: '420',
+      maxMint: '1',
+      presaleMintTime: {
+        time: '0s',
+        date: 'Apr 4, 12:45',
+      },
+      publicSaleMintTime: {
+        time: '0s',
+        date: 'Apr 4, 12:45',
+      },
+      category: ['Cat1', 'Cat2', 'category 3'],
+      socialMedia: ['discord', 'twitter', 'discord'],
     },
-    listings: {
-      hl: '10',
-      change: '10',
-    },
-    volume: '15422',
-    marketCap: '6356745',
-  },
-  {
-    id: 2,
-    user: {
-      userImage: 'https://picsum.photos/50',
-      nftName: 'NFT NAME',
-      time: '35 days ago',
-    },
-    floor: {
-      hl: '10',
-      change: '10',
-    },
-    saies: {
-      hl: '-10',
-      change: '10',
-    },
-    listings: {
-      hl: '10',
-      change: '10',
-    },
-    volume: '15422',
-    marketCap: '6356745',
-  },
-];
-
-const headerItems = [
-  'Collection',
-  'Supply',
-  'Twitter Member',
-  'Discord Member',
-  'Presale Price',
-  'Public Sale Price',
-  'Max Mint',
-  'Presale Mint Time',
-  'Public Sale Mint Time',
-  'Category',
-  'Social Media',
-];
+  ],
+  spaces: [60, 15, 15, 15, 13, 13, 20, 13, 20, 15, 20],
+};
 
 const Drops = () => {
   const [openFilter, setOpenFiter] = useState(false);
@@ -128,7 +159,7 @@ const Drops = () => {
             containerStyles={{
               border: '1px solid #1956E2',
               height: '30px',
-              width: '20rem',
+              minWidth: '20rem',
             }}
             callBack={activeButtonsChange}
           />
@@ -146,12 +177,7 @@ const Drops = () => {
       </div>
 
       <div className="drops__table__container">
-        <TraitsList
-          items={tableItems}
-          headerItems={headerItems}
-          sort={false}
-          info={false}
-        />
+        <MTable data={tableData} sort={false} info={false} area="mTableDrops" />
       </div>
 
       <Footer />

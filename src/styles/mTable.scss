@@ -43,6 +43,13 @@
     .col {
       flex-basis: 20%;
     }
+
+    // company
+    .info__details {
+      opacity: 0;
+      user-select: none;
+      pointer-events: none;
+    }
   }
 
   @media (max-width: 800px) {

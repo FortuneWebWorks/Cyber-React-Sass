@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import '../styles/trending.scss';
 import ButtonGroup from '../components/ButtonGroup';
 import Timer from '../components/Timer';
-import TraitsList from '../components/TrendingList';
 import { ReactComponent as FilterIcon } from '../assets/icons/filtr.svg';
 import Footer from '../components/Footer2';
 import Filter from '../components/Filter';
@@ -151,13 +150,12 @@ const Traits = () => {
       </div>
 
       <div className="table__container">
-        {/* <TraitsList
-          items={tableItems}
-          headerItems={headerItems}
+        <MyTable
+          data={tableData}
           sort={sort}
           info={true}
-        /> */}
-        <MyTable data={tableData} sort={sort} info={true} />
+          area="trending__table"
+        />
       </div>
 
       <Footer />
