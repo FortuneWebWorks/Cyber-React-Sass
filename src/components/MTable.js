@@ -19,6 +19,8 @@ const headerItemsInof = [
 
 const MTable = ({ data = [], sort, info, area }) => {
   const [open, setOpen] = useState('');
+  const [category, setCategory] = useState('');
+  const [maxMint, setMaxMint] = useState('');
 
   return (
     <div className={`m__table__container ${area}`}>
@@ -41,7 +43,9 @@ const MTable = ({ data = [], sort, info, area }) => {
             <li
               key={index}
               className={`table__row ${
-                open === item.user.nftName ? 'open' : ''
+                category === item.user.nftName || maxMint === item.user.nftName
+                  ? 'open'
+                  : ''
               }`}
             >
               <div className="col" style={{ flexBasis: `${data.spaces[0]}%` }}>
@@ -245,11 +249,25 @@ const MTable = ({ data = [], sort, info, area }) => {
 
                   {/*  */}
                   <div
-                    className="col"
+                    className={`col col__mint ${
+                      maxMint === item.user.nftName ? 'open' : ''
+                    }`}
                     style={{ flexBasis: `${data.spaces[6]}%` }}
                   >
-                    <div className="table__changes single">
-                      <span>{item.maxMint}</span>
+                    <div
+                      className="table__changes single"
+                      onClick={() => {
+                        setMaxMint((prev) =>
+                          prev === item.user.nftName ? '' : item.user.nftName
+                        );
+                        setCategory('');
+                      }}
+                    >
+                      {item.maxMint.map((mint, index) => (
+                        <span key={index} className="table__changes_mint">
+                          {mint}
+                        </span>
+                      ))}
                     </div>
                   </div>
 
@@ -282,13 +300,14 @@ const MTable = ({ data = [], sort, info, area }) => {
                   {/*  */}
                   <div
                     className={`col col__category ${
-                      open === item.user.nftName ? 'open' : ''
+                      category === item.user.nftName ? 'open' : ''
                     }`}
-                    onClick={() =>
-                      setOpen((prev) =>
+                    onClick={() => {
+                      setCategory((prev) =>
                         prev === item.user.nftName ? '' : item.user.nftName
-                      )
-                    }
+                      );
+                      setMaxMint('');
+                    }}
                     style={{ flexBasis: `${data.spaces[9]}%` }}
                   >
                     <div className="table__changes table__changes_category_container">

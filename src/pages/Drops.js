@@ -35,7 +35,7 @@ const tableData = {
       discordMember: '420',
       presalePrice: '420',
       publicSalePrice: '420',
-      maxMint: '1',
+      maxMint: ['WL:1', 'PUB:2'],
       presaleMintTime: {
         time: '0s',
         date: 'Apr 4, 12:45',
@@ -59,7 +59,7 @@ const tableData = {
       discordMember: '420',
       presalePrice: '420',
       publicSalePrice: '420',
-      maxMint: '1',
+      maxMint: ['WL:1', 'PUB:2'],
       presaleMintTime: {
         time: '0s',
         date: 'Apr 4, 12:45',
@@ -83,7 +83,7 @@ const tableData = {
       discordMember: '420',
       presalePrice: '420',
       publicSalePrice: '420',
-      maxMint: '1',
+      maxMint: ['WL:1', 'PUB:2'],
       presaleMintTime: {
         time: '0s',
         date: 'Apr 4, 12:45',
