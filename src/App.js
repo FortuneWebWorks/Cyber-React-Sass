@@ -7,13 +7,13 @@ import { ToastContainer } from 'react-toastify';
 import MintContextProvider from './contexts/autoMintContext';
 import SnipeContextProvider from './contexts/snipeContext';
 import BulkContextProvider from './contexts/bulkContext';
+import Footer from './components/Footer2';
 
 const App = () => {
   return (
     <div className="App">
-      <Header />
-
       <Router>
+        <Header />
         <MintContextProvider>
           <SnipeContextProvider>
             <BulkContextProvider>
@@ -22,6 +22,8 @@ const App = () => {
           </SnipeContextProvider>
         </MintContextProvider>
       </Router>
+
+      <Footer />
 
       <ToastContainer
         position="bottom-right"

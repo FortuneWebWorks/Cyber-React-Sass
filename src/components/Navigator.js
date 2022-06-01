@@ -46,10 +46,10 @@ const Navigator = ({
           {items &&
             items.map((item, index) => (
               <div
+              key={index}
                 className={`navigator__card ${
                   active === index ? 'active' : ''
                 }`}
-                key={index}
               >
                 <img
                   className="navigator__card_image"

@@ -16,13 +16,15 @@ const Footer = () => {
           </p>
         </div>
       </div>
-      <div className="footer__copyright">
-        <span>&copy; CyberDash. All rights reserved</span>
+      <div className="footer__copyright_container">
+        <div className="footer__copyright">
+          <span>&copy; CyberDash. All rights reserved</span>
 
-        <YoutubeIcon />
-        <TwitterIcon />
-        <DiscordIcon />
-        <OpenSeaIcon />
+          <YoutubeIcon />
+          <TwitterIcon />
+          <DiscordIcon />
+          <OpenSeaIcon />
+        </div>
       </div>
     </footer>
   );

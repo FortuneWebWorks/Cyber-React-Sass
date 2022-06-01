@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/header.scss';
 import logo from '../assets/images/Group 989.png';
 import { ReactComponent as DiscordIcon } from '../assets/images/discord.svg';
@@ -12,6 +13,8 @@ import { toast } from 'react-toastify';
 import { MetaMask, Node } from '../libs/wallets';
 
 const Header = () => {
+  const navigate = useNavigate();
+
   const [provider, setProvider] = useState({});
   const [wallet, setwallet] = useState('');
   const [gasValue, setgasValue] = useState(0);
@@ -71,8 +74,8 @@ const Header = () => {
         <Search />
 
         <div className="header__menu-item">
-          <span>Drops</span>
-          <span>Trending</span>
+          <span onClick={() => navigate('/drops')}>Drops</span>
+          <span onClick={() => navigate('/trending')}>Trending</span>
           <span>FAQ</span>
           <span>Trending Kit</span>
         </div>

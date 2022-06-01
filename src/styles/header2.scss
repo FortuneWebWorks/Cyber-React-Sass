@@ -35,6 +35,10 @@
     font: normal normal 600 1.7rem/19px Roboto;
     letter-spacing: 1px;
     white-space: pre;
+
+    span {
+      cursor: pointer;
+    }
   }
 
   .header__contact {

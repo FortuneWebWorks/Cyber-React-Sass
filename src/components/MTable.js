@@ -270,8 +270,10 @@ const MTable = ({ data = [], sort, info, area }) => {
                     style={{ flexBasis: `${data.spaces[9]}%` }}
                   >
                     <div className="table__changes table__changes_category_container">
-                      {item.category.map((cat) => (
-                        <span className="table__changes_category">{cat}</span>
+                      {item.category.map((cat, index) => (
+                        <span key={index} className="table__changes_category">
+                          {cat}
+                        </span>
                       ))}
                     </div>
                   </div>

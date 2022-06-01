@@ -179,8 +179,6 @@ const Drops = () => {
       <div className="drops__table__container">
         <MTable data={tableData} sort={false} info={false} area="mTableDrops" />
       </div>
-
-      <Footer />
     </div>
   );
 };
