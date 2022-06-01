@@ -4,7 +4,6 @@ import '../styles/mTableDrops.scss';
 import ButtonGroup from '../components/ButtonGroup';
 import Navigator from '../components/Navigator';
 import { ReactComponent as FilterIcon } from '../assets/icons/filtr.svg';
-import Footer from '../components/Footer2';
 import Filter from '../components/Filter';
 import Search from '../components/Search';
 import MTable from '../components/MTable';
@@ -27,7 +26,7 @@ const tableData = {
     {
       id: 1,
       user: {
-        userImage: 'https://picsum.photos/51',
+        userImage: 'https://picsum.photos/50',
         nftName: 'NFT Name',
         time: '35 days ago',
       },
@@ -45,14 +44,14 @@ const tableData = {
         time: '0s',
         date: 'Apr 4, 12:45',
       },
-      category: ['Cat1', 'Cat2', 'category 3'],
+      category: ['Cat1', 'Cat2', 'category 3', 'Cat2', 'category 3'],
       socialMedia: ['discord', 'twitter', 'discord'],
     },
     {
       id: 1,
       user: {
         userImage: 'https://picsum.photos/51',
-        nftName: 'NFT Name',
+        nftName: 'NFT Name2',
         time: '35 days ago',
       },
       supply: '11221',
@@ -69,14 +68,14 @@ const tableData = {
         time: '0s',
         date: 'Apr 4, 12:45',
       },
-      category: ['Cat1', 'Cat2', 'category 3'],
+      category: ['Cat1', 'Cat2', 'category 3', 'Cat2', 'category 3'],
       socialMedia: ['discord', 'twitter', 'discord'],
     },
     {
       id: 1,
       user: {
-        userImage: 'https://picsum.photos/51',
-        nftName: 'NFT Name',
+        userImage: 'https://picsum.photos/49',
+        nftName: 'NFT Name3',
         time: '35 days ago',
       },
       supply: '11221',
@@ -93,11 +92,11 @@ const tableData = {
         time: '0s',
         date: 'Apr 4, 12:45',
       },
-      category: ['Cat1', 'Cat2', 'category 3'],
+      category: ['Cat1', 'Cat2', 'category 3', 'Cat2', 'category 3'],
       socialMedia: ['discord', 'twitter', 'discord'],
     },
   ],
-  spaces: [60, 15, 15, 15, 13, 13, 20, 13, 20, 20, 20],
+  spaces: [60, 15, 15, 15, 13, 13, 20, 13, 20, 20, 20, 20],
 };
 
 const Drops = () => {
@@ -111,7 +110,7 @@ const Drops = () => {
   const activeButtonsChange = (value) => {
     setReveal(value);
     if (value === 'Reveal') {
-      // headerItems.push('Reveal');
+      // tableData.headers.push('reveal');
     } else {
     }
   };
@@ -156,10 +155,12 @@ const Drops = () => {
             items={['Upcoming', 'Reveal']}
             activeDefault="Reveal"
             font="normal normal bold 12px/14px Roboto"
+            height="30px"
+            paddingTop="1rem"
             containerStyles={{
               border: '1px solid #1956E2',
+              minWidth: '21.555rem',
               height: '30px',
-              minWidth: '20rem',
             }}
             callBack={activeButtonsChange}
           />
@@ -167,7 +168,16 @@ const Drops = () => {
 
         <div className="search__filter__container">
           <div className="">
-            <Search />
+            <Search
+              className="other-placeholder"
+              styles={{
+                width: '194px',
+                height: '30px',
+                border: '1px solid #1956E2',
+                background: '#0B1E39 0% 0% no-repeat padding-box',
+                color: '#244677',
+              }}
+            />
           </div>
 
           <div className="drops__filter" id="filter" onClick={onClick}>

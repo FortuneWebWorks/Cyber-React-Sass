@@ -3,6 +3,10 @@ import '../styles/mTableTrending.scss';
 import { ReactComponent as InfoIcon } from '../assets/images/information.svg';
 import { ReactComponent as FlashDownIcon } from '../assets/images/flash-down.svg';
 import { ReactComponent as FlashUpIcon } from '../assets/images/flash_up.svg';
+import { ReactComponent as DiscordIcon } from '../assets/images/table-discord.svg';
+import { ReactComponent as TwitterIcon } from '../assets/images/table-twitter.svg';
+import { ReactComponent as WorldIcon } from '../assets/images/table-world.svg';
+import { useState } from 'react';
 
 const headerItemsInof = [
   'The collections with the highest number of sales in the selected timeframe',
@@ -14,6 +18,8 @@ const headerItemsInof = [
 ];
 
 const MTable = ({ data = [], sort, info, area }) => {
+  const [open, setOpen] = useState('');
+
   return (
     <div className={`m__table__container ${area}`}>
       <ul className="m__table">
@@ -32,7 +38,12 @@ const MTable = ({ data = [], sort, info, area }) => {
         </li>
         {data &&
           data.items.map((item, index) => (
-            <li key={index} className="table__row">
+            <li
+              key={index}
+              className={`table__row ${
+                open === item.user.nftName ? 'open' : ''
+              }`}
+            >
               <div className="col" style={{ flexBasis: `${data.spaces[0]}%` }}>
                 <div className="table__details">
                   <img src={item.user.userImage} alt="" />
@@ -249,7 +260,9 @@ const MTable = ({ data = [], sort, info, area }) => {
                   >
                     <div className="table__changes">
                       <span>{item.presaleMintTime.time}</span>
-                      <span>{item.presaleMintTime.date}</span>
+                      <span className="table__changes_date">
+                        {item.presaleMintTime.date}
+                      </span>
                     </div>
                   </div>
 
@@ -260,13 +273,22 @@ const MTable = ({ data = [], sort, info, area }) => {
                   >
                     <div className="table__changes">
                       <span>{item.publicSaleMintTime.time}</span>
-                      <span>{item.publicSaleMintTime.date}</span>
+                      <span className="table__changes_date">
+                        {item.publicSaleMintTime.date}
+                      </span>
                     </div>
                   </div>
 
                   {/*  */}
                   <div
-                    className="col"
+                    className={`col col__category ${
+                      open === item.user.nftName ? 'open' : ''
+                    }`}
+                    onClick={() =>
+                      setOpen((prev) =>
+                        prev === item.user.nftName ? '' : item.user.nftName
+                      )
+                    }
                     style={{ flexBasis: `${data.spaces[9]}%` }}
                   >
                     <div className="table__changes table__changes_category_container">
@@ -283,8 +305,10 @@ const MTable = ({ data = [], sort, info, area }) => {
                     className="col"
                     style={{ flexBasis: `${data.spaces[10]}%` }}
                   >
-                    <div className="table__changes">
-                      <span>social</span>
+                    <div className="table__changes table__changes_social">
+                      <DiscordIcon />
+                      <TwitterIcon />
+                      <WorldIcon />
                     </div>
                   </div>
                 </>

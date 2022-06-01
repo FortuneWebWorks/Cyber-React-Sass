@@ -3,7 +3,6 @@ import '../styles/trending.scss';
 import ButtonGroup from '../components/ButtonGroup';
 import Timer from '../components/Timer';
 import { ReactComponent as FilterIcon } from '../assets/icons/filtr.svg';
-import Footer from '../components/Footer2';
 import Filter from '../components/Filter';
 import MyTable from '../components/MTable';
 
@@ -157,8 +156,6 @@ const Traits = () => {
           area="trending__table"
         />
       </div>
-
-      <Footer />
     </div>
   );
 };

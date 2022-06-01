@@ -1,8 +1,14 @@
 import React from 'react';
 import '../styles/search.scss';
 
-const Search = () => {
-  return <input className="search" placeholder="Search" />;
+const Search = ({ className, styles }) => {
+  return (
+    <input
+      className={`search ${className || ''}`}
+      placeholder="Search"
+      style={styles}
+    />
+  );
 };
 
 export default Search;
