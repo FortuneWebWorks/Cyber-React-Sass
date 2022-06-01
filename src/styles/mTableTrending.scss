@@ -49,6 +49,7 @@
   }
 
   .table__details {
+    max-width: 5rem;
     max-height: 4rem;
     display: flex;
     justify-content: flex-start;
@@ -75,6 +76,25 @@
 
     .table__details_nftName {
       font: normal normal bold 14px/16px Roboto;
+      white-space: pre;
+      max-width: 15rem;
+      overflow: hidden;
+
+      &.over {
+        span {
+          display: block;
+          animation: 10s infinite forwards longLabel ease-in-out;
+        }
+
+        @keyframes longLabel {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-90%);
+          }
+        }
+      }
     }
 
     .table__details_time {

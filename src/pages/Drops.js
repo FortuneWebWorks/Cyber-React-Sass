@@ -97,7 +97,7 @@ const tableData = {
       socialMedia: ['discord', 'twitter', 'discord'],
     },
   ],
-  spaces: [60, 15, 15, 15, 13, 13, 20, 13, 20, 15, 20],
+  spaces: [60, 15, 15, 15, 13, 13, 20, 13, 20, 20, 20],
 };
 
 const Drops = () => {

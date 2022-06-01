@@ -37,9 +37,18 @@ const MTable = ({ data = [], sort, info, area }) => {
                 <div className="table__details">
                   <img src={item.user.userImage} alt="" />
                   <div>
-                    <span className="table__details_nftName">
-                      {item.user.nftName}
+                    <span
+                      className={`table__details_nftName ${
+                        item.user.nftName.length > 22 ? 'over' : ''
+                      }`}
+                    >
+                      <span>{item.user.nftName}</span>
                     </span>
+                    {area === 'trending__table' && (
+                      <span className="table__details_time">
+                        {item.user.time}
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -260,9 +269,9 @@ const MTable = ({ data = [], sort, info, area }) => {
                     className="col"
                     style={{ flexBasis: `${data.spaces[9]}%` }}
                   >
-                    <div className="table__changes">
+                    <div className="table__changes table__changes_category_container">
                       {item.category.map((cat) => (
-                        <span>{cat}</span>
+                        <span className="table__changes_category">{cat}</span>
                       ))}
                     </div>
                   </div>
