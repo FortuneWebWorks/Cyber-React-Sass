@@ -10,7 +10,7 @@
   overflow-x: hidden;
 
   .table__container {
-    overflow: hidden;
+    width: 100%;
     transition: overflow 0.2s ease;
   }
 
@@ -77,8 +77,9 @@
 
   @media (max-width: 1000px) {
     .table__container {
-      overflow: hidden;
-      overflow-x: auto;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
       transition: overflow 0.2s ease;
     }
   }

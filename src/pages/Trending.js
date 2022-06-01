@@ -11,61 +11,78 @@ import MyTable from '../components/MTable';
 const timings = ['1d', '7d', '30d', '90d', '1y'];
 const timings2 = ['5m', '30m', '1h', '6h'];
 
-const tableItems = [
-  {
-    id: 1,
-    user: {
-      userImage: 'https://picsum.photos/51',
-      nftName: 'NFT NAME',
-      time: '35 days ago',
+const tableData = {
+  headers: ['Collection', 'Floor', 'Saies', 'Listings', 'Volume', 'Market Cap'],
+  items: [
+    {
+      id: 1,
+      user: {
+        userImage: 'https://picsum.photos/51',
+        nftName: 'NFT Name',
+        time: '35 days ago',
+      },
+      floor: {
+        hl: '-10',
+        change: '10',
+      },
+      saies: {
+        hl: '10',
+        change: '10',
+      },
+      listings: {
+        hl: '10',
+        change: '10',
+      },
+      volume: '1555',
+      marketCap: '1555',
     },
-    floor: {
-      hl: '-10',
-      change: '10',
+    {
+      id: 2,
+      user: {
+        userImage: 'https://picsum.photos/50',
+        nftName: 'NFT NAME',
+        time: '35 days ago',
+      },
+      floor: {
+        hl: '10',
+        change: '10',
+      },
+      saies: {
+        hl: '-10',
+        change: '10',
+      },
+      listings: {
+        hl: '10',
+        change: '10',
+      },
+      volume: '1555',
+      marketCap: '1555',
     },
-    saies: {
-      hl: '10',
-      change: '10',
+    {
+      id: 2,
+      user: {
+        userImage: 'https://picsum.photos/49',
+        nftName: 'NFT NAME',
+        time: '35 days ago',
+      },
+      floor: {
+        hl: '10',
+        change: '10',
+      },
+      saies: {
+        hl: '-10',
+        change: '10',
+      },
+      listings: {
+        hl: '10',
+        change: '10',
+      },
+      volume: '1555',
+      marketCap: '1555',
     },
-    listings: {
-      hl: '10',
-      change: '10',
-    },
-    volume: '15422',
-    marketCap: '6356745',
-  },
-  {
-    id: 2,
-    user: {
-      userImage: 'https://picsum.photos/50',
-      nftName: 'NFT NAME',
-      time: '35 days ago',
-    },
-    floor: {
-      hl: '10',
-      change: '10',
-    },
-    saies: {
-      hl: '-10',
-      change: '10',
-    },
-    listings: {
-      hl: '10',
-      change: '10',
-    },
-    volume: '15422',
-    marketCap: '6356745',
-  },
-];
-
-const headerItems = [
-  'Collection',
-  'Floor',
-  'Saies',
-  'Listings',
-  'Volume',
-  'Market Cap',
-];
+  ],
+  spaces: [40, 20, 20, 20, 20, 13],
+};
 
 const Traits = () => {
   const [openFilter, setOpenFiter] = useState(false);
@@ -115,7 +132,7 @@ const Traits = () => {
             containerStyles={{
               border: '1px solid #1956E2',
               height: '30px',
-              width: '20rem',
+              minWidth: '23rem',
             }}
             callBack={activeButtonsChange}
           />
@@ -123,8 +140,8 @@ const Traits = () => {
 
         <div className="timers__filter__container">
           <div className="traits__timers">
-            <Timer items={timings} defaultActive={timings[2]} />
-            <Timer items={timings2} defaultActive={timings[2]} />
+            <Timer items={timings} defaultActive={timings[4]} />
+            <Timer items={timings2} defaultActive={timings2[2]} />
           </div>
 
           <div id="filter" onClick={onClick}>
@@ -140,7 +157,7 @@ const Traits = () => {
           sort={sort}
           info={true}
         /> */}
-        <MyTable />
+        <MyTable data={tableData} sort={sort} info={true} />
       </div>
 
       <Footer />

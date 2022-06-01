@@ -9,16 +9,16 @@
 
   // Mozilla
   scrollbar-width: 5px;
-  scrollbar-color: $primary-dark;
+  scrollbar-color: $primary;
 
   &::-webkit-scrollbar {
     width: 5px;
     height: 5px;
-    background-color: $primary-dark;
+    background-color: $primary;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: $primary;
+    background-color: $primary-dark;
   }
 }
 
