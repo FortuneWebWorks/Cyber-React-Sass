@@ -42,8 +42,6 @@ const Navigator = ({
 
       const moveStep = card[0].getBoundingClientRect().width + gap;
 
-      console.log(gap);
-
       navigator.style.transform = `translateX(${-moveStep * e.target.id}px)`;
     }
   };

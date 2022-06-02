@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import '../styles/mTable.scss';
 import '../styles/mTableTrending.scss';
 import { ReactComponent as InfoIcon } from '../assets/images/information.svg';
@@ -6,7 +7,7 @@ import { ReactComponent as FlashUpIcon } from '../assets/images/flash_up.svg';
 import { ReactComponent as DiscordIcon } from '../assets/images/table-discord.svg';
 import { ReactComponent as TwitterIcon } from '../assets/images/table-twitter.svg';
 import { ReactComponent as WorldIcon } from '../assets/images/table-world.svg';
-import { useState } from 'react';
+import Tooltip from './Tooltip';
 
 const headerItemsInof = [
   'The collections with the highest number of sales in the selected timeframe',
@@ -17,47 +18,77 @@ const headerItemsInof = [
   'The total volume of collections from the beginning until now',
 ];
 
-const MTable = ({ data = [], sort, info, area }) => {
+const headers = [
+  'Collection',
+  'Supply',
+  'Twitter Member',
+  'Discord Member',
+  'Presale Price',
+  'Public Sale Price',
+  'Max Mint',
+  'Presale Mint Time',
+  'Public Sale Mint Time',
+  'Category',
+  'Social Media',
+];
+const spaces = [60, 15, 15, 15, 13, 13, 20, 13, 20, 20, 20, 20];
+
+const MTable = ({ data = [], sort, info, area, reveal }) => {
   const [open, setOpen] = useState('');
   const [category, setCategory] = useState('');
   const [maxMint, setMaxMint] = useState('');
+
+  if (reveal) {
+    if (!headers.includes('Reveal')) headers.push('Reveal');
+  } else {
+    if (headers.includes('Reveal')) headers.splice(headers.length - 1, 1);
+  }
+
+  const GetTime = ({ timeStamp }) => {
+    const date = new Date(timeStamp * 1000);
+    return <span>{date.toLocaleDateString()}</span>;
+  };
 
   return (
     <div className={`m__table__container ${area}`}>
       <ul className="m__table">
         <li className="table__header">
-          {data &&
-            data.headers.map((item, index) => (
-              <div
-                key={index}
-                className="col head_items"
-                style={{ flexBasis: `${data.spaces[index]}%` }}
-              >
-                {item} {info && <InfoIcon />}
-                <p className="info__details">{headerItemsInof[index]}</p>
-              </div>
-            ))}
+          {headers.map((item, index) => (
+            <div
+              key={index}
+              className="col head_items"
+              style={{ flexBasis: `${spaces[index]}%` }}
+            >
+              {item} {info && <InfoIcon />}
+              <p className="info__details">{headerItemsInof[index]}</p>
+            </div>
+          ))}
         </li>
         {data &&
-          data.items.map((item, index) => (
+          data.map((item, index) => (
             <li
               key={index}
-              className={`table__row ${
-                category === item.user.nftName || maxMint === item.user.nftName
-                  ? 'open'
-                  : ''
-              }`}
+              className={`table__row`}
+              // className={`table__row ${
+              //   category === item.id ||
+              //   item.user.nftName ||
+              //   maxMint === item.id ||
+              //   item.user.nftName
+              //     ? 'open'
+              //     : ''
+              // }`}
             >
-              <div className="col" style={{ flexBasis: `${data.spaces[0]}%` }}>
+              <div className="col" style={{ flexBasis: `${spaces[0]}%` }}>
                 <div className="table__details">
-                  <img src={item.user.userImage} alt="" />
+                  <img src="https://picsum.photos/500" alt="" />
                   <div>
                     <span
-                      className={`table__details_nftName ${
-                        item.user.nftName.length > 22 ? 'over' : ''
-                      }`}
+                      className="table__details_nftName"
+                      // className={`table__details_nftName ${
+                      //   item.user.nftName.length > 22 ? 'over' : ''
+                      // }`}
                     >
-                      <span>{item.user.nftName}</span>
+                      <span>{item.collection_name}</span>
                     </span>
                     {area === 'trending__table' && (
                       <span className="table__details_time">
@@ -198,138 +229,139 @@ const MTable = ({ data = [], sort, info, area }) => {
                 </>
               ) : (
                 <>
-                  <div
-                    className="col"
-                    style={{ flexBasis: `${data.spaces[1]}%` }}
-                  >
+                  <div className="col" style={{ flexBasis: `${spaces[1]}%` }}>
                     <div className="table__changes single">
-                      <span>{item.supply}</span>
+                      <span>{item.quantity}</span>
+                    </div>
+                  </div>
+
+                  {/*  */}
+                  <div className="col" style={{ flexBasis: `${spaces[2]}%` }}>
+                    <div className="table__changes single">
+                      <span>{item.twitter_member}</span>
+                    </div>
+                  </div>
+
+                  {/*  */}
+                  <div className="col" style={{ flexBasis: `${spaces[3]}%` }}>
+                    <div className="table__changes single">
+                      <span>{item.discord_member}</span>
+                    </div>
+                  </div>
+
+                  {/*  */}
+                  <div className="col" style={{ flexBasis: `${spaces[4]}%` }}>
+                    <div className="table__changes single">
+                      <span>{item.presale_price}</span>
+                    </div>
+                  </div>
+
+                  {/*  */}
+                  <div className="col" style={{ flexBasis: `${spaces[5]}%` }}>
+                    <div className="table__changes single">
+                      <span>{item.publicsale_price}</span>
                     </div>
                   </div>
 
                   {/*  */}
                   <div
                     className="col"
-                    style={{ flexBasis: `${data.spaces[2]}%` }}
-                  >
-                    <div className="table__changes single">
-                      <span>{item.twitterrMember}</span>
-                    </div>
-                  </div>
-
-                  {/*  */}
-                  <div
-                    className="col"
-                    style={{ flexBasis: `${data.spaces[3]}%` }}
-                  >
-                    <div className="table__changes single">
-                      <span>{item.discordMember}</span>
-                    </div>
-                  </div>
-
-                  {/*  */}
-                  <div
-                    className="col"
-                    style={{ flexBasis: `${data.spaces[4]}%` }}
-                  >
-                    <div className="table__changes single">
-                      <span>{item.presalePrice}</span>
-                    </div>
-                  </div>
-
-                  {/*  */}
-                  <div
-                    className="col"
-                    style={{ flexBasis: `${data.spaces[5]}%` }}
-                  >
-                    <div className="table__changes single">
-                      <span>{item.publicSalePrice}</span>
-                    </div>
-                  </div>
-
-                  {/*  */}
-                  <div
-                    className={`col col__mint ${
-                      maxMint === item.user.nftName ? 'open' : ''
-                    }`}
-                    style={{ flexBasis: `${data.spaces[6]}%` }}
+                    // className={`col col__mint ${
+                    //   maxMint === item.user.nftName ? 'open' : ''
+                    // }`}
+                    style={{ flexBasis: `${spaces[6]}%` }}
                   >
                     <div
                       className="table__changes single"
-                      onClick={() => {
-                        setMaxMint((prev) =>
-                          prev === item.user.nftName ? '' : item.user.nftName
-                        );
-                        setCategory('');
-                      }}
+                      // onClick={() => {
+                      //   setMaxMint((prev) =>
+                      //     prev === item.user.nftName ? '' : item.user.nftName
+                      //   );
+                      //   setCategory('');
+                      // }}
                     >
-                      {item.maxMint.map((mint, index) => (
+                      <span>{item.max_mint}</span>
+                      {/* {item.maxMint.map((mint, index) => (
                         <span key={index} className="table__changes_mint">
                           {mint}
                         </span>
-                      ))}
+                      ))} */}
                     </div>
                   </div>
 
                   {/*  */}
-                  <div
-                    className="col"
-                    style={{ flexBasis: `${data.spaces[7]}%` }}
-                  >
+                  <div className="col" style={{ flexBasis: `${spaces[7]}%` }}>
                     <div className="table__changes">
-                      <span>{item.presaleMintTime.time}</span>
+                      {/* <span>{item.presale_mint_timestamp}</span> */}
                       <span className="table__changes_date">
-                        {item.presaleMintTime.date}
+                        <GetTime timeStamp={item.presale_mint_timestamp} />
                       </span>
                     </div>
                   </div>
 
                   {/*  */}
-                  <div
-                    className="col"
-                    style={{ flexBasis: `${data.spaces[8]}%` }}
-                  >
+                  <div className="col" style={{ flexBasis: `${spaces[8]}%` }}>
                     <div className="table__changes">
-                      <span>{item.publicSaleMintTime.time}</span>
+                      {/* <span>{item.publicsale_mint_timestamp}</span> */}
                       <span className="table__changes_date">
-                        {item.publicSaleMintTime.date}
+                        <GetTime timeStamp={item.publicsale_mint_timestamp} />
                       </span>
                     </div>
                   </div>
 
-                  {/*  */}
+                  {/* category */}
                   <div
-                    className={`col col__category ${
-                      category === item.user.nftName ? 'open' : ''
-                    }`}
-                    onClick={() => {
-                      setCategory((prev) =>
-                        prev === item.user.nftName ? '' : item.user.nftName
-                      );
-                      setMaxMint('');
-                    }}
-                    style={{ flexBasis: `${data.spaces[9]}%` }}
+                    className={`col col__category`}
+                    // className={`col col__category ${
+                    //   category === item.user.nftName ? 'open' : ''
+                    // }`}
+                    // onClick={() => {
+                    //   setCategory((prev) =>
+                    //     prev === item.user.nftName ? '' : item.user.nftName
+                    //   );
+                    //   setMaxMint('');
+                    // }}
+                    style={{ flexBasis: `${spaces[10]}%` }}
                   >
                     <div className="table__changes table__changes_category_container">
-                      {item.category.map((cat, index) => (
-                        <span key={index} className="table__changes_category">
-                          {cat}
+                      {item.categories.map((cat) => (
+                        <span
+                          key={cat.id}
+                          className="table__changes_category"
+                          style={{ borderColor: cat.color, color: cat.color }}
+                        >
+                          {cat.title}
+                          <Tooltip title="What is it?" message={cat.tooltip} />
                         </span>
                       ))}
                     </div>
                   </div>
 
                   {/* social */}
-                  <div
-                    className="col"
-                    style={{ flexBasis: `${data.spaces[10]}%` }}
-                  >
+                  <div className="col" style={{ flexBasis: `${spaces[11]}%` }}>
                     <div className="table__changes table__changes_social">
-                      <DiscordIcon />
-                      <TwitterIcon />
-                      <WorldIcon />
+                      <a href={item.discord_link}>
+                        <DiscordIcon />
+                      </a>
+                      <a href={item.twitter_link}>
+                        <TwitterIcon />
+                      </a>
+                      <a href={item.website_link}>
+                        <WorldIcon />
+                      </a>
                     </div>
                   </div>
+
+                  {/* reveal */}
+                  {reveal && (
+                    <div className="col" style={{ flexBasis: `${spaces[9]}%` }}>
+                      <div className="table__changes">
+                        <span className="table__changes_date">
+                          <GetTime timeStamp={item.reveal_timestamp} />
+                        </span>
+                      </div>
+                    </div>
+                  )}
                 </>
               )}
             </li>

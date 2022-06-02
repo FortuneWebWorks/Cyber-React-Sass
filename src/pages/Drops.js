@@ -7,6 +7,7 @@ import { ReactComponent as FilterIcon } from '../assets/icons/filtr.svg';
 import Filter from '../components/Filter';
 import Search from '../components/Search';
 import MTable from '../components/MTable';
+import useFetcher from '../hooks/useFetcher';
 
 const tableData = {
   headers: [
@@ -100,19 +101,19 @@ const tableData = {
 };
 
 const Drops = () => {
+  const [data, loading] = useFetcher(
+    'https://api.cyberdash.app/v1/tables/upcoming'
+  );
+
   const [openFilter, setOpenFiter] = useState(false);
-  const [reveal, setReveal] = useState('Reveal');
+  const [reveal, setReveal] = useState(false);
 
   const onClick = (e) => {
     setOpenFiter((prev) => !prev);
   };
 
   const activeButtonsChange = (value) => {
-    setReveal(value);
-    if (value === 'Reveal') {
-      // tableData.headers.push('reveal');
-    } else {
-    }
+    setReveal(value === 'Reveal');
   };
 
   useEffect(() => {
@@ -133,8 +134,13 @@ const Drops = () => {
     setOpenFiter(false);
   };
 
+  if (loading) {
+    return <h2>Loading...</h2>;
+  }
+
   return (
     <div className="drops">
+      {console.log(data.rows[0])}
       {openFilter && <Filter callBack={closer} />}
       <div className="drops__title">
         <h2>Drops</h2>
@@ -153,7 +159,7 @@ const Drops = () => {
           <span>Sorted By: </span>
           <ButtonGroup
             items={['Upcoming', 'Reveal']}
-            activeDefault="Reveal"
+            activeDefault="Upcoming"
             font="normal normal bold 12px/14px Roboto"
             height="30px"
             paddingTop="1rem"
@@ -187,7 +193,13 @@ const Drops = () => {
       </div>
 
       <div className="drops__table__container">
-        <MTable data={tableData} sort={false} info={false} area="mTableDrops" />
+        <MTable
+          data={data.rows}
+          sort={false}
+          info={false}
+          area="mTableDrops"
+          reveal={reveal}
+        />
       </div>
     </div>
   );

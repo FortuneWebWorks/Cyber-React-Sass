@@ -139,7 +139,7 @@
 
   .col__category {
     max-height: 4rem;
-    overflow: hidden;
+    // overflow: hidden;
 
     &.open {
       max-height: 100%;
@@ -180,6 +180,10 @@
     justify-content: center;
     align-items: center;
 
+    a {
+      cursor: pointer;
+    }
+
     svg {
       width: 21px;
       height: 21px;
@@ -197,6 +201,7 @@
   }
 
   .table__changes_category {
+    position: relative;
     height: 16px;
     border: 1px solid #d1d1d1;
     border-radius: 10px;
@@ -204,6 +209,13 @@
     text-align: center;
     font: normal normal normal 12px/14px Roboto;
     color: #d1d1d1;
+    cursor: pointer;
+
+    &:hover {
+      .tooltip {
+        opacity: 1;
+      }
+    }
   }
 
   .table__changes_date {
