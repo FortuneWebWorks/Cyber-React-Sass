@@ -7,7 +7,7 @@ const Navigator = ({
     { name: 'Bijan maa', image: 'https:picsum.photos/5' },
     { name: 'Bijan maa', image: 'https:picsum.photos/5' },
     { name: 'Bijan maa', image: 'https:picsum.photos/5' },
-    { name: 'Bijan maa', image: 'https:picsum.photos/5' },
+    { name: '5', image: 'https:picsum.photos/5' },
     { name: 'Bijan maa', image: 'https:picsum.photos/5' },
     { name: 'Bijan maa', image: 'https:picsum.photos/5' },
     { name: 'Bijan maa', image: 'https:picsum.photos/5' },
@@ -16,7 +16,6 @@ const Navigator = ({
 }) => {
   const [active, setActive] = useState(0);
   let navigator = useRef(null);
-  const moveStep = -290.3;
   const allSteps = items.slice(3, items.length);
 
   useEffect(() => {
@@ -33,7 +32,19 @@ const Navigator = ({
     if (e.target.id) {
       setActive(+e.target.id);
 
-      navigator.style.transform = `translateX(${moveStep * e.target.id}px)`;
+      const card = navigator.querySelectorAll('.navigator__card');
+
+      const gap = Math.abs(
+        card[0].getBoundingClientRect().left +
+          card[0].getBoundingClientRect().width -
+          card[1].getBoundingClientRect().left
+      );
+
+      const moveStep = card[0].getBoundingClientRect().width + gap;
+
+      console.log(gap);
+
+      navigator.style.transform = `translateX(${-moveStep * e.target.id}px)`;
     }
   };
 
@@ -46,7 +57,7 @@ const Navigator = ({
           {items &&
             items.map((item, index) => (
               <div
-              key={index}
+                key={index}
                 className={`navigator__card ${
                   active === index ? 'active' : ''
                 }`}
