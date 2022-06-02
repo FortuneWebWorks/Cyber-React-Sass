@@ -22,8 +22,8 @@
     align-items: flex-start;
   }
 
-  .table__row:hover {
-    background-color: $primary-light;
+  .table__row {
+    cursor: pointer;
   }
 
   .table__header {
@@ -179,6 +179,7 @@
     flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
+    gap: 4.47px;
 
     a {
       cursor: pointer;

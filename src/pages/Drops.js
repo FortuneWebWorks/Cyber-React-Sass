@@ -144,7 +144,7 @@ const Drops = () => {
       {openFilter && <Filter callBack={closer} />}
       <div className="drops__title">
         <h2>Drops</h2>
-        <p>We only include the project that are worth mentioning</p>
+        <p>We only include the projects that are worth mentioning</p>
       </div>
 
       <Navigator />
@@ -181,7 +181,7 @@ const Drops = () => {
                 height: '30px',
                 border: '1px solid #1956E2',
                 background: '#0B1E39 0% 0% no-repeat padding-box',
-                color: '#244677',
+                color: '#fff',
               }}
             />
           </div>

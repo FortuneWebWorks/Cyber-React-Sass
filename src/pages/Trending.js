@@ -149,12 +149,12 @@ const Traits = () => {
       </div>
 
       <div className="table__container">
-        <MyTable
+        {/* <MyTable
           data={tableData}
           sort={sort}
           info={true}
           area="trending__table"
-        />
+        /> */}
       </div>
     </div>
   );
