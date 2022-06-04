@@ -1,57 +1,34 @@
-import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/headerMenu.scss';
+import DropDown from './DropDown';
+
+const header2Items = [{ name: 'Drops' }, { name: 'Trending' }, { name: 'FAQ' }];
+
+// const header1Items = [
+//   { name: 'Pricing' },
+//   { name: 'Resources' },
+//   { name: 'Cyberdash Alpha' },
+//   { name: 'Institutions' },
+//   { name: 'About us' },
+// ];
 
 const HeaderMenu = ({ second }) => {
-  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const closer = (e) => {
-      if (!e.target.closest('.headermenu__container')) {
-        setOpen(false);
-      }
-    };
-
-    window && window.addEventListener('pointerdown', closer);
-
-    return () => {
-      window.removeEventListener('pointerdown', closer);
-    };
-  }, []);
+  const routeChange = (key) => {
+    navigate(key.toLowerCase());
+  };
 
   return (
     <div className="headermenu__container">
-      <svg
-        viewBox="0 0 24 24"
-        aria-hidden="true"
-        width="25"
-        height="30"
-        onClick={() => setOpen((prev) => !prev)}
-      >
-        <path
-          d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
-          fill="#fff"
-        ></path>
-      </svg>
-
-      {open && (
-        <ul className="headermenu__items">
-          {!second ? (
-            <>
-              <li>Pricing</li>
-              <li>Resources</li>
-              <li>Cyberdash Alpha</li>
-              <li>Institutions</li>
-              <li>About us</li>
-            </>
-          ) : (
-            <>
-              <li>Drops</li>
-              <li>Trending</li>
-              <li>FAQ</li>
-            </>
-          )}
-        </ul>
-      )}
+      <DropDown
+        fontSize="3rem"
+        innerColor="#244677"
+        minWidth="10rem"
+        placeholder={window.location.pathname.replace('/', '')}
+        items={header2Items}
+        callBack={routeChange}
+      />
     </div>
   );
 };

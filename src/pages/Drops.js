@@ -140,7 +140,6 @@ const Drops = () => {
 
   return (
     <div className="drops">
-      {console.log(data.rows[0])}
       {openFilter && <Filter callBack={closer} />}
       <div className="drops__title">
         <h2>Drops</h2>

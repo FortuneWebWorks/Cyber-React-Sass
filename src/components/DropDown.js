@@ -10,6 +10,7 @@ const DropDown = ({
   fontSize,
   value,
   innerColor,
+  minWidth,
 }) => {
   // const [data, setData] = useState('');
   const [placeHolder, setPlaceHolder] = useState(value || placeholder);
@@ -45,7 +46,7 @@ const DropDown = ({
     <div className="dropdown__container" dropdown="true">
       <span
         className="title"
-        style={{ fontSize: fontSize || '' }}
+        style={{ fontSize: fontSize || '', minWidth: minWidth || '' }}
         dropdown="true"
       >
         {title}
@@ -63,9 +64,9 @@ const DropDown = ({
             dropdown="true"
             style={{ backgroundColor: innerColor }}
           >
-            {items.map((item) => (
+            {items.map((item, index) => (
               <li
-                key={item.name || item.title}
+                key={item.name || item.title || index}
                 data={JSON.stringify(item)}
                 dropdown="true"
               >
