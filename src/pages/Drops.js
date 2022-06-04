@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import '../styles/drops.scss';
-import '../styles/mTableDrops.scss';
+import '../styles/customTableDrops.scss';
 import ButtonGroup from '../components/ButtonGroup';
 import Navigator from '../components/Navigator';
 import { ReactComponent as FilterIcon } from '../assets/icons/filtr.svg';
 import Filter from '../components/Filter';
 import Search from '../components/Search';
-import MTable from '../components/MTable';
+import MTable from '../components/CustomTable';
 import useFetcher from '../hooks/useFetcher';
 
 const tableData = {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import '../styles/mTable.scss';
-import '../styles/mTableTrending.scss';
+import '../styles/customTable.scss';
+import '../styles/customTableTrending.scss';
 import { ReactComponent as InfoIcon } from '../assets/images/information.svg';
 import { ReactComponent as FlashDownIcon } from '../assets/images/flash-down.svg';
 import { ReactComponent as FlashUpIcon } from '../assets/images/flash_up.svg';
@@ -33,7 +33,7 @@ const headers = [
 ];
 const spaces = [60, 15, 15, 15, 13, 13, 20, 13, 20, 20, 20, 20];
 
-const MTable = ({ data = [], sort, info, area, reveal }) => {
+const CustomTable = ({ data = [], sort, info, area, reveal }) => {
   const [open, setOpen] = useState('');
   const [category, setCategory] = useState('');
   const [maxMint, setMaxMint] = useState('');
@@ -371,4 +371,4 @@ const MTable = ({ data = [], sort, info, area, reveal }) => {
   );
 };
 
-export default MTable;
+export default CustomTable;
