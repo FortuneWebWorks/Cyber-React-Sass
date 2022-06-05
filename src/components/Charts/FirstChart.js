@@ -7,24 +7,24 @@ const BarLineChart = () => {
       data={{
         labels: ['hello', 'test'],
         datasets: [
-          {
-            type: 'line',
-            data: [
-              { x: 2, y: 2 },
-              { x: 4, y: 5 },
-              { x: 4, y: 1 },
-            ],
-            borderColor: 'green',
-          },
-          {
-            type: 'line',
-            data: [
-              { x: 0, y: 1 },
-              { x: 2, y: 10 },
-              { x: 9, y: 1 },
-            ],
-            borderColor: 'yellow',
-          },
+          // {
+          //   type: 'line',
+          //   data: [
+          //     { x: 2, y: 2 },
+          //     { x: 4, y: 5 },
+          //     { x: 4, y: 1 },
+          //   ],
+          //   borderColor: 'green',
+          // },
+          // {
+          //   type: 'line',
+          //   data: [
+          //     { x: 0, y: 1 },
+          //     { x: 2, y: 10 },
+          //     { x: 9, y: 1 },
+          //   ],
+          //   borderColor: 'yellow',
+          // },
           {
             type: 'bar',
             data: [10, 5],
@@ -36,9 +36,17 @@ const BarLineChart = () => {
       }}
       options={{
         maintainAspectRatio: false,
+        interaction: {
+          mode: 'y',
+        },
         plugins: {
           legend: {
             display: true,
+          },
+        },
+        scales: {
+          myScale: {
+            position: 'left', // `axis` is determined by the position as `'y'`
           },
         },
       }}
