@@ -9,12 +9,20 @@ const BarLineChart = () => {
         datasets: [
           {
             type: 'line',
-            data: [65, 59, 80, 81, 56, 55, 40],
+            data: [
+              { x: 2, y: 2 },
+              { x: 4, y: 5 },
+              { x: 4, y: 1 },
+            ],
             borderColor: 'green',
           },
           {
             type: 'line',
-            data: [15, 20],
+            data: [
+              { x: 0, y: 1 },
+              { x: 2, y: 10 },
+              { x: 9, y: 1 },
+            ],
             borderColor: 'yellow',
           },
           {
