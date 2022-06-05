@@ -46,7 +46,37 @@ const CustomTable = ({ data = [], sort, info, area, reveal }) => {
 
   const GetTime = ({ timeStamp }) => {
     const date = new Date(timeStamp * 1000);
-    return <span>{date.toLocaleDateString()}</span>;
+    const today = new Date();
+
+    // console.log(today.getFullYear());
+    // console.log(date.getFullYear());
+
+    const year = date.getFullYear() - today.getFullYear();
+    const month = today.getMonth() - date.getMonth();
+    const hours = today.getHours() - date.getHours();
+    const minutes = today.getMinutes() - date.getMinutes();
+    console.log(today.getFullYear());
+
+    // let timestamp = timeStamp;
+
+    // timestamp /= 1000; // from ms to seconds
+
+    // function component(x, v) {
+    //   return Math.floor(x / v);
+    // }
+
+    // setInterval(function () {
+    //   timestamp--;
+
+    //   const days = component(timestamp, 24 * 60 * 60),
+    //     hours = component(timestamp, 60 * 60) % 24,
+    //     minutes = component(timestamp, 60) % 60,
+    //     seconds = component(timestamp, 1) % 60;
+
+    //   console.log(days + ' days, ' + hours + ':' + minutes + ':' + seconds);
+    // }, 1000);
+
+    return <span></span>;
   };
 
   return (

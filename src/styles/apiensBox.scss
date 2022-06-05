@@ -1,0 +1,35 @@
+.apiensBox {
+  width: fit-content;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  align-content: center;
+  border-radius: 15px;
+  margin: auto;
+  overflow: hidden;
+
+  .apiens__rect {
+    width: 158px;
+    height: 93px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    background: #0b1e39 0% 0% no-repeat padding-box;
+    border: 1px solid #000f24;
+
+    .value {
+      font: normal normal bold 26px/30px Roboto;
+      letter-spacing: 0px;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    .title {
+      font: normal normal normal 14px/16px Roboto;
+      letter-spacing: 0px;
+      color: #d1d1d1;
+    }
+  }
+}
