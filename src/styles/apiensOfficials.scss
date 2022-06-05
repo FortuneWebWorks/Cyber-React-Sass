@@ -24,6 +24,15 @@
     }
   }
 
+  .chart__container {
+    position: relative;
+    width: 1180px;
+    height: 390px;
+    margin: auto;
+    border-radius: 10px;
+    background: #0b1e39 0% 0% no-repeat padding-box;
+  }
+
   @media (max-width: 1300px) {
     .apiens__title {
       margin: 2.666rem 0;

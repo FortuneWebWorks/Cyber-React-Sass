@@ -45,35 +45,28 @@ const CustomTable = ({ data = [], sort, info, area, reveal }) => {
   }
 
   const GetTime = ({ timeStamp }) => {
-    const date = new Date(timeStamp * 1000);
-    const today = new Date();
+    const today = +new Date().getTime() / 1000;
 
-    // console.log(today.getFullYear());
-    // console.log(date.getFullYear());
+    const date = +timeStamp - today;
 
-    const year = date.getFullYear() - today.getFullYear();
-    const month = today.getMonth() - date.getMonth();
-    const hours = today.getHours() - date.getHours();
-    const minutes = today.getMinutes() - date.getMinutes();
-    console.log(today.getFullYear());
+    // setInterval(() => {
+    const currDate = new Date();
+    // const year = date.getFullYear() - currDate.getFullYear();
 
-    // let timestamp = timeStamp;
+    // const month = date.getMonth() - currDate.getMonth();
 
-    // timestamp /= 1000; // from ms to seconds
+    // const day = date.getDay() - currDate.getDay();
 
-    // function component(x, v) {
-    //   return Math.floor(x / v);
-    // }
+    // const hours = date.getHours() - currDate.getHours();
 
-    // setInterval(function () {
-    //   timestamp--;
+    // const minutes = date.getMinutes() - currDate.getMinutes();
 
-    //   const days = component(timestamp, 24 * 60 * 60),
-    //     hours = component(timestamp, 60 * 60) % 24,
-    //     minutes = component(timestamp, 60) % 60,
-    //     seconds = component(timestamp, 1) % 60;
+    // const seconds = date.getSeconds() - currDate.getSeconds();
 
-    //   console.log(days + ' days, ' + hours + ':' + minutes + ':' + seconds);
+    const test = new Date(+timeStamp);
+    console.log(test);
+
+    // console.log(year, month, day, hours, minutes, seconds);
     // }, 1000);
 
     return <span></span>;
