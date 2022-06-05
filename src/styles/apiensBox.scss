@@ -32,4 +32,20 @@
       color: #d1d1d1;
     }
   }
+
+  @media (max-width: 1300px) {
+    .apiens__rect {
+      .value {
+        font: normal normal bold 2.888rem/30px Roboto;
+      }
+
+      .title {
+        font: normal normal normal 1.555rem/16px Roboto;
+      }
+    }
+  }
+
+  @media (max-width: 650px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
