@@ -267,4 +267,20 @@
       font: normal normal bold 1.888rem/20px Roboto;
     }
   }
+
+  @media (max-width: 1200px) {
+    .apiens__head_content {
+      width: 100%;
+    }
+
+    .apiens__lists__cahrts_conatiner {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .apiens__reveal_container,
+    .apiens__search {
+      width: 100%;
+    }
+  }
 }

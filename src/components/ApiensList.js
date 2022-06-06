@@ -1,10 +1,18 @@
 import '../styles/apinesList.scss';
 import useFetcher from '../hooks/useFetcher';
+import ApiensModal from './ApiensModal';
+import { useState } from 'react';
 
 const ApiensList = () => {
+  const [modal, setModal] = useState(null);
+
   const [data, loading] = useFetcher(
     'https://jsonplaceholder.typicode.com/photos?_start=0&_limit=30'
   );
+
+  const showModal = (item) => {
+    setModal(item);
+  };
 
   if (loading) {
     return <h2>Loading...</h2>;
@@ -12,10 +20,15 @@ const ApiensList = () => {
 
   return (
     <div className="apiens__list_scroll_container">
+      {modal && <ApiensModal data={modal} callBack={() => setModal(null)} />}
+
       <div className="apiens__list">
-        {console.log(data[0])}
         {data.map((item) => (
-          <div key={item.id} className="apiens__list_item">
+          <div
+            key={item.id}
+            className="apiens__list_item"
+            onClick={showModal.bind(null, item)}
+          >
             <img src={item.thumbnailUrl} alt="" />
 
             <div className="Rank_Id__container">

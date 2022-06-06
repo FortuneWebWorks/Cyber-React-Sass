@@ -3,6 +3,7 @@
 .apiens__filter {
   width: 1180px;
   height: 175px;
+  min-height: 175px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -220,6 +221,26 @@
       background: #1956e2 0% 0% no-repeat padding-box;
       color: #ffffff;
       cursor: pointer;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    height: 175px;
+    min-height: 175px;
+    width: 100%;
+    justify-content: center;
+
+    .apiens__filter__menu {
+      // flex-direction: column;
+      // align-items: flex-start;
+    }
+
+    .apiens__filter__content_content {
+      flex-flow: row wrap;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 0;
+      gap: 2rem;
     }
   }
 }
