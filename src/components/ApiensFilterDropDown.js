@@ -3,7 +3,13 @@ import { ReactComponent as ArrowIcon } from '../assets/images/downArrow.svg';
 import { ReactComponent as CloseIcon } from '../assets/images/close.svg';
 import { useState } from 'react';
 
-const tempListItems = ['74 (0.5%)', '74 (0.4%)', '74 (0.1%)', '74 (0.25%)'];
+const tempListItems = [
+  '74 (0.5%)',
+  '74 (0.4%)',
+  '74 (0.1%)',
+  '74 (0.25%)',
+  '74 (0.75%)',
+];
 
 const ApiensFilterDropDown = () => {
   const [open, setOpen] = useState(false);

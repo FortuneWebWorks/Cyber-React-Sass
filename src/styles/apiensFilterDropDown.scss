@@ -1,14 +1,15 @@
 .a__dropdown {
   position: relative;
   width: 300px;
-  height: 52px;
+  min-height: 52px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding: 12px 15px;
   padding-right: 0;
   border: 2px solid #d1d1d1;
   border-radius: 10px;
+  // margin-top: 10rem;
 
   .a__dropdown__icons {
     width: fit-content;
@@ -41,11 +42,14 @@
 
   .a__dropdown__items {
     display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
   }
 
   .a__dropdown__item {
-    width: 100px;
-    height: 29px;
+    min-width: 100px;
+    min-height: 29px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -91,6 +95,7 @@
     opacity: 0;
     user-select: none;
     pointer-events: none;
+    transition: opacity 0.1s ease;
 
     &.open {
       opacity: 1;
