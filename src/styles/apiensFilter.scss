@@ -7,7 +7,6 @@
   justify-content: center;
   align-items: center;
   border-radius: 15px;
-  overflow: hidden;
 
   .apiens__filter__sideMenu {
     position: relative;
@@ -118,6 +117,10 @@
       cursor: pointer;
     }
 
+    button:first-of-type {
+      border-top-left-radius: 10px;
+    }
+
     button.active {
       background-color: $primary;
     }
@@ -151,16 +154,17 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    border-bottom-left-radius: 10px;
     background-color: $primary;
 
-    span {
+    & > span {
       margin: 0 26px;
       font: normal normal normal 16px/19px Roboto;
       letter-spacing: 0px;
       color: #d1d1d1;
     }
 
-    span:first-of-type {
+    .apiens__filter__content_content_first_text:first-of-type {
       margin-right: 20px;
     }
 
