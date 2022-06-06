@@ -1,5 +1,6 @@
 import '../styles/mainApiens.scss';
 import ApiensBox from '../components/ApiensBox';
+import ApiensTrendingDashboard from '../components/ApiensTrendingDashboard';
 import RevealStatus from '../components/RevealStatus';
 import Search from '../components/Search';
 import { ReactComponent as WorldIcon } from '../assets/images/table-world.svg';
@@ -13,6 +14,7 @@ const Apiens = () => {
       <div className="apiens__head_header">
         <div className="hader__cricle_image"></div>
       </div>
+
       <div className="apiens__head_content">
         <div className="apiens__reveal_container">
           <span>REVEAL STATUS</span>
@@ -36,6 +38,10 @@ const Apiens = () => {
           </div>
           <Search />
         </div>
+      </div>
+
+      <div>
+        <ApiensTrendingDashboard />
       </div>
     </div>
   );
