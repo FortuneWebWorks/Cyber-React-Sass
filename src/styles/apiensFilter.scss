@@ -18,6 +18,10 @@
     border-radius: 0px 15px 15px 0px;
 
     & > div {
+      cursor: pointer;
+    }
+
+    &.close > div {
       position: absolute;
       top: 0;
       left: -100%;
@@ -31,12 +35,57 @@
       transform: matrix(0, -1, 1, 0, 0, 0) translate(-42%, -140%);
     }
 
-    &.open svg {
-      transform: rotate(180deg) translate(30%, 10%);
-    }
-
     span {
       white-space: pre;
+    }
+
+    button {
+      display: none;
+    }
+
+    &.open {
+      width: fit-content;
+
+      & > div {
+        position: static;
+        width: fit-content;
+        height: 175px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 7.5px;
+        padding: 7px;
+        font: normal normal bold 18px/21px Roboto;
+        letter-spacing: 0px;
+        color: #3666ac;
+
+        span {
+          display: none;
+        }
+
+        svg {
+          transform-origin: top;
+          transform: rotate(90deg) translateX(30%);
+        }
+      }
+    }
+
+    &.open button {
+      display: block;
+      width: 116px;
+      height: 38px;
+      background: #000f24 0% 0% no-repeat padding-box;
+      border: 1px solid #244677;
+      border-radius: 10px;
+      font: normal normal bold 16px/19px Roboto;
+      letter-spacing: 0px;
+      color: #d1d1d1;
+
+      &.active {
+        background: #244677 0% 0% no-repeat padding-box;
+        border: 1px solid #d1d1d1;
+      }
     }
   }
 

@@ -1,28 +1,49 @@
 import '../styles/apiensFilter.scss';
 import { ReactComponent as ArrowIcon } from '../assets/images/arrow_down.svg';
+import { useState } from 'react';
+
+const menuItems = ['Price', 'Rank', 'Token', 'Trait'];
 
 const ApiensFilter = () => {
+  const [sideMenu, setSideMenu] = useState(false);
+  const [activeMenu, setActiveMenu] = useState('Price');
+
+  const menuHandler = (e) => {
+    if (
+      e.target.tagName === 'BUTTON' &&
+      !e.target.classList.contains('delete')
+    ) {
+      setActiveMenu(e.target.textContent);
+    }
+  };
+
   return (
     <div className="apiens__filter">
       <div className="apiens__filter__content">
-        <div className="apiens__filter__menu">
-          <button className="active">Price</button>
-          <button>Rank</button>
-          <button>Token</button>
-          <button>Trait</button>
+        <div className="apiens__filter__menu" onClick={menuHandler}>
+          {menuItems.map((item) => (
+            <button
+              key={item}
+              className={`${item === activeMenu ? 'active' : ''}`}
+            >
+              {item}
+            </button>
+          ))}
 
-          <button className="apiens__filter__menu_resetall">Reset All</button>
-          <button className="apiens__filter__menu_reset">Reset</button>
+          <button className="apiens__filter__menu_resetall delete">
+            Reset All
+          </button>
+          <button className="apiens__filter__menu_reset delete">Reset</button>
         </div>
 
         <div className="apiens__filter__content_content">
-          <span>Show the price between</span>
+          <span>Show the {activeMenu.toLowerCase()} between</span>
 
           <input type="text" placeholder="Min" />
 
           <span>and</span>
 
-          <div class="apiens__filter_legend_input">
+          <div className="apiens__filter_legend_input">
             <label>Max</label>
             <input type="text" placeholder="20" />
           </div>
@@ -31,10 +52,16 @@ const ApiensFilter = () => {
         </div>
       </div>
 
-      <div className="apiens__filter__sideMenu">
+      <div
+        className={`apiens__filter__sideMenu ${sideMenu ? 'open' : 'close'}`}
+        onClick={() => setSideMenu((prev) => !prev)}
+      >
         <div>
           <span className="">Ranking Method</span>
           <ArrowIcon />
+          <button>Simple</button>
+          <button className="active">Normalization</button>
+          <button>Weighting</button>
         </div>
       </div>
     </div>
