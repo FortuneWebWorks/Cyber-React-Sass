@@ -1,5 +1,14 @@
+.apiens__list_scroll_container {
+  width: fit-content;
+  height: fit-content;
+  border-radius: 10px;
+  padding: 10px 7px;
+  padding-right: 3px;
+  background: #0b1e39 0% 0% no-repeat padding-box;
+}
+
 .apiens__list {
-  width: 300px;
+  width: 290px;
   height: 1021px;
   display: flex;
   flex-direction: column;
@@ -7,10 +16,17 @@
   align-items: center;
   gap: 10px;
   border-radius: 10px;
-  padding: 14px 15px;
-  background: #0b1e39 0% 0% no-repeat padding-box;
   overflow-y: auto;
   overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 3px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #244677;
+  }
 
   .apiens__list_item {
     width: 280px;
