@@ -1,0 +1,110 @@
+.apiens__list {
+  width: 300px;
+  height: 1021px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  padding: 14px 15px;
+  background: #0b1e39 0% 0% no-repeat padding-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  .apiens__list_item {
+    width: 280px;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #244677;
+    border-radius: 10px;
+    padding: 5px;
+    background: #244677 0% 0% no-repeat padding-box;
+
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+    }
+
+    .Rank_Id__container,
+    .Price_Time__container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .Rank_Id__container {
+      margin-right: auto;
+      margin-left: 6px;
+    }
+
+    .Rank {
+      font: normal normal normal 14px/16px Roboto;
+      letter-spacing: 0px;
+      color: #89baff;
+
+      span {
+        font: normal normal bold 14px/16px Roboto;
+        letter-spacing: 0px;
+        color: #ffffff;
+      }
+    }
+
+    .Id {
+      font: normal normal bold 12px/14px Roboto;
+      letter-spacing: 0px;
+      color: #d1d1d1;
+    }
+
+    .Price {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+      font: normal normal normal 14px/16px Roboto;
+      letter-spacing: 0px;
+      color: #89baff;
+
+      span {
+        font: normal normal bold 14px/16px Roboto;
+        letter-spacing: 0px;
+        color: #ffffff;
+      }
+
+      .Price__icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: -3px;
+
+        div {
+          width: 18px;
+          height: 18px;
+          background: #5c86c3 0% 0% no-repeat padding-box;
+          border-radius: 27px;
+        }
+      }
+    }
+
+    .Time {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 11px;
+      font: normal normal normal 12px/14px Roboto;
+      letter-spacing: 0px;
+      color: #89baff;
+
+      span {
+        font: normal normal normal 10px/11px Roboto;
+        letter-spacing: 0px;
+        color: #d1d1d1;
+      }
+    }
+  }
+}

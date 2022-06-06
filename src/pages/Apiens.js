@@ -7,6 +7,7 @@ import { ReactComponent as WorldIcon } from '../assets/images/table-world.svg';
 import { ReactComponent as TwitterIcon } from '../assets/images/table-twitter.svg';
 import { ReactComponent as DiscordIcon } from '../assets/images/discordNoBackground.svg';
 import { ReactComponent as OpenSeaIcon } from '../assets/images/openSeaNoBackground.svg';
+import ApiensList from '../components/ApiensList';
 
 const Apiens = () => {
   return (
@@ -40,8 +41,12 @@ const Apiens = () => {
         </div>
       </div>
 
-      <div>
+      <div style={{ marginBottom: '67px' }}>
         <ApiensTrendingDashboard />
+      </div>
+
+      <div>
+        <ApiensList />
       </div>
     </div>
   );
