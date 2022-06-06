@@ -200,6 +200,7 @@
 
   .apies__list_container {
     .apies__list__header {
+      min-height: 5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -226,11 +227,13 @@
           font: normal normal normal 14px/16px Roboto;
           letter-spacing: 0px;
           color: #d1d1d1;
+          border-radius: 10px;
 
           .dropdown__placeholder__icon {
             font: normal normal normal 14px/16px Roboto;
             letter-spacing: 0px;
             color: #d1d1d1;
+            padding-left: 13px;
 
             span {
               opacity: 1;
@@ -242,6 +245,7 @@
           }
 
           .dropdown__items {
+            border-radius: 10px;
             font: normal normal normal 14px/16px Roboto;
             letter-spacing: 0px;
             color: #d1d1d1;

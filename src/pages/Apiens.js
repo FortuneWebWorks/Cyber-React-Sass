@@ -87,16 +87,6 @@ const Apiens = () => {
         <div className="apies__list_container">
           <div className="apies__list__header">
             <h2>Listings</h2>
-
-            <div className="apies__list__header_dropdown">
-              <DropDown
-                fontSize="3rem"
-                innerColor="#244677"
-                minWidth="111px"
-                items={[{ name: 'Date' }, { name: 'Price' }, { name: 'Rank' }]}
-                placeholder={'Sorting'}
-              />
-            </div>
           </div>
           <ApiensList />
         </div>
