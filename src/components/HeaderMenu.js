@@ -12,7 +12,7 @@ const header2Items = [{ name: 'Drops' }, { name: 'Trending' }, { name: 'FAQ' }];
 //   { name: 'About us' },
 // ];
 
-const HeaderMenu = ({ second }) => {
+const HeaderMenu = ({ second, items }) => {
   const navigate = useNavigate();
 
   const routeChange = (key) => {
@@ -26,7 +26,7 @@ const HeaderMenu = ({ second }) => {
         innerColor="#244677"
         minWidth="10rem"
         placeholder={window.location.pathname.replace('/', '')}
-        items={header2Items}
+        items={items || header2Items}
         callBack={routeChange}
       />
     </div>
