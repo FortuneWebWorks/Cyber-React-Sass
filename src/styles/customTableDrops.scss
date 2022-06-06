@@ -15,10 +15,11 @@
   .table__header,
   .table__row {
     text-align: center;
+    max-height: unset;
   }
 
   .table__row.open {
-    max-height: 500px;
+    // max-height: 500px;
     align-items: flex-start;
   }
 
@@ -211,6 +212,10 @@
     font: normal normal normal 12px/14px Roboto;
     color: #d1d1d1;
     cursor: pointer;
+
+    &.hidden {
+      display: none;
+    }
 
     &:hover {
       .tooltip {

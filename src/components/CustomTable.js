@@ -35,7 +35,7 @@ const spaces = [60, 15, 15, 15, 13, 13, 20, 13, 20, 20, 20, 20];
 
 const CustomTable = ({ data = [], sort, info, area, reveal }) => {
   const [open, setOpen] = useState('');
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState(null);
   const [maxMint, setMaxMint] = useState('');
 
   if (reveal) {
@@ -64,12 +64,31 @@ const CustomTable = ({ data = [], sort, info, area, reveal }) => {
     // const seconds = date.getSeconds() - currDate.getSeconds();
 
     const test = new Date(+timeStamp);
-    console.log(test);
+    // console.log(test);
 
     // console.log(year, month, day, hours, minutes, seconds);
     // }, 1000);
 
     return <span></span>;
+  };
+
+  const renderCategory = (data) => {
+    return (
+      <>
+        {data.categories.map((cat, index) => (
+          <span
+            key={cat.id}
+            className={`table__changes_category ${
+              index > 1 && category !== data.id ? 'hidden' : ''
+            }`}
+            style={{ borderColor: cat.color, color: cat.color }}
+          >
+            {cat.title}
+            <Tooltip title="What is it?" message={cat.tooltip} />
+          </span>
+        ))}
+      </>
+    );
   };
 
   return (
@@ -334,29 +353,20 @@ const CustomTable = ({ data = [], sort, info, area, reveal }) => {
 
                   {/* category */}
                   <div
-                    className={`col col__category`}
-                    // className={`col col__category ${
-                    //   category === item.user.nftName ? 'open' : ''
-                    // }`}
-                    // onClick={() => {
-                    //   setCategory((prev) =>
-                    //     prev === item.user.nftName ? '' : item.user.nftName
-                    //   );
-                    //   setMaxMint('');
-                    // }}
+                    className={`col col__category ${
+                      category === item.id && item.categories.length > 2
+                        ? 'open'
+                        : ''
+                    }`}
                     style={{ flexBasis: `${spaces[10]}%` }}
+                    onClick={() => {
+                      setCategory((prev) =>
+                        prev === item.id ? null : item.id
+                      );
+                    }}
                   >
                     <div className="table__changes table__changes_category_container">
-                      {item.categories.map((cat) => (
-                        <span
-                          key={cat.id}
-                          className="table__changes_category"
-                          style={{ borderColor: cat.color, color: cat.color }}
-                        >
-                          {cat.title}
-                          <Tooltip title="What is it?" message={cat.tooltip} />
-                        </span>
-                      ))}
+                      {renderCategory(item)}
                     </div>
                   </div>
 
