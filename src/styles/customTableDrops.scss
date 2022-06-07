@@ -139,7 +139,7 @@
   }
 
   .col__category {
-    max-height: 4rem;
+    max-height: 5rem;
     // overflow: hidden;
     transition: all 0.1s ease-in-out;
 
@@ -249,6 +249,13 @@
       .head_items:first-of-type {
         transform: translateX(50px);
       }
+    }
+  }
+
+  @media (max-width: 1215px) {
+    .m__table {
+      min-width: 1190px;
+      overflow: hidden;
     }
   }
 }
