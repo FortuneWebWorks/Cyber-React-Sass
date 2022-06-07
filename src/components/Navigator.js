@@ -17,22 +17,29 @@ const Navigator = ({
   const [active, setActive] = useState(0);
   let navigator = useRef(null);
   const allSteps = items.slice(3, items.length);
+  const [gap, setGap] = useState(18);
 
   useEffect(() => {
     if (items.length === 1) {
-      navigator.style.justifyContent = 'center';
+      navigator.current.style.justifyContent = 'center';
     } else if (items.length === 2 || items.length === 3) {
-      navigator.style.justifyContent = 'space-evenly';
+      navigator.current.style.justifyContent = 'space-evenly';
     } else {
-      navigator.style.justifyContent = 'flex-start';
+      navigator.current.style.justifyContent = 'flex-start';
     }
+
+    window && window.addEventListener('resize', sizeHandler);
+
+    return () => {
+      window.removeEventListener('resize', sizeHandler);
+    };
   }, [items]);
 
   const navigateHandler = (e) => {
     if (e.target.id) {
       setActive(+e.target.id);
 
-      const card = navigator.querySelectorAll('.navigator__card');
+      const card = navigator.current.querySelectorAll('.navigator__card');
 
       const gap = Math.abs(
         card[0].getBoundingClientRect().left +
@@ -42,7 +49,31 @@ const Navigator = ({
 
       const moveStep = card[0].getBoundingClientRect().width + gap;
 
-      navigator.style.transform = `translateX(${-moveStep * e.target.id}px)`;
+      navigator.current.style.transform = `translateX(${
+        -moveStep * e.target.id
+      }px)`;
+    }
+  };
+
+  const sizeHandler = (e) => {
+    const card = navigator.current.querySelectorAll('.navigator__card');
+    const gap = Math.abs(
+      card[0].getBoundingClientRect().left +
+        card[0].getBoundingClientRect().width -
+        card[1].getBoundingClientRect().left
+    );
+    const cardWidth = card[0].getBoundingClientRect().width + gap;
+    const containerWidth = document
+      .querySelector('.cards__navigator')
+      .getBoundingClientRect().width;
+
+    // console.log(containerWidth);
+    if (cardWidth * 4 > containerWidth) {
+      // console.log((containerWidth - cardWidth * 3) / 3);
+      console.log(containerWidth - cardWidth * 3);
+
+      document.querySelector('.navigator').style.gap =
+        containerWidth - cardWidth + 'px';
     }
   };
 
@@ -50,15 +81,17 @@ const Navigator = ({
     <div className="navigator">
       <h2>Today's Mint</h2>
 
+      {console.log('render')}
+
       <div className="cards__navigator">
-        <div className="navigator__cards" ref={(el) => (navigator = el)}>
+        <div className="navigator__cards" ref={navigator}>
           {items &&
             items.map((item, index) => (
               <div
                 key={index}
                 className={`navigator__card ${
                   active === index ? 'active' : ''
-                }`}
+                } ${index === 0 ? 'first' : ''}`}
               >
                 <img
                   className="navigator__card_image"
