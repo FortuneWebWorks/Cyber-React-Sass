@@ -8,9 +8,10 @@ import { ReactComponent as TwitterIcon } from '../assets/images/table-twitter.sv
 import { ReactComponent as DiscordIcon } from '../assets/images/discordNoBackground.svg';
 import { ReactComponent as OpenSeaIcon } from '../assets/images/openSeaNoBackground.svg';
 import { ReactComponent as EtherScanIcon } from '../assets/images/etherscan-logo-circle.svg';
+import { ReactComponent as LooksrareIcon } from '../assets/images/looksrare.svg';
 import { ReactComponent as CopyIcon } from '../assets/images/copy.svg';
-import { ReactComponent as ExternalLinkIcon } from '../assets/images/icons8-external-link.svg';
-import { ReactComponent as BluetickIcon } from '../assets/images/bluetick.svg';
+import { ReactComponent as ExternalLinkIcon } from '../assets/images/external-link.svg';
+import { ReactComponent as BluetickIcon } from '../assets/images/bluebg-check.svg';
 import { ReactComponent as TrendingIcon } from '../assets/images/Trending.svg';
 import { ReactComponent as AnalyticalIcon } from '../assets/images/Analytical.svg';
 import ApiensList from '../components/ApiensList';
@@ -46,6 +47,7 @@ const Apiens = () => {
             <TwitterIcon />
             <DiscordIcon />
             <OpenSeaIcon />
+            <LooksrareIcon />
             <EtherScanIcon />
           </div>
           <Search />
