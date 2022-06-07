@@ -161,6 +161,7 @@
 
     .single {
       gap: 0;
+
       .table__changes_mint {
         font: normal normal bold 1.5rem/21px Roboto !important;
       }
@@ -239,6 +240,13 @@
   }
 
   .single {
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+
     span {
       font: normal normal bold 1.9rem/21px Roboto !important;
     }
@@ -248,6 +256,12 @@
     .table__header {
       .head_items:first-of-type {
         transform: translateX(50px);
+      }
+    }
+
+    .single {
+      .ETH {
+        margin-top: -5%;
       }
     }
   }

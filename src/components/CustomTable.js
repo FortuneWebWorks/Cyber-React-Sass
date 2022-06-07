@@ -303,14 +303,20 @@ const CustomTable = ({ data = [], sort, info, area, reveal }) => {
                   {/*  */}
                   <div className="col" style={{ flexBasis: `${spaces[4]}%` }}>
                     <div className="table__changes single">
-                      <span>{item.presale_price}</span>
+                      <span>{item.presale_price.split(' ')[0]}</span>
+                      <span className="ETH">
+                        {item.presale_price.split(' ')[1]}
+                      </span>
                     </div>
                   </div>
 
                   {/*  */}
                   <div className="col" style={{ flexBasis: `${spaces[5]}%` }}>
                     <div className="table__changes single">
-                      <span>{item.publicsale_price}</span>
+                      <span>{item.publicsale_price.split(' ')[0]}</span>
+                      <span className="ETH">
+                        {item.publicsale_price.split(' ')[1]}
+                      </span>
                     </div>
                   </div>
 
