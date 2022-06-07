@@ -6,7 +6,7 @@ import Navigator from '../components/Navigator';
 import { ReactComponent as FilterIcon } from '../assets/icons/filtr.svg';
 import Filter from '../components/DropsFilter';
 import Search from '../components/Search';
-import MTable from '../components/CustomTable';
+import CustomTable from '../components/CustomTable';
 import useFetcher from '../hooks/useFetcher';
 
 const tableData = {
@@ -192,7 +192,7 @@ const Drops = () => {
       </div>
 
       <div className="drops__table__container">
-        <MTable
+        <CustomTable
           data={data.rows}
           sort={false}
           info={false}

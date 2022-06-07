@@ -18,7 +18,7 @@ const headerItemsInof = [
   'The total volume of collections from the beginning until now',
 ];
 
-const headers = [
+let headers = [
   'Collection',
   'Supply',
   'Twitter Member',
@@ -33,15 +33,24 @@ const headers = [
 ];
 const spaces = [60, 15, 15, 15, 13, 13, 20, 13, 20, 20, 20, 20];
 
+const insert = (arr, index, newItem) => [
+  ...arr.slice(0, index),
+  newItem,
+  ...arr.slice(index),
+];
+
 const CustomTable = ({ data = [], sort, info, area, reveal }) => {
   const [open, setOpen] = useState('');
   const [category, setCategory] = useState(null);
   const [maxMint, setMaxMint] = useState('');
 
   if (reveal) {
-    if (!headers.includes('Reveal')) headers.push('Reveal');
+    if (!headers.includes('Reveal')) {
+      headers = insert(headers, 9, 'Reveal');
+    }
   } else {
-    if (headers.includes('Reveal')) headers.splice(headers.length - 1, 1);
+    if (headers.includes('Reveal'))
+      headers = headers.filter((item) => item !== 'Reveal');
   }
 
   const GetTime = ({ timeStamp }) => {
@@ -79,7 +88,7 @@ const CustomTable = ({ data = [], sort, info, area, reveal }) => {
           <span
             key={cat.id}
             className={`table__changes_category ${
-              index > 1 && category !== data.id ? 'hidden' : ''
+              index > 2 && category !== data.id ? 'hidden' : ''
             }`}
             style={{ borderColor: cat.color, color: cat.color }}
           >
@@ -351,6 +360,17 @@ const CustomTable = ({ data = [], sort, info, area, reveal }) => {
                     </div>
                   </div>
 
+                  {/* reveal */}
+                  {reveal && (
+                    <div className="col" style={{ flexBasis: `${spaces[9]}%` }}>
+                      <div className="table__changes">
+                        <span className="table__changes_date">
+                          <GetTime timeStamp={item.reveal_timestamp} />
+                        </span>
+                      </div>
+                    </div>
+                  )}
+
                   {/* category */}
                   <div
                     className={`col col__category ${
@@ -358,7 +378,9 @@ const CustomTable = ({ data = [], sort, info, area, reveal }) => {
                         ? 'open'
                         : ''
                     }`}
-                    style={{ flexBasis: `${spaces[10]}%` }}
+                    style={{
+                      flexBasis: `${spaces[10]}%`,
+                    }}
                     onClick={() => {
                       setCategory((prev) =>
                         prev === item.id ? null : item.id
@@ -384,17 +406,6 @@ const CustomTable = ({ data = [], sort, info, area, reveal }) => {
                       </a>
                     </div>
                   </div>
-
-                  {/* reveal */}
-                  {reveal && (
-                    <div className="col" style={{ flexBasis: `${spaces[9]}%` }}>
-                      <div className="table__changes">
-                        <span className="table__changes_date">
-                          <GetTime timeStamp={item.reveal_timestamp} />
-                        </span>
-                      </div>
-                    </div>
-                  )}
                 </>
               )}
             </li>
