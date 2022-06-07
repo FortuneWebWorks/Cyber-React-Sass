@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import '../styles/dropdown.scss';
-import { ReactComponent as Arrow } from '../assets/icons/arrow_down.svg';
+import { ReactComponent as Arrow } from '../assets/images/chevron-down.svg';
 
 const DropDown = ({
   title,

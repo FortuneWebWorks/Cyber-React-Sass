@@ -33,6 +33,13 @@
     }
   }
 
+  .box__text_icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+
   @media (max-width: 1300px) {
     .apiens__rect {
       .value {

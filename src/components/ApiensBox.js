@@ -1,4 +1,5 @@
 import '../styles/apiensBox.scss';
+import { ReactComponent as ApiensHeaderIcon } from '../assets/images/apiens-header.svg';
 
 const ApiensBox = () => {
   return (
@@ -12,7 +13,10 @@ const ApiensBox = () => {
         <span className="title">Owner</span>
       </div>
       <div className="apiens__rect">
-        <span className="value">1.3</span>
+        <div className="box__text_icon">
+          <ApiensHeaderIcon />
+          <span className="value">1.3</span>
+        </div>
         <span className="title">Floor Price</span>
       </div>
       <div className="apiens__rect">
@@ -28,7 +32,10 @@ const ApiensBox = () => {
         <span className="title">% Owner</span>
       </div>
       <div className="apiens__rect">
-        <span className="value">1.5</span>
+        <div className="box__text_icon">
+          <ApiensHeaderIcon />
+          <span className="value">1.5</span>
+        </div>
         <span className="title">Average Price</span>
       </div>
       <div className="apiens__rect">

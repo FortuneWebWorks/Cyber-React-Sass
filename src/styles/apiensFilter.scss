@@ -186,17 +186,6 @@
       width: fit-content;
       height: fit-content;
 
-      label {
-        position: absolute;
-        top: -10%;
-        left: 20px;
-        padding: 0 1rem;
-        font: normal normal normal 12px/14px Roboto;
-        letter-spacing: 0px;
-        background-color: $primary;
-        color: #d1d1d1;
-      }
-
       input {
         width: 220px;
         height: 52px;
@@ -207,6 +196,28 @@
         letter-spacing: 0px;
         background-color: transparent;
         color: #d1d1d1;
+      }
+
+      label {
+        position: absolute;
+        top: 50%;
+        left: 10%;
+        background-color: $primary;
+        color: #d1d1d1;
+        font: normal normal normal 16px/19px Roboto;
+        transform: translateY(-50%);
+        transition: all 0.3s ease;
+        user-select: none;
+        pointer-events: none;
+      }
+
+      input:focus + label {
+        top: -10%;
+        left: 10px;
+        padding: 0 1rem;
+        font: normal normal normal 12px/14px Roboto;
+        color: #d1d1d1;
+        transform: translateY(0);
       }
     }
 
@@ -230,10 +241,10 @@
     width: 100%;
     justify-content: center;
 
-    .apiens__filter__menu {
-      // flex-direction: column;
-      // align-items: flex-start;
-    }
+    // .apiens__filter__menu {
+    //   // flex-direction: column;
+    //   // align-items: flex-start;
+    // }
 
     .apiens__filter__content_content {
       flex-flow: row wrap;

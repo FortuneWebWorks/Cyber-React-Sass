@@ -155,7 +155,7 @@ const Drops = () => {
 
       <div className="drops__sort_timer">
         <div className="drops__sort-details">
-          <span>Sorted By: </span>
+          {/* <span>Sorted By: </span> */}
           <ButtonGroup
             items={['Upcoming', 'Reveal']}
             activeDefault="Upcoming"

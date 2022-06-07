@@ -1,7 +1,7 @@
 import '../styles/apiensFilterDropDown.scss';
 import { ReactComponent as ArrowIcon } from '../assets/images/downArrow.svg';
 import { ReactComponent as CloseIcon } from '../assets/images/close.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const tempListItems = [
   '74 (0.5%)',
@@ -31,6 +31,19 @@ const ApiensFilterDropDown = () => {
 
     setItems(newItems);
   };
+
+  useEffect(() => {
+    const closer = (e) => {
+      if (!e.target.closest('.a__dropdown')) {
+        setOpen(false);
+      }
+    };
+    window && window.addEventListener('mouseup', closer);
+
+    return () => {
+      window.removeEventListener('mouseup', closer);
+    };
+  }, []);
 
   return (
     <div className="a__dropdown">

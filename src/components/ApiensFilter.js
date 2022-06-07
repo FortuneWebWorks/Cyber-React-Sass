@@ -44,20 +44,26 @@ const ApiensFilter = () => {
                 Show the {activeMenu.toLowerCase()} between
               </span>
 
-              <input type="text" placeholder="Min" />
+              <div className="apiens__filter_legend_input">
+                <input type="text" />
+                <label>Min</label>
+              </div>
 
               <span>and</span>
 
               <div className="apiens__filter_legend_input">
+                <input type="text" />
                 <label>Max</label>
-                <input type="text" placeholder="20" />
               </div>
             </>
           ) : (
             <>
               <span>Select Trait</span>
 
-              <input type="text" placeholder="Min" />
+              <div className="apiens__filter_legend_input">
+                <input type="text" />
+                <label>Min</label>
+              </div>
 
               <span>Select Type</span>
               <ApiensFilterDropDown />

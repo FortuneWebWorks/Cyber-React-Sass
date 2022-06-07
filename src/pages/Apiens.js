@@ -7,8 +7,13 @@ import { ReactComponent as WorldIcon } from '../assets/images/table-world.svg';
 import { ReactComponent as TwitterIcon } from '../assets/images/table-twitter.svg';
 import { ReactComponent as DiscordIcon } from '../assets/images/discordNoBackground.svg';
 import { ReactComponent as OpenSeaIcon } from '../assets/images/openSeaNoBackground.svg';
+import { ReactComponent as EtherScanIcon } from '../assets/images/etherscan-logo-circle.svg';
+import { ReactComponent as CopyIcon } from '../assets/images/copy.svg';
+import { ReactComponent as ExternalLinkIcon } from '../assets/images/icons8-external-link.svg';
+import { ReactComponent as BluetickIcon } from '../assets/images/bluetick.svg';
+import { ReactComponent as TrendingIcon } from '../assets/images/Trending.svg';
+import { ReactComponent as AnalyticalIcon } from '../assets/images/Analytical.svg';
 import ApiensList from '../components/ApiensList';
-import HeaderMenu from '../components/HeaderMenu';
 import DropDown from '../components/DropDown';
 
 const Apiens = () => {
@@ -25,9 +30,12 @@ const Apiens = () => {
         </div>
 
         <div className="apiens__center_box">
-          <h1 className="apiens__title">APIENS OFFICIALS</h1>
+          <h1 className="apiens__title">
+            APIENS OFFICIALS <BluetickIcon className="blue_tick" />
+          </h1>
           <span className="apiens__id">
-            sdfasdfdfsdsadfsdfsdfsdsfadfsaadfsdafsdfs
+            sdfasdfdfsdsadfsdfsdfsdsfadfsaadfsdafsdfs <CopyIcon />
+            <ExternalLinkIcon className="external_link_svg" />
           </span>
           <ApiensBox />
         </div>
@@ -38,8 +46,21 @@ const Apiens = () => {
             <TwitterIcon />
             <DiscordIcon />
             <OpenSeaIcon />
+            <EtherScanIcon />
           </div>
           <Search />
+        </div>
+      </div>
+
+      <div className="apiens__views">
+        <div className="active">
+          <TrendingIcon />
+          <span>Trending Dashboard</span>
+        </div>
+
+        <div>
+          <AnalyticalIcon />
+          <span>Analytical Charts</span>
         </div>
       </div>
 
