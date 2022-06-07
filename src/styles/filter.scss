@@ -97,6 +97,7 @@
     align-items: center;
     gap: 1rem;
     font: normal normal normal 1.5rem/16px Roboto;
+    color: #ccc;
 
     input {
       width: 120px;
@@ -106,34 +107,33 @@
       border-radius: 10px;
       background-color: $primary;
       font: normal normal normal 1.5rem/16px Roboto;
-      color: #fff;
 
       &::-webkit-input-placeholder {
         /* WebKit, Blink, Edge */
-        color: #d1d1d1;
+        color: #ccc;
       }
       &:-moz-placeholder {
         /* Mozilla Firefox 4 to 18 */
-        color: #d1d1d1;
+        color: #ccc;
         opacity: 1;
       }
       &::-moz-placeholder {
         /* Mozilla Firefox 19+ */
-        color: #d1d1d1;
+        color: #ccc;
         opacity: 1;
       }
       &:-ms-input-placeholder {
         /* Internet Explorer 10-11 */
-        color: #d1d1d1;
+        color: #ccc;
       }
       &::-ms-input-placeholder {
         /* Microsoft Edge */
-        color: #d1d1d1;
+        color: #ccc;
       }
 
       &::placeholder {
         /* Most modern browsers support this now. */
-        color: #d1d1d1;
+        color: #ccc;
       }
     }
   }
