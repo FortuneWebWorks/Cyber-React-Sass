@@ -5,11 +5,13 @@ import Drops from '../pages/Drops';
 import ExpectedPnl from '../pages/ExpectedPnl';
 import ApiensOfficials from '../pages/ApiensOfficials';
 import Apiens from '../pages/Apiens';
+import Home from '../pages/Home';
 
 const index = () => {
   return (
     <Routes>
-      <Route path="/" element={<Main />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/dashboard" element={<Main />} />
       <Route path="/trending" element={<Traits />} />
       <Route path="/drops" element={<Drops />} />
       <Route path="/panel" element={<ExpectedPnl />} />
