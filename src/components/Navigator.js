@@ -17,20 +17,9 @@ const Navigator = ({
   const [rowCount, setRowCount] = useState(3);
   const [active, setActive] = useState(0);
   let navigator = useRef(null);
-  const allSteps = items.slice(3, items.length);
-  // const [start, setStart] = useState(0);
-  // const [end, setEnd] = useState(rowCount);
+  let allSteps = useRef(items.slice(3, items.length));
 
   useEffect(() => {
-    // if (items.length === 1) {
-    //   navigator.current.style.justifyContent = 'center';
-    // } else if (items.length === 2 || items.length === 3) {
-    //   navigator.current.style.justifyContent = 'space-evenly';
-    // } else {
-    //   rowCount === 1
-    //     ? (navigator.current.style.justifyContent = 'center')
-    //     : (navigator.current.style.justifyContent = 'space-between');
-    // }
     sizeHandler();
 
     window && window.addEventListener('resize', sizeHandler);
@@ -68,6 +57,23 @@ const Navigator = ({
       Math.ceil(navigator.current.getBoundingClientRect().width / cardWidth) -
       1;
 
+    switch (row) {
+      case 4:
+        allSteps.current = items.slice(3, items.length);
+        break;
+      case 3:
+        allSteps.current = items.slice(2, items.length);
+        break;
+      case 2:
+        allSteps.current = items.slice(1, items.length);
+        break;
+      case 1:
+        allSteps.current = items.slice(0, items.length);
+        break;
+
+      default:
+        break;
+    }
     console.log(row);
 
     if (rowCount !== row) {
@@ -134,7 +140,7 @@ const Navigator = ({
       </div>
 
       <div className="navigator__buttons" onClick={navigateHandler}>
-        {allSteps.map((_, index) => (
+        {allSteps.current.map((_, index) => (
           <button
             key={index}
             id={index}
