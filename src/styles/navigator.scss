@@ -45,7 +45,11 @@
     flex-grow: 0;
     flex-shrink: 0;
     width: 275px;
-    height: 8rem;
+    min-width: 275px;
+    max-width: 275px;
+    height: 68px;
+    min-height: 68px;
+    max-height: 68px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -59,8 +63,8 @@
   }
 
   .navigator__card_image {
-    width: 6.44rem;
-    height: 6.44rem;
+    width: 58px;
+    height: 58px;
     border-radius: 10px;
   }
 
