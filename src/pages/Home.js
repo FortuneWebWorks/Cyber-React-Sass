@@ -2,8 +2,21 @@ import '../styles/home/home.scss';
 import { ReactComponent as VideoIcon } from '../assets/images/video.svg';
 import HomeCard from '../components/home/HomeCard';
 import HomeTestimonial from '../components/home/HomeTestimonial';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const Home = () => {
+  const settings = {
+    className: 'center',
+    centerMode: true,
+    infinite: true,
+    arrows: false,
+    centerPadding: '175px',
+    slidesToShow: 3,
+    speed: 500,
+  };
+
   return (
     <main className="home">
       <div className="section__1">
@@ -36,8 +49,15 @@ const Home = () => {
       <section className="section__3">
         <h2>TESTIMONIAL</h2>
 
-        <div className="section__3__testimonial">
-          <HomeTestimonial />
+        <div style={{ color: '#fff' }}>
+          <Slider {...settings}>
+            <HomeTestimonial />
+            <HomeTestimonial />
+            <HomeTestimonial />
+            <HomeTestimonial />
+            <HomeTestimonial />
+            <HomeTestimonial />
+          </Slider>
         </div>
       </section>
     </main>
