@@ -27,13 +27,14 @@ const Navigator = ({
     return () => {
       window.removeEventListener('resize', sizeHandler);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items]);
 
   const navigateHandler = (e) => {
-    if (e.target.id) {
-      setActive(+e.target.id);
+    const card = navigator.current.querySelectorAll('.navigator__card');
 
-      const card = navigator.current.querySelectorAll('.navigator__card');
+    if (e?.target?.id) {
+      setActive(+e.target.id);
 
       const gap = Math.abs(
         card[0].getBoundingClientRect().left +
@@ -43,9 +44,19 @@ const Navigator = ({
 
       const moveStep = card[0].getBoundingClientRect().width + gap;
 
-      card.forEach((item) => {
-        item.style.transform = `translate(${-moveStep * e.target.id}px, -50%)`;
-      });
+      if (rowCount !== 1) {
+        card.forEach((item) => {
+          item.style.transform = `translate(${
+            -moveStep * e.target.id
+          }px, -50%)`;
+        });
+      } else {
+        card.forEach((item) => {
+          item.style.transform = `translate(${
+            -parseInt(moveStep) * e.target.id
+          }px, -50%)`;
+        });
+      }
     }
   };
 
@@ -74,13 +85,16 @@ const Navigator = ({
       default:
         break;
     }
-    console.log(row);
 
     if (rowCount !== row) {
       setRowCount(row);
-      card.forEach((item) => {
-        item.style.transform = `translate(0, -50%)`;
-      });
+      if (row <= 1) {
+        console.log('Hell');
+      } else {
+        card.forEach((item) => {
+          item.style.transform = `translate(0, -50%)`;
+        });
+      }
     }
 
     setSizes();
@@ -99,9 +113,20 @@ const Navigator = ({
       if (gap !== 1) {
         item.style.left = (cardWidth + gap) * index + 'px';
       } else {
-        item.style.left = 100 * index + 1 + '%';
+        const gup = Math.abs(
+          card[0].getBoundingClientRect().left +
+            card[0].getBoundingClientRect().width -
+            card[1].getBoundingClientRect().left
+        );
+
+        const navigatorWidth = navigator.current.getBoundingClientRect().width;
+
+        item.style.left =
+          (cardWidth + gup) * index + (navigatorWidth - cardWidth) / 2 + 'px';
       }
     });
+
+    navigateHandler();
   };
 
   return (
