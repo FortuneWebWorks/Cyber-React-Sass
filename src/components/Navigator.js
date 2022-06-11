@@ -88,13 +88,9 @@ const Navigator = ({
 
     if (rowCount !== row) {
       setRowCount(row);
-      if (row <= 1) {
-        console.log('Hell');
-      } else {
-        card.forEach((item) => {
-          item.style.transform = `translate(0, -50%)`;
-        });
-      }
+      card.forEach((item) => {
+        item.style.transform = `translate(0, -50%)`;
+      });
     }
 
     setSizes();

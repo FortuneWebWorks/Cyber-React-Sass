@@ -33,7 +33,7 @@
     }
 
     .table__row {
-      // max-height: 53px;
+      min-height: 53px;
       align-items: center;
       border-radius: 10px;
       background-color: $primary-dark;

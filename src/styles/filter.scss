@@ -181,9 +181,13 @@
 
   .filter__menu_item_content_compare {
     width: 100%;
-    display: none;
+    display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1rem;
+    opacity: 0;
+    user-select: none;
+    pointer-events: none;
 
     .filter__menu_item_content_minmax {
       width: 60%;

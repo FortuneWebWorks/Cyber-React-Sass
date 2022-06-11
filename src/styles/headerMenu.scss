@@ -67,6 +67,10 @@
       opacity: 1;
       user-select: unset;
       pointer-events: unset;
+
+      @media (max-width: 500px) {
+        right: 0;
+      }
     }
 
     .hamb__icon {

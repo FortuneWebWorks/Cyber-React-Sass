@@ -185,6 +185,7 @@ const Filter = ({ title = 'Filter', callBack }) => {
               />
               <span>Listings</span>
             </div>
+
             <div className="filter__menu_item_content_average">
               <div className="filter__menu_switch" id="second">
                 <span>%</span>

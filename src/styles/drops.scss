@@ -11,6 +11,10 @@
   overflow-x: hidden;
   overflow-y: hidden;
 
+  .buttons__container {
+    padding-left: 0;
+  }
+
   .drops__table__container {
     // overflow: hidden;
     transition: overflow 0.2s ease;
@@ -56,6 +60,7 @@
     justify-content: flex-end;
     align-items: center;
     gap: 3rem;
+    // padding: 1rem;
   }
 
   .drops__sort-details {
@@ -83,8 +88,8 @@
 
   @media (max-width: 1215px) {
     .drops__table__container {
-      overflow: hidden;
       overflow-x: auto;
+      overflow-y: hidden;
       transition: overflow 0.2s ease;
     }
   }

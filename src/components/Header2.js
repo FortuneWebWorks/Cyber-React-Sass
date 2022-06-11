@@ -68,7 +68,7 @@ const Header = () => {
   return (
     <header className="max-width-header-limiter">
       <div className="header">
-        <h2>NFToolkit</h2>
+        <h2 onClick={() => navigate('/')}>NFToolkit</h2>
 
         <Search />
 

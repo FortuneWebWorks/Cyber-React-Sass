@@ -164,7 +164,7 @@ const Drops = () => {
             paddingTop="1rem"
             containerStyles={{
               border: '1px solid #1956E2',
-              minWidth: '21.555rem',
+              minWidth: '194px',
               height: '30px',
             }}
             callBack={activeButtonsChange}
