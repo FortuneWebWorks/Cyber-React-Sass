@@ -70,4 +70,27 @@
       color: #ffffff;
     }
   }
+
+  @media (max-width: 1250px) {
+    .section__2 {
+      .section__2__cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+
+  @media (max-width: 834px) {
+    .section__1 {
+      svg {
+        width: 90%;
+        margin: auto;
+      }
+    }
+
+    .section__2 {
+      .section__2__cards {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+  }
 }
