@@ -17,21 +17,22 @@
     }
 
     p {
+      margin-top: 24px;
       text-align: center;
       font: normal normal normal 14px/16px Roboto;
       letter-spacing: 0px;
       color: #d1d1d1;
-      margin-top: 24px;
     }
 
     button {
       width: 205px;
       height: 53px;
-      margin: auto;
       background: #1956e2 0% 0% no-repeat padding-box;
+      margin: auto;
+      margin-top: 35px;
       border-radius: 27px;
       color: #ffffff;
-      margin-top: 35px;
+      cursor: pointer;
     }
 
     svg {
@@ -61,6 +62,7 @@
 
   .section__3 {
     width: 100%;
+
     h2 {
       margin-top: 76px;
       margin-bottom: 34px;

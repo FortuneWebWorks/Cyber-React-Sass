@@ -62,17 +62,11 @@
     svg:first-of-type {
       margin-left: auto;
     }
+
+    svg {
+      cursor: pointer;
+    }
   }
-
-  // @media (max-width: 800px) {
-  //   .footer__info {
-  //     padding: 0 0.5rem;
-  //   }
-
-  //   .footer__copyright_container {
-  //     padding: 0 0.5rem;
-  //   }
-  // }
 
   @media (min-width: 1400px) {
     .footer__copyright {

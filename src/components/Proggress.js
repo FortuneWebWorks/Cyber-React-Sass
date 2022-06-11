@@ -5,14 +5,18 @@ const Proggress = ({ min = 0, max = 100, sign = '%' }) => {
     <div className="progress__container">
       <input className="progress__range" type="range" min={min} max={max} />
       <div className="progress__lables">
-        <span>
-          {min}
-          {sign}
-        </span>
-        <span>
-          {max}
-          {sign}
-        </span>
+        {min && min !== '' && (
+          <span>
+            {min}
+            {sign}
+          </span>
+        )}
+        {max && max !== '' && (
+          <span>
+            {max}
+            {sign}
+          </span>
+        )}
       </div>
     </div>
   );

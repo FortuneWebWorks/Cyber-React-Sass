@@ -19,7 +19,6 @@
   }
 
   .table__row.open {
-    // max-height: 500px;
     align-items: flex-start;
   }
 
@@ -140,7 +139,6 @@
 
   .col__category {
     max-height: 5rem;
-    // overflow: hidden;
     transition: all 0.1s ease-in-out;
 
     &.open {
@@ -202,7 +200,6 @@
     justify-content: flex-start;
     align-items: flex-start;
     gap: 4px;
-    // overflow: hidden;
     transition: all 0.1s;
   }
 
@@ -226,7 +223,7 @@
       pointer-events: none;
     }
 
-    @media (hover: hover) {
+    @media (hover: hover) and (min-width: 1210px) {
       &:hover {
         .tooltip {
           opacity: 1;
