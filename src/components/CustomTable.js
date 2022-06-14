@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import '../styles/customTable.scss';
 import '../styles/customTableTrending.scss';
 import { ReactComponent as InfoIcon } from '../assets/images/information.svg';
@@ -41,7 +41,7 @@ const insert = (arr, index, newItem) => [
 ];
 
 const CustomTable = ({ data = [], sort, info, area, reveal }) => {
-  // const [open, setOpen] = useState('');
+  // const [open, setOpen] = useState('');=
   const [category, setCategory] = useState(null);
   // const [maxMint, setMaxMint] = useState('');
 
@@ -86,9 +86,8 @@ const CustomTable = ({ data = [], sort, info, area, reveal }) => {
     return (
       <>
         {data.categories.map((cat, index) => (
-          <>
+          <Fragment key={cat.id}>
             <span
-              key={cat.id}
               className={`table__changes_category ${
                 index > 2 && category !== data.id ? 'hidden' : ''
               }`}
@@ -98,7 +97,7 @@ const CustomTable = ({ data = [], sort, info, area, reveal }) => {
               <Tooltip title="What is it?" message={cat.tooltip} />
             </span>
             {index === 2 && <ArrowIcon />}
-          </>
+          </Fragment>
         ))}
       </>
     );

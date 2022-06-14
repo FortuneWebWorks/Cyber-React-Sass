@@ -77,11 +77,11 @@ const Filter = ({ title = 'Filter', callBack }) => {
               <span>to</span>
               <input type="text" placeholder="Max" />
             </div>
-            <div className="filter__menu_item_content_average">
+            {/* <div className="filter__menu_item_content_average">
               <span>Average Sales for top</span>
               <input type="text" />
               <span> is:</span>
-            </div>
+            </div> */}
           </div>
         </div>
 
