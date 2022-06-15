@@ -1,13 +1,13 @@
 import { Fragment, useState } from 'react';
-import '../styles/customTable.scss';
-import '../styles/customTableTrending.scss';
-import { ReactComponent as InfoIcon } from '../assets/images/information.svg';
-import { ReactComponent as FlashDownIcon } from '../assets/images/flash-down.svg';
-import { ReactComponent as FlashUpIcon } from '../assets/images/flash_up.svg';
-import { ReactComponent as DiscordIcon } from '../assets/images/table-discord.svg';
-import { ReactComponent as TwitterIcon } from '../assets/images/table-twitter.svg';
-import { ReactComponent as WorldIcon } from '../assets/images/table-world.svg';
-import { ReactComponent as ArrowIcon } from '../assets/images/table-arrow.svg';
+import 'styles/customTable/customTable.scss';
+import 'styles/customTable/customTableTrending.scss';
+import { ReactComponent as InfoIcon } from 'assets/images/information.svg';
+import { ReactComponent as FlashDownIcon } from 'assets/images/flash-down.svg';
+import { ReactComponent as FlashUpIcon } from 'assets/images/flash_up.svg';
+import { ReactComponent as DiscordIcon } from 'assets/images/table-discord.svg';
+import { ReactComponent as TwitterIcon } from 'assets/images/table-twitter.svg';
+import { ReactComponent as WorldIcon } from 'assets/images/table-world.svg';
+import { ReactComponent as ArrowIcon } from 'assets/images/table-arrow.svg';
 import Tooltip from './Tooltip';
 
 const headerItemsInof = [

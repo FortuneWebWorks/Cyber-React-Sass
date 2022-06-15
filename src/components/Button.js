@@ -7,10 +7,12 @@ const Button = ({
   borderRadius,
   padding,
   fontSize = '1.4rem',
+  font,
+  fixWidth,
   callBack,
 }) => {
   return (
-    <div className="button__container">
+    <div className={`button__container ${fixWidth ? 'fix' : ''}`}>
       <button
         className="button"
         style={{
@@ -19,6 +21,7 @@ const Button = ({
           borderRadius: borderRadius || '',
           padding: padding,
           fontSize: fontSize,
+          font: font,
         }}
         onClick={callBack}
       >

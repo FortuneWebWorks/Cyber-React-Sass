@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import '../styles/drops.scss';
-import '../styles/customTableDrops.scss';
-import ButtonGroup from '../components/ButtonGroup';
-import Navigator from '../components/Navigator';
-import { ReactComponent as FilterIcon } from '../assets/icons/filtr.svg';
-import Filter from '../components/DropsFilter';
-import Search from '../components/Search';
-import CustomTable from '../components/CustomTable';
-import useFetcher from '../hooks/useFetcher';
+import 'styles/drops.scss';
+import 'styles/customTable/customTableDrops.scss';
+import ButtonGroup from 'components/ButtonGroup';
+import Navigator from 'components/Navigator';
+import { ReactComponent as FilterIcon } from 'assets/icons/filtr.svg';
+import Filter from 'components/drops/DropsFilter';
+import Search from 'components/Search';
+import CustomTable from 'components/CustomTable';
+import useFetcher from 'hooks/useFetcher';
 
 const tableData = {
   headers: [

@@ -7,12 +7,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 0.5rem;
-  padding: 1rem;
+  gap: 4.5px;
+  padding: 9px;
 
   .input__title-contianer {
-    max-width: 13rem;
+    max-width: 117px;
     overflow: hidden;
+
+    .input__title {
+      font: normal normal bold 12px/14px Roboto;
+    }
 
     &.over {
       span {
@@ -38,9 +42,9 @@
     border: none;
     outline: none;
     border-radius: $border-radius-sm;
-    padding: 0.7rem;
+    padding: 6.3px;
     color: #fff;
-    font-size: 1.4rem;
+    font: normal normal normal 14px/16px Roboto;
 
     -webkit-appearance: none;
     -moz-appearance: none;

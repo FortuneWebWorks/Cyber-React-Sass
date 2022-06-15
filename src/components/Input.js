@@ -14,7 +14,7 @@ const Input = ({
       <div
         className={`input__title-contianer ${title.length > 22 ? 'over' : ''}`}
       >
-        <span style={{ fontSize: fontSize || '' }} className="">
+        <span style={{ fontSize: fontSize || '' }} className="input__title">
           {title}
         </span>
       </div>

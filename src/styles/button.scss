@@ -15,5 +15,14 @@
     color: #fff;
     font-weight: bold;
     cursor: pointer;
+    white-space: pre;
+  }
+
+  &.fix {
+    button {
+      width: 111px;
+      height: 35px;
+      padding: 0;
+    }
   }
 }

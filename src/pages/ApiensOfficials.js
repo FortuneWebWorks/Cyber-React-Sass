@@ -1,6 +1,5 @@
-import '../styles/apiensOfficials.scss';
-import ApiensBox from '../components/ApiensBox';
-import BarLineChart from '../components/Charts/FirstChart';
+import 'styles/apiens/apiensOfficials.scss';
+import ApiensBox from 'components/apiens/ApiensBox';
 
 const ApiensOfficials = () => {
   return (
@@ -18,9 +17,7 @@ const ApiensOfficials = () => {
         </div>
       </div>
 
-      <div className="chart__container">
-        <BarLineChart />
-      </div>
+      <div className="chart__container"></div>
     </div>
   );
 };

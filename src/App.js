@@ -1,13 +1,13 @@
 import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from './routes/index';
 import './styles/app.scss';
-import Header from './components/Header2';
+import Header from './components/header/Header2';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import MintContextProvider from './contexts/autoMintContext';
 import SnipeContextProvider from './contexts/snipeContext';
 import BulkContextProvider from './contexts/bulkContext';
-import Footer from './components/Footer2';
+import Footer from './components/footer/Footer2';
 
 const App = () => {
   return (

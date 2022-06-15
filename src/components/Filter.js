@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import '../styles/filter.scss';
-import { ReactComponent as ArrowDown } from '../assets/icons/arrow_down.svg';
-import { ReactComponent as CancelIcon } from '../assets/images/cancel.svg';
+import 'styles/filter.scss';
+import { ReactComponent as ArrowDown } from 'assets/icons/arrow_down.svg';
+import { ReactComponent as CancelIcon } from 'assets/images/cancel.svg';
 import SwitchJs from './SwitchJs';
-import DropDown from '../components/DropDown';
+import DropDown from 'components/DropDown';
 
 const compareItems = [
   { name: '==' },

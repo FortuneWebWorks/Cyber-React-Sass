@@ -60,30 +60,33 @@ const List = () => {
           borderRadius="10px"
           bgColor="#fff"
           color="#244677"
-          padding="2rem 1rem"
-          fontSize="1.5rem"
-          call
+          padding="11px 23px"
+          font="normal normal bold 12px/14px Roboto"
+          fixWidth={true}
         />
         <Button
           text="Start All"
           borderRadius="10px"
           bgColor="#25CE8C"
-          padding="2rem 1rem"
-          fontSize="1.5rem"
+          padding="11px 23px"
+          font="normal normal bold 12px/14px Roboto"
+          fixWidth={true}
         />
         <Button
           text="Stop All"
           borderRadius="10px"
           bgColor="#FD2F7A"
-          padding="2rem 1rem"
-          fontSize="1.5rem"
+          padding="11px 23px"
+          font="normal normal bold 12px/14px Roboto"
+          fixWidth={true}
         />
         <Button
           text="Delete All"
           borderRadius="10px"
           bgColor="#434248"
-          padding="2rem 1rem"
-          fontSize="1.5rem"
+          padding="11px 23px"
+          font="normal normal bold 12px/14px Roboto"
+          fixWidth={true}
           callBack={onDeleteAll}
         />
       </div>

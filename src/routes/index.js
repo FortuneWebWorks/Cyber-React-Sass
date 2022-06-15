@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import Main from '../pages/Main';
+import Dashboard from '../pages/Dashboard';
 import Traits from '../pages/Trending';
 import Drops from '../pages/Drops';
 import ExpectedPnl from '../pages/ExpectedPnl';
@@ -11,7 +11,7 @@ const index = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/dashboard" element={<Main />} />
+      <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/trending" element={<Traits />} />
       <Route path="/drops" element={<Drops />} />
       <Route path="/panel" element={<ExpectedPnl />} />
