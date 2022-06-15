@@ -40,6 +40,7 @@
   .hamb__items {
     position: absolute;
     top: 160%;
+    left: 0;
     min-width: 10rem;
     border-radius: 10px;
     background: $primary-light 0% 0% no-repeat padding-box;
@@ -49,6 +50,10 @@
     user-select: none;
     pointer-events: none;
     transition: opacity 0.3s;
+
+    @media (max-width: 500px) {
+      left: -100%;
+    }
   }
 
   li {
@@ -69,7 +74,7 @@
       pointer-events: unset;
 
       @media (max-width: 500px) {
-        right: 0;
+        left: -100%;
       }
     }
 
