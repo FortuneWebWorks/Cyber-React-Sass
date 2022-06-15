@@ -115,6 +115,7 @@
 
   @media (max-width: 800px) {
     min-height: 8rem;
+    padding: 1rem;
 
     .header__connect-wallet {
       width: 100%;
@@ -122,13 +123,7 @@
     }
   }
 
-  @media (max-width: 630px) {
-    padding: 0 2rem;
-  }
-
   @media (max-width: 470px) {
-    padding: 0 2rem;
-
     h2 {
       font-size: 2rem;
     }

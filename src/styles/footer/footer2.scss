@@ -64,7 +64,24 @@
     }
 
     svg {
+      aspect-ratio: 1/1;
+      width: 32px;
       cursor: pointer;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .footer__copyright {
+      max-width: 1186px;
+    }
+
+    .footer__copyright_container {
+      width: 100%;
+      padding: 0;
+    }
+
+    .footer__info {
+      padding: 0 1rem;
     }
   }
 
