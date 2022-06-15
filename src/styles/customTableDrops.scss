@@ -149,8 +149,20 @@
 
       .table__changes_category_container {
         padding: 1rem;
+
+        .table__changes_category_dropdown_icon {
+          top: 84%;
+        }
       }
     }
+  }
+
+  .table__changes_category_dropdown_icon {
+    position: absolute;
+    top: 50%;
+    left: 70%;
+    z-index: 15;
+    transform: translateY(-30%);
   }
 
   .col__mint {
@@ -161,7 +173,7 @@
       gap: 0;
 
       .table__changes_mint {
-        font: normal normal bold 1.5rem/21px Roboto !important;
+        font: normal normal bold 14px/21px Roboto !important;
       }
     }
 
@@ -194,6 +206,7 @@
   }
 
   .table__changes_category_container {
+    position: relative;
     max-height: 100%;
     display: flex;
     flex-flow: row wrap;
@@ -246,7 +259,7 @@
     gap: 0;
 
     span {
-      font: normal normal bold 1.9rem/21px Roboto !important;
+      font: normal normal bold 18px/21px Roboto !important;
     }
 
     .ETH {

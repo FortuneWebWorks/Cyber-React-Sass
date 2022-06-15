@@ -96,7 +96,10 @@ const CustomTable = ({ data = [], sort, info, area, reveal }) => {
               {cat.title}
               <Tooltip title="What is it?" message={cat.tooltip} />
             </span>
-            {index === 2 && <ArrowIcon />}
+
+            <div className="table__changes_category_dropdown_icon">
+              {index === 2 && <ArrowIcon />}
+            </div>
           </Fragment>
         ))}
       </>
