@@ -1,49 +1,50 @@
-import 'styles/apiens/apiensBox.scss';
-import { ReactComponent as ApiensHeaderIcon } from 'assets/images/apiens-header.svg';
+import "styles/apiens/apiensBox.scss";
+import { ReactComponent as ApiensHeaderIcon } from "assets/images/apiens-header.svg";
 
-const ApiensBox = () => {
+const InfoBox = ({ data }) => {
   return (
     <div className="apiensBox">
+      {console.log(data)}
       <div className="apiens__rect">
-        <span className="value">10K</span>
+        <span className="value">{data.total_supply}</span>
         <span className="title">Supply</span>
       </div>
       <div className="apiens__rect">
-        <span className="value">2.8K</span>
+        <span className="value">{data.owners_count}</span>
         <span className="title">Owner</span>
       </div>
       <div className="apiens__rect">
         <div className="box__text_icon">
           <ApiensHeaderIcon />
-          <span className="value">1.3</span>
+          <span className="value">{data.floor_price}</span>
         </div>
         <span className="title">Floor Price</span>
       </div>
       <div className="apiens__rect">
-        <span className="value">188</span>
+        <span className="value">{data.volume_traded}</span>
         <span className="title">Volume Traded</span>
       </div>
       <div className="apiens__rect">
-        <span className="value">5%</span>
-        <span className="title">Loyalty</span>
+        <span className="value">{data.nft_royalty}</span>
+        <span className="title">Royalty</span>
       </div>
       <div className="apiens__rect">
-        <span className="value">50</span>
+        <span className="value">{data.percent_owner}</span>
         <span className="title">% Owner</span>
       </div>
       <div className="apiens__rect">
         <div className="box__text_icon">
           <ApiensHeaderIcon />
-          <span className="value">1.5</span>
+          <span className="value">{data.average_price}</span>
         </div>
         <span className="title">Average Price</span>
       </div>
       <div className="apiens__rect">
-        <span className="value">10K</span>
+        <span className="value">{data.sales_volume}</span>
         <span className="title">Sales Volume</span>
       </div>
     </div>
   );
 };
 
-export default ApiensBox;
+export default InfoBox;

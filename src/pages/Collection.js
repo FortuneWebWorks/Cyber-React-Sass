@@ -1,7 +1,6 @@
-import { useContext } from "react";
-import ContractAdress from "contexts/collection";
+import useFetcher from "hooks/useFetcher";
 import "styles/apiens/mainApiens.scss";
-import ApiensBox from "components/apiens/ApiensBox";
+import InfoBox from "components/apiens/InfoBox";
 import ApiensTrendingDashboard from "components/apiens/ApiensTrendingDashboard";
 import RevealStatus from "components/RevealStatus";
 import Search from "components/Search";
@@ -18,15 +17,32 @@ import { ReactComponent as TrendingIcon } from "assets/images/Trending.svg";
 import { ReactComponent as AnalyticalIcon } from "assets/images/Analytical.svg";
 import ApiensList from "components/apiens/ApiensList";
 import DropDown from "components/DropDown";
+import { useParams } from "react-router-dom";
 
 const Collection = () => {
-  const { swapData, setSwapData } = useContext(ContractAdress);
-  console.log(swapData);
+  const params = useParams();
+  const slug = params.slug;
+
+  console.log(slug);
+
+  const [data, loading] = useFetcher(
+    `https://api.cyberdash.app/v1/collections/${slug}`
+  );
+
+  console.log(data);
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
 
   return (
     <div className="apiens__container">
       <div className="apiens__head_header">
-        <div className="hader__cricle_image"></div>
+        <img
+          src={data.banner_image_url}
+          className="apiens__head_header"
+          alt=""
+        />
+        <img src={data.image_url} className="hader__cricle_image" alt="" />
       </div>
 
       <div className="apiens__head_content">
@@ -37,23 +53,35 @@ const Collection = () => {
 
         <div className="apiens__center_box">
           <h1 className="apiens__title">
-            APIENS OFFICIALS <BluetickIcon className="blue_tick" />
+            {data.collection_name} <BluetickIcon className="blue_tick" />
           </h1>
           <span className="apiens__id">
-            sdfasdfdfsdsadfsdfsdfsdsfadfsaadfsdafsdfs <CopyIcon />
+            {data.contract_address} <CopyIcon />
             <ExternalLinkIcon className="external_link_svg" />
           </span>
-          <ApiensBox />
+          {data && <InfoBox data={data} />}
         </div>
 
         <div className="apiens__search">
           <div>
-            <WorldIcon />
-            <TwitterIcon />
-            <DiscordIcon />
-            <OpenSeaIcon />
-            <LooksrareIcon />
-            <EtherScanIcon />
+            <a href={data.website_url}>
+              <WorldIcon />
+            </a>
+            <a href={data.twitter_url}>
+              <TwitterIcon />
+            </a>
+            <a href={data.discord_url}>
+              <DiscordIcon />
+            </a>
+            <a href={data.opensea_url}>
+              <OpenSeaIcon />
+            </a>
+            <a href={data.website_url}>
+              <LooksrareIcon />
+            </a>
+            <a href={data.website_url}>
+              <EtherScanIcon />
+            </a>
           </div>
           <Search />
         </div>
@@ -114,7 +142,7 @@ const Collection = () => {
 
         <div className="apies__list_container">
           <div className="apies__list__header">
-            <h2>Listings</h2>
+            <h2>Sales</h2>
           </div>
           <ApiensList />
         </div>

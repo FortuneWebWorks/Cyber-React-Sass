@@ -1,5 +1,5 @@
-import 'styles/apiens/apiensOfficials.scss';
-import ApiensBox from 'components/apiens/ApiensBox';
+import "styles/apiens/apiensOfficials.scss";
+import ApiensBox from "components/apiens/InfoBox";
 
 const ApiensOfficials = () => {
   return (
