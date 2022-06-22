@@ -15,7 +15,7 @@ import { ReactComponent as ExternalLinkIcon } from "assets/images/external-link.
 import { ReactComponent as BluetickIcon } from "assets/images/bluebg-check.svg";
 import { ReactComponent as TrendingIcon } from "assets/images/Trending.svg";
 import { ReactComponent as AnalyticalIcon } from "assets/images/Analytical.svg";
-import ApiensList from "components/apiens/ApiensList";
+import CollectionsList from "components/apiens/CollectionsList";
 import DropDown from "components/DropDown";
 import { useParams } from "react-router-dom";
 
@@ -25,24 +25,23 @@ const Collection = () => {
 
   console.log(slug);
 
-  const [data, loading] = useFetcher(
+  const [metaData, metaLoading] = useFetcher(
     `https://api.cyberdash.app/v1/collections/${slug}`
   );
 
-  console.log(data);
-  if (loading) {
-    return <h1>Loading...</h1>;
+  if (metaLoading) {
+    return <h1>Loadinssg...</h1>;
   }
 
   return (
     <div className="apiens__container">
       <div className="apiens__head_header">
         <img
-          src={data.banner_image_url}
+          src={metaData.banner_image_url}
           className="apiens__head_header"
           alt=""
         />
-        <img src={data.image_url} className="hader__cricle_image" alt="" />
+        <img src={metaData.image_url} className="hader__cricle_image" alt="" />
       </div>
 
       <div className="apiens__head_content">
@@ -53,33 +52,33 @@ const Collection = () => {
 
         <div className="apiens__center_box">
           <h1 className="apiens__title">
-            {data.collection_name} <BluetickIcon className="blue_tick" />
+            {metaData.collection_name} <BluetickIcon className="blue_tick" />
           </h1>
           <span className="apiens__id">
-            {data.contract_address} <CopyIcon />
+            {metaData.contract_address} <CopyIcon />
             <ExternalLinkIcon className="external_link_svg" />
           </span>
-          {data && <InfoBox data={data} />}
+          {metaData && <InfoBox data={metaData} />}
         </div>
 
         <div className="apiens__search">
           <div>
-            <a href={data.website_url}>
+            <a href={metaData.website_url}>
               <WorldIcon />
             </a>
-            <a href={data.twitter_url}>
+            <a href={metaData.twitter_url}>
               <TwitterIcon />
             </a>
-            <a href={data.discord_url}>
+            <a href={metaData.discord_url}>
               <DiscordIcon />
             </a>
-            <a href={data.opensea_url}>
+            <a href={metaData.opensea_url}>
               <OpenSeaIcon />
             </a>
-            <a href={data.website_url}>
+            <a href={metaData.website_url}>
               <LooksrareIcon />
             </a>
-            <a href={data.website_url}>
+            <a href={metaData.website_url}>
               <EtherScanIcon />
             </a>
           </div>
@@ -118,7 +117,7 @@ const Collection = () => {
               />
             </div>
           </div>
-          <ApiensList />
+          <CollectionsList slug={slug} type={"listings"} />
         </div>
 
         <div className="apiens__charts_container">
@@ -144,7 +143,7 @@ const Collection = () => {
           <div className="apies__list__header">
             <h2>Sales</h2>
           </div>
-          <ApiensList />
+          <CollectionsList slug={slug} type={"orders"} />
         </div>
       </div>
     </div>

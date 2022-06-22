@@ -4,7 +4,6 @@ import { ReactComponent as ApiensHeaderIcon } from "assets/images/apiens-header.
 const InfoBox = ({ data }) => {
   return (
     <div className="apiensBox">
-      {console.log(data)}
       <div className="apiens__rect">
         <span className="value">{data.total_supply}</span>
         <span className="title">Supply</span>

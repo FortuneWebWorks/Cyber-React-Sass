@@ -98,13 +98,10 @@
         color: #ffffff;
       }
 
-      .Price__icons {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+      .opensea__icons {
         margin-left: -3px;
 
-        div {
+        a {
           width: 18px;
           height: 18px;
           background: #5c86c3 0% 0% no-repeat padding-box;
