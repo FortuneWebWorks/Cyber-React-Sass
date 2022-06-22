@@ -1,4 +1,6 @@
-import { Fragment, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import ContractAdress from "contexts/collection";
 import "styles/customTable/customTable.scss";
 import "styles/trending/trendingTable.scss";
 import { ReactComponent as InfoIcon } from "assets/images/information.svg";
@@ -32,7 +34,14 @@ const timestampToDate = (timestamp) => {
 };
 
 const TrendingTable = ({ data = [], sort, info }) => {
-  console.log(data);
+  const navigator = useNavigate();
+  const { swapData, setSwapData } = useContext(ContractAdress);
+
+  const redirectCargo = (item) => {
+    setSwapData(item.contract_address);
+
+    navigator(`/collection/${item.collection_slug}`);
+  };
 
   return (
     <div className={`m__table__container trending__table`}>
@@ -52,7 +61,11 @@ const TrendingTable = ({ data = [], sort, info }) => {
         </li>
         {data &&
           data.map((item, index) => (
-            <li key={index} className={`table__row`}>
+            <li
+              key={index}
+              className={`table__row`}
+              onClick={redirectCargo.bind(null, item)}
+            >
               <div className="col" style={{ flexBasis: `${spaces[0]}%` }}>
                 <div className="table__details">
                   <img src={item.image_url} alt="" />

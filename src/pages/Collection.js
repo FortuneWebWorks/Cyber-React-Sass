@@ -1,23 +1,28 @@
-import 'styles/apiens/mainApiens.scss';
-import ApiensBox from 'components/apiens/ApiensBox';
-import ApiensTrendingDashboard from 'components/apiens/ApiensTrendingDashboard';
-import RevealStatus from 'components/RevealStatus';
-import Search from 'components/Search';
-import { ReactComponent as WorldIcon } from 'assets/images/table-world.svg';
-import { ReactComponent as TwitterIcon } from 'assets/images/table-twitter.svg';
-import { ReactComponent as DiscordIcon } from 'assets/images/discordNoBackground.svg';
-import { ReactComponent as OpenSeaIcon } from 'assets/images/openSeaNoBackground.svg';
-import { ReactComponent as EtherScanIcon } from 'assets/images/etherscan-logo-circle.svg';
-import { ReactComponent as LooksrareIcon } from 'assets/images/looksrare.svg';
-import { ReactComponent as CopyIcon } from 'assets/images/copy.svg';
-import { ReactComponent as ExternalLinkIcon } from 'assets/images/external-link.svg';
-import { ReactComponent as BluetickIcon } from 'assets/images/bluebg-check.svg';
-import { ReactComponent as TrendingIcon } from 'assets/images/Trending.svg';
-import { ReactComponent as AnalyticalIcon } from 'assets/images/Analytical.svg';
-import ApiensList from 'components/apiens/ApiensList';
-import DropDown from 'components/DropDown';
+import { useContext } from "react";
+import ContractAdress from "contexts/collection";
+import "styles/apiens/mainApiens.scss";
+import ApiensBox from "components/apiens/ApiensBox";
+import ApiensTrendingDashboard from "components/apiens/ApiensTrendingDashboard";
+import RevealStatus from "components/RevealStatus";
+import Search from "components/Search";
+import { ReactComponent as WorldIcon } from "assets/images/table-world.svg";
+import { ReactComponent as TwitterIcon } from "assets/images/table-twitter.svg";
+import { ReactComponent as DiscordIcon } from "assets/images/discordNoBackground.svg";
+import { ReactComponent as OpenSeaIcon } from "assets/images/openSeaNoBackground.svg";
+import { ReactComponent as EtherScanIcon } from "assets/images/etherscan-logo-circle.svg";
+import { ReactComponent as LooksrareIcon } from "assets/images/looksrare.svg";
+import { ReactComponent as CopyIcon } from "assets/images/copy.svg";
+import { ReactComponent as ExternalLinkIcon } from "assets/images/external-link.svg";
+import { ReactComponent as BluetickIcon } from "assets/images/bluebg-check.svg";
+import { ReactComponent as TrendingIcon } from "assets/images/Trending.svg";
+import { ReactComponent as AnalyticalIcon } from "assets/images/Analytical.svg";
+import ApiensList from "components/apiens/ApiensList";
+import DropDown from "components/DropDown";
 
-const Apiens = () => {
+const Collection = () => {
+  const { swapData, setSwapData } = useContext(ContractAdress);
+  console.log(swapData);
+
   return (
     <div className="apiens__container">
       <div className="apiens__head_header">
@@ -66,7 +71,7 @@ const Apiens = () => {
         </div>
       </div>
 
-      <div style={{ marginBottom: '67px' }}>
+      <div style={{ marginBottom: "67px" }}>
         <ApiensTrendingDashboard />
       </div>
 
@@ -80,8 +85,8 @@ const Apiens = () => {
                 fontSize="3rem"
                 innerColor="#244677"
                 minWidth="111px"
-                items={[{ name: 'Date' }, { name: 'Price' }, { name: 'Rank' }]}
-                placeholder={'Sorting'}
+                items={[{ name: "Date" }, { name: "Price" }, { name: "Rank" }]}
+                placeholder={"Sorting"}
               />
             </div>
           </div>
@@ -118,4 +123,4 @@ const Apiens = () => {
   );
 };
 
-export default Apiens;
+export default Collection;

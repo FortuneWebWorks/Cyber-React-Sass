@@ -42,6 +42,8 @@ const Traits = () => {
   };
 
   useEffect(() => {
+    fetchData("1h");
+
     const closer = (e) => {
       if (!e.target.closest(".filter")) {
         setOpenFiter(false);
