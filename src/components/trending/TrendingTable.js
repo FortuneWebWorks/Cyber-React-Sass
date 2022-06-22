@@ -1,6 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import ContractAdress from "contexts/collection";
 import "styles/customTable/customTable.scss";
 import "styles/trending/trendingTable.scss";
 import { ReactComponent as InfoIcon } from "assets/images/information.svg";
@@ -35,11 +33,8 @@ const timestampToDate = (timestamp) => {
 
 const TrendingTable = ({ data = [], sort, info }) => {
   const navigator = useNavigate();
-  const { swapData, setSwapData } = useContext(ContractAdress);
 
   const redirectCargo = (item) => {
-    setSwapData(item.contract_address);
-
     navigator(`/collection/${item.collection_slug}`);
   };
 
