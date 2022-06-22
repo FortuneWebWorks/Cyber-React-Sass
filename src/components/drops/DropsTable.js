@@ -8,7 +8,7 @@ import { ReactComponent as DiscordIcon } from "assets/images/table-discord.svg";
 import { ReactComponent as TwitterIcon } from "assets/images/table-twitter.svg";
 import { ReactComponent as WorldIcon } from "assets/images/table-world.svg";
 import { ReactComponent as ArrowIcon } from "assets/images/table-arrow.svg";
-import Tooltip from "./Tooltip";
+import Tooltip from "components/Tooltip";
 
 const headerItemsInof = [
   "The collections with the highest number of sales in the selected timeframe",
@@ -40,7 +40,7 @@ const insert = (arr, index, newItem) => [
   ...arr.slice(index),
 ];
 
-const CustomTable = ({ data = [], sort, info, area, reveal }) => {
+const DropsTable = ({ data = [], sort, info, area, reveal }) => {
   console.log(data);
 
   // const [open, setOpen] = useState('');=
@@ -429,4 +429,4 @@ const CustomTable = ({ data = [], sort, info, area, reveal }) => {
   );
 };
 
-export default CustomTable;
+export default DropsTable;

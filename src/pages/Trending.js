@@ -8,7 +8,6 @@ import MyTable from "../components/CustomTable";
 
 const timeFrameMoreThan1Day = ["1d", "7d"];
 const timeFrameLessThan1Day = ["5m", "30m", "1h", "6h"];
-const defaultTimeFrame = "1h";
 
 const tableData = {
   headers: ["Collection", "Floor", "Saies", "Listings", "Volume", "Market Cap"],
@@ -20,6 +19,7 @@ const Traits = () => {
   const [data, setData] = useState(null);
   const [openFilter, setOpenFiter] = useState(false);
   const [sort, setSort] = useState("High/Low");
+  const [activeTimeFrame, setActiveTimeFrame] = useState("1h");
 
   const onClick = (e) => {
     setOpenFiter((prev) => !prev);
@@ -41,6 +41,7 @@ const Traits = () => {
 
       const data = await res.json();
 
+      console.log(data);
       setData(data);
     };
 
@@ -90,12 +91,14 @@ const Traits = () => {
             <Timer
               callBack={fetchData}
               items={timeFrameMoreThan1Day}
-              defaultActive={defaultTimeFrame}
+              activeTimeFrame={activeTimeFrame}
+              setActiveTimeFrame={setActiveTimeFrame}
             />
             <Timer
               callBack={fetchData}
               items={timeFrameLessThan1Day}
-              defaultActive={defaultTimeFrame}
+              activeTimeFrame={activeTimeFrame}
+              setActiveTimeFrame={setActiveTimeFrame}
             />
           </div>
 
@@ -107,7 +110,12 @@ const Traits = () => {
 
       <div className="table__container">
         {data && (
-          <MyTable data={data} sort={sort} info={true} area="trending__table" />
+          <MyTable
+            data={data.rows}
+            sort={sort}
+            info={true}
+            area="trending__table"
+          />
         )}
       </div>
     </div>
