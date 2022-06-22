@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
-import "styles/customTable/customTable.scss";
-import "styles/customTable/customTableTrending.scss";
+import "styles/drops/dropsTable.scss";
+// import "styles/customTable/customTableTrending.scss";
 import { ReactComponent as InfoIcon } from "assets/images/information.svg";
 import { ReactComponent as FlashDownIcon } from "assets/images/flash-down.svg";
 import { ReactComponent as FlashUpIcon } from "assets/images/flash_up.svg";

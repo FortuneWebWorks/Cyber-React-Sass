@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "styles/drops.scss";
-import "styles/customTable/customTableDrops.scss";
+import "styles/drops/dropsTable.scss";
 import ButtonGroup from "components/ButtonGroup";
 import Navigator from "components/Navigator";
 import { ReactComponent as FilterIcon } from "assets/icons/filtr.svg";

@@ -1,13 +1,10 @@
 import { Fragment, useState } from "react";
 import "styles/customTable/customTable.scss";
-import "styles/customTable/customTableTrending.scss";
+import "styles/trending/trendingTable.scss";
 import { ReactComponent as InfoIcon } from "assets/images/information.svg";
 import { ReactComponent as FlashDownIcon } from "assets/images/flash-down.svg";
 import { ReactComponent as FlashUpIcon } from "assets/images/flash_up.svg";
-import { ReactComponent as DiscordIcon } from "assets/images/table-discord.svg";
-import { ReactComponent as TwitterIcon } from "assets/images/table-twitter.svg";
-import { ReactComponent as WorldIcon } from "assets/images/table-world.svg";
-import { ReactComponent as ArrowIcon } from "assets/images/table-arrow.svg";
+
 import Tooltip from "components/Tooltip";
 
 const headerItemsInof = [
@@ -21,34 +18,24 @@ const headerItemsInof = [
 
 let headers = [
   "Collection",
-  "Supply",
-  "Twitter Member",
-  "Discord Member",
-  "Presale Price",
-  "Public Sale Price",
-  "Max Mint",
-  "Presale Mint Time",
-  "Public Sale Mint Time",
-  "Category",
-  "Social Media",
+  "Floor",
+  "Saies",
+  "Listings",
+  "Volume",
+  "Market Cap",
 ];
-const spaces = [60, 15, 15, 15, 13, 13, 20, 13, 20, 20, 20, 20];
+const spaces = [40, 20, 20, 20, 20, 13];
 
-const insert = (arr, index, newItem) => [
-  ...arr.slice(0, index),
-  newItem,
-  ...arr.slice(index),
-];
+const timestampToDate = (timestamp) => {
+  const date = new Date(timestamp * 1000);
+  return date.getDay() + " days ago";
+};
 
-const TrendingTable = ({ data = [], sort, info, area, reveal }) => {
+const TrendingTable = ({ data = [], sort, info }) => {
   console.log(data);
 
-  // const [open, setOpen] = useState('');
-  const [category, setCategory] = useState(null);
-  // const [maxMint, setMaxMint] = useState('');
-
   return (
-    <div className={`m__table__container ${area}`}>
+    <div className={`m__table__container trending__table`}>
       <ul className="m__table">
         <li className="table__header">
           {headers.map((item, index) => (
@@ -58,7 +45,8 @@ const TrendingTable = ({ data = [], sort, info, area, reveal }) => {
               style={{ flexBasis: `${spaces[index]}%` }}
             >
               {item} {info && <InfoIcon />}
-              <p className="info__details">{headerItemsInof[index]}</p>
+              <Tooltip title="What is it?" message={headerItemsInof[index]} />
+              {/* <p className="info__details">{headerItemsInof[index]}</p> */}
             </div>
           ))}
         </li>
@@ -67,126 +55,232 @@ const TrendingTable = ({ data = [], sort, info, area, reveal }) => {
             <li key={index} className={`table__row`}>
               <div className="col" style={{ flexBasis: `${spaces[0]}%` }}>
                 <div className="table__details">
-                  <img src="https://picsum.photos/500" alt="" />
+                  <img src={item.image_url} alt="" />
                   <div>
                     <span className="table__details_nftName">
                       <span>{item.collection_name}</span>
                     </span>
-                    {area === "trending__table" && (
-                      <span className="table__details_time">
-                        {item.user.time}
-                      </span>
-                    )}
+                    <span className="table__details_time">
+                      <span>{timestampToDate(item.created_date)}</span>
+                    </span>
                   </div>
                 </div>
               </div>
 
               {/*  */}
-              {/* <div className="col" style={{ flexBasis: `${data.spaces[1]}%` }}>
+              <div className="col" style={{ flexBasis: `${spaces[1]}%` }}>
                 <div className="table__changes">
                   {sort === "High/Low" ? (
                     <>
-                      <span>{item.floor.change}</span>
-                      <span className={item.floor.hl > 0 ? "green" : "red"}>
-                        {+item.floor.hl > 0 ? (
+                      <span>{item.floor_price}</span>
+                      <span
+                        className={
+                          +item.floor_price_change_percent.split(" ")[0] > 0
+                            ? "green"
+                            : "red"
+                        }
+                      >
+                        {+item.floor_price_change_percent.split(" ")[0] > 0 ? (
                           <FlashUpIcon />
                         ) : (
                           <FlashDownIcon />
                         )}
-                        {item.floor.hl.replace("-", "")}%
+                        {item.floor_price_change_percent.replace("-", "")}
                       </span>
                     </>
                   ) : (
                     <>
-                      <span className={item.floor.hl > 0 ? "green" : "red"}>
-                        {+item.floor.hl > 0 ? (
+                      <span
+                        className={
+                          +item.floor_price_change_percent.split(" ")[0] > 0
+                            ? "green"
+                            : "red"
+                        }
+                      >
+                        {+item.floor_price_change_percent.split(" ")[0] > 0 ? (
                           <FlashUpIcon />
                         ) : (
                           <FlashDownIcon />
                         )}
-                        {item.floor.hl.replace("-", "")}%
+                        {item.floor_price_change_percent.replace("-", "")}
                       </span>
-                      <span>{item.floor.change}</span>
+                      <span>{item.floor_price}</span>
                     </>
                   )}
                 </div>
-              </div> */}
+              </div>
 
               {/*  */}
-              {/* <div className="col" style={{ flexBasis: `${data.spaces[2]}%` }}>
+              <div className="col" style={{ flexBasis: `${spaces[2]}%` }}>
                 <div className="table__changes">
                   {sort === "High/Low" ? (
                     <>
-                      <span>{item.saies.change}</span>
-                      <span className={item.saies.hl > 0 ? "green" : "red"}>
-                        {+item.saies.hl > 0 ? (
+                      <span>{item.sales}</span>
+                      <span
+                        className={
+                          +item.sales_change_percent.split(" ")[0] > 0
+                            ? "green"
+                            : "red"
+                        }
+                      >
+                        {+item.sales_change_percent.split(" ")[0] > 0 ? (
                           <FlashUpIcon />
                         ) : (
                           <FlashDownIcon />
                         )}
-                        {item.saies.hl.replace("-", "")}%
+                        {item.sales_change_percent.replace("-", "")}
                       </span>
                     </>
                   ) : (
                     <>
-                      <span className={item.saies.hl > 0 ? "green" : "red"}>
-                        {+item.saies.hl > 0 ? (
+                      <span
+                        className={
+                          +item.sales_change_percent.split(" ")[0] > 0
+                            ? "green"
+                            : "red"
+                        }
+                      >
+                        {+item.sales_change_percent.split(" ")[0] > 0 ? (
                           <FlashUpIcon />
                         ) : (
                           <FlashDownIcon />
                         )}
-                        {item.saies.hl.replace("-", "")}%
+                        {item.sales_change_percent.replace("-", "")}
                       </span>
-                      <span>{item.saies.change}</span>
+                      <span>{item.sales}</span>
                     </>
                   )}
                 </div>
-              </div> */}
+              </div>
 
               {/*  */}
-              {/* <div className="col" style={{ flexBasis: `${data.spaces[3]}%` }}>
+              <div className="col" style={{ flexBasis: `${spaces[3]}%` }}>
                 <div className="table__changes">
                   {sort === "High/Low" ? (
                     <>
-                      <span>{item.listings.change}</span>
-                      <span className={item.listings.hl > 0 ? "green" : "red"}>
-                        {+item.listings.hl > 0 ? (
+                      <span>{item.listings}</span>
+                      <span
+                        className={
+                          +item.listings_change_percent.split(" ")[0] > 0
+                            ? "green"
+                            : "red"
+                        }
+                      >
+                        {+item.listings_change_percent.split(" ")[0] > 0 ? (
                           <FlashUpIcon />
                         ) : (
                           <FlashDownIcon />
                         )}
-                        {item.listings.hl.replace("-", "")}%
+                        {item.listings_change_percent.replace("-", "")}
                       </span>
                     </>
                   ) : (
                     <>
-                      <span className={item.listings.hl > 0 ? "green" : "red"}>
-                        {+item.listings.hl > 0 ? (
+                      <span
+                        className={
+                          +item.listings_change_percent.split(" ")[0] > 0
+                            ? "green"
+                            : "red"
+                        }
+                      >
+                        {+item.listings_change_percent.split(" ")[0] > 0 ? (
                           <FlashUpIcon />
                         ) : (
                           <FlashDownIcon />
                         )}
-                        {item.listings.hl.replace("-", "")}%
+                        {item.listings_change_percent.replace("-", "")}
                       </span>
-                      <span>{item.listings.change}</span>
+                      <span>{item.listings}</span>
                     </>
                   )}
                 </div>
-              </div> */}
+              </div>
 
               {/*  */}
-              {/* <div className="col" style={{ flexBasis: `${data.spaces[4]}%` }}>
-                <div className="table__changes single">
-                  <span>{item.volume}</span>
+              <div className="col" style={{ flexBasis: `${spaces[4]}%` }}>
+                <div className="table__changes">
+                  {sort === "High/Low" ? (
+                    <>
+                      <span>{item.volume}</span>
+                      <span
+                        className={
+                          +item.volume_change_percent.split(" ")[0] > 0
+                            ? "green"
+                            : "red"
+                        }
+                      >
+                        {+item.volume_change_percent.split(" ")[0] > 0 ? (
+                          <FlashUpIcon />
+                        ) : (
+                          <FlashDownIcon />
+                        )}
+                        {item.volume_change_percent.replace("-", "")}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span
+                        className={
+                          +item.volume_change_percent.split(" ")[0] > 0
+                            ? "green"
+                            : "red"
+                        }
+                      >
+                        {+item.volume_change_percent.split(" ")[0] > 0 ? (
+                          <FlashUpIcon />
+                        ) : (
+                          <FlashDownIcon />
+                        )}
+                        {item.volume_change_percent.replace("-", "")}
+                      </span>
+                      <span>{item.volume}</span>
+                    </>
+                  )}
                 </div>
-              </div> */}
+              </div>
 
               {/*  */}
-              {/* <div className="col" style={{ flexBasis: `${data.spaces[5]}%` }}>
-                <div className="table__changes single">
-                  <span>{item.marketCap}</span>
+              <div className="col" style={{ flexBasis: `${spaces[5]}%` }}>
+                <div className="table__changes">
+                  {sort === "High/Low" ? (
+                    <>
+                      <span>{item.market_cap}</span>
+                      <span
+                        className={
+                          +item.market_cap_change_percent.split(" ")[0] > 0
+                            ? "green"
+                            : "red"
+                        }
+                      >
+                        {+item.market_cap_change_percent.split(" ")[0] > 0 ? (
+                          <FlashUpIcon />
+                        ) : (
+                          <FlashDownIcon />
+                        )}
+                        {item.market_cap_change_percent.replace("-", "")}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span
+                        className={
+                          +item.market_cap_change_percent.split(" ")[0] > 0
+                            ? "green"
+                            : "red"
+                        }
+                      >
+                        {+item.market_cap_change_percent.split(" ")[0] > 0 ? (
+                          <FlashUpIcon />
+                        ) : (
+                          <FlashDownIcon />
+                        )}
+                        {item.market_cap_change_percent.replace("-", "")}
+                      </span>
+                      <span>{item.market_cap}</span>
+                    </>
+                  )}
                 </div>
-              </div> */}
+              </div>
             </li>
           ))}
       </ul>

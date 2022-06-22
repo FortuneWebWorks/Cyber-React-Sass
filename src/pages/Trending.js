@@ -1,19 +1,13 @@
 import { useEffect, useState } from "react";
-import "../styles/trending.scss";
-import ButtonGroup from "../components/ButtonGroup";
-import Timer from "../components/Timer";
-import { ReactComponent as FilterIcon } from "../assets/icons/filtr.svg";
-import Filter from "../components/Filter";
-import MyTable from "../components/CustomTable";
+import "styles/trending.scss";
+import ButtonGroup from "components/ButtonGroup";
+import Timer from "components/Timer";
+import { ReactComponent as FilterIcon } from "assets/icons/filtr.svg";
+import Filter from "components/Filter";
+import TrendingTable from "components/trending/TrendingTable";
 
 const timeFrameMoreThan1Day = ["1d", "7d"];
-const timeFrameLessThan1Day = ["5m", "30m", "1h", "6h"];
-
-const tableData = {
-  headers: ["Collection", "Floor", "Saies", "Listings", "Volume", "Market Cap"],
-
-  spaces: [40, 20, 20, 20, 20, 13],
-};
+const timeFrameLessThan1Day = ["1m", "5m", "15m", "1h", "6h", "12h"];
 
 const Traits = () => {
   const [data, setData] = useState(null);
@@ -41,7 +35,6 @@ const Traits = () => {
 
       const data = await res.json();
 
-      console.log(data);
       setData(data);
     };
 
@@ -109,14 +102,7 @@ const Traits = () => {
       </div>
 
       <div className="table__container">
-        {data && (
-          <MyTable
-            data={data.rows}
-            sort={sort}
-            info={true}
-            area="trending__table"
-          />
-        )}
+        {data && <TrendingTable data={data.rows} sort={sort} info={true} />}
       </div>
     </div>
   );
