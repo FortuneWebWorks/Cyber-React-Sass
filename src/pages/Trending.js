@@ -1,90 +1,25 @@
-import { useEffect, useState } from 'react';
-import '../styles/trending.scss';
-import ButtonGroup from '../components/ButtonGroup';
-import Timer from '../components/Timer';
-import { ReactComponent as FilterIcon } from '../assets/icons/filtr.svg';
-import Filter from '../components/Filter';
-import MyTable from '../components/CustomTable';
+import { useEffect, useState } from "react";
+import "../styles/trending.scss";
+import ButtonGroup from "../components/ButtonGroup";
+import Timer from "../components/Timer";
+import { ReactComponent as FilterIcon } from "../assets/icons/filtr.svg";
+import Filter from "../components/Filter";
+import MyTable from "../components/CustomTable";
 
-const timings = ['1d', '7d', '30d', '90d', '1y'];
-const timings2 = ['5m', '30m', '1h', '6h'];
+const timeFrameMoreThan1Day = ["1d", "7d"];
+const timeFrameLessThan1Day = ["5m", "30m", "1h", "6h"];
+const defaultTimeFrame = "1h";
 
 const tableData = {
-  headers: ['Collection', 'Floor', 'Saies', 'Listings', 'Volume', 'Market Cap'],
-  items: [
-    {
-      id: 1,
-      user: {
-        userImage: 'https://picsum.photos/51',
-        nftName: 'NFT Name',
-        time: '35 days ago',
-      },
-      floor: {
-        hl: '-10',
-        change: '10',
-      },
-      saies: {
-        hl: '10',
-        change: '10',
-      },
-      listings: {
-        hl: '10',
-        change: '10',
-      },
-      volume: '1555',
-      marketCap: '1555',
-    },
-    {
-      id: 2,
-      user: {
-        userImage: 'https://picsum.photos/50',
-        nftName: 'NFT NAME',
-        time: '35 days ago',
-      },
-      floor: {
-        hl: '10',
-        change: '10',
-      },
-      saies: {
-        hl: '-10',
-        change: '10',
-      },
-      listings: {
-        hl: '10',
-        change: '10',
-      },
-      volume: '1555',
-      marketCap: '1555',
-    },
-    {
-      id: 2,
-      user: {
-        userImage: 'https://picsum.photos/49',
-        nftName: 'NFT NAME',
-        time: '35 days ago',
-      },
-      floor: {
-        hl: '10',
-        change: '10',
-      },
-      saies: {
-        hl: '-10',
-        change: '10',
-      },
-      listings: {
-        hl: '10',
-        change: '10',
-      },
-      volume: '1555',
-      marketCap: '1555',
-    },
-  ],
+  headers: ["Collection", "Floor", "Saies", "Listings", "Volume", "Market Cap"],
+
   spaces: [40, 20, 20, 20, 20, 13],
 };
 
 const Traits = () => {
+  const [data, setData] = useState(null);
   const [openFilter, setOpenFiter] = useState(false);
-  const [sort, setSort] = useState('High/Low');
+  const [sort, setSort] = useState("High/Low");
 
   const onClick = (e) => {
     setOpenFiter((prev) => !prev);
@@ -94,23 +29,37 @@ const Traits = () => {
     setSort(value);
   };
 
+  const closer = () => {
+    setOpenFiter(false);
+  };
+
+  const fetchData = (time) => {
+    const fetcher = async () => {
+      const res = await fetch(
+        `http://api.cyberdash.app/v1/tables/trending/ticker/${time}`
+      );
+
+      const data = await res.json();
+
+      setData(data);
+    };
+
+    fetcher();
+  };
+
   useEffect(() => {
     const closer = (e) => {
-      if (!e.target.closest('.filter')) {
+      if (!e.target.closest(".filter")) {
         setOpenFiter(false);
       }
     };
 
-    window && window.addEventListener('mouseup', closer);
+    window && window.addEventListener("mouseup", closer);
 
     return () => {
-      window.removeEventListener('mouseup', closer);
+      window.removeEventListener("mouseup", closer);
     };
   }, []);
-
-  const closer = () => {
-    setOpenFiter(false);
-  };
 
   return (
     <div className="traits">
@@ -124,13 +73,13 @@ const Traits = () => {
         <div className="traits__sort-details">
           <span>Sorted By: </span>
           <ButtonGroup
-            items={['High/Low', '%Change']}
+            items={["High/Low", "%Change"]}
             activeDefault="High/Low"
             font="normal normal bold 12px/14px Roboto"
             containerStyles={{
-              border: '1px solid #1956E2',
-              height: '30px',
-              minWidth: '23rem',
+              border: "1px solid #1956E2",
+              height: "30px",
+              minWidth: "23rem",
             }}
             callBack={activeButtonsChange}
           />
@@ -138,8 +87,16 @@ const Traits = () => {
 
         <div className="timers__filter__container">
           <div className="traits__timers">
-            <Timer items={timings} defaultActive={timings[4]} />
-            <Timer items={timings2} defaultActive={timings2[2]} />
+            <Timer
+              callBack={fetchData}
+              items={timeFrameMoreThan1Day}
+              defaultActive={defaultTimeFrame}
+            />
+            <Timer
+              callBack={fetchData}
+              items={timeFrameLessThan1Day}
+              defaultActive={defaultTimeFrame}
+            />
           </div>
 
           <div id="filter" onClick={onClick}>
@@ -149,12 +106,9 @@ const Traits = () => {
       </div>
 
       <div className="table__container">
-        {/* <MyTable
-          data={tableData}
-          sort={sort}
-          info={true}
-          area="trending__table"
-        /> */}
+        {data && (
+          <MyTable data={data} sort={sort} info={true} area="trending__table" />
+        )}
       </div>
     </div>
   );

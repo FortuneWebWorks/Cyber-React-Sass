@@ -1,12 +1,13 @@
-import { useState } from 'react';
-import '../styles/timer.scss';
-import { ReactComponent as Clock } from '../assets/icons/clock.svg';
+import { useState } from "react";
+import "../styles/timer.scss";
+import { ReactComponent as Clock } from "../assets/icons/clock.svg";
 
-const Timer = ({ items, defaultActive }) => {
-  const [active, setActive] = useState(defaultActive || '');
+const Timer = ({ items, defaultActive, callBack }) => {
+  const [active, setActive] = useState(defaultActive || "");
 
   const onTimeChangeHandler = (item) => {
     setActive(item);
+    callBack(item);
   };
 
   return (
@@ -17,7 +18,7 @@ const Timer = ({ items, defaultActive }) => {
         items.map((item) => (
           <button
             key={item}
-            className={active === item ? 'active' : ''}
+            className={active === item ? "active" : ""}
             onClick={onTimeChangeHandler.bind(null, item)}
           >
             {item}

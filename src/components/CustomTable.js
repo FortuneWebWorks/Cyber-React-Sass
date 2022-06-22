@@ -1,36 +1,36 @@
-import { Fragment, useState } from 'react';
-import 'styles/customTable/customTable.scss';
-import 'styles/customTable/customTableTrending.scss';
-import { ReactComponent as InfoIcon } from 'assets/images/information.svg';
-import { ReactComponent as FlashDownIcon } from 'assets/images/flash-down.svg';
-import { ReactComponent as FlashUpIcon } from 'assets/images/flash_up.svg';
-import { ReactComponent as DiscordIcon } from 'assets/images/table-discord.svg';
-import { ReactComponent as TwitterIcon } from 'assets/images/table-twitter.svg';
-import { ReactComponent as WorldIcon } from 'assets/images/table-world.svg';
-import { ReactComponent as ArrowIcon } from 'assets/images/table-arrow.svg';
-import Tooltip from './Tooltip';
+import { Fragment, useState } from "react";
+import "styles/customTable/customTable.scss";
+import "styles/customTable/customTableTrending.scss";
+import { ReactComponent as InfoIcon } from "assets/images/information.svg";
+import { ReactComponent as FlashDownIcon } from "assets/images/flash-down.svg";
+import { ReactComponent as FlashUpIcon } from "assets/images/flash_up.svg";
+import { ReactComponent as DiscordIcon } from "assets/images/table-discord.svg";
+import { ReactComponent as TwitterIcon } from "assets/images/table-twitter.svg";
+import { ReactComponent as WorldIcon } from "assets/images/table-world.svg";
+import { ReactComponent as ArrowIcon } from "assets/images/table-arrow.svg";
+import Tooltip from "./Tooltip";
 
 const headerItemsInof = [
-  'The collections with the highest number of sales in the selected timeframe',
-  'Floor price on Opensea',
-  'The number of sales',
-  'The number of listings',
-  'The trading volume of Collections in the selected timeframe',
-  'The total volume of collections from the beginning until now',
+  "The collections with the highest number of sales in the selected timeframe",
+  "Floor price on Opensea",
+  "The number of sales",
+  "The number of listings",
+  "The trading volume of Collections in the selected timeframe",
+  "The total volume of collections from the beginning until now",
 ];
 
 let headers = [
-  'Collection',
-  'Supply',
-  'Twitter Member',
-  'Discord Member',
-  'Presale Price',
-  'Public Sale Price',
-  'Max Mint',
-  'Presale Mint Time',
-  'Public Sale Mint Time',
-  'Category',
-  'Social Media',
+  "Collection",
+  "Supply",
+  "Twitter Member",
+  "Discord Member",
+  "Presale Price",
+  "Public Sale Price",
+  "Max Mint",
+  "Presale Mint Time",
+  "Public Sale Mint Time",
+  "Category",
+  "Social Media",
 ];
 const spaces = [60, 15, 15, 15, 13, 13, 20, 13, 20, 20, 20, 20];
 
@@ -46,12 +46,12 @@ const CustomTable = ({ data = [], sort, info, area, reveal }) => {
   // const [maxMint, setMaxMint] = useState('');
 
   if (reveal) {
-    if (!headers.includes('Reveal')) {
-      headers = insert(headers, 9, 'Reveal');
+    if (!headers.includes("Reveal")) {
+      headers = insert(headers, 9, "Reveal");
     }
   } else {
-    if (headers.includes('Reveal'))
-      headers = headers.filter((item) => item !== 'Reveal');
+    if (headers.includes("Reveal"))
+      headers = headers.filter((item) => item !== "Reveal");
   }
 
   const GetTime = ({ timeStamp }) => {
@@ -89,7 +89,7 @@ const CustomTable = ({ data = [], sort, info, area, reveal }) => {
           <Fragment key={cat.id}>
             <span
               className={`table__changes_category ${
-                index > 2 && category !== data.id ? 'hidden' : ''
+                index > 2 && category !== data.id ? "hidden" : ""
               }`}
               style={{ borderColor: cat.color, color: cat.color }}
             >
@@ -147,7 +147,7 @@ const CustomTable = ({ data = [], sort, info, area, reveal }) => {
                     >
                       <span>{item.collection_name}</span>
                     </span>
-                    {area === 'trending__table' && (
+                    {area === "trending__table" && (
                       <span className="table__details_time">
                         {item.user.time}
                       </span>
@@ -156,7 +156,7 @@ const CustomTable = ({ data = [], sort, info, area, reveal }) => {
                 </div>
               </div>
 
-              {area === 'trending__table' ? (
+              {area === "trending__table" ? (
                 <>
                   {/*  */}
                   <div
@@ -164,27 +164,27 @@ const CustomTable = ({ data = [], sort, info, area, reveal }) => {
                     style={{ flexBasis: `${data.spaces[1]}%` }}
                   >
                     <div className="table__changes">
-                      {sort === 'High/Low' ? (
+                      {sort === "High/Low" ? (
                         <>
                           <span>{item.floor.change}</span>
-                          <span className={item.floor.hl > 0 ? 'green' : 'red'}>
+                          <span className={item.floor.hl > 0 ? "green" : "red"}>
                             {+item.floor.hl > 0 ? (
                               <FlashUpIcon />
                             ) : (
                               <FlashDownIcon />
                             )}
-                            {item.floor.hl.replace('-', '')}%
+                            {item.floor.hl.replace("-", "")}%
                           </span>
                         </>
                       ) : (
                         <>
-                          <span className={item.floor.hl > 0 ? 'green' : 'red'}>
+                          <span className={item.floor.hl > 0 ? "green" : "red"}>
                             {+item.floor.hl > 0 ? (
                               <FlashUpIcon />
                             ) : (
                               <FlashDownIcon />
                             )}
-                            {item.floor.hl.replace('-', '')}%
+                            {item.floor.hl.replace("-", "")}%
                           </span>
                           <span>{item.floor.change}</span>
                         </>
@@ -198,27 +198,27 @@ const CustomTable = ({ data = [], sort, info, area, reveal }) => {
                     style={{ flexBasis: `${data.spaces[2]}%` }}
                   >
                     <div className="table__changes">
-                      {sort === 'High/Low' ? (
+                      {sort === "High/Low" ? (
                         <>
                           <span>{item.saies.change}</span>
-                          <span className={item.saies.hl > 0 ? 'green' : 'red'}>
+                          <span className={item.saies.hl > 0 ? "green" : "red"}>
                             {+item.saies.hl > 0 ? (
                               <FlashUpIcon />
                             ) : (
                               <FlashDownIcon />
                             )}
-                            {item.saies.hl.replace('-', '')}%
+                            {item.saies.hl.replace("-", "")}%
                           </span>
                         </>
                       ) : (
                         <>
-                          <span className={item.saies.hl > 0 ? 'green' : 'red'}>
+                          <span className={item.saies.hl > 0 ? "green" : "red"}>
                             {+item.saies.hl > 0 ? (
                               <FlashUpIcon />
                             ) : (
                               <FlashDownIcon />
                             )}
-                            {item.saies.hl.replace('-', '')}%
+                            {item.saies.hl.replace("-", "")}%
                           </span>
                           <span>{item.saies.change}</span>
                         </>
@@ -232,31 +232,31 @@ const CustomTable = ({ data = [], sort, info, area, reveal }) => {
                     style={{ flexBasis: `${data.spaces[3]}%` }}
                   >
                     <div className="table__changes">
-                      {sort === 'High/Low' ? (
+                      {sort === "High/Low" ? (
                         <>
                           <span>{item.listings.change}</span>
                           <span
-                            className={item.listings.hl > 0 ? 'green' : 'red'}
+                            className={item.listings.hl > 0 ? "green" : "red"}
                           >
                             {+item.listings.hl > 0 ? (
                               <FlashUpIcon />
                             ) : (
                               <FlashDownIcon />
                             )}
-                            {item.listings.hl.replace('-', '')}%
+                            {item.listings.hl.replace("-", "")}%
                           </span>
                         </>
                       ) : (
                         <>
                           <span
-                            className={item.listings.hl > 0 ? 'green' : 'red'}
+                            className={item.listings.hl > 0 ? "green" : "red"}
                           >
                             {+item.listings.hl > 0 ? (
                               <FlashUpIcon />
                             ) : (
                               <FlashDownIcon />
                             )}
-                            {item.listings.hl.replace('-', '')}%
+                            {item.listings.hl.replace("-", "")}%
                           </span>
                           <span>{item.listings.change}</span>
                         </>
@@ -309,9 +309,9 @@ const CustomTable = ({ data = [], sort, info, area, reveal }) => {
                   {/*  */}
                   <div className="col" style={{ flexBasis: `${spaces[4]}%` }}>
                     <div className="table__changes single">
-                      <span>{item.presale_price.split(' ')[0]}</span>
+                      <span>{item.presale_price.split(" ")[0]}</span>
                       <span className="ETH">
-                        {item.presale_price.split(' ')[1]}
+                        {item.presale_price.split(" ")[1]}
                       </span>
                     </div>
                   </div>
@@ -319,9 +319,9 @@ const CustomTable = ({ data = [], sort, info, area, reveal }) => {
                   {/*  */}
                   <div className="col" style={{ flexBasis: `${spaces[5]}%` }}>
                     <div className="table__changes single">
-                      <span>{item.publicsale_price.split(' ')[0]}</span>
+                      <span>{item.publicsale_price.split(" ")[0]}</span>
                       <span className="ETH">
-                        {item.publicsale_price.split(' ')[1]}
+                        {item.publicsale_price.split(" ")[1]}
                       </span>
                     </div>
                   </div>
@@ -387,8 +387,8 @@ const CustomTable = ({ data = [], sort, info, area, reveal }) => {
                   <div
                     className={`col col__category ${
                       category === item.id && item.categories.length > 2
-                        ? 'open'
-                        : ''
+                        ? "open"
+                        : ""
                     }`}
                     style={{
                       flexBasis: `${spaces[10]}%`,
