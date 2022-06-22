@@ -1,7 +1,7 @@
 import "styles/apiens/apinesList.scss";
 import useFetcher from "hooks/useFetcher";
 import ApiensModal from "./ApiensModal";
-import { ReactComponent as OpenSeaIcon } from "assets/images/openSeaNoBackground.svg";
+import { ReactComponent as OpenSeaIcon } from "assets/images/openSea-logo-circle-collections.svg";
 import { useState } from "react";
 
 const CollectionsList = ({ slug, type }) => {
@@ -46,14 +46,17 @@ const CollectionsList = ({ slug, type }) => {
             </div>
 
             <div className="Price_Time__container">
-              <span className="Price">
-                Price: <span>{item.price}</span>{" "}
-                <span className="opensea__icons">
+              <div className="Price">
+                <span>
+                  Price: <span>{item.price}</span>
+                </span>
+                <span className="opensea__icon">
                   <a href={item.opensea_url}>
                     <OpenSeaIcon />
                   </a>
                 </span>
-              </span>
+              </div>
+
               <span className="Time">
                 Time: <span>{timestampToDate(item.timestamp)}</span>
               </span>
