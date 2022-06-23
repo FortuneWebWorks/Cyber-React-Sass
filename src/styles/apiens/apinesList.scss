@@ -66,12 +66,12 @@
     }
 
     .Rank {
-      font: normal normal normal 14px/16px Roboto;
+      font: normal normal normal 12px/15px Roboto;
       letter-spacing: 0px;
       color: #89baff;
 
       span {
-        font: normal normal bold 14px/16px Roboto;
+        font: normal normal bold 12px/16px Roboto;
         letter-spacing: 0px;
         color: #ffffff;
       }
@@ -93,6 +93,72 @@
       color: #89baff;
       width: 100%;
 
+      .listings-specific {
+        display: flex;
+        flex-direction: column;
+
+        & {
+          width: 50px;
+          margin-left: 4px;
+        }
+
+        span {
+          font: normal normal normal 12px/16px Roboto;
+          letter-spacing: 0px;
+          color: #89baff;
+        }
+
+        .Price__container {
+          color: white;
+          font: normal normal bold 12px/16px Roboto;
+        }
+      }
+
+      .button__seen {
+        opacity: 1;
+        pointer-events: unset;
+        user-select: unset;
+        font: normal normal bold 12px/14px Roboto;
+        background-color: #1956e2;
+        color: white;
+        border: none;
+        width: 49px;
+        height: 23px;
+        border-radius: 27px;
+        margin-right: 3px;
+
+        &:hover {
+          background-color: #0b1e39;
+        }
+      }
+
+      .button__unseen {
+        display: none;
+      }
+
+      .svg__seen {
+        display: unset;
+        width: 18px;
+        height: 18px;
+        fill: #0b1e39;
+        position: relative;
+        top: 2px;
+        fill: #5c86c3;
+      }
+
+      .svg__unseen {
+        display: none;
+      }
+
+      .Price__container {
+        svg {
+          width: 10px;
+          height: 19px;
+          position: relative;
+          top: 5px;
+          margin-right: 2px;
+        }
+      }
       span {
         font: normal normal bold 14px/16px Roboto;
         letter-spacing: 0px;
@@ -101,17 +167,24 @@
 
       .opensea__icon {
         align-self: flex-end;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        height: 45px;
+        width: 80px;
         a {
           background: #5c86c3 0% 0% no-repeat padding-box;
           border-radius: 27px;
-          height: 18px;
-          width: 18px;
+          width: 23px;
+          height: 23px;
           padding: 2px;
 
           svg {
             fill: #0b1e39;
             height: 15px;
             width: 15px;
+            position: relative;
+            top: 2px;
           }
         }
       }

@@ -2,6 +2,8 @@ import "styles/apiens/apinesList.scss";
 import useFetcher from "hooks/useFetcher";
 import ApiensModal from "./ApiensModal";
 import { ReactComponent as OpenSeaIcon } from "assets/images/openSea-logo-circle-collections.svg";
+import { ReactComponent as EtherScanIcon } from "assets/images/etherscan-logo-circle-orders.svg";
+import { ReactComponent as EthIcon } from "assets/images/eth-icon.svg";
 import { useState } from "react";
 
 const CollectionsList = ({ slug, type }) => {
@@ -40,26 +42,49 @@ const CollectionsList = ({ slug, type }) => {
 
             <div className="Rank_Id__container">
               <span className="Rank">
-                Rank: <span>{item.token_rank}</span>
+                Rank: <span>1234</span>
               </span>
               <span className="Id">#{item.token_id}</span>
             </div>
 
             <div className="Price_Time__container">
               <div className="Price">
-                <span>
-                  Price: <span>{item.price}</span>
+                <span
+                  className={type === "listings" ? "listings-specific" : " "}
+                >
+                  <span>Price: </span>
+                  <span className="Price__container">
+                    <EthIcon />
+                    {item.price}
+                  </span>
                 </span>
+
                 <span className="opensea__icon">
-                  <a href={item.opensea_url}>
-                    <OpenSeaIcon />
-                  </a>
+                  <div>
+                    <button
+                      className={
+                        type === "listings" ? "button__seen" : "button__unseen"
+                      }
+                    >
+                      Buy
+                    </button>
+
+                    <a href={item.opensea_url}>
+                      <OpenSeaIcon />
+                    </a>
+                    <EtherScanIcon
+                      className={
+                        type === "orders" ? "svg__seen" : "svg__unseen"
+                      }
+                    />
+                  </div>
+
+                  <span className="Time">
+                    {type === "orders" ? "Time:" : " "}{" "}
+                    <span>{timestampToDate(item.timestamp)}</span>
+                  </span>
                 </span>
               </div>
-
-              <span className="Time">
-                Time: <span>{timestampToDate(item.timestamp)}</span>
-              </span>
             </div>
           </div>
         ))}

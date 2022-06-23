@@ -1,5 +1,5 @@
 import "styles/apiens/apiensBox.scss";
-import { ReactComponent as ApiensHeaderIcon } from "assets/images/apiens-header.svg";
+import { ReactComponent as EthIcon } from "assets/images/eth-icon.svg";
 
 const InfoBox = ({ data }) => {
   return (
@@ -14,7 +14,7 @@ const InfoBox = ({ data }) => {
       </div>
       <div className="apiens__rect">
         <div className="box__text_icon">
-          <ApiensHeaderIcon />
+          <EthIcon />
           <span className="value">{data.floor_price}</span>
         </div>
         <span className="title">Floor Price</span>
@@ -33,7 +33,7 @@ const InfoBox = ({ data }) => {
       </div>
       <div className="apiens__rect">
         <div className="box__text_icon">
-          <ApiensHeaderIcon />
+          <EthIcon />
           <span className="value">{data.average_price}</span>
         </div>
         <span className="title">Average Price</span>
