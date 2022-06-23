@@ -47,41 +47,37 @@ const CollectionsList = ({ slug, type }) => {
               <span className="Id">#{item.token_id}</span>
             </div>
 
-            <div className="Price_Time__container">
-              <div className="Price">
-                <span
-                  className={type === "listings" ? "listings-specific" : " "}
-                >
-                  <span>Price: </span>
-                  <span className="Price__container">
-                    <EthIcon />
-                    {item.price}
+            <div className="cards-right-side__container">
+              <div
+                className={
+                  type === "listings" ? "listings-specific" : "orders-specific"
+                }
+              >
+                <div className="top-side-container">
+                  <span className="price__container">
+                    <span className="price-title__container">Price: </span>
+                    <span className="price-amount-svg__container">
+                      <EthIcon />
+                      {item.price}
+                    </span>
                   </span>
-                </span>
 
-                <span className="opensea__icon">
-                  <div>
-                    <button
-                      className={
-                        type === "listings" ? "button__seen" : "button__unseen"
-                      }
-                    >
-                      Buy
-                    </button>
+                  <div className="svg-button__container">
+                    <button>Buy</button>
 
-                    <a href={item.opensea_url}>
+                    <a href={item.opensea_url} className="opensea__svg">
                       <OpenSeaIcon />
                     </a>
-                    <EtherScanIcon
-                      className={
-                        type === "orders" ? "svg__seen" : "svg__unseen"
-                      }
-                    />
+                    <a href="https://google.com" className="ethscan__svg">
+                      <EtherScanIcon />
+                    </a>
                   </div>
+                </div>
 
-                  <span className="Time">
-                    {type === "orders" ? "Time:" : " "}{" "}
-                    <span>{timestampToDate(item.timestamp)}</span>
+                <span className="Time">
+                  <span className="time-title__container">Time: </span>
+                  <span className="time-amount__container">
+                    {timestampToDate(item.timestamp)}
                   </span>
                 </span>
               </div>

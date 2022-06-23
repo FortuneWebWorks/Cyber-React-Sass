@@ -43,6 +43,9 @@
     &:hover {
       background: #1956e2 0% 0% no-repeat padding-box;
       border: 1px solid #244677;
+      button {
+        background-color: #0b1e39 !important;
+      }
     }
 
     img {
@@ -82,131 +85,90 @@
       letter-spacing: 0px;
       color: #d1d1d1;
     }
-
-    .Price {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 6px;
-      font: normal normal normal 14px/16px Roboto;
-      letter-spacing: 0px;
-      color: #89baff;
-      width: 100%;
-
-      .listings-specific {
+    .cards-right-side__container {
+      width: 130px;
+      .top-side-container {
         display: flex;
-        flex-direction: column;
-
-        & {
-          width: 50px;
-          margin-left: 4px;
-        }
-
-        span {
-          font: normal normal normal 12px/16px Roboto;
-          letter-spacing: 0px;
-          color: #89baff;
-        }
-
-        .Price__container {
-          color: white;
-          font: normal normal bold 12px/16px Roboto;
-        }
+        justify-content: space-between;
       }
-
-      .button__seen {
-        opacity: 1;
-        pointer-events: unset;
-        user-select: unset;
-        font: normal normal bold 12px/14px Roboto;
-        background-color: #1956e2;
-        color: white;
-        border: none;
-        width: 49px;
-        height: 23px;
-        border-radius: 27px;
-        margin-right: 3px;
-
-        &:hover {
-          background-color: #0b1e39;
-        }
+      .svg-button__container {
+        display: flex;
+        width: 80px;
+        justify-content: space-between;
       }
-
-      .button__unseen {
-        display: none;
+      .price-title__container,
+      .time-title__container {
+        font: normal normal normal 12px/16px Roboto;
+        color: #89baff;
       }
-
-      .svg__seen {
-        display: unset;
-        width: 18px;
-        height: 18px;
-        fill: #0b1e39;
-        position: relative;
-        top: 2px;
-        fill: #5c86c3;
-      }
-
-      .svg__unseen {
-        display: none;
-      }
-
-      .Price__container {
+      .price-amount-svg__container {
+        font: normal normal bold 12px/16px Roboto;
+        color: #ffffff;
         svg {
-          width: 10px;
-          height: 19px;
+          width: 8px;
+          height: 13px;
           position: relative;
-          top: 5px;
+          top: 2px;
           margin-right: 2px;
         }
       }
-      span {
-        font: normal normal bold 14px/16px Roboto;
-        letter-spacing: 0px;
-        color: #ffffff;
+      .time-amount__container {
+        font: normal normal normal 10px/11px Roboto;
+        color: #d1d1d1;
+      }
+      button {
+        display: none;
       }
 
-      .opensea__icon {
-        align-self: flex-end;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        height: 45px;
-        width: 80px;
-        a {
-          background: #5c86c3 0% 0% no-repeat padding-box;
+      .listings-specific {
+        button {
+          display: unset;
+          width: 49px;
+          height: 23px;
+          background: #1956e2 0% 0% no-repeat padding-box;
           border-radius: 27px;
+          border: none;
+          font: normal normal bold 12px/14px Roboto;
+          color: #ffffff;
+        }
+        .ethscan__svg {
+          display: none;
+        }
+        .Time {
+          display: flex;
+        }
+        .time-title__container {
+          display: none;
+        }
+        .time-amount__container {
+          margin-left: auto;
+          transform: translateY(-5px);
+        }
+        .price__container {
+          display: flex;
+          flex-direction: column;
+          transform: translateY(2px);
+        }
+        .price-amount-svg__container {
+          transform: translateY(6px);
+        }
+      }
+      .orders-specific {
+        .svg-button__container {
+          width: 50px;
+        }
+        a svg {
           width: 23px;
           height: 23px;
-          padding: 2px;
-
-          svg {
-            fill: #0b1e39;
-            height: 15px;
-            width: 15px;
-            position: relative;
-            top: 2px;
-          }
+        }
+        .Time {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
         }
       }
     }
-
-    .Time {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 11px;
-      font: normal normal normal 12px/14px Roboto;
-      letter-spacing: 0px;
-      color: #89baff;
-
-      span {
-        font: normal normal normal 10px/11px Roboto;
-        letter-spacing: 0px;
-        color: #d1d1d1;
-      }
-    }
   }
-
   @media (max-width: 1200px) {
     height: 90vh;
   }
