@@ -1,6 +1,6 @@
-import "styles/apiens/apinesList.scss";
+import "styles/collections/collectionList.scss";
 import useFetcher from "hooks/useFetcher";
-import ApiensModal from "./ApiensModal";
+import ApiensModal from "./CollectionModal";
 import { ReactComponent as OpenSeaIcon } from "assets/images/openSea-logo-circle-collections.svg";
 import { ReactComponent as EtherScanIcon } from "assets/images/etherscan-logo-circle-orders.svg";
 import { ReactComponent as EthIcon } from "assets/images/eth-icon.svg";

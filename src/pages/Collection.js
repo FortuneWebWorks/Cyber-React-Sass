@@ -1,7 +1,7 @@
 import useFetcher from "hooks/useFetcher";
-import "styles/apiens/mainApiens.scss";
-import InfoBox from "components/apiens/InfoBox";
-import ApiensTrendingDashboard from "components/apiens/ApiensTrendingDashboard";
+import "styles/collections/mainCollection.scss";
+import InfoBox from "components/collections/InfoBox";
+import ApiensTrendingDashboard from "components/collections/CollectionTrendingDashboard";
 import RevealStatus from "components/RevealStatus";
 import Search from "components/Search";
 import { ReactComponent as WorldIcon } from "assets/images/table-world.svg";
@@ -15,7 +15,7 @@ import { ReactComponent as ExternalLinkIcon } from "assets/images/external-link.
 import { ReactComponent as BluetickIcon } from "assets/images/bluebg-check.svg";
 import { ReactComponent as TrendingIcon } from "assets/images/Trending.svg";
 import { ReactComponent as AnalyticalIcon } from "assets/images/Analytical.svg";
-import CollectionsList from "components/apiens/CollectionsList";
+import CollectionsList from "components/collections/CollectionsList";
 import DropDown from "components/DropDown";
 import { useParams } from "react-router-dom";
 

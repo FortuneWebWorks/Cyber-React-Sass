@@ -3,7 +3,7 @@ import Dashboard from "../pages/Dashboard";
 import Traits from "../pages/Trending";
 import Drops from "../pages/Drops";
 import ExpectedPnl from "../pages/ExpectedPnl";
-import ApiensOfficials from "../pages/ApiensOfficials";
+import ApiensOfficials from "../pages/CollectionOfficials";
 import Collection from "../pages/Collection";
 import Home from "../pages/Home";
 

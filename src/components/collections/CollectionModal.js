@@ -1,5 +1,5 @@
-import 'styles/apiens/apiensModal.scss';
-import { ReactComponent as CloseIcon } from 'assets/images/cancel.svg';
+import "styles/collections/collectionModal.scss";
+import { ReactComponent as CloseIcon } from "assets/images/cancel.svg";
 
 const ApiensModal = ({ data, callBack }) => {
   return (

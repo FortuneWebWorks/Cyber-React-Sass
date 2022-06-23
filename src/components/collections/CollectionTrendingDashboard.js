@@ -1,5 +1,5 @@
-import 'styles/apiens/apiensTrendingDashboard.scss';
-import ApiensFilter from './ApiensFilter';
+import "styles/collections/collectionTrendingDashboard.scss";
+import ApiensFilter from "./CollectionFilter";
 
 const TrendingDashboardTable = () => {
   return (

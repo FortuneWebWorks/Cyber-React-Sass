@@ -1,4 +1,4 @@
-import "styles/apiens/apiensBox.scss";
+import "styles/collections/collectionBox.scss";
 import { ReactComponent as EthIcon } from "assets/images/eth-icon.svg";
 
 const InfoBox = ({ data }) => {

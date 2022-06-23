@@ -1,18 +1,18 @@
-import 'styles/apiens/apiensFilter.scss';
-import { ReactComponent as ArrowIcon } from 'assets/images/arrow_down.svg';
-import { useState } from 'react';
-import ApiensFilterDropDown from './ApiensFilterDropDown';
+import "styles/collections/collectionFilter.scss";
+import { ReactComponent as ArrowIcon } from "assets/images/arrow_down.svg";
+import { useState } from "react";
+import ApiensFilterDropDown from "./CollectionFilterDropDown";
 
-const menuItems = ['Price', 'Rank', 'Token', 'Trait'];
+const menuItems = ["Price", "Rank", "Token", "Trait"];
 
 const ApiensFilter = () => {
   const [sideMenu, setSideMenu] = useState(false);
-  const [activeMenu, setActiveMenu] = useState('Price');
+  const [activeMenu, setActiveMenu] = useState("Price");
 
   const menuHandler = (e) => {
     if (
-      e.target.tagName === 'BUTTON' &&
-      !e.target.classList.contains('delete')
+      e.target.tagName === "BUTTON" &&
+      !e.target.classList.contains("delete")
     ) {
       setActiveMenu(e.target.textContent);
     }
@@ -25,7 +25,7 @@ const ApiensFilter = () => {
           {menuItems.map((item) => (
             <button
               key={item}
-              className={`${item === activeMenu ? 'active' : ''}`}
+              className={`${item === activeMenu ? "active" : ""}`}
             >
               {item}
             </button>
@@ -38,7 +38,7 @@ const ApiensFilter = () => {
         </div>
 
         <div className="apiens__filter__content_content">
-          {activeMenu !== 'Trait' ? (
+          {activeMenu !== "Trait" ? (
             <>
               <span className="apiens__filter__content_content_first_text">
                 Show the {activeMenu.toLowerCase()} between
@@ -75,7 +75,7 @@ const ApiensFilter = () => {
       </div>
 
       <div
-        className={`apiens__filter__sideMenu ${sideMenu ? 'open' : 'close'}`}
+        className={`apiens__filter__sideMenu ${sideMenu ? "open" : "close"}`}
         onClick={() => setSideMenu((prev) => !prev)}
       >
         <div>
