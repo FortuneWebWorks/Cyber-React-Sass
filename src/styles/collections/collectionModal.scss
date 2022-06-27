@@ -1,4 +1,4 @@
-.apiens__modal_container {
+.collection__modal_container {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,7 +11,7 @@
   backdrop-filter: blur(5px);
   z-index: 15;
 
-  .apiens__modal {
+  .collection__modal {
     position: relative;
     width: 684px;
     height: 547px;

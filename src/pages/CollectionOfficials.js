@@ -1,14 +1,14 @@
-import "styles/collections/collectionOfficials.scss";
-import ApiensBox from "components/collections/InfoBox";
+import 'styles/collections/collectionOfficials.scss';
+import CollectionBox from 'components/collections/InfoBox';
 
-const ApiensOfficials = () => {
+const CollectionOfficials = () => {
   return (
-    <div className="apiens">
-      <h1 className="apiens__title">APIENS OFFICIALS</h1>
+    <div className='collection'>
+      <h1 className='collection__title'>APIENS OFFICIALS</h1>
 
-      <ApiensBox />
+      <CollectionBox />
 
-      <div className="apiens__switch">
+      <div className='collection__switch'>
         <div>
           <span>Trading Dashboard</span>
         </div>
@@ -17,9 +17,9 @@ const ApiensOfficials = () => {
         </div>
       </div>
 
-      <div className="chart__container"></div>
+      <div className='chart__container'></div>
     </div>
   );
 };
 
-export default ApiensOfficials;
+export default CollectionOfficials;

@@ -1,6 +1,6 @@
 import 'styles/collections/collectionList.scss';
 import useFetcher from 'hooks/useFetcher';
-import ApiensModal from './CollectionModal';
+import CollectionModal from './CollectionModal';
 import { ReactComponent as OpenSeaIcon } from 'assets/images/openSea-logo-circle-collections.svg';
 import { ReactComponent as EtherScanIcon } from 'assets/images/etherscan-logo-circle-orders.svg';
 import { ReactComponent as EthIcon } from 'assets/images/eth-icon.svg';
@@ -74,6 +74,11 @@ const CollectionsList = ({ slug, type }) => {
     timeOut.current = setTimeout(() => {
       setRender((prev) => !prev);
     }, 2000);
+
+    return () => {
+      clearTimeout(timeOut.current);
+      timeOut.current = null;
+    };
   }, [render]);
 
   if (!slug) {
@@ -81,16 +86,18 @@ const CollectionsList = ({ slug, type }) => {
   }
 
   return (
-    <div className='apiens__list_scroll_container'>
-      {modal && <ApiensModal data={modal} callBack={() => setModal(null)} />}
+    <div className='collection__list_scroll_container'>
+      {modal && (
+        <CollectionModal data={modal} callBack={() => setModal(null)} />
+      )}
 
-      <div className='apiens__list'>
+      <div className='collection__list'>
         {currentViewData[0].collectionId
           ? currentViewData?.map((item) => (
               <div
                 key={item.id}
                 //ask if you should change it ^
-                className='apiens__list_item'
+                className='collection__list_item'
                 onClick={showModal.bind(null, item)}
                 onMouseEnter={(e) => clearTimeout(timeOut.current)}
                 onMouseLeave={(e) => setRender((prev) => !prev)}
@@ -151,7 +158,7 @@ const CollectionsList = ({ slug, type }) => {
               <div key={item.id}>
                 <div
                   key={item.id}
-                  className='apiens__list_item'
+                  className='collection__list_item'
                   ref={item === currentViewData.at(-1) ? lastElement : nothing}>
                   <img src={item.image_url} alt='' className='skeleton' />
 

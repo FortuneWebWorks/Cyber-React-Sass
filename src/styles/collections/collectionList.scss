@@ -1,4 +1,4 @@
-.apiens__list_scroll_container {
+.collection__list_scroll_container {
   width: fit-content;
   height: fit-content;
   border-radius: 10px;
@@ -7,7 +7,7 @@
   background: #0b1e39 0% 0% no-repeat padding-box;
 }
 
-.apiens__list {
+.collection__list {
   width: 290px;
   height: 1021px;
   display: flex;
@@ -28,7 +28,7 @@
     background-color: #244677;
   }
 
-  .apiens__list_item {
+  .collection__list_item {
     width: 280px;
     height: 60px;
     display: flex;

@@ -1,24 +1,24 @@
-import "styles/collections/collectionFilterDropDown.scss";
-import { ReactComponent as ArrowIcon } from "assets/images/downArrow.svg";
-import { ReactComponent as CloseIcon } from "assets/images/close.svg";
-import { useEffect, useState } from "react";
+import 'styles/collections/collectionFilterDropDown.scss';
+import { ReactComponent as ArrowIcon } from 'assets/images/downArrow.svg';
+import { ReactComponent as CloseIcon } from 'assets/images/close.svg';
+import { useEffect, useState } from 'react';
 
 const tempListItems = [
-  "74 (0.5%)",
-  "74 (0.4%)",
-  "74 (0.1%)",
-  "74 (0.25%)",
-  "74 (0.75%)",
+  '74 (0.5%)',
+  '74 (0.4%)',
+  '74 (0.1%)',
+  '74 (0.25%)',
+  '74 (0.75%)',
 ];
 
-const ApiensFilterDropDown = () => {
+const CollectionFilterDropDown = () => {
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState([]);
 
   const addToListHandler = (e) => {
     if (
-      e.target.tagName === "SPAN" &&
-      !e.target.classList.contains("checked")
+      e.target.tagName === 'SPAN' &&
+      !e.target.classList.contains('checked')
     ) {
       const newItems = [...items];
       newItems.push(e.target.textContent);
@@ -34,29 +34,29 @@ const ApiensFilterDropDown = () => {
 
   useEffect(() => {
     const closer = (e) => {
-      if (!e.target.closest(".a__dropdown")) {
+      if (!e.target.closest('.a__dropdown')) {
         setOpen(false);
       }
     };
-    window && window.addEventListener("mouseup", closer);
+    window && window.addEventListener('mouseup', closer);
 
     return () => {
-      window.removeEventListener("mouseup", closer);
+      window.removeEventListener('mouseup', closer);
     };
   }, []);
 
   return (
-    <div className="a__dropdown">
-      <div className="a__dropdown__items">
+    <div className='a__dropdown'>
+      <div className='a__dropdown__items'>
         {items.map((item, index) => (
-          <div key={index} className="a__dropdown__item">
+          <div key={index} className='a__dropdown__item'>
             <span>{item}</span>
             <CloseIcon onClick={removeItemHandler.bind(null, item)} />
           </div>
         ))}
       </div>
 
-      <div className="a__dropdown__icons">
+      <div className='a__dropdown__icons'>
         <div>
           <CloseIcon onClick={() => setItems([])} />
         </div>
@@ -65,13 +65,12 @@ const ApiensFilterDropDown = () => {
         </div>
       </div>
 
-      <div className={`a__dropdown_list ${open ? "open" : ""}`}>
+      <div className={`a__dropdown_list ${open ? 'open' : ''}`}>
         {tempListItems.map((item, index) => (
           <span
             key={index}
-            className={`${items.includes(item) ? "checked" : ""}`}
-            onClick={addToListHandler}
-          >
+            className={`${items.includes(item) ? 'checked' : ''}`}
+            onClick={addToListHandler}>
             {item}
           </span>
         ))}
@@ -80,4 +79,4 @@ const ApiensFilterDropDown = () => {
   );
 };
 
-export default ApiensFilterDropDown;
+export default CollectionFilterDropDown;

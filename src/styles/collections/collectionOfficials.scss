@@ -1,5 +1,5 @@
-.apiens {
-  .apiens__title {
+.collection {
+  .collection__title {
     margin: 24px 0;
     font: normal normal bold 40px/47px Roboto;
     letter-spacing: 0px;
@@ -8,7 +8,7 @@
     text-transform: uppercase;
   }
 
-  .apiens__switch {
+  .collection__switch {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,12 +34,12 @@
   }
 
   @media (max-width: 1300px) {
-    .apiens__title {
+    .collection__title {
       margin: 2.666rem 0;
       font: normal normal bold 4.444rem/47px Roboto;
     }
 
-    .apiens__switch {
+    .collection__switch {
       gap: 9.111rem;
       margin-top: 8.111rem;
       font: normal normal bold 1.888rem/20px Roboto;

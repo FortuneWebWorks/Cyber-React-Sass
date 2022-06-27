@@ -1,6 +1,6 @@
 @use '../colors' as *;
 
-.apiens__filter {
+.collection__filter {
   width: 1180px;
   height: 175px;
   min-height: 175px;
@@ -9,7 +9,7 @@
   align-items: center;
   border-radius: 15px;
 
-  .apiens__filter__sideMenu {
+  .collection__filter__sideMenu {
     position: relative;
     width: 40px;
     height: 175px;
@@ -89,7 +89,7 @@
     }
   }
 
-  .apiens__filter__content {
+  .collection__filter__content {
     width: 100%;
     height: 100%;
     display: flex;
@@ -99,7 +99,7 @@
     background: #000f24 0% 0% no-repeat padding-box;
   }
 
-  .apiens__filter__menu {
+  .collection__filter__menu {
     width: 100%;
     height: 57px;
     display: flex;
@@ -126,7 +126,7 @@
       background-color: $primary;
     }
 
-    .apiens__filter__menu_reset {
+    .collection__filter__menu_reset {
       width: 93px;
       height: 40px;
       margin: 0 11px;
@@ -137,7 +137,7 @@
       color: #ffffff;
     }
 
-    .apiens__filter__menu_resetall {
+    .collection__filter__menu_resetall {
       width: 114px;
       height: 40px;
       margin-left: auto;
@@ -149,7 +149,7 @@
     }
   }
 
-  .apiens__filter__content_content {
+  .collection__filter__content_content {
     width: 100%;
     height: 100%;
     display: flex;
@@ -165,7 +165,7 @@
       color: #d1d1d1;
     }
 
-    .apiens__filter__content_content_first_text:first-of-type {
+    .collection__filter__content_content_first_text:first-of-type {
       margin-right: 20px;
     }
 
@@ -181,7 +181,7 @@
       color: #d1d1d1;
     }
 
-    .apiens__filter_legend_input {
+    .collection__filter_legend_input {
       position: relative;
       width: fit-content;
       height: fit-content;
@@ -241,12 +241,12 @@
     width: 100%;
     justify-content: center;
 
-    // .apiens__filter__menu {
+    // .collection__filter__menu {
     //   // flex-direction: column;
     //   // align-items: flex-start;
     // }
 
-    .apiens__filter__content_content {
+    .collection__filter__content_content {
       flex-flow: row wrap;
       align-items: center;
       justify-content: center;

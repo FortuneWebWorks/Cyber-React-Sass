@@ -1,24 +1,24 @@
-import useFetcher from "hooks/useFetcher";
-import "styles/collections/mainCollection.scss";
-import InfoBox from "components/collections/InfoBox";
-import ApiensTrendingDashboard from "components/collections/CollectionTrendingDashboard";
-import RevealStatus from "components/RevealStatus";
-import Search from "components/Search";
-import { ReactComponent as WorldIcon } from "assets/images/table-world.svg";
-import { ReactComponent as TwitterIcon } from "assets/images/table-twitter.svg";
-import { ReactComponent as DiscordIcon } from "assets/images/discordNoBackground.svg";
-import { ReactComponent as OpenSeaIcon } from "assets/images/openSeaNoBackground.svg";
-import { ReactComponent as EtherScanIcon } from "assets/images/etherscan-logo-circle.svg";
-import { ReactComponent as LooksrareIcon } from "assets/images/looksrare.svg";
-import { ReactComponent as CopyIcon } from "assets/images/copy.svg";
-import { ReactComponent as ExternalLinkIcon } from "assets/images/external-link.svg";
-import { ReactComponent as BluetickIcon } from "assets/images/bluebg-check.svg";
-import { ReactComponent as TrendingIcon } from "assets/images/Trending.svg";
-import { ReactComponent as AnalyticalIcon } from "assets/images/Analytical.svg";
-import CollectionsList from "components/collections/CollectionsList";
-import DropDown from "components/DropDown";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import useFetcher from 'hooks/useFetcher';
+import 'styles/collections/mainCollection.scss';
+import InfoBox from 'components/collections/InfoBox';
+import CollectionTrendingDashboard from 'components/collections/CollectionTrendingDashboard';
+import RevealStatus from 'components/RevealStatus';
+import Search from 'components/Search';
+import { ReactComponent as WorldIcon } from 'assets/images/table-world.svg';
+import { ReactComponent as TwitterIcon } from 'assets/images/table-twitter.svg';
+import { ReactComponent as DiscordIcon } from 'assets/images/discordNoBackground.svg';
+import { ReactComponent as OpenSeaIcon } from 'assets/images/openSeaNoBackground.svg';
+import { ReactComponent as EtherScanIcon } from 'assets/images/etherscan-logo-circle.svg';
+import { ReactComponent as LooksrareIcon } from 'assets/images/looksrare.svg';
+import { ReactComponent as CopyIcon } from 'assets/images/copy.svg';
+import { ReactComponent as ExternalLinkIcon } from 'assets/images/external-link.svg';
+import { ReactComponent as BluetickIcon } from 'assets/images/bluebg-check.svg';
+import { ReactComponent as TrendingIcon } from 'assets/images/Trending.svg';
+import { ReactComponent as AnalyticalIcon } from 'assets/images/Analytical.svg';
+import CollectionsList from 'components/collections/CollectionsList';
+import DropDown from 'components/DropDown';
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 const Collection = () => {
   const params = useParams();
@@ -42,34 +42,34 @@ const Collection = () => {
   // }
 
   return (
-    <div className="apiens__container">
-      <div className="apiens__head_header">
+    <div className='collection__container'>
+      <div className='collection__head_header'>
         <img
           src={metaData?.banner_image_url}
-          className="apiens__head_header"
-          alt=""
+          className='collection__head_header'
+          alt=''
         />
-        <img src={metaData?.image_url} className="hader__cricle_image" alt="" />
+        <img src={metaData?.image_url} className='hader__cricle_image' alt='' />
       </div>
 
-      <div className="apiens__head_content">
-        <div className="apiens__reveal_container">
+      <div className='collection__head_content'>
+        <div className='collection__reveal_container'>
           <span>REVEAL STATUS</span>
           <RevealStatus />
         </div>
 
-        <div className="apiens__center_box">
-          <h1 className="apiens__title">
-            {metaData?.collection_name} <BluetickIcon className="blue_tick" />
+        <div className='collection__center_box'>
+          <h1 className='collection__title'>
+            {metaData?.collection_name} <BluetickIcon className='blue_tick' />
           </h1>
-          <span className="apiens__id">
+          <span className='collection__id'>
             {metaData?.contract_address} <CopyIcon />
-            <ExternalLinkIcon className="external_link_svg" />
+            <ExternalLinkIcon className='external_link_svg' />
           </span>
           {metaData && <InfoBox data={metaData} />}
         </div>
 
-        <div className="apiens__search">
+        <div className='collection__search'>
           <div>
             <a href={metaData?.website_url}>
               <WorldIcon />
@@ -94,8 +94,8 @@ const Collection = () => {
         </div>
       </div>
 
-      <div className="apiens__views">
-        <div className="active">
+      <div className='collection__views'>
+        <div className='active'>
           <TrendingIcon />
           <span>Trending Dashboard</span>
         </div>
@@ -106,52 +106,52 @@ const Collection = () => {
         </div>
       </div>
 
-      <div style={{ marginBottom: "67px" }}>
-        <ApiensTrendingDashboard />
+      <div style={{ marginBottom: '67px' }}>
+        <CollectionTrendingDashboard />
       </div>
 
-      <div className="apiens__lists__cahrts_conatiner">
-        <div className="apies__list_container">
-          <div className="apies__list__header">
+      <div className='collection__lists__cahrts_conatiner'>
+        <div className='apies__list_container'>
+          <div className='apies__list__header'>
             <h2>Listings</h2>
 
-            <div className="apies__list__header_dropdown">
+            <div className='apies__list__header_dropdown'>
               <DropDown
-                fontSize="3rem"
-                innerColor="#244677"
-                minWidth="111px"
-                items={[{ name: "Date" }, { name: "Price" }, { name: "Rank" }]}
-                placeholder={"Sorting"}
+                fontSize='3rem'
+                innerColor='#244677'
+                minWidth='111px'
+                items={[{ name: 'Date' }, { name: 'Price' }, { name: 'Rank' }]}
+                placeholder={'Sorting'}
               />
             </div>
           </div>
-          <CollectionsList slug={slug} type={"listings"} />
+          <CollectionsList slug={slug} type={'listings'} />
         </div>
 
-        <div className="apiens__charts_container">
-          <div className="apiens__charts">
-            <div className="apiens__chart_header">
-              <button className="active">List</button>
+        <div className='collection__charts_container'>
+          <div className='collection__charts'>
+            <div className='collection__chart_header'>
+              <button className='active'>List</button>
               <button>Delist</button>
             </div>
           </div>
 
-          <div className="apiens__second_chart_container">
+          <div className='collection__second_chart_container'>
             <h2>Momentum Index</h2>
-            <div className="apiens__charts">
-              <div className="apiens__chart_header">
-                <button className="active">List</button>
+            <div className='collection__charts'>
+              <div className='collection__chart_header'>
+                <button className='active'>List</button>
                 <button>Delist</button>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="apies__list_container">
-          <div className="apies__list__header">
+        <div className='apies__list_container'>
+          <div className='apies__list__header'>
             <h2>Sales</h2>
           </div>
-          <CollectionsList slug={slug} type={"orders"} />
+          <CollectionsList slug={slug} type={'orders'} />
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-.apiensBox {
+.collectionBox {
   width: fit-content;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -8,7 +8,7 @@
   margin: auto;
   overflow: hidden;
 
-  .apiens__rect {
+  .collection__rect {
     width: 158px;
     height: 93px;
     display: flex;
@@ -41,7 +41,7 @@
   }
 
   @media (max-width: 1300px) {
-    .apiens__rect {
+    .collection__rect {
       .value {
         font: normal normal bold 2.888rem/30px Roboto;
       }
