@@ -1,89 +1,167 @@
-import "styles/collections/collectionList.scss";
-import useFetcher from "hooks/useFetcher";
-import ApiensModal from "./CollectionModal";
-import { ReactComponent as OpenSeaIcon } from "assets/images/openSea-logo-circle-collections.svg";
-import { ReactComponent as EtherScanIcon } from "assets/images/etherscan-logo-circle-orders.svg";
-import { ReactComponent as EthIcon } from "assets/images/eth-icon.svg";
-import { useState } from "react";
+import 'styles/collections/collectionList.scss';
+import useFetcher from 'hooks/useFetcher';
+import ApiensModal from './CollectionModal';
+import { ReactComponent as OpenSeaIcon } from 'assets/images/openSea-logo-circle-collections.svg';
+import { ReactComponent as EtherScanIcon } from 'assets/images/etherscan-logo-circle-orders.svg';
+import { ReactComponent as EthIcon } from 'assets/images/eth-icon.svg';
+import { useCallback, useEffect, useRef, useState } from 'react';
+
+const defData = [
+  { id: 201 },
+  { id: 202 },
+  { id: 203 },
+  { id: 204 },
+  { id: 205 },
+  { id: 206 },
+  { id: 207 },
+  { id: 208 },
+  { id: 209 },
+  { id: 210 },
+  { id: 211 },
+  { id: 212 },
+  { id: 213 },
+  { id: 214 },
+  { id: 215 },
+  { id: 216 },
+  { id: 217 },
+  { id: 218 },
+  { id: 219 },
+  { id: 220 },
+];
 
 const CollectionsList = ({ slug, type }) => {
+  const [listingsData, listingsLoading] = useFetcher(
+    `https://api.cyberdash.app/v1/collections/${slug}/${type}`
+  );
   const [modal, setModal] = useState(null);
+  const [render, setRender] = useState(false);
+  const [currentViewData, setCurrentViewData] = useState(defData);
+  const timeOut = useRef(null);
+  const observer = useRef(null);
+  const nothing = useRef(null);
+  const lastElement = useCallback(
+    (el) => {
+      if (listingsLoading) return;
+
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          setCurrentViewData(
+            listingsData.rows.slice(0, currentViewData.length + 20)
+          );
+        }
+      });
+
+      if (el) observer.current.observe(el);
+    },
+    [currentViewData?.length, listingsData?.rows, listingsLoading]
+  );
 
   const showModal = (item) => {
     setModal(item);
   };
 
-  const [listingsData, listingsLoading] = useFetcher(
-    `https://api.cyberdash.app/v1/collections/${slug}/${type}`
-  );
-
   const timestampToDate = (timestamp) => {
     const date = new Date(timestamp * 1000);
-    return date.getMinutes() + " minutes ago";
+    return date.getMinutes() + ' minutes ago';
   };
 
-  if (!slug || listingsLoading) {
+  useEffect(() => {
+    if (listingsData) setCurrentViewData(listingsData.rows.slice(0, 20));
+  }, [listingsData]);
+
+  useEffect(() => {
+    timeOut.current = setTimeout(() => {
+      setRender((prev) => !prev);
+    }, 2000);
+  }, [render]);
+
+  if (!slug) {
     return <h1>Loading...</h1>;
   }
 
   return (
-    <div className="apiens__list_scroll_container">
+    <div className='apiens__list_scroll_container'>
       {modal && <ApiensModal data={modal} callBack={() => setModal(null)} />}
 
-      <div className="apiens__list">
-        {listingsData.rows.map((item) => (
-          <div
-            key={item.id}
-            //ask if you should change it ^
-            className="apiens__list_item"
-            onClick={showModal.bind(null, item)}
-          >
-            <img src={item.image_url} alt="" />
-
-            <div className="Rank_Id__container">
-              <span className="Rank">
-                Rank: <span>1234</span>
-              </span>
-              <span className="Id">#{item.token_id}</span>
-            </div>
-
-            <div className="cards-right-side__container">
+      <div className='apiens__list'>
+        {currentViewData[0].collectionId
+          ? currentViewData?.map((item) => (
               <div
-                className={
-                  type === "listings" ? "listings-specific" : "orders-specific"
-                }
-              >
-                <div className="top-side-container">
-                  <span className="price__container">
-                    <span className="price-title__container">Price: </span>
-                    <span className="price-amount-svg__container">
-                      <EthIcon />
-                      {item.price}
-                    </span>
+                key={item.id}
+                //ask if you should change it ^
+                className='apiens__list_item'
+                onClick={showModal.bind(null, item)}
+                onMouseEnter={(e) => clearTimeout(timeOut.current)}
+                onMouseLeave={(e) => setRender((prev) => !prev)}
+                ref={item === currentViewData.at(-1) ? lastElement : nothing}>
+                <img src={item.image_url} alt='' className='skeleton' />
+
+                <div className='Rank_Id__container'>
+                  <span className='Rank'>
+                    Rank: <span>1234</span>
                   </span>
-
-                  <div className="svg-button__container">
-                    <button>Buy</button>
-
-                    <a href={item.opensea_url} className="opensea__svg">
-                      <OpenSeaIcon />
-                    </a>
-                    <a href="https://google.com" className="ethscan__svg">
-                      <EtherScanIcon />
-                    </a>
-                  </div>
+                  <span className='Id'>
+                    #
+                    {item.token_id || (
+                      <div className='skeleton skeleton-text'></div>
+                    )}
+                  </span>
                 </div>
 
-                <span className="Time">
-                  <span className="time-title__container">Time: </span>
-                  <span className="time-amount__container">
-                    {timestampToDate(item.timestamp)}
-                  </span>
-                </span>
+                <div className='cards-right-side__container'>
+                  <div
+                    className={
+                      type === 'listings'
+                        ? 'listings-specific'
+                        : 'orders-specific'
+                    }>
+                    <div className='top-side-container'>
+                      <span className='price__container'>
+                        <span className='price-title__container'>Price: </span>
+                        <span className='price-amount-svg__container'>
+                          <EthIcon />
+                          {item.price}
+                        </span>
+                      </span>
+
+                      <div className='svg-button__container'>
+                        <button>Buy</button>
+
+                        <a href={item.opensea_url} className='opensea__svg'>
+                          <OpenSeaIcon />
+                        </a>
+                        <a href='https://google.com' className='ethscan__svg'>
+                          <EtherScanIcon />
+                        </a>
+                      </div>
+                    </div>
+
+                    <span className='Time'>
+                      <span className='time-title__container'>Time: </span>
+                      <span className='time-amount__container'>
+                        {timestampToDate(item.timestamp)}
+                      </span>
+                    </span>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        ))}
+            ))
+          : currentViewData?.map((item) => (
+              <div key={item.id}>
+                <div
+                  key={item.id}
+                  className='apiens__list_item'
+                  ref={item === currentViewData.at(-1) ? lastElement : nothing}>
+                  <img src={item.image_url} alt='' className='skeleton' />
+
+                  <div className='Rank_Id__container' style={{ width: '100%' }}>
+                    <div className='skeleton skeleton-text'></div>
+                    <div className='skeleton skeleton-text'></div>
+                  </div>
+                </div>
+              </div>
+            ))}
       </div>
     </div>
   );

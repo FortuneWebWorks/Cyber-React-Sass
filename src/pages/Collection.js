@@ -18,10 +18,12 @@ import { ReactComponent as AnalyticalIcon } from "assets/images/Analytical.svg";
 import CollectionsList from "components/collections/CollectionsList";
 import DropDown from "components/DropDown";
 import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const Collection = () => {
   const params = useParams();
   const slug = params.slug;
+  const [render, setRender] = useState(false);
 
   console.log(slug);
 
@@ -29,19 +31,25 @@ const Collection = () => {
     `https://api.cyberdash.app/v1/collections/${slug}`
   );
 
-  if (metaLoading) {
-    return <h1>Loadinssg...</h1>;
-  }
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setRender(prev => !prev);
+  //   }, 10000)
+  // }, [render])
+
+  // if (metaLoading) {
+  //   return <h1>Loadinssg...</h1>;
+  // }
 
   return (
     <div className="apiens__container">
       <div className="apiens__head_header">
         <img
-          src={metaData.banner_image_url}
+          src={metaData?.banner_image_url}
           className="apiens__head_header"
           alt=""
         />
-        <img src={metaData.image_url} className="hader__cricle_image" alt="" />
+        <img src={metaData?.image_url} className="hader__cricle_image" alt="" />
       </div>
 
       <div className="apiens__head_content">
@@ -52,10 +60,10 @@ const Collection = () => {
 
         <div className="apiens__center_box">
           <h1 className="apiens__title">
-            {metaData.collection_name} <BluetickIcon className="blue_tick" />
+            {metaData?.collection_name} <BluetickIcon className="blue_tick" />
           </h1>
           <span className="apiens__id">
-            {metaData.contract_address} <CopyIcon />
+            {metaData?.contract_address} <CopyIcon />
             <ExternalLinkIcon className="external_link_svg" />
           </span>
           {metaData && <InfoBox data={metaData} />}
@@ -63,22 +71,22 @@ const Collection = () => {
 
         <div className="apiens__search">
           <div>
-            <a href={metaData.website_url}>
+            <a href={metaData?.website_url}>
               <WorldIcon />
             </a>
-            <a href={metaData.twitter_url}>
+            <a href={metaData?.twitter_url}>
               <TwitterIcon />
             </a>
-            <a href={metaData.discord_url}>
+            <a href={metaData?.discord_url}>
               <DiscordIcon />
             </a>
-            <a href={metaData.opensea_url}>
+            <a href={metaData?.opensea_url}>
               <OpenSeaIcon />
             </a>
-            <a href={metaData.website_url}>
+            <a href={metaData?.website_url}>
               <LooksrareIcon />
             </a>
-            <a href={metaData.website_url}>
+            <a href={metaData?.website_url}>
               <EtherScanIcon />
             </a>
           </div>

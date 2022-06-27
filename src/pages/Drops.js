@@ -9,97 +9,6 @@ import Search from "components/Search";
 import DropsTable from "components/drops/DropsTable";
 import useFetcher from "hooks/useFetcher";
 
-const tableData = {
-  headers: [
-    "Collection",
-    "Supply",
-    "Twitter Member",
-    "Discord Member",
-    "Presale Price",
-    "Public Sale Price",
-    "Max Mint",
-    "Presale Mint Time",
-    "Public Sale Mint Time",
-    "Category",
-    "Social Media",
-  ],
-  items: [
-    {
-      id: 1,
-      user: {
-        userImage: "https://picsum.photos/50",
-        nftName: "NFT Name",
-        time: "35 days ago",
-      },
-      supply: "11221",
-      twitterrMember: "12",
-      discordMember: "420",
-      presalePrice: "420",
-      publicSalePrice: "420",
-      maxMint: ["WL:1", "PUB:2"],
-      presaleMintTime: {
-        time: "0s",
-        date: "Apr 4, 12:45",
-      },
-      publicSaleMintTime: {
-        time: "0s",
-        date: "Apr 4, 12:45",
-      },
-      category: ["Cat1", "Cat2", "category 3", "Cat2", "category 3"],
-      socialMedia: ["discord", "twitter", "discord"],
-    },
-    {
-      id: 1,
-      user: {
-        userImage: "https://picsum.photos/51",
-        nftName: "NFT Name2",
-        time: "35 days ago",
-      },
-      supply: "11221",
-      twitterrMember: "12",
-      discordMember: "420",
-      presalePrice: "420",
-      publicSalePrice: "420",
-      maxMint: ["WL:1", "PUB:2"],
-      presaleMintTime: {
-        time: "0s",
-        date: "Apr 4, 12:45",
-      },
-      publicSaleMintTime: {
-        time: "0s",
-        date: "Apr 4, 12:45",
-      },
-      category: ["Cat1", "Cat2", "category 3", "Cat2", "category 3"],
-      socialMedia: ["discord", "twitter", "discord"],
-    },
-    {
-      id: 1,
-      user: {
-        userImage: "https://picsum.photos/49",
-        nftName: "NFT Name3",
-        time: "35 days ago",
-      },
-      supply: "11221",
-      twitterrMember: "12",
-      discordMember: "420",
-      presalePrice: "420",
-      publicSalePrice: "420",
-      maxMint: ["WL:1", "PUB:2"],
-      presaleMintTime: {
-        time: "0s",
-        date: "Apr 4, 12:45",
-      },
-      publicSaleMintTime: {
-        time: "0s",
-        date: "Apr 4, 12:45",
-      },
-      category: ["Cat1", "Cat2", "category 3", "Cat2", "category 3"],
-      socialMedia: ["discord", "twitter", "discord"],
-    },
-  ],
-  spaces: [60, 15, 15, 15, 13, 13, 20, 13, 20, 20, 20, 20],
-};
-
 const Drops = () => {
   const [data, loading] = useFetcher(
     "https://api.cyberdash.app/v1/tables/upcoming"
@@ -134,9 +43,9 @@ const Drops = () => {
     setOpenFiter(false);
   };
 
-  if (loading) {
-    return <h2>Loading...</h2>;
-  }
+  // if (loading) {
+  //   return <h2>Loading...</h2>;
+  // }
 
   return (
     <div className="drops">
@@ -193,7 +102,7 @@ const Drops = () => {
 
       <div className="drops__table__container">
         <DropsTable
-          data={data.rows}
+          data={data?.rows}
           sort={false}
           info={false}
           area="mTableDrops"
