@@ -4,7 +4,8 @@ import CollectionModal from './CollectionModal';
 import { ReactComponent as OpenSeaIcon } from 'assets/images/openSea-logo-circle-collections.svg';
 import { ReactComponent as EtherScanIcon } from 'assets/images/etherscan-logo-circle-orders.svg';
 import { ReactComponent as EthIcon } from 'assets/images/eth-icon.svg';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import CollectionContext from 'contexts/collectionContext';
 
 const defData = [
   { id: 201 },
@@ -33,6 +34,9 @@ const CollectionsList = ({ slug, type }) => {
   const [listingsData, listingsLoading] = useFetcher(
     `https://api.cyberdash.app/v1/collections/${slug}/${type}`
   );
+
+  const { collectionData, setCollectionData } = useContext(CollectionContext);
+
   const [modal, setModal] = useState(null);
   const [render, setRender] = useState(false);
   const [currentViewData, setCurrentViewData] = useState(defData);
@@ -67,8 +71,11 @@ const CollectionsList = ({ slug, type }) => {
   };
 
   useEffect(() => {
-    if (listingsData) setCurrentViewData(listingsData.rows.slice(0, 20));
-  }, [listingsData]);
+    if (listingsData) {
+      setCurrentViewData(listingsData.rows.slice(0, 20));
+      setCollectionData((prev) => ({ ...prev, [type]: listingsData.rows }));
+    }
+  }, [listingsData, setCollectionData, type]);
 
   useEffect(() => {
     timeOut.current = setTimeout(() => {

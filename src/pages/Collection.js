@@ -18,143 +18,221 @@ import { ReactComponent as AnalyticalIcon } from 'assets/images/Analytical.svg';
 import CollectionsList from 'components/collections/CollectionsList';
 import DropDown from 'components/DropDown';
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import ETHPrice from 'components/charts/ETHPrice';
+import SwitchJs from 'components/SwitchJs';
+import { CollectionContextProvider } from 'contexts/collectionContext';
 
 const Collection = () => {
   const params = useParams();
   const slug = params.slug;
-  const [render, setRender] = useState(false);
-
-  console.log(slug);
+  const [activeChart, setActiveChart] = useState('orders');
+  const [outliers, setOutliers] = useState(false);
+  const [timeFrame, setTimeFrame] = useState('4 Hours');
 
   const [metaData, metaLoading] = useFetcher(
     `https://api.cyberdash.app/v1/collections/${slug}`
   );
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setRender(prev => !prev);
-  //   }, 10000)
-  // }, [render])
-
-  // if (metaLoading) {
-  //   return <h1>Loadinssg...</h1>;
-  // }
-
   return (
-    <div className='collection__container'>
-      <div className='collection__head_header'>
-        <img
-          src={metaData?.banner_image_url}
-          className='collection__head_header'
-          alt=''
-        />
-        <img src={metaData?.image_url} className='hader__cricle_image' alt='' />
-      </div>
-
-      <div className='collection__head_content'>
-        <div className='collection__reveal_container'>
-          <span>REVEAL STATUS</span>
-          <RevealStatus />
+    <CollectionContextProvider>
+      <div className='collection__container'>
+        <div className='collection__head_header'>
+          <img
+            src={metaData?.banner_image_url}
+            className='collection__head_header'
+            alt=''
+          />
+          <img
+            src={metaData?.image_url}
+            className='hader__cricle_image'
+            alt=''
+          />
         </div>
 
-        <div className='collection__center_box'>
-          <h1 className='collection__title'>
-            {metaData?.collection_name} <BluetickIcon className='blue_tick' />
-          </h1>
-          <span className='collection__id'>
-            {metaData?.contract_address} <CopyIcon />
-            <ExternalLinkIcon className='external_link_svg' />
-          </span>
-          {metaData && <InfoBox data={metaData} />}
+        <div className='collection__head_content'>
+          <div className='collection__reveal_container'>
+            <span>REVEAL STATUS</span>
+            <RevealStatus />
+          </div>
+
+          <div className='collection__center_box'>
+            <h1 className='collection__title'>
+              {metaData?.collection_name} <BluetickIcon className='blue_tick' />
+            </h1>
+            <span className='collection__id'>
+              {metaData?.contract_address} <CopyIcon />
+              <ExternalLinkIcon className='external_link_svg' />
+            </span>
+            {metaData && <InfoBox data={metaData} />}
+          </div>
+
+          <div className='collection__search'>
+            <div>
+              <a href={metaData?.website_url}>
+                <WorldIcon />
+              </a>
+              <a href={metaData?.twitter_url}>
+                <TwitterIcon />
+              </a>
+              <a href={metaData?.discord_url}>
+                <DiscordIcon />
+              </a>
+              <a href={metaData?.opensea_url}>
+                <OpenSeaIcon />
+              </a>
+              <a href={metaData?.website_url}>
+                <LooksrareIcon />
+              </a>
+              <a href={metaData?.website_url}>
+                <EtherScanIcon />
+              </a>
+            </div>
+            <Search />
+          </div>
         </div>
 
-        <div className='collection__search'>
+        <div className='collection__views'>
+          <div className='active'>
+            <TrendingIcon />
+            <span>Trending Dashboard</span>
+          </div>
+
           <div>
-            <a href={metaData?.website_url}>
-              <WorldIcon />
-            </a>
-            <a href={metaData?.twitter_url}>
-              <TwitterIcon />
-            </a>
-            <a href={metaData?.discord_url}>
-              <DiscordIcon />
-            </a>
-            <a href={metaData?.opensea_url}>
-              <OpenSeaIcon />
-            </a>
-            <a href={metaData?.website_url}>
-              <LooksrareIcon />
-            </a>
-            <a href={metaData?.website_url}>
-              <EtherScanIcon />
-            </a>
+            <AnalyticalIcon />
+            <span>Analytical Charts</span>
           </div>
-          <Search />
-        </div>
-      </div>
-
-      <div className='collection__views'>
-        <div className='active'>
-          <TrendingIcon />
-          <span>Trending Dashboard</span>
         </div>
 
-        <div>
-          <AnalyticalIcon />
-          <span>Analytical Charts</span>
+        <div style={{ marginBottom: '67px' }}>
+          <CollectionTrendingDashboard />
         </div>
-      </div>
 
-      <div style={{ marginBottom: '67px' }}>
-        <CollectionTrendingDashboard />
-      </div>
+        <div className='collection__lists__cahrts_conatiner'>
+          <div className='collection__list_container'>
+            <div className='collection__list__header'>
+              <h2>Listings</h2>
 
-      <div className='collection__lists__cahrts_conatiner'>
-        <div className='apies__list_container'>
-          <div className='apies__list__header'>
-            <h2>Listings</h2>
-
-            <div className='apies__list__header_dropdown'>
-              <DropDown
-                fontSize='3rem'
-                innerColor='#244677'
-                minWidth='111px'
-                items={[{ name: 'Date' }, { name: 'Price' }, { name: 'Rank' }]}
-                placeholder={'Sorting'}
-              />
+              <div className='collection__list__header_dropdown'>
+                <DropDown
+                  fontSize='3rem'
+                  innerColor='#244677'
+                  minWidth='111px'
+                  items={[
+                    { name: 'Date' },
+                    { name: 'Price' },
+                    { name: 'Rank' },
+                  ]}
+                  placeholder={'Sorting'}
+                />
+              </div>
             </div>
-          </div>
-          <CollectionsList slug={slug} type={'listings'} />
-        </div>
-
-        <div className='collection__charts_container'>
-          <div className='collection__charts'>
-            <div className='collection__chart_header'>
-              <button className='active'>List</button>
-              <button>Delist</button>
-            </div>
+            <CollectionsList slug={slug} type={'listings'} />
           </div>
 
-          <div className='collection__second_chart_container'>
-            <h2>Momentum Index</h2>
+          <div className='collection__charts_container'>
             <div className='collection__charts'>
               <div className='collection__chart_header'>
-                <button className='active'>List</button>
-                <button>Delist</button>
+                <button
+                  className={activeChart === 'list' ? 'active' : ''}
+                  onClick={() => setActiveChart('list')}>
+                  List
+                </button>
+                <button
+                  className={activeChart === 'orders' ? 'active' : ''}
+                  onClick={() => setActiveChart('orders')}>
+                  Delist
+                </button>
+              </div>
+
+              <div className='collection__filters'>
+                <div className='collection__filters_dropdown'>
+                  <span className='dropdown_title'>Time Frame</span>
+                  <DropDown
+                    fontSize='3rem'
+                    innerColor='#244677'
+                    minWidth='111px'
+                    items={[
+                      { name: '4 Hours' },
+                      { name: '7 Hours' },
+                      { name: '2 Hours' },
+                    ]}
+                    placeholder={'4 Hours'}
+                    callBack={(value) => setTimeFrame(value)}
+                  />
+                </div>
+
+                <div className='collection__filters_toggle'>
+                  <span>LOG Scale</span>
+                  <SwitchJs />
+                </div>
+
+                <div className='collection__filters_toggle'>
+                  <span>OUTLIERS</span>
+                  <SwitchJs
+                    onClick={(e) => {
+                      setOutliers((prev) => !prev);
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className='collection__charts_mode'>
+                <div>
+                  <div className='collection__charts_mode_point'></div>
+                  <span>LEGENDARY</span>
+                </div>
+                <div>
+                  <div className='collection__charts_mode_point'></div>
+                  <span>SUPER RARE</span>
+                </div>
+                <div>
+                  <div className='collection__charts_mode_point'></div>
+                  <span>RARE</span>
+                </div>
+                <div>
+                  <div className='collection__charts_mode_point'></div>
+                  <span>COMMON</span>
+                </div>
+              </div>
+
+              <div className='ETHPrice_chart'>
+                <ETHPrice
+                  type={activeChart}
+                  isOutliers={outliers}
+                  timeFrame={timeFrame}
+                />
+              </div>
+            </div>
+
+            <div className='collection__second_chart_container'>
+              <h2>Momentum Index</h2>
+              <div className='collection__charts'>
+                <div className='collection__chart_header'>
+                  <button
+                    className={activeChart === 'list' ? 'active' : ''}
+                    onClick={() => setActiveChart('list')}>
+                    List
+                  </button>
+                  <button
+                    className={activeChart === 'orders' ? 'active' : ''}
+                    onClick={() => setActiveChart('orders')}>
+                    Delist
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className='apies__list_container'>
-          <div className='apies__list__header'>
-            <h2>Sales</h2>
+          <div className='collection__list_container'>
+            <div className='collection__list__header'>
+              <h2>Sales</h2>
+            </div>
+            <CollectionsList slug={slug} type={'orders'} />
           </div>
-          <CollectionsList slug={slug} type={'orders'} />
         </div>
       </div>
-    </div>
+    </CollectionContextProvider>
   );
 };
 

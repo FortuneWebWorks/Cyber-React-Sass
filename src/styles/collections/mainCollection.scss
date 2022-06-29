@@ -161,8 +161,11 @@
   .collection__charts {
     width: 540px;
     height: 504px;
-    background: #0b1e39 0% 0% no-repeat padding-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     border-radius: 10px;
+    background: #0b1e39 0% 0% no-repeat padding-box;
   }
 
   .collection__chart_header {
@@ -203,6 +206,7 @@
     gap: 20px;
   }
 
+  // Charts
   .collection__charts_container {
     height: 100%;
     display: flex;
@@ -210,6 +214,100 @@
     justify-content: space-between;
     align-items: center;
     gap: 38px;
+
+    .collection__filters {
+      height: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin: 15px 0;
+      padding: 0 16px;
+    }
+
+    .collection__filters_toggle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 9px;
+
+      span {
+        text-align: center;
+        font: normal normal normal 11px/13px Roboto;
+        letter-spacing: 0px;
+        color: #d1d1d1;
+        text-transform: uppercase;
+      }
+
+      .switchjs__container {
+        width: 60px;
+        height: 30px;
+
+        input:checked + .slider:before {
+          -webkit-transform: translateX(3.5rem);
+          -ms-transform: translateX(3.5rem);
+          transform: translateX(3.5rem);
+        }
+      }
+
+      .slider:before {
+        width: 26px;
+        height: 26px;
+        left: 0;
+        bottom: 2px;
+      }
+    }
+
+    .collection__charts_mode {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 23px;
+      margin: 14px 0;
+
+      span {
+        text-align: center;
+        font: normal normal normal 11px/13px Roboto;
+        letter-spacing: 0px;
+        color: #d1d1d1;
+        text-transform: uppercase;
+      }
+
+      div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+      }
+    }
+
+    .collection__charts_mode_point {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #fd8f25 0% 0% no-repeat padding-box;
+    }
+
+    .collection__filters_dropdown {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+
+      .dropdown_title {
+        width: fit-content;
+        font: normal normal bold 16px/19px Roboto;
+        letter-spacing: 0px;
+        color: #ffffff;
+        white-space: pre;
+      }
+
+      .dropdown {
+        .dropdown__placeholder__icon {
+          padding: 0 1px;
+          white-space: pre;
+        }
+      }
+    }
   }
 
   .collection__second_chart_container {
@@ -226,8 +324,8 @@
     }
   }
 
-  .apies__list_container {
-    .apies__list__header {
+  .collection__list_container {
+    .collection__list__header {
       min-height: 5rem;
       display: flex;
       justify-content: space-between;
@@ -240,45 +338,59 @@
         letter-spacing: 0px;
         color: #ffffff;
       }
+    }
+  }
 
-      .apies__list__header_dropdown {
-        width: fit-content;
+  // Chart
+  .ETHPrice_chart {
+    width: 100%;
+    height: 70%;
+    margin-top: auto;
+    padding: 0 56px;
+    // background-color: cadetblue;
 
-        .dropdown__container {
-          padding: 0;
+    & > div {
+      height: 100%;
+    }
+  }
+
+  .collection__list__header_dropdown,
+  .collection__filters_dropdown {
+    width: fit-content;
+
+    .dropdown__container {
+      padding: 0;
+    }
+
+    .dropdown {
+      background: #244677 0% 0% no-repeat padding-box;
+      width: 111px;
+      height: 30px;
+      font: normal normal normal 14px/16px Roboto;
+      letter-spacing: 0px;
+      color: #d1d1d1;
+      border-radius: 10px;
+
+      .dropdown__placeholder__icon {
+        font: normal normal normal 14px/16px Roboto;
+        letter-spacing: 0px;
+        color: #d1d1d1;
+        padding-left: 13px;
+
+        span {
+          opacity: 1;
         }
+      }
 
-        .dropdown {
-          background: #244677 0% 0% no-repeat padding-box;
-          width: 111px;
-          height: 30px;
-          font: normal normal normal 14px/16px Roboto;
-          letter-spacing: 0px;
-          color: #d1d1d1;
-          border-radius: 10px;
+      svg {
+        stroke: #0b1e39;
+      }
 
-          .dropdown__placeholder__icon {
-            font: normal normal normal 14px/16px Roboto;
-            letter-spacing: 0px;
-            color: #d1d1d1;
-            padding-left: 13px;
-
-            span {
-              opacity: 1;
-            }
-          }
-
-          svg {
-            stroke: #0b1e39;
-          }
-
-          .dropdown__items {
-            border-radius: 10px;
-            font: normal normal normal 14px/16px Roboto;
-            letter-spacing: 0px;
-            color: #d1d1d1;
-          }
-        }
+      .dropdown__items {
+        border-radius: 10px;
+        font: normal normal normal 14px/16px Roboto;
+        letter-spacing: 0px;
+        color: #d1d1d1;
       }
     }
   }

@@ -9420,6 +9420,11 @@
   "resolved" "https://registry.npmjs.org/os-tmpdir/-/os-tmpdir-1.0.2.tgz"
   "version" "1.0.2"
 
+"outliers@^0.0.3":
+  "integrity" "sha512-llzMndHLe3bT5myeO5qiySIusEN+zd+Eq1YLXWbe2/FC2l26AmWPRw0ji7heI0azubWB6NEM87xU24y/CL99Iw=="
+  "resolved" "https://registry.npmjs.org/outliers/-/outliers-0.0.3.tgz"
+  "version" "0.0.3"
+
 "p-cancelable@^0.3.0":
   "integrity" "sha512-RVbZPLso8+jFeq1MfNvgXtCRED2raz/dKpacfTNxsx6pLEpEomM7gah6VeHSYV3+vo0OAi4MkArtQcWWXuQoyw=="
   "resolved" "https://registry.npmjs.org/p-cancelable/-/p-cancelable-0.3.0.tgz"

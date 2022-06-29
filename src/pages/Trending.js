@@ -31,7 +31,7 @@ const Traits = () => {
   const fetchData = (time) => {
     const fetcher = async () => {
       const res = await fetch(
-        `http://api.cyberdash.app/v1/tables/trending/ticker/${time}`
+        `https://api.cyberdash.app/v1/tables/trending/ticker/${time}`
       );
 
       const data = await res.json();
@@ -46,7 +46,7 @@ const Traits = () => {
     fetchData('1h');
 
     const closer = (e) => {
-      if (!e.target.closest('.filter')) {
+      if (!e.target.closest('.filter') && e.target.id !== 'filter') {
         setOpenFiter(false);
       }
     };
