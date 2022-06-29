@@ -278,6 +278,27 @@
         align-items: center;
         gap: 5px;
       }
+
+      & div:nth-child(1) {
+        .collection__charts_mode_point {
+          background: #ab7ce1;
+        }
+      }
+      & div:nth-child(2) {
+        .collection__charts_mode_point {
+          background: #fd2f7a;
+        }
+      }
+      & div:nth-child(3) {
+        .collection__charts_mode_point {
+          background: #fd2f7a;
+        }
+      }
+      & div:nth-child(4) {
+        .collection__charts_mode_point {
+          background: #7c7c7c;
+        }
+      }
     }
 
     .collection__charts_mode_point {

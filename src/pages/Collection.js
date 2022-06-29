@@ -26,7 +26,7 @@ import { CollectionContextProvider } from 'contexts/collectionContext';
 const Collection = () => {
   const params = useParams();
   const slug = params.slug;
-  const [activeChart, setActiveChart] = useState('orders');
+  const [activeChart, setActiveChart] = useState('list');
   const [outliers, setOutliers] = useState(false);
   const [timeFrame, setTimeFrame] = useState('4 Hours');
 
@@ -164,12 +164,13 @@ const Collection = () => {
 
                 <div className='collection__filters_toggle'>
                   <span>LOG Scale</span>
-                  <SwitchJs />
+                  <SwitchJs style={{ backgroundColor: '#24467750' }} />
                 </div>
 
                 <div className='collection__filters_toggle'>
                   <span>OUTLIERS</span>
                   <SwitchJs
+                    style={{ backgroundColor: '#24467750' }}
                     onClick={(e) => {
                       setOutliers((prev) => !prev);
                     }}

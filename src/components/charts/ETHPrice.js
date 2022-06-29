@@ -9,7 +9,6 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
   type = type === 'list' ? 'listings' : 'orders';
   const { collectionData } = useContext(CollectionContext);
   const [data, setData] = useState(null);
-  const chart = useRef();
 
   const getTime = (timestamp) => {
     const hours = new Date(+timestamp).getHours();
@@ -17,19 +16,71 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
     return hours;
   };
 
-  const chartAreaBorder = {
+  const plugin = {
     id: 'chartAreaBorder',
-    beforeDraw(chart, args, options) {
+    afterDraw: (chart, args, opts) => {
       const {
+        chartArea: { top, left, width, height },
         ctx,
-        chartArea: { left, top, width, height },
       } = chart;
+      const {
+        borders: { tLtR, tLbL, tRbR, bLbR },
+      } = opts;
+
       ctx.save();
-      ctx.strokeStyle = options.borderColor;
-      ctx.lineWidth = options.borderWidth;
-      ctx.setLineDash(options.borderDash || []);
-      ctx.lineDashOffset = options.borderDashOffset;
-      ctx.strokeRect(left, top, width, height);
+
+      if (tLtR && tLtR.borderWidth !== 0) {
+        ctx.beginPath();
+        ctx.strokeStyle = tLtR.borderColor || Chart.defaults.color;
+        ctx.lineWidth = tLtR.borderWidth || 0;
+        ctx.borderStyle = tLtR.borderDash || [];
+        ctx.borderTopWidth = tLtR.borderTopWidth || 0;
+        ctx.setLineDash(tLtR.borderDash || []);
+        ctx.lineDashOffset = tLtR.borderDashOffset || 0;
+        ctx.moveTo(left, top);
+        ctx.lineTo(left + width, top);
+        ctx.stroke();
+      }
+
+      if (tLbL && tLbL.borderWidth !== 0) {
+        ctx.beginPath();
+        ctx.strokeStyle = tLbL.borderColor || Chart.defaults.color;
+        ctx.lineWidth = tLbL.borderWidth || 0;
+        ctx.borderStyle = tLbL.borderDash || [];
+        ctx.borderTopWidth = tLbL.borderTopWidth || 0;
+        ctx.setLineDash(tLbL.borderDash || []);
+        ctx.lineDashOffset = tLbL.borderDashOffset || 0;
+        ctx.moveTo(left, top);
+        ctx.lineTo(left, top + height);
+        ctx.stroke();
+      }
+
+      if (tRbR && tRbR.borderWidth !== 0) {
+        ctx.beginPath();
+        ctx.strokeStyle = tRbR.borderColor || Chart.defaults.color;
+        ctx.lineWidth = tRbR.borderWidth || 0;
+        ctx.borderStyle = tRbR.borderDash || [];
+        ctx.borderTopWidth = tRbR.borderTopWidth || 0;
+        ctx.setLineDash(tLbL.borderDash || []);
+        ctx.lineDashOffset = tRbR.borderDashOffset || 0;
+        ctx.moveTo(left + width, top);
+        ctx.lineTo(left + width, top + height);
+        ctx.stroke();
+      }
+
+      if (bLbR && bLbR.borderWidth !== 0) {
+        ctx.beginPath();
+        ctx.strokeStyle = bLbR.borderColor || Chart.defaults.color;
+        ctx.lineWidth = bLbR.borderWidth || 0;
+        ctx.borderStyle = bLbR.borderDash || [];
+        ctx.borderTopWidth = bLbR.borderTopWidth || 0;
+        ctx.setLineDash(bLbR.borderDash || []);
+        ctx.lineDashOffset = bLbR.borderDashOffset || 0;
+        ctx.moveTo(left, top + height);
+        ctx.lineTo(left + width, top + height);
+        ctx.stroke();
+      }
+
       ctx.restore();
     },
   };
@@ -42,8 +93,8 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
         const filteredData = collectionData[type].filter(
           (item) =>
             getTime(item.timestamp) <= time && {
-              x: +item.price,
-              y: +getTime(item.timestamp),
+              y: +item.price,
+              x: +getTime(item.timestamp),
               img: item.image_url,
               price: item.price,
               timestamp: item.timestamp,
@@ -56,8 +107,8 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
 
         setData(
           filteredData.map((item) => ({
-            x: +item.price,
-            y: +getTime(item.timestamp),
+            y: +item.price,
+            x: +getTime(item.timestamp),
             img: item.image_url,
             price: item.price,
             timestamp: item.timestamp,
@@ -72,8 +123,8 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
 
         setData(
           collectionData[type].map((item) => ({
-            x: +item.price,
-            y: +getTime(item.timestamp),
+            y: +item.price,
+            x: +getTime(item.timestamp),
             img: item.image_url,
             price: item.price,
             timestamp: item.timestamp,
@@ -85,8 +136,8 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
       } else {
         setData(
           collectionData[type].map((item) => ({
-            x: +item.price,
-            y: +getTime(item.timestamp),
+            y: +item.price,
+            x: +getTime(item.timestamp),
             img: item.image_url,
             price: item.price,
             timestamp: item.timestamp,
@@ -101,7 +152,6 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
   return (
     <div>
       <Chart
-        ref={chart}
         style={{ paddingLeft: '0' }}
         type='scatter'
         data={{
@@ -123,6 +173,7 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
         }}
         options={{
           maintainAspectRatio: false,
+
           scales: {
             x: {
               grid: {
@@ -132,8 +183,10 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
                 lineWidth: 2,
                 color: '#244677',
                 tickWidth: 0,
+                padding: 30,
               },
               ticks: {
+                // padding: 30,
                 callback: function (val) {
                   return this.getLabels()[val];
                 },
@@ -149,7 +202,7 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
                 tickWidth: 0,
                 drawBorder: true,
               },
-              // min: 0,
+              // max: ,
               beginAtZero: true,
             },
           },
@@ -163,12 +216,29 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
             legend: { display: false },
 
             chartAreaBorder: {
-              borderColor: '#244677',
-              borderWidth: 2,
+              borders: {
+                tLtR: {
+                  borderWidth: 5,
+                  borderColor: '#0b1e39',
+                },
+                tLbL: {
+                  borderWidth: 2,
+                  borderColor: '#244677',
+                },
+                tRbR: {
+                  borderTopWidth: 2,
+                  borderColor: 'transparent',
+                  lineDashOffset: 5,
+                },
+                bLbR: {
+                  borderWidth: 2,
+                  borderColor: '#244677',
+                },
+              },
             },
           },
         }}
-        plugins={[chartAreaBorder]}
+        plugins={[plugin]}
       />
     </div>
   );

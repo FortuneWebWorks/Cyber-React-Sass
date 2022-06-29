@@ -3,9 +3,35 @@ const getOrCreateTooltip = (chart, tooltip) => {
   const tooltipData = tooltip?.dataPoints?.at(0)?.raw;
 
   const getTime = (timestamp) => {
-    const hours = new Date(+timestamp);
+    const time = new Date(+timestamp);
 
-    return hours;
+    const months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ];
+
+    const formattedTime =
+      months[time.getMonth()] +
+      ' ' +
+      time.getDay() +
+      ', ' +
+      time.getFullYear() +
+      ' ' +
+      time.getHours() +
+      ':' +
+      time.getMinutes();
+
+    return formattedTime;
   };
 
   if (!tooltipEl) {
