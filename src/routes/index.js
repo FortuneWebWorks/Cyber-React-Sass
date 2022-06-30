@@ -16,7 +16,10 @@ const index = () => {
       <Route path='/drops' element={<Drops />} />
       <Route path='/panel' element={<ExpectedPnl />} />
       <Route path='/collection/:slug' element={<Collection />} />
-      <Route path='/apiens' element={<CollectionOfficials />} />
+      <Route
+        path='/collectionOfficials/:slug'
+        element={<CollectionOfficials />}
+      />
     </Routes>
   );
 };

@@ -11,6 +11,7 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
   const { collectionData } = useContext(CollectionContext);
   const [data, setData] = useState(null);
   const max = useRef(240);
+  console.log(collectionData);
 
   const getTime = (timestamp) => {
     const hours = new Date(+timestamp).getHours();

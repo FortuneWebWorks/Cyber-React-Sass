@@ -1,7 +1,7 @@
 import 'styles/collections/collectionBox.scss';
 import { ReactComponent as EthIcon } from 'assets/images/eth-icon.svg';
 
-const InfoBox = ({ data }) => {
+const InfoBox = ({ data = [] }) => {
   return (
     <div className='collectionBox'>
       <div className='collection__rect'>
