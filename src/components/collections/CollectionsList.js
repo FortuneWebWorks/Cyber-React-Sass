@@ -30,7 +30,11 @@ const defData = [
   { id: 220 },
 ];
 
-const CollectionsList = ({ slug, type }) => {
+const CollectionsList = ({ slug, type, sort }) => {
+  if (sort === 'Date') sort = 'timestamp';
+  if (sort === 'Rank') sort = 'token_rank';
+  if (sort === 'Price') sort = 'price';
+
   const [listingsData, listingsLoading] = useFetcher(
     `https://api.cyberdash.app/v1/collections/${slug}/${type}`
   );
@@ -67,15 +71,27 @@ const CollectionsList = ({ slug, type }) => {
 
   const timestampToDate = (timestamp) => {
     const date = new Date(timestamp * 1000);
-    return date.getMinutes() + ' minutes ago';
+    return date.getMinutes();
   };
 
   useEffect(() => {
     if (listingsData) {
-      setCurrentViewData(listingsData.rows.slice(0, 20));
+      if (sort === 'price' || sort === 'token_rank') {
+        setCurrentViewData(
+          listingsData.rows.sort((a, b) => +a[sort] - +b[sort])
+        );
+      } else if (sort === 'timestamp') {
+        setCurrentViewData(
+          listingsData.rows.sort(
+            (a, b) => timestampToDate(+a[sort]) - timestampToDate(+b[sort])
+          )
+        );
+      } else {
+        setCurrentViewData(listingsData.rows);
+      }
       setCollectionData((prev) => ({ ...prev, [type]: listingsData.rows }));
     }
-  }, [listingsData, setCollectionData, type]);
+  }, [listingsData, setCollectionData, sort, type]);
 
   useEffect(() => {
     timeOut.current = setTimeout(() => {
@@ -154,7 +170,7 @@ const CollectionsList = ({ slug, type }) => {
                     <span className='Time'>
                       <span className='time-title__container'>Time: </span>
                       <span className='time-amount__container'>
-                        {timestampToDate(item.timestamp)}
+                        {timestampToDate(item.timestamp)} minutes ago
                       </span>
                     </span>
                   </div>

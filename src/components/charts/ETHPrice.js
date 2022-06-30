@@ -85,6 +85,23 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
     },
   };
 
+  const checkOutliers = (data) => {
+    const outliers = data.filter(outlier('x'));
+
+    console.log(outliers);
+    setData(
+      outliers.map((item) => ({
+        y: +item.price,
+        x: +getTime(item.timestamp),
+        img: item.image_url,
+        price: item.price,
+        timestamp: item.timestamp,
+        tokenId: item.token_id,
+        tokenRank: item.token_rank,
+      }))
+    );
+  };
+
   useEffect(() => {
     if (collectionData && collectionData[type]) {
       if (timeFrame) {
@@ -103,7 +120,12 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
             }
         );
 
-        console.log(filteredData);
+        // console.log(filteredData);
+
+        if (isOutliers) {
+          checkOutliers(filteredData);
+          return;
+        }
 
         setData(
           filteredData.map((item) => ({
@@ -116,24 +138,12 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
             tokenRank: item.token_rank,
           }))
         );
-      } else if (isOutliers) {
-        const needToCheck = collectionData[type].map((item) =>
-          parseInt(item.price)
-        );
-
-        setData(
-          collectionData[type].map((item) => ({
-            y: +item.price,
-            x: +getTime(item.timestamp),
-            img: item.image_url,
-            price: item.price,
-            timestamp: item.timestamp,
-            tokenId: item.token_id,
-            tokenRank: item.token_rank,
-          }))
-        );
-        // console.log(outlier(needToCheck));
       } else {
+        if (isOutliers) {
+          checkOutliers(collectionData[type]);
+          return;
+        }
+
         setData(
           collectionData[type].map((item) => ({
             y: +item.price,

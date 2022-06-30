@@ -29,6 +29,7 @@ const Collection = () => {
   const [activeChart, setActiveChart] = useState('list');
   const [outliers, setOutliers] = useState(false);
   const [timeFrame, setTimeFrame] = useState('4 Hours');
+  const [listingsSort, setListingsSort] = useState('null');
 
   const [metaData, metaLoading] = useFetcher(
     `https://api.cyberdash.app/v1/collections/${slug}`
@@ -113,6 +114,7 @@ const Collection = () => {
             <div className='collection__list__header'>
               <h2>Listings</h2>
 
+              {console.log(listingsSort)}
               <div className='collection__list__header_dropdown'>
                 <DropDown
                   fontSize='3rem'
@@ -124,10 +126,15 @@ const Collection = () => {
                     { name: 'Rank' },
                   ]}
                   placeholder={'Sorting'}
+                  callBack={(val) => setListingsSort(val)}
                 />
               </div>
             </div>
-            <CollectionsList slug={slug} type={'listings'} />
+            <CollectionsList
+              slug={slug}
+              type={'listings'}
+              sort={listingsSort}
+            />
           </div>
 
           <div className='collection__charts_container'>
