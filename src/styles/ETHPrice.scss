@@ -4,7 +4,7 @@
   .ETH__hider_bottom {
     position: absolute;
     bottom: 5%;
-    left: 1%;
+    left: 1px;
     width: 20px;
     height: 20px;
     background-color: #0b1e39;
@@ -14,8 +14,8 @@
   .ETH__hider_top {
     position: absolute;
     top: 0;
-    left: 2px;
-    width: 20px;
+    left: 1px;
+    width: 23px;
     height: 20px;
     background-color: #0b1e39;
     pointer-events: none;

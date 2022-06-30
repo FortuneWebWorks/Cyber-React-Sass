@@ -10,6 +10,7 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
   type = type === 'list' ? 'listings' : 'orders';
   const { collectionData } = useContext(CollectionContext);
   const [data, setData] = useState(null);
+  const max = useRef(240);
 
   const getTime = (timestamp) => {
     const hours = new Date(+timestamp).getHours();
@@ -87,9 +88,10 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
   };
 
   const checkOutliers = (data) => {
-    const outliers = data.filter(outlier('x'));
+    const outliers = data.filter(outlier('price'));
+    const maxPrice = Math.max(...outliers.map((item) => +item.price));
+    max.current = maxPrice;
 
-    console.log(outliers);
     setData(
       outliers.map((item) => ({
         y: +item.price,
@@ -121,10 +123,12 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
             }
         );
 
-        // console.log(filteredData);
+        const maxPrice = Math.max(...filteredData.map((item) => +item.price));
+        max.current = maxPrice;
 
         if (isOutliers) {
           checkOutliers(filteredData);
+          console.log(checkOutliers(filteredData));
           return;
         }
 
@@ -163,6 +167,7 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
 
   return (
     <div className='ETH__container'>
+      {console.log(max.current)}
       <Chart
         style={{ paddingLeft: '0' }}
         type='scatter'
@@ -185,6 +190,7 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
         }}
         options={{
           maintainAspectRatio: false,
+          responsive: true,
 
           scales: {
             x: {
@@ -218,11 +224,10 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
               },
 
               ticks: {
-                stepSize: 40,
-                // tickLength: 0,
+                stepSize: max.current < 150 ? 3 : 40,
               },
-              max: 240,
-              min: -40,
+              max: max.current + (max.current < 150 ? 10 : 40),
+              min: (max.current < 150 ? 3 : 40) * -1,
               // beginAtZero: true,
             },
           },
