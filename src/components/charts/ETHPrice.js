@@ -1,4 +1,5 @@
 import { useContext, useEffect, useRef, useState } from 'react';
+import '../../styles/ETHPrice.scss';
 import 'chart.js/auto';
 import { Chart } from 'react-chartjs-2';
 import externalTooltipHandler from './CustomTooltip';
@@ -157,10 +158,11 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
         );
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [collectionData, isOutliers, timeFrame, type]);
 
   return (
-    <div>
+    <div className='ETH__container'>
       <Chart
         style={{ paddingLeft: '0' }}
         type='scatter'
@@ -186,6 +188,7 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
 
           scales: {
             x: {
+              offset: true,
               grid: {
                 display: true,
                 drawBorder: true,
@@ -193,15 +196,15 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
                 lineWidth: 2,
                 color: '#244677',
                 tickWidth: 0,
-                padding: 30,
+                // tickLength: 0,
+                // padding: 30,
               },
               ticks: {
-                // padding: 30,
                 callback: function (val) {
                   return this.getLabels()[val];
                 },
               },
-              // min: -1,
+              min: 0,
               beginAtZero: true,
             },
 
@@ -210,10 +213,17 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
                 color: '#244677',
                 lineWidth: 2,
                 tickWidth: 0,
-                drawBorder: true,
+                drawBorder: false,
+                drawOnChartArea: true,
               },
-              // max: ,
-              beginAtZero: true,
+
+              ticks: {
+                stepSize: 40,
+                // tickLength: 0,
+              },
+              max: 240,
+              min: -40,
+              // beginAtZero: true,
             },
           },
 
@@ -250,6 +260,8 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
         }}
         plugins={[plugin]}
       />
+      <span className='ETH__hider_bottom'></span>
+      <span className='ETH__hider_top'></span>
     </div>
   );
 };

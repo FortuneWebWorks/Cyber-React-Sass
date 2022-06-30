@@ -1,3 +1,5 @@
+import '../../styles/ETHPrice.scss';
+
 const getOrCreateTooltip = (chart, tooltip) => {
   let tooltipEl = chart.canvas.parentNode.querySelector('div');
   const tooltipData = tooltip?.dataPoints?.at(0)?.raw;

@@ -76,7 +76,9 @@ const Collection = () => {
               <a href={metaData?.twitter_url}>
                 <TwitterIcon />
               </a>
-              <a href={metaData?.discord_url}>
+              <a
+                href={metaData?.discord_url}
+                style={{ transform: 'scale(1.5)' }}>
                 <DiscordIcon />
               </a>
               <a href={metaData?.opensea_url}>
