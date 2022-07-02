@@ -141,6 +141,10 @@ const Collection = () => {
 
           <div className='collection__charts_container'>
             <div className='collection__charts'>
+              {/* Titles */}
+              <span className='list-sails_title_x'>Time</span>
+              <span className='list-sails_title_y'>ETH Price</span>
+
               <div className='collection__chart_header'>
                 <button
                   className={activeChart === 'list' ? 'active' : ''}
@@ -150,7 +154,7 @@ const Collection = () => {
                 <button
                   className={activeChart === 'orders' ? 'active' : ''}
                   onClick={() => setActiveChart('orders')}>
-                  Delist
+                  Sails
                 </button>
               </div>
 
@@ -215,21 +219,76 @@ const Collection = () => {
               </div>
             </div>
 
-            <div className='collection__second_chart_container'>
-              <h2>Momentum Index</h2>
-              <div className='collection__charts'>
-                <div className='collection__chart_header'>
-                  <button
-                    className={activeChart === 'list' ? 'active' : ''}
-                    onClick={() => setActiveChart('list')}>
-                    List
-                  </button>
-                  <button
-                    className={activeChart === 'orders' ? 'active' : ''}
-                    onClick={() => setActiveChart('orders')}>
-                    Delist
-                  </button>
+            {/*  */}
+            <div className='collection__charts collection__second_chart_container'>
+              <div className='collection__chart_header'>
+                <button
+                  className={activeChart === 'list' ? 'active' : ''}
+                  onClick={() => setActiveChart('list')}>
+                  List
+                </button>
+                <button
+                  className={activeChart === 'orders' ? 'active' : ''}
+                  onClick={() => setActiveChart('orders')}>
+                  Sails
+                </button>
+              </div>
+
+              <div className='collection__filters second__chart'>
+                <div className='collection__filters_dropdown'>
+                  <span className='dropdown_title'>Floo Var</span>
+                  <DropDown
+                    fontSize='3rem'
+                    innerColor='#244677'
+                    minWidth='70px'
+                    items={[{ name: '10%' }, { name: '20%' }, { name: '30%' }]}
+                    placeholder={'10%'}
+                    callBack={(value) => setTimeFrame(value)}
+                  />
                 </div>
+
+                <div className='collection__filters_dropdown'>
+                  <span className='dropdown_title'>Time Frame</span>
+                  <DropDown
+                    fontSize='3rem'
+                    innerColor='#244677'
+                    minWidth='111px'
+                    items={[
+                      { name: '4 Hours' },
+                      { name: '7 Hours' },
+                      { name: '2 Hours' },
+                    ]}
+                    placeholder={'4 Hours'}
+                    callBack={(value) => setTimeFrame(value)}
+                  />
+                </div>
+              </div>
+
+              <div className='collection__charts_mode'>
+                <div>
+                  <div className='collection__charts_mode_point'></div>
+                  <span>LEGENDARY</span>
+                </div>
+                <div>
+                  <div className='collection__charts_mode_point'></div>
+                  <span>SUPER RARE</span>
+                </div>
+                <div>
+                  <div className='collection__charts_mode_point'></div>
+                  <span>RARE</span>
+                </div>
+                <div>
+                  <div className='collection__charts_mode_point'></div>
+                  <span>COMMON</span>
+                </div>
+              </div>
+
+              <div className='ETHPrice_chart'>
+                <ETHPrice
+                  type={activeChart}
+                  isOutliers={outliers}
+                  timeFrame={timeFrame}
+                />
               </div>
             </div>
           </div>

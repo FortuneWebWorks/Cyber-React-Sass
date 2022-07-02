@@ -59,7 +59,7 @@ const TrendingTable = ({ data = defData, sort, info }) => {
   const navigator = useNavigate();
 
   const redirectCargo = (item) => {
-    navigator(`/collectionOfficials/${item.collection_slug}`);
+    navigator(`/collection/${item.collection_slug}`);
   };
 
   return (

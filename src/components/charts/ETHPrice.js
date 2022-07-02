@@ -193,6 +193,12 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
           maintainAspectRatio: false,
           responsive: true,
 
+          layout: {
+            padding: {
+              bottom: 40,
+            },
+          },
+
           scales: {
             x: {
               offset: true,
