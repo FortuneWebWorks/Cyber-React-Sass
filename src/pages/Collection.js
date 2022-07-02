@@ -17,6 +17,7 @@ import { ReactComponent as TrendingIcon } from 'assets/images/Trending.svg';
 import { ReactComponent as AnalyticalIcon } from 'assets/images/Analytical.svg';
 import CollectionsList from 'components/collections/CollectionsList';
 import DropDown from 'components/DropDown';
+import DropDownFloorVar from 'components/collections/CollectionDropDown';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import ETHPrice from 'components/charts/ETHPrice';
@@ -236,13 +237,17 @@ const Collection = () => {
 
               <div className='collection__filters second__chart'>
                 <div className='collection__filters_dropdown'>
-                  <span className='dropdown_title'>Floo Var</span>
-                  <DropDown
+                  <span className='dropdown_title'>Floor Var</span>
+                  <DropDownFloorVar
                     fontSize='3rem'
                     innerColor='#244677'
-                    minWidth='70px'
-                    items={[{ name: '10%' }, { name: '20%' }, { name: '30%' }]}
-                    placeholder={'10%'}
+                    minWidth='111px'
+                    items={[
+                      { name: '4 Hours' },
+                      { name: '7 Hours' },
+                      { name: '2 Hours' },
+                    ]}
+                    placeholder={'4 Hours'}
                     callBack={(value) => setTimeFrame(value)}
                   />
                 </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import '../styles/dropdown.scss';
-import { ReactComponent as Arrow } from '../assets/images/chevron-down.svg';
+import 'styles/dropdown.scss';
+import { ReactComponent as Arrow } from 'assets/images/chevron-down.svg';
 
 const DropDown = ({
   title,
@@ -43,33 +43,30 @@ const DropDown = ({
   }, []);
 
   return (
-    <div className="dropdown__container" dropdown="true">
+    <div className='dropdown__container' dropdown='true'>
       <span
-        className="title"
+        className='title'
         style={{ fontSize: fontSize || '', minWidth: minWidth || '' }}
-        dropdown="true"
-      >
+        dropdown='true'>
         {title}
       </span>
-      <ul className="dropdown" onClick={onClick} dropdown="true">
-        <div className="dropdown__placeholder__icon" dropdown="true">
-          <span className="dropdown__placeholder" dropdown="true">
+      <ul className='dropdown' onClick={onClick} dropdown='true'>
+        <div className='dropdown__placeholder__icon' dropdown='true'>
+          <span className='dropdown__placeholder' dropdown='true'>
             {placeHolder}
           </span>
           <Arrow />
         </div>
-        <div className="dropdown__scroll" dropdown="true">
+        <div className='dropdown__scroll' dropdown='true'>
           <ul
             className={`dropdown__items ${open ? 'open' : ''}`}
-            dropdown="true"
-            style={{ backgroundColor: innerColor }}
-          >
+            dropdown='true'
+            style={{ backgroundColor: innerColor }}>
             {items.map((item, index) => (
               <li
                 key={item.name || item.title || index}
                 data={JSON.stringify(item)}
-                dropdown="true"
-              >
+                dropdown='true'>
                 {item.name || item.title}
               </li>
             ))}
