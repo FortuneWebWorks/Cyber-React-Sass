@@ -26,11 +26,33 @@
     height: 128px;
 
     li {
+      position: relative;
       height: 63px;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       gap: 9.5px;
+      border-radius: $border-radius-sm;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: $border-radius-sm;
+        background-color: #333;
+        z-index: 10;
+        opacity: 0.5;
+      }
+    }
+
+    li.active {
+      &::after {
+        content: '';
+        display: none;
+      }
     }
 
     .sign {
@@ -84,7 +106,6 @@
     width: 272px;
     height: fit-content;
     border-radius: $border-radius-sm;
-    overflow: hidden;
     z-index: 5;
     transform: translateX(-50%);
   }
@@ -104,7 +125,6 @@
     transition: opacity 0, all 0.1s ease-in-out;
     user-select: none;
     pointer-events: none;
-    overflow: hidden;
 
     // Mozilla
     scrollbar-width: 5px;
@@ -122,8 +142,6 @@
     &.open {
       height: fit-content;
       max-height: 180px;
-      overflow: hidden;
-      overflow-y: auto;
       opacity: 1;
       z-index: 1;
       user-select: auto;

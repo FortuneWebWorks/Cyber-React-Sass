@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-import '../../styles/ETHPrice.scss';
+import 'styles/ETHPriceChart/ETHPrice.scss';
 import 'chart.js/auto';
 import { Chart } from 'react-chartjs-2';
 import externalTooltipHandler from './CustomTooltip';
@@ -11,7 +11,6 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
   const { collectionData } = useContext(CollectionContext);
   const [data, setData] = useState(null);
   const max = useRef(240);
-  console.log(collectionData);
 
   const getTime = (timestamp) => {
     const hours = new Date(+timestamp).getHours();
@@ -129,7 +128,6 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
 
         if (isOutliers) {
           checkOutliers(filteredData);
-          console.log(checkOutliers(filteredData));
           return;
         }
 
@@ -168,7 +166,6 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
 
   return (
     <div className='ETH__container'>
-      {console.log(max.current)}
       <Chart
         style={{ paddingLeft: '0' }}
         type='scatter'

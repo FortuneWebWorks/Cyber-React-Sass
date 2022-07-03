@@ -264,7 +264,7 @@
       justify-content: center;
       align-items: center;
       gap: 23px;
-      margin: 14px 0;
+      margin: 14px auto;
 
       span {
         text-align: center;
@@ -293,7 +293,7 @@
       }
       & div:nth-child(3) {
         .collection__charts_mode_point {
-          background: #fd2f7a;
+          background: #fd8f25;
         }
       }
       & div:nth-child(4) {
@@ -311,6 +311,7 @@
     }
 
     .collection__filters_dropdown {
+      height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;

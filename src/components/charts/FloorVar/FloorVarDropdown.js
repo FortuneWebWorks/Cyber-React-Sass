@@ -17,6 +17,7 @@ const DropDownFloorVar = ({
   // const [data, setData] = useState('');
   const [placeHolder, setPlaceHolder] = useState(value || placeholder);
   const [open, setOpen] = useState(false);
+  const [activeDropdwon, setActiveDropdwon] = useState('%');
 
   const onClick = (e) => {
     if (e.target.classList.contains('dropdown')) {
@@ -65,26 +66,30 @@ const DropDownFloorVar = ({
             dropdown='true'
             style={{ backgroundColor: innerColor }}>
             <div dropdown='true' className='dropdown_items'>
-              <li>
+              <li
+                onClick={() => setActiveDropdwon('%')}
+                className={`${activeDropdwon === '%' ? 'active' : ''}`}>
                 <div className='sign'>%</div>
                 <MultiRangeSlider
                   min={-1000}
                   max={1000}
+                  type={'%'}
                   onChange={({ min, max }) =>
-                    // console.log(`min = ${min}, max = ${max}`)
-                    'hello'
+                    activeDropdwon === '%' && setPlaceHolder(`${min} - ${max}`)
                   }
                 />
               </li>
 
-              <li>
+              <li
+                onClick={() => setActiveDropdwon('X')}
+                className={`${activeDropdwon === 'X' ? 'active' : ''}`}>
                 <div className='sign'>X</div>
                 <MultiRangeSlider
-                  min={-1000}
-                  max={1000}
+                  min={-100}
+                  max={100}
+                  type={'x'}
                   onChange={({ min, max }) =>
-                    // console.log(`min = ${min}, max = ${max}`)
-                    'hello'
+                    activeDropdwon === 'X' && setPlaceHolder(`${min} - ${max}`)
                   }
                 />
               </li>

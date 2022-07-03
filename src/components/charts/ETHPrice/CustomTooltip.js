@@ -1,4 +1,4 @@
-import '../../styles/ETHPrice.scss';
+import 'styles/ETHPriceChart/ETHPrice.scss';
 
 const getOrCreateTooltip = (chart, tooltip) => {
   let tooltipEl = chart.canvas.parentNode.querySelector('div');

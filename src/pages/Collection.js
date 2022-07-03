@@ -17,12 +17,13 @@ import { ReactComponent as TrendingIcon } from 'assets/images/Trending.svg';
 import { ReactComponent as AnalyticalIcon } from 'assets/images/Analytical.svg';
 import CollectionsList from 'components/collections/CollectionsList';
 import DropDown from 'components/DropDown';
-import DropDownFloorVar from 'components/collections/CollectionDropDown';
+import DropDownFloorVar from 'components/charts/FloorVar/FloorVarDropdown';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
-import ETHPrice from 'components/charts/ETHPrice';
+import ETHPrice from 'components/charts/ETHPrice/ETHPrice';
 import SwitchJs from 'components/SwitchJs';
 import { CollectionContextProvider } from 'contexts/collectionContext';
+import FloorVarChart from 'components/charts/FloorVar/FloorVarChart';
 
 const Collection = () => {
   const params = useParams();
@@ -35,6 +36,8 @@ const Collection = () => {
   const [metaData, metaLoading] = useFetcher(
     `https://api.cyberdash.app/v1/collections/${slug}`
   );
+
+  console.log(metaData);
 
   return (
     <CollectionContextProvider>
@@ -117,7 +120,6 @@ const Collection = () => {
             <div className='collection__list__header'>
               <h2>Listings</h2>
 
-              {console.log(listingsSort)}
               <div className='collection__list__header_dropdown'>
                 <DropDown
                   fontSize='3rem'
@@ -222,6 +224,14 @@ const Collection = () => {
 
             {/*  */}
             <div className='collection__charts collection__second_chart_container'>
+              {/* Titles */}
+              <span
+                className='list-sails_title_x'
+                style={{ transform: 'translateX(-50%)' }}>
+                Time Period
+              </span>
+              <span className='list-sails_title_y'>Count</span>
+
               <div className='collection__chart_header'>
                 <button
                   className={activeChart === 'list' ? 'active' : ''}
@@ -231,13 +241,14 @@ const Collection = () => {
                 <button
                   className={activeChart === 'orders' ? 'active' : ''}
                   onClick={() => setActiveChart('orders')}>
-                  Sails
+                  Delist
                 </button>
               </div>
 
               <div className='collection__filters second__chart'>
                 <div className='collection__filters_dropdown'>
                   <span className='dropdown_title'>Floor Var</span>
+                  {/* {console.log(metaData)} */}
                   <DropDownFloorVar
                     fontSize='3rem'
                     innerColor='#244677'
@@ -271,29 +282,34 @@ const Collection = () => {
 
               <div className='collection__charts_mode'>
                 <div>
-                  <div className='collection__charts_mode_point'></div>
-                  <span>LEGENDARY</span>
+                  <div
+                    className='collection__charts_mode_point'
+                    style={{ backgroundColor: '#27AF52' }}></div>
+                  <span>ABOVE FLOOR</span>
                 </div>
                 <div>
-                  <div className='collection__charts_mode_point'></div>
-                  <span>SUPER RARE</span>
+                  <div
+                    className='collection__charts_mode_point'
+                    style={{ backgroundColor: '#FD2F7A' }}></div>
+                  <span>BELOW FLOOR</span>
                 </div>
                 <div>
-                  <div className='collection__charts_mode_point'></div>
-                  <span>RARE</span>
-                </div>
-                <div>
-                  <div className='collection__charts_mode_point'></div>
-                  <span>COMMON</span>
+                  <div
+                    className='collection__charts_mode_point'
+                    style={{ backgroundColor: '#FD8F25' }}></div>
+                  <span>SALES</span>
                 </div>
               </div>
 
               <div className='ETHPrice_chart'>
-                <ETHPrice
-                  type={activeChart}
-                  isOutliers={outliers}
-                  timeFrame={timeFrame}
-                />
+                {metaData && (
+                  <FloorVarChart
+                    type={activeChart}
+                    isOutliers={outliers}
+                    timeFrame={timeFrame}
+                    floorPrice={metaData.floor_price}
+                  />
+                )}
               </div>
             </div>
           </div>

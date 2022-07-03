@@ -107,4 +107,11 @@
     pointer-events: all;
     position: relative;
   }
+
+  .value__setter {
+    position: absolute;
+    top: -50%;
+    left: 0;
+    width: 5rem;
+  }
 }

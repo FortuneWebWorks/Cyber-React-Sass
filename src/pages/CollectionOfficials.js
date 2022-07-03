@@ -1,7 +1,7 @@
 import 'styles/collections/collectionOfficials.scss';
 import 'styles/collections/mainCollection.scss';
 import CollectionBox from 'components/collections/InfoBox';
-import ETHPrice from 'components/charts/ETHPrice';
+import ETHPrice from 'components/charts/ETHPrice/ETHPrice';
 import SwitchJs from 'components/SwitchJs';
 import DropDown from 'components/DropDown';
 import { CollectionContextProvider } from 'contexts/collectionContext';

@@ -8,12 +8,18 @@ const MultiRangeSlider = ({ min, max, onChange }) => {
   const minValRef = useRef(min);
   const maxValRef = useRef(max);
   const range = useRef(null);
+  const valueSetter = useRef(null);
 
   // Convert to percentage
   const getPercent = useCallback(
     (value) => Math.round(((value - min) / (max - min)) * 100),
     [min, max]
   );
+
+  // Show input
+  const onClick = () => {
+    console.log('object');
+  };
 
   // Set width of the range to decrease from the left side
   useEffect(() => {
@@ -24,6 +30,9 @@ const MultiRangeSlider = ({ min, max, onChange }) => {
       range.current.style.left = `${minPercent}%`;
       range.current.style.width = `${maxPercent - minPercent}%`;
     }
+
+    console.log(minPercent / 10);
+    valueSetter.current.style.left = minPercent - (minPercent / 20 + 9) + '%';
   }, [minVal, getPercent]);
 
   // Set width of the range to decrease from the right side
@@ -43,6 +52,8 @@ const MultiRangeSlider = ({ min, max, onChange }) => {
 
   return (
     <div className='multirange__container'>
+      <input type='text' className='value__setter' ref={valueSetter} />
+
       <input
         type='range'
         min={min}
@@ -66,14 +77,15 @@ const MultiRangeSlider = ({ min, max, onChange }) => {
           setMaxVal(value);
           maxValRef.current = value;
         }}
+        onClick={onClick}
         className='thumb thumb--right'
       />
 
       <div className='slider'>
         <div className='slider__track' />
         <div ref={range} className='slider__range' />
-        <div className='slider__left-value'>{minVal}</div>
-        <div className='slider__right-value'>{maxVal}</div>
+        <div className='slider__left-value'>{min}</div>
+        <div className='slider__right-value'>{max}</div>
       </div>
     </div>
   );
