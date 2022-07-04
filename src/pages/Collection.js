@@ -19,7 +19,7 @@ import CollectionsList from 'components/collections/CollectionsList';
 import DropDown from 'components/DropDown';
 import DropDownFloorVar from 'components/charts/FloorVar/FloorVarDropdown';
 import { useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import ETHPrice from 'components/charts/ETHPrice/ETHPrice';
 import SwitchJs from 'components/SwitchJs';
 import { CollectionContextProvider } from 'contexts/collectionContext';
@@ -31,7 +31,9 @@ const Collection = () => {
   const [activeChart, setActiveChart] = useState('list');
   const [outliers, setOutliers] = useState(false);
   const [timeFrame, setTimeFrame] = useState('4 Hours');
+  const [floorTimeFrame, setFloorTimeFrame] = useState('4 Hours');
   const [listingsSort, setListingsSort] = useState('null');
+  const [floorVar, setFloorVar] = useState('null');
 
   const [metaData, metaLoading] = useFetcher(
     `https://api.cyberdash.app/v1/collections/${slug}`
@@ -253,13 +255,7 @@ const Collection = () => {
                     fontSize='3rem'
                     innerColor='#244677'
                     minWidth='111px'
-                    items={[
-                      { name: '4 Hours' },
-                      { name: '7 Hours' },
-                      { name: '2 Hours' },
-                    ]}
-                    placeholder={'4 Hours'}
-                    callBack={(value) => setTimeFrame(value)}
+                    callBack={(value) => setFloorVar(value)}
                   />
                 </div>
 
@@ -275,7 +271,7 @@ const Collection = () => {
                       { name: '2 Hours' },
                     ]}
                     placeholder={'4 Hours'}
-                    callBack={(value) => setTimeFrame(value)}
+                    callBack={(value) => setFloorTimeFrame(value)}
                   />
                 </div>
               </div>
@@ -306,8 +302,9 @@ const Collection = () => {
                   <FloorVarChart
                     type={activeChart}
                     isOutliers={outliers}
-                    timeFrame={timeFrame}
+                    timeFrame={floorTimeFrame}
                     floorPrice={metaData.floor_price}
+                    floorVar={floorVar}
                   />
                 )}
               </div>

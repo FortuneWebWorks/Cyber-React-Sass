@@ -113,5 +113,10 @@
     top: -50%;
     left: 0;
     width: 5rem;
+
+    &.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
   }
 }

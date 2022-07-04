@@ -4,12 +4,19 @@ import 'chart.js/auto';
 import { Chart } from 'react-chartjs-2';
 import externalTooltipHandler from './FloorVarCustomTooltip';
 import CollectionContext from 'contexts/collectionContext';
-import outlier from 'outliers';
 
-const FloorVarChart = ({ type, isOutliers, timeFrame, floorPrice }) => {
-  type = type === 'list' ? 'listings' : 'orders';
+const FloorVarChart = ({
+  type,
+  isOutliers,
+  timeFrame,
+  floorPrice,
+  floorVar,
+}) => {
+  type = 'listings';
   const { collectionData } = useContext(CollectionContext);
   const [data, setData] = useState(null);
+  const [flooredData, setFlooredData] = useState(null);
+  const [xAxisLabels, setXAxisLabels] = useState(null);
   const max = useRef(20);
 
   const getTime = (timestamp) => {
@@ -118,49 +125,91 @@ const FloorVarChart = ({ type, isOutliers, timeFrame, floorPrice }) => {
 
   useEffect(() => {
     if (collectionData && collectionData[type]) {
-      if (timeFrame === false) {
+      if (timeFrame) {
         const time = +timeFrame.split(' ')[0];
 
-        const filteredData = collectionData[type].filter(
-          (item) =>
-            getTime(item.timestamp) <= time && {
-              y: +item.price,
-              x: +getTime(item.timestamp),
-              img: item.image_url,
-              price: item.price,
-              timestamp: item.timestamp,
-              tokenId: item.token_id,
-              tokenRank: item.token_rank,
-            }
-        );
+        // console.log(time);
+        const convertMinsToHrsMins = (mins) => {
+          let h = Math.floor(mins / 60);
+          let m = mins % 60;
+          h = h < 10 ? '0' + h : h; // (or alternatively) h = String(h).padStart(2, '0')
+          m = m < 10 ? '0' + m : m; // (or alternatively) m = String(m).padStart(2, '0')
+          return `${h}:${m}`;
+        };
 
-        const maxPrice = Math.max(...filteredData.map((item) => +item.price));
-        max.current = maxPrice;
+        const date = new Date();
+        const currentTime = date.getHours() * 60 + date.getMinutes();
 
-        setData(
-          filteredData.map((item) => ({
-            y: +item.price,
-            x: +getTime(item.timestamp),
-            img: item.image_url,
-            price: item.price,
-            timestamp: item.timestamp,
-            tokenId: item.token_id,
-            tokenRank: item.token_rank,
-          }))
-        );
-      } else {
+        const targetTime = +time * 60;
+
+        const finalTimeRef = ((+currentTime - +targetTime) / 60)
+          .toString()
+          .split('.');
+        const finalHours = finalTimeRef[0];
+        const finalMinutes = Math.ceil((finalTimeRef[1] * 60) / 100)
+          .toString()
+          .replace(/^0+(\d)|(\d)0+$/gm, '$1$2');
+
+        const finalTime =
+          ('0' + finalHours).slice(-2) + ':' + ('0' + finalMinutes).slice(-2);
+
+        const wantedTime = new Date(`${date.toDateString()} ${finalTime}`);
+        console.log(wantedTime);
+
+        //   var diff = date.getTime() - wantedTime.getTime();
+
+        //   var msec = diff;
+        //   var hh = Math.floor(msec / 1000 / 60 / 60);
+        //   msec -= hh * 1000 * 60 * 60;
+        //   var mm = Math.floor(msec / 1000 / 60);
+        //   msec -= mm * 1000 * 60;
+
+        //   console.log(hh + ':' + mm);
+      }
+
+      if (flooredData) {
         setData({
-          above: collectionData[type]
+          above: flooredData
             .filter((item) => +item.price >= +floorPrice)
             .map((i) => +i.price),
-          below: collectionData[type]
+          below: flooredData
             .filter((item) => +item.price <= +floorPrice)
             .map((i) => +i.price),
         });
+      } else {
+        setData({ above: [], below: [] });
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [collectionData, isOutliers, timeFrame, type]);
+  }, [collectionData, isOutliers, timeFrame, type, flooredData, floorPrice]);
+
+  useEffect(() => {
+    const floor = floorVar.split(' ');
+    const unit = floor.filter((item) => !parseInt(item))[0];
+    let max = null;
+    let min = null;
+    if (unit === 'X') {
+      min = parseInt(floor[1]) * floorPrice;
+      max = parseInt(floor[2]) * floorPrice;
+
+      setFlooredData(
+        collectionData[type].filter(
+          (item) => +item.price <= max && +item.price >= min
+        )
+      );
+    } else {
+      min = parseInt(floor[0]);
+      max = parseInt(floor[1]);
+
+      collectionData &&
+        setFlooredData(
+          collectionData[type]?.filter(
+            (item) =>
+              +Math.floor((+item.price / floorPrice) * 100) <= max &&
+              +Math.floor((+item.price / floorPrice) * 100) >= min
+          )
+        );
+    }
+  }, [collectionData, floorPrice, floorVar, type]);
 
   return (
     <div className='floor__container'>
@@ -300,7 +349,7 @@ const FloorVarChart = ({ type, isOutliers, timeFrame, floorPrice }) => {
         }}
         plugins={[plugin]}
       />
-      {console.log(collectionData)}
+
       <span className='ETH__hider_bottom'></span>
       <span className='ETH__hider_top'></span>
     </div>
