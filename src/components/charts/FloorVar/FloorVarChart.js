@@ -154,7 +154,7 @@ const FloorVarChart = ({
           ('0' + finalHours).slice(-2) + ':' + ('0' + finalMinutes).slice(-2);
 
         const wantedTime = new Date(`${date.toDateString()} ${finalTime}`);
-        console.log(wantedTime);
+        // console.log(wantedTime);
 
         //   var diff = date.getTime() - wantedTime.getTime();
 
@@ -217,14 +217,11 @@ const FloorVarChart = ({
         min: Math.min(...[...data.above, ...data.below]),
         max: Math.max(...[...data.above, ...data.below]),
       });
-
-      console.log(Math.max(...[...data.above, ...data.below]));
     }
   }, [data]);
 
   return (
     <div className='floor__container'>
-      {console.log(minMax)}
       <Chart
         style={{ paddingLeft: '0' }}
         type='line'

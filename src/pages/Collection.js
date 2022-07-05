@@ -25,6 +25,7 @@ import SwitchJs from 'components/SwitchJs';
 import { CollectionContextProvider } from 'contexts/collectionContext';
 import FloorVarChart from 'components/charts/FloorVar/FloorVarChart';
 import ButtonGroup from 'components/ButtonGroup';
+import LargeChart from 'components/charts/LargeChart/LargeChart';
 
 const Collection = () => {
   const params = useParams();
@@ -379,6 +380,7 @@ const Collection = () => {
                 name='threshold'
                 id='threshold'
                 className='threshold__input'
+                placeholder='45'
               />
             </div>
 
@@ -409,7 +411,7 @@ const Collection = () => {
               <span className='list-sails_title_y'>Count</span>
 
               <div className='ETHPrice_chart'>
-                <ETHPrice
+                <LargeChart
                   type={activeChart}
                   isOutliers={outliers}
                   timeFrame={timeFrame}
