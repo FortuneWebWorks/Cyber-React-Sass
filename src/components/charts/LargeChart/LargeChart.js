@@ -145,6 +145,18 @@ const LargeChart = ({ type, isOutliers, timeFrame }) => {
     setData(result);
   };
 
+  function getRange(upper, lower, steps) {
+    const difference = upper - lower;
+    const increment = difference / (steps - 1);
+    return [
+      lower,
+      ...Array(steps - 2)
+        .fill('')
+        .map((_, index) => Math.ceil(lower + increment * (index + 1))),
+      upper,
+    ];
+  }
+
   useEffect(() => {
     if (collectionData && collectionData[type]) {
       if (timeFrame) {
@@ -165,19 +177,33 @@ const LargeChart = ({ type, isOutliers, timeFrame }) => {
             .values(),
         ];
 
-        const formattedData = result.map((item) => ({
-          y: +item.count,
-          x: +item.price,
-          img: item.image_url,
-          price: item.price,
-          timestamp: item.timestamp,
-          tokenId: item.token_id,
-          tokenRank: item.token_rank,
-        }));
+        const formattedData = result
+          .map((item) => ({
+            y: +item.count,
+            x: +item.price,
+            img: item.image_url,
+            price: item.price,
+            timestamp: item.timestamp,
+            tokenId: item.token_id,
+            tokenRank: item.token_rank,
+          }))
+          .sort((a, b) => +a.x - +b.x);
 
-        const labels = formattedData
-          .map((item) => ({ label: item.price, color: '#AB7CE1' }))
-          .sort((a, b) => +a - +b);
+        const ranges = getRange(formattedData.length, 0, 5);
+
+        const labels = formattedData.map((item, index) => {
+          index = index !== 0 ? index + 1 : index;
+
+          if (ranges.includes(index)) {
+            return { label: item.x, color: '#AB7CE1' };
+          }
+
+          return { label: '', color: '#AB7CE1' };
+        });
+        //
+
+        console.log(formattedData);
+        console.log(labels);
 
         setLabels(labels);
 
@@ -261,6 +287,7 @@ const LargeChart = ({ type, isOutliers, timeFrame }) => {
 
           scales: {
             x: {
+              // stacked: true,
               offset: true,
               grid: {
                 display: true,
@@ -277,9 +304,8 @@ const LargeChart = ({ type, isOutliers, timeFrame }) => {
                 // callback: function (val) {
                 //   return this.getLabels()[val];
                 // },
-
                 autoSkip: false,
-                maxTicksLimit: 10000,
+                maxRotation: 0,
               },
               // min: 0,
               beginAtZero: true,
