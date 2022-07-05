@@ -24,6 +24,7 @@ import ETHPrice from 'components/charts/ETHPrice/ETHPrice';
 import SwitchJs from 'components/SwitchJs';
 import { CollectionContextProvider } from 'contexts/collectionContext';
 import FloorVarChart from 'components/charts/FloorVar/FloorVarChart';
+import ButtonGroup from 'components/ButtonGroup';
 
 const Collection = () => {
   const params = useParams();
@@ -38,8 +39,6 @@ const Collection = () => {
   const [metaData, metaLoading] = useFetcher(
     `https://api.cyberdash.app/v1/collections/${slug}`
   );
-
-  console.log(metaData);
 
   return (
     <CollectionContextProvider>
@@ -316,6 +315,122 @@ const Collection = () => {
               <h2>Sales</h2>
             </div>
             <CollectionsList slug={slug} type={'orders'} />
+          </div>
+        </div>
+
+        <div className='collection__large_chart collection__charts_container'>
+          <div className='collection__filters price_range'>
+            <div className='collection__filters_dropdown'>
+              <span
+                className='dropdown_title'
+                style={{ font: 'normal normal bold 12px/14px Roboto' }}>
+                Price Range
+              </span>
+              <DropDown
+                fontSize='3rem'
+                innerColor='#244677'
+                minWidth='60px'
+                items={[{ name: '10%' }, { name: '20%' }, { name: '30%' }]}
+                placeholder={'10%'}
+                callBack={(value) => setTimeFrame(value)}
+              />
+            </div>
+
+            <div className='collection__filters_toggle'>
+              <ButtonGroup items={['%', '#']} />
+            </div>
+
+            <div className='collection__filters_toggle'>
+              <span
+                style={{
+                  color: '#D1D1D1',
+                  font: 'normal normal normal 11px/13px Roboto',
+                }}>
+                OUTLIERS
+              </span>
+              <SwitchJs
+                style={{ backgroundColor: '#24467750' }}
+                onClick={(e) => {
+                  setOutliers((prev) => !prev);
+                }}
+              />
+            </div>
+
+            <div className='collection__filters_dropdown large_chart_time_frame'>
+              <span className='dropdown_title'>Time Frame</span>
+              <DropDown
+                fontSize='3rem'
+                innerColor='#244677'
+                minWidth='111px'
+                items={[
+                  { name: '4 Hours' },
+                  { name: '7 Hours' },
+                  { name: '2 Hours' },
+                ]}
+                placeholder={'4 Hours'}
+                callBack={(value) => setTimeFrame(value)}
+              />
+            </div>
+
+            <div className='collection__filters_dropdown'>
+              <span className='dropdown_title'>Threshold</span>
+              <input
+                type='number'
+                name='threshold'
+                id='threshold'
+                className='threshold__input'
+              />
+            </div>
+
+            <div className='collection__charts_mode'>
+              <div>
+                <div className='collection__charts_mode_point'></div>
+                <span>LEGENDARY</span>
+              </div>
+              <div>
+                <div className='collection__charts_mode_point'></div>
+                <span>SUPER RARE</span>
+              </div>
+              <div>
+                <div className='collection__charts_mode_point'></div>
+                <span>RARE</span>
+              </div>
+              <div>
+                <div className='collection__charts_mode_point'></div>
+                <span>COMMON</span>
+              </div>
+            </div>
+          </div>
+
+          <div className='charts'>
+            <div className='collection__charts'>
+              {/* Titles */}
+              <span className='list-sails_title_x'>Price</span>
+              <span className='list-sails_title_y'>Count</span>
+
+              <div className='ETHPrice_chart'>
+                <ETHPrice
+                  type={activeChart}
+                  isOutliers={outliers}
+                  timeFrame={timeFrame}
+                />
+              </div>
+            </div>
+
+            {/*  */}
+            <div className='collection__charts'>
+              {/* Titles */}
+              <span className='list-sails_title_x'>Rarity Rank</span>
+              <span className='list-sails_title_y'>Price in ETH</span>
+
+              <div className='ETHPrice_chart'>
+                <ETHPrice
+                  type={activeChart}
+                  isOutliers={outliers}
+                  timeFrame={timeFrame}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

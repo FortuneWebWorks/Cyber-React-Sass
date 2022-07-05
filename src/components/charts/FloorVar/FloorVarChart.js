@@ -17,7 +17,7 @@ const FloorVarChart = ({
   const [data, setData] = useState(null);
   const [flooredData, setFlooredData] = useState(null);
   const [xAxisLabels, setXAxisLabels] = useState(null);
-  const max = useRef(20);
+  const [minMax, setMinMax] = useState(0);
 
   const getTime = (timestamp) => {
     const hours = new Date(+timestamp).getHours();
@@ -211,8 +211,20 @@ const FloorVarChart = ({
     }
   }, [collectionData, floorPrice, floorVar, type]);
 
+  useEffect(() => {
+    if (data && data.above) {
+      setMinMax({
+        min: Math.min(...[...data.above, ...data.below]),
+        max: Math.max(...[...data.above, ...data.below]),
+      });
+
+      console.log(Math.max(...[...data.above, ...data.below]));
+    }
+  }, [data]);
+
   return (
     <div className='floor__container'>
+      {console.log(minMax)}
       <Chart
         style={{ paddingLeft: '0' }}
         type='line'
@@ -307,10 +319,10 @@ const FloorVarChart = ({
               },
 
               ticks: {
-                stepSize: 1,
+                stepSize: 2,
               },
-              max: max.current,
-              min: 0,
+              max: minMax.max,
+              min: minMax.min,
               // beginAtZero: true,
             },
           },
