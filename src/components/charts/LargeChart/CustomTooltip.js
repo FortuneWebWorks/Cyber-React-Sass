@@ -1,4 +1,4 @@
-import 'styles/longChart/largeChartCustomTooltip.scss';
+import 'styles/largeChart/largeChartCustomTooltip.scss';
 
 const getOrCreateTooltip = (chart, tooltip) => {
   let tooltipEl = chart.canvas.parentNode.querySelector('div');

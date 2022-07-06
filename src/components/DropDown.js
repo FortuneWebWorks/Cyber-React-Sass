@@ -42,6 +42,10 @@ const DropDown = ({
       });
   }, []);
 
+  useEffect(() => {
+    setPlaceHolder(placeholder);
+  }, [placeholder]);
+
   return (
     <div className='dropdown__container' dropdown='true'>
       <span

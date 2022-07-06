@@ -6,12 +6,13 @@ import externalTooltipHandler from './CustomTooltip';
 import CollectionContext from 'contexts/collectionContext';
 import outlier from 'outliers';
 
-const LargeChart = ({ type, isOutliers, timeFrame, callBack }) => {
+const LargeChart = ({ type, isOutliers, timeFrame, callBack, step }) => {
   type = type === 'list' ? 'listings' : 'orders';
   const { collectionData } = useContext(CollectionContext);
   const [data, setData] = useState(null);
   const [labels, setLabels] = useState(null);
   const max = useRef(240);
+  const min = useRef(240);
 
   const getTime = (timestamp) => {
     const hours = new Date(+timestamp).getHours();
@@ -120,7 +121,9 @@ const LargeChart = ({ type, isOutliers, timeFrame, callBack }) => {
   const checkOutliers = (data) => {
     const outliers = data.filter(outlier('price'));
     const maxPrice = Math.max(...outliers.map((item) => +item.price));
+    const minPrice = Math.min(...outliers.map((item) => +item.price));
     max.current = maxPrice;
+    min.current = minPrice;
 
     const outliersFiltered = outliers.map((item) => item);
 
@@ -161,7 +164,7 @@ const LargeChart = ({ type, isOutliers, timeFrame, callBack }) => {
       return {
         label: item.x,
         color: '#AB7CE1',
-        labelColor: '#5B5E6100',
+        labelColor: '#5B5E61',
         y: +item.count,
         x: +item.price,
       };
@@ -231,7 +234,7 @@ const LargeChart = ({ type, isOutliers, timeFrame, callBack }) => {
           return {
             label: item.x,
             color: '#AB7CE1',
-            labelColor: '#5B5E6100',
+            labelColor: '#5B5E61',
             y: +item.count,
             x: +item.price,
           };
@@ -240,7 +243,9 @@ const LargeChart = ({ type, isOutliers, timeFrame, callBack }) => {
         setLabels(labels);
 
         const maxPrice = Math.max(...filteredData.map((item) => +item.price));
+        const minPrice = Math.min(...filteredData.map((item) => +item.price));
         max.current = maxPrice;
+        min.current = minPrice;
 
         if (isOutliers) {
           checkOutliers(filteredData);
@@ -269,15 +274,16 @@ const LargeChart = ({ type, isOutliers, timeFrame, callBack }) => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [collectionData, isOutliers, timeFrame, type]);
+  }, [collectionData, isOutliers, timeFrame, type, step]);
 
   return (
     <div className='ETH__container'>
+      {console.log(max.current)}
       <Chart
         style={{ paddingLeft: '0' }}
         type='bar'
         data={{
-          labels: labels?.map((label) => label.label),
+          // labels: labels?.map((label) => label.label),
 
           datasets: [
             {
@@ -338,14 +344,15 @@ const LargeChart = ({ type, isOutliers, timeFrame, callBack }) => {
                 // callback: function (val) {
                 //   return this.getLabels()[val];
                 // },
-                stepSize: 0.9,
+                stepSize: +step?.split('Ξ')[1] || 0.9,
                 // color: labels?.map((label) => label.labelColor),
                 autoSkip: true,
-                maxRotation: 0,
-                maxTicksLimit: 6,
+                // maxRotation: 0,
+                // maxTicksLimit: 5,
               },
-              // min: 0,
-              // beginAtZero: true,
+              max: +max.current || 200,
+              min: +min.current || 0,
+              beginAtZero: true,
             },
 
             y: {
@@ -373,6 +380,7 @@ const LargeChart = ({ type, isOutliers, timeFrame, callBack }) => {
               position: 'average',
               external: externalTooltipHandler,
             },
+
             legend: { display: false },
 
             chartAreaBorder: {
@@ -401,6 +409,7 @@ const LargeChart = ({ type, isOutliers, timeFrame, callBack }) => {
         plugins={[plugin]}
       />
       {/* <span className='ETH__hider_bottom'></span> */}
+      {console.log(data)}
       <span className='ETH__hider_top'></span>
     </div>
   );

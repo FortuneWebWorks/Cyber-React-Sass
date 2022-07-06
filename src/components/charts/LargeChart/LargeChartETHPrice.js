@@ -89,7 +89,7 @@ const LargeChartETHPrice = ({ type, isOutliers, timeFrame, data }) => {
   };
 
   useEffect(() => {
-    if (data) setMax(Math.ceil(Math.max(...data.map((item) => item.x))));
+    if (data) setMax(Math.ceil(Math.max(...data.map((item) => item.y))));
   }, [data]);
 
   // const checkOutliers = (data) => {
@@ -171,7 +171,6 @@ const LargeChartETHPrice = ({ type, isOutliers, timeFrame, data }) => {
 
   return (
     <div className='ETH__container'>
-      {console.log(max)}
       <Chart
         style={{ paddingLeft: '0' }}
         type='scatter'
@@ -182,7 +181,9 @@ const LargeChartETHPrice = ({ type, isOutliers, timeFrame, data }) => {
             {
               label: false,
               data: data,
-              pointBackgroundColor: '#244677',
+              pointBackgroundColor: data?.map(
+                () => '#' + (((1 << 24) * Math.random()) | 0).toString(16)
+              ),
               pointHoverBackgroundColor: '#244677ff',
               pointRadius: 5,
               pointHoverRadius: 7,

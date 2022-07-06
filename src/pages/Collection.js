@@ -38,6 +38,8 @@ const Collection = () => {
   const [listingsSort, setListingsSort] = useState('null');
   const [floorVar, setFloorVar] = useState('null');
   const [rarityRank, setRarityRank] = useState(null);
+  const [activePriceRange, setActivePriceRange] = useState('%');
+  const [priceRange, setPriceRange] = useState(null);
 
   const [metaData, metaLoading] = useFetcher(
     `https://api.cyberdash.app/v1/collections/${slug}`
@@ -335,18 +337,49 @@ const Collection = () => {
                 style={{ font: 'normal normal bold 12px/14px Roboto' }}>
                 Price Range
               </span>
-              <DropDown
-                fontSize='3rem'
-                innerColor='#244677'
-                minWidth='60px'
-                items={[{ name: '10%' }, { name: '20%' }, { name: '30%' }]}
-                placeholder={'10%'}
-                callBack={(value) => setTimeFrame(value)}
-              />
+              {activePriceRange === '%' ? (
+                <div className='collection__filters_dropdown'>
+                  <input
+                    type='number'
+                    name='threshold'
+                    id='threshold'
+                    className='threshold__input'
+                    placeholder='45'
+                  />
+                </div>
+              ) : (
+                <DropDown
+                  fontSize='3rem'
+                  innerColor='#244677'
+                  minWidth='60px'
+                  items={
+                    activePriceRange === '%'
+                      ? [{ name: '10%' }, { name: '20%' }, { name: '30%' }]
+                      : [
+                          { name: 'Ξ0.01' },
+                          { name: 'Ξ0.02' },
+                          { name: 'Ξ0.05' },
+                          { name: 'Ξ0.1' },
+                          { name: 'Ξ0.5' },
+                          { name: 'Ξ1' },
+                          { name: 'Ξ2' },
+                          { name: 'Ξ5' },
+                        ]
+                  }
+                  placeholder={`5 ${activePriceRange}`}
+                  callBack={(value) => setPriceRange(value)}
+                />
+              )}
             </div>
 
             <div className='collection__filters_toggle'>
-              <ButtonGroup items={['%', 'Ξ']} />
+              <ButtonGroup
+                items={['%', 'Ξ']}
+                activeDefault='%'
+                callBack={(value) =>
+                  value !== activePriceRange && setActivePriceRange(value)
+                }
+              />
             </div>
 
             <div className='collection__filters_toggle'>
@@ -424,6 +457,7 @@ const Collection = () => {
                   isOutliers={outliers}
                   timeFrame={timeFrame}
                   callBack={setRarity}
+                  step={priceRange}
                 />
               </div>
             </div>
