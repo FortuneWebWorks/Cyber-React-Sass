@@ -338,7 +338,7 @@ const Collection = () => {
             </div>
 
             <div className='collection__filters_toggle'>
-              <ButtonGroup items={['%', '#']} />
+              <ButtonGroup items={['%', 'Ξ']} />
             </div>
 
             <div className='collection__filters_toggle'>

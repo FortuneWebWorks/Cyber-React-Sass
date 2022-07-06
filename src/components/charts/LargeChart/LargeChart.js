@@ -311,6 +311,7 @@ const LargeChart = ({ type, isOutliers, timeFrame }) => {
 
           scales: {
             x: {
+              type: 'linear',
               // stacked: true,
               offset: true,
               grid: {
@@ -324,19 +325,21 @@ const LargeChart = ({ type, isOutliers, timeFrame }) => {
                 // padding: 30,
               },
               ticks: {
-                // stepSize: 1,
                 // callback: function (val) {
                 //   return this.getLabels()[val];
                 // },
-                color: labels?.map((label) => label.labelColor),
-                autoSkip: false,
+                stepSize: 0.009,
+                // color: labels?.map((label) => label.labelColor),
+                autoSkip: true,
                 maxRotation: 0,
+                maxTicksLimit: 5,
               },
               // min: 0,
               beginAtZero: true,
             },
 
             y: {
+              type: 'linear',
               grid: {
                 color: '#244677',
                 lineWidth: 2,
