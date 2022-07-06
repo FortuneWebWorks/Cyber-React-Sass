@@ -17,39 +17,21 @@ import { ReactComponent as TrendingIcon } from 'assets/images/Trending.svg';
 import { ReactComponent as AnalyticalIcon } from 'assets/images/Analytical.svg';
 import CollectionsList from 'components/collections/CollectionsList';
 import DropDown from 'components/DropDown';
-import DropDownFloorVar from 'components/charts/FloorVar/FloorVarDropdown';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
-import ETHPrice from 'components/charts/ETHPrice/ETHPrice';
-import SwitchJs from 'components/SwitchJs';
 import { CollectionContextProvider } from 'contexts/collectionContext';
-import FloorVarChart from 'components/charts/FloorVar/FloorVarChart';
-import ButtonGroup from 'components/ButtonGroup';
-import LargeChart from 'components/charts/LargeChart/LargeChart';
-import LargeChartETHPrice from 'components/charts/LargeChart/LargeChartETHPrice';
+import FirstChart from 'components/collections/lists/chart1/FirstChart';
+import SecondChart from 'components/collections/lists/chart2/SecondChart';
+import ThirdChart from 'components/collections/lists/chart3/ThirdChart';
 
 const Collection = () => {
   const params = useParams();
   const slug = params.slug;
-  const [activeChart, setActiveChart] = useState('list');
-  const [outliers, setOutliers] = useState(false);
-  const [timeFrame, setTimeFrame] = useState('4 Hours');
-  const [floorTimeFrame, setFloorTimeFrame] = useState('4 Hours');
   const [listingsSort, setListingsSort] = useState('null');
-  const [floorVar, setFloorVar] = useState('null');
-  const [rarityRank, setRarityRank] = useState(null);
-  const [activePriceRange, setActivePriceRange] = useState('%');
-  const [priceRange, setPriceRange] = useState(null);
 
-  const [metaData, metaLoading] = useFetcher(
+  const [metaData] = useFetcher(
     `https://api.cyberdash.app/v1/collections/${slug}`
   );
-
-  const setRarity = (data) => {
-    const dataToSet = data.filter((item) => item.color === '#FD8F25');
-
-    setRarityRank(dataToSet);
-  };
 
   return (
     <CollectionContextProvider>
@@ -155,170 +137,9 @@ const Collection = () => {
           </div>
 
           <div className='collection__charts_container'>
-            <div className='collection__charts'>
-              {/* Titles */}
-              <span className='list-sails_title_x'>Time</span>
-              <span className='list-sails_title_y'>ETH Price</span>
+            <FirstChart />
 
-              <div className='collection__chart_header'>
-                <button
-                  className={activeChart === 'list' ? 'active' : ''}
-                  onClick={() => setActiveChart('list')}>
-                  List
-                </button>
-                <button
-                  className={activeChart === 'orders' ? 'active' : ''}
-                  onClick={() => setActiveChart('orders')}>
-                  Sails
-                </button>
-              </div>
-
-              <div className='collection__filters'>
-                <div className='collection__filters_dropdown'>
-                  <span className='dropdown_title'>Time Frame</span>
-                  <DropDown
-                    fontSize='3rem'
-                    innerColor='#244677'
-                    minWidth='111px'
-                    items={[
-                      { name: '4 Hours' },
-                      { name: '7 Hours' },
-                      { name: '2 Hours' },
-                    ]}
-                    placeholder={'4 Hours'}
-                    callBack={(value) => setTimeFrame(value)}
-                  />
-                </div>
-
-                <div className='collection__filters_toggle'>
-                  <span>LOG Scale</span>
-                  <SwitchJs style={{ backgroundColor: '#24467750' }} />
-                </div>
-
-                <div className='collection__filters_toggle'>
-                  <span>OUTLIERS</span>
-                  <SwitchJs
-                    style={{ backgroundColor: '#24467750' }}
-                    onClick={(e) => {
-                      setOutliers((prev) => !prev);
-                    }}
-                  />
-                </div>
-              </div>
-
-              <div className='collection__charts_mode'>
-                <div>
-                  <div className='collection__charts_mode_point'></div>
-                  <span>LEGENDARY</span>
-                </div>
-                <div>
-                  <div className='collection__charts_mode_point'></div>
-                  <span>SUPER RARE</span>
-                </div>
-                <div>
-                  <div className='collection__charts_mode_point'></div>
-                  <span>RARE</span>
-                </div>
-                <div>
-                  <div className='collection__charts_mode_point'></div>
-                  <span>COMMON</span>
-                </div>
-              </div>
-
-              <div className='ETHPrice_chart'>
-                <ETHPrice
-                  type={activeChart}
-                  isOutliers={outliers}
-                  timeFrame={timeFrame}
-                />
-              </div>
-            </div>
-
-            {/*  */}
-            <div className='collection__charts collection__second_chart_container'>
-              {/* Titles */}
-              <span
-                className='list-sails_title_x'
-                style={{ transform: 'translateX(-50%)' }}>
-                Time Period
-              </span>
-              <span className='list-sails_title_y'>Count</span>
-
-              <div className='collection__chart_header'>
-                <button
-                  className={activeChart === 'list' ? 'active' : ''}
-                  onClick={() => setActiveChart('list')}>
-                  List
-                </button>
-                <button
-                  className={activeChart === 'orders' ? 'active' : ''}
-                  onClick={() => setActiveChart('orders')}>
-                  Delist
-                </button>
-              </div>
-
-              <div className='collection__filters second__chart'>
-                <div className='collection__filters_dropdown'>
-                  <span className='dropdown_title'>Floor Var</span>
-                  {/* {console.log(metaData)} */}
-                  <DropDownFloorVar
-                    fontSize='3rem'
-                    innerColor='#244677'
-                    minWidth='111px'
-                    callBack={(value) => setFloorVar(value)}
-                  />
-                </div>
-
-                <div className='collection__filters_dropdown'>
-                  <span className='dropdown_title'>Time Frame</span>
-                  <DropDown
-                    fontSize='3rem'
-                    innerColor='#244677'
-                    minWidth='111px'
-                    items={[
-                      { name: '4 Hours' },
-                      { name: '7 Hours' },
-                      { name: '2 Hours' },
-                    ]}
-                    placeholder={'4 Hours'}
-                    callBack={(value) => setFloorTimeFrame(value)}
-                  />
-                </div>
-              </div>
-
-              <div className='collection__charts_mode'>
-                <div>
-                  <div
-                    className='collection__charts_mode_point'
-                    style={{ backgroundColor: '#27AF52' }}></div>
-                  <span>ABOVE FLOOR</span>
-                </div>
-                <div>
-                  <div
-                    className='collection__charts_mode_point'
-                    style={{ backgroundColor: '#FD2F7A' }}></div>
-                  <span>BELOW FLOOR</span>
-                </div>
-                <div>
-                  <div
-                    className='collection__charts_mode_point'
-                    style={{ backgroundColor: '#FD8F25' }}></div>
-                  <span>SALES</span>
-                </div>
-              </div>
-
-              <div className='ETHPrice_chart'>
-                {metaData && (
-                  <FloorVarChart
-                    type={activeChart}
-                    isOutliers={outliers}
-                    timeFrame={floorTimeFrame}
-                    floorPrice={metaData.floor_price}
-                    floorVar={floorVar}
-                  />
-                )}
-              </div>
-            </div>
+            <SecondChart data={metaData} />
           </div>
 
           <div className='collection__list_container'>
@@ -329,156 +150,7 @@ const Collection = () => {
           </div>
         </div>
 
-        <div className='collection__large_chart collection__charts_container'>
-          <div className='collection__filters price_range'>
-            <div className='collection__filters_dropdown'>
-              <span
-                className='dropdown_title'
-                style={{ font: 'normal normal bold 12px/14px Roboto' }}>
-                Price Range
-              </span>
-              {activePriceRange === '%' ? (
-                <div className='collection__filters_dropdown'>
-                  <input
-                    type='number'
-                    name='threshold'
-                    id='threshold'
-                    className='threshold__input'
-                    placeholder='45'
-                  />
-                </div>
-              ) : (
-                <DropDown
-                  fontSize='3rem'
-                  innerColor='#244677'
-                  minWidth='60px'
-                  items={
-                    activePriceRange === '%'
-                      ? [{ name: '10%' }, { name: '20%' }, { name: '30%' }]
-                      : [
-                          { name: 'Ξ0.01' },
-                          { name: 'Ξ0.02' },
-                          { name: 'Ξ0.05' },
-                          { name: 'Ξ0.1' },
-                          { name: 'Ξ0.5' },
-                          { name: 'Ξ1' },
-                          { name: 'Ξ2' },
-                          { name: 'Ξ5' },
-                        ]
-                  }
-                  placeholder={`5 ${activePriceRange}`}
-                  callBack={(value) => setPriceRange(value)}
-                />
-              )}
-            </div>
-
-            <div className='collection__filters_toggle'>
-              <ButtonGroup
-                items={['%', 'Ξ']}
-                activeDefault='%'
-                callBack={(value) =>
-                  value !== activePriceRange && setActivePriceRange(value)
-                }
-              />
-            </div>
-
-            <div className='collection__filters_toggle'>
-              <span
-                style={{
-                  color: '#D1D1D1',
-                  font: 'normal normal normal 11px/13px Roboto',
-                }}>
-                OUTLIERS
-              </span>
-              <SwitchJs
-                style={{ backgroundColor: '#24467750' }}
-                onClick={(e) => {
-                  setOutliers((prev) => !prev);
-                }}
-              />
-            </div>
-
-            <div className='collection__filters_dropdown large_chart_time_frame'>
-              <span className='dropdown_title'>Time Frame</span>
-              <DropDown
-                fontSize='3rem'
-                innerColor='#244677'
-                minWidth='111px'
-                items={[
-                  { name: '4 Hours' },
-                  { name: '7 Hours' },
-                  { name: '2 Hours' },
-                ]}
-                placeholder={'4 Hours'}
-                callBack={(value) => setTimeFrame(value)}
-              />
-            </div>
-
-            <div className='collection__filters_dropdown'>
-              <span className='dropdown_title'>Threshold</span>
-              <input
-                type='number'
-                name='threshold'
-                id='threshold'
-                className='threshold__input'
-                placeholder='45'
-              />
-            </div>
-
-            <div className='collection__charts_mode'>
-              <div>
-                <div className='collection__charts_mode_point'></div>
-                <span>LEGENDARY</span>
-              </div>
-              <div>
-                <div className='collection__charts_mode_point'></div>
-                <span>SUPER RARE</span>
-              </div>
-              <div>
-                <div className='collection__charts_mode_point'></div>
-                <span>RARE</span>
-              </div>
-              <div>
-                <div className='collection__charts_mode_point'></div>
-                <span>COMMON</span>
-              </div>
-            </div>
-          </div>
-
-          <div className='charts'>
-            <div className='collection__charts'>
-              {/* Titles */}
-              <span className='list-sails_title_x'>Price</span>
-              <span className='list-sails_title_y'>Count</span>
-
-              <div className='ETHPrice_chart'>
-                <LargeChart
-                  type={activeChart}
-                  isOutliers={outliers}
-                  timeFrame={timeFrame}
-                  callBack={setRarity}
-                  step={priceRange}
-                />
-              </div>
-            </div>
-
-            {/*  */}
-            <div className='collection__charts'>
-              {/* Titles */}
-              <span className='list-sails_title_x'>Rarity Rank</span>
-              <span className='list-sails_title_y'>Price in ETH</span>
-
-              <div className='ETHPrice_chart'>
-                <LargeChartETHPrice
-                  type={activeChart}
-                  isOutliers={outliers}
-                  timeFrame={timeFrame}
-                  data={rarityRank}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+        <ThirdChart />
       </div>
     </CollectionContextProvider>
   );

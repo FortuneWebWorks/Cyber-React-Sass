@@ -6,11 +6,13 @@ import externalTooltipHandler from './CustomTooltip';
 import CollectionContext from 'contexts/collectionContext';
 import outlier from 'outliers';
 
-const ETHPrice = ({ type, isOutliers, timeFrame }) => {
+const LargeChart = ({ type, isOutliers = true, timeFrame, callBack, step }) => {
   type = type === 'list' ? 'listings' : 'orders';
   const { collectionData } = useContext(CollectionContext);
   const [data, setData] = useState(null);
+  const [labels, setLabels] = useState(null);
   const max = useRef(240);
+  const min = useRef(240);
 
   const getTime = (timestamp) => {
     const hours = new Date(+timestamp).getHours();
@@ -21,16 +23,45 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
   const plugin = {
     id: 'chartAreaBorder',
     afterDraw: (chart, args, opts) => {
+      const ctx = chart.ctx,
+        x = chart.tooltip.caretX,
+        y = chart.tooltip.caretY,
+        chartBottom = chart.chartArea.bottom,
+        chartLeft = chart.chartArea.left;
+
       const {
         chartArea: { top, left, width, height },
-        ctx,
       } = chart;
       const {
         borders: { tLtR, tLbL, tRbR, bLbR },
       } = opts;
 
-      ctx.save();
+      if (chart.tooltip._active && chart.tooltip._active.length) {
+        // draw line Y
+        ctx.save();
+        ctx.beginPath();
+        ctx.setLineDash([3, 5]);
+        ctx.moveTo(x, y);
+        ctx.lineTo(x, chartBottom);
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#1E2134';
+        ctx.stroke();
+        ctx.restore();
 
+        // draw line X
+        ctx.save();
+        ctx.beginPath();
+        ctx.setLineDash([3, 5]);
+        ctx.moveTo(x, y);
+        ctx.lineTo(chartLeft, y);
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#1E2134';
+        ctx.stroke();
+
+        ctx.restore();
+      }
+
+      ctx.save();
       if (tLtR && tLtR.borderWidth !== 0) {
         ctx.beginPath();
         ctx.strokeStyle = tLtR.borderColor || Chart.defaults.color;
@@ -90,20 +121,73 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
   const checkOutliers = (data) => {
     const outliers = data.filter(outlier('price'));
     const maxPrice = Math.max(...outliers.map((item) => +item.price));
+    const minPrice = Math.min(...outliers.map((item) => +item.price));
     max.current = maxPrice;
+    min.current = minPrice;
 
-    setData(
-      outliers.map((item) => ({
-        y: +item.price,
-        x: +getTime(item.timestamp),
-        img: item.image_url,
+    const outliersFiltered = outliers.map((item) => +item.price && item);
+
+    const result = [
+      ...outliersFiltered
+        .reduce((mp, o) => {
+          if (!mp.has(+o.price)) mp.set(+o.price, { ...o, count: 0 });
+          mp.get(+o.price).count++;
+          return mp;
+        }, new Map())
+        .values(),
+    ];
+
+    console.log(outliersFiltered);
+
+    const formattedData = result
+      .map((item) => ({
+        y: +item.count,
+        x: +item.price,
         price: item.price,
-        timestamp: item.timestamp,
-        tokenId: item.token_id,
-        tokenRank: item.token_rank,
+        count: item.count,
       }))
-    );
+      .sort((a, b) => +a.x - +b.x);
+
+    const ranges = getRange(formattedData.length, 0, 5);
+
+    const labels = formattedData.map((item, index) => {
+      index = index !== 0 ? index + 1 : index;
+
+      if (ranges.includes(index)) {
+        return {
+          label: index === 0 ? 0 : item.x,
+          color: '#AB7CE1',
+          labelColor: '#5B5E61',
+          y: +item.count,
+          x: +item.price,
+        };
+      }
+
+      return {
+        label: item.x,
+        color: '#AB7CE1',
+        labelColor: '#5B5E61',
+        y: +item.count,
+        x: +item.price,
+      };
+    });
+
+    setLabels(labels);
+
+    setData(formattedData);
   };
+
+  function getRange(upper, lower, steps) {
+    const difference = upper - lower;
+    const increment = difference / (steps - 1);
+    return [
+      lower,
+      ...Array(steps - 2)
+        .fill('')
+        .map((_, index) => Math.ceil(lower + increment * (index + 1))),
+      upper,
+    ];
+  }
 
   useEffect(() => {
     if (collectionData && collectionData[type]) {
@@ -111,37 +195,66 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
         const time = +timeFrame.split(' ')[0];
 
         const filteredData = collectionData[type].filter(
-          (item) =>
-            getTime(item.timestamp) <= time && {
-              y: +item.price,
-              x: +getTime(item.timestamp),
-              img: item.image_url,
-              price: item.price,
-              timestamp: item.timestamp,
-              tokenId: item.token_id,
-              tokenRank: item.token_rank,
-            }
+          (item) => getTime(item.timestamp) <= time
         );
 
+        const result = [
+          ...filteredData
+            .reduce((mp, o) => {
+              if (!mp.has(+o.price)) mp.set(+o.price, { ...o, count: 0 });
+
+              mp.get(+o.price).count++;
+              return mp;
+            }, new Map())
+            .values(),
+        ];
+
+        const formattedData = result
+          .map((item) => ({
+            y: +item.count,
+            x: +item.price,
+            price: item.price,
+            count: item.count,
+          }))
+          .sort((a, b) => +a.x - +b.x);
+
+        const ranges = getRange(formattedData.length, 0, 5);
+
+        const labels = formattedData.map((item, index) => {
+          index = index !== 0 ? index + 1 : index;
+
+          if (ranges.includes(index)) {
+            return {
+              label: index === 0 ? 0 : item.x,
+              color: '#AB7CE1',
+              labelColor: '#5B5E61',
+              y: +item.count,
+              x: +item.price,
+            };
+          }
+
+          return {
+            label: item.x,
+            color: '#AB7CE1',
+            labelColor: '#5B5E61',
+            y: +item.count,
+            x: +item.price,
+          };
+        });
+
+        setLabels(labels);
+
         const maxPrice = Math.max(...filteredData.map((item) => +item.price));
+        const minPrice = Math.min(...filteredData.map((item) => +item.price));
         max.current = maxPrice;
+        min.current = minPrice;
 
         if (isOutliers) {
           checkOutliers(filteredData);
           return;
         }
 
-        setData(
-          filteredData.map((item) => ({
-            y: +item.price,
-            x: +getTime(item.timestamp),
-            img: item.image_url,
-            price: item.price,
-            timestamp: item.timestamp,
-            tokenId: item.token_id,
-            tokenRank: item.token_rank,
-          }))
-        );
+        setData(formattedData);
       } else {
         if (isOutliers) {
           checkOutliers(collectionData[type]);
@@ -161,34 +274,52 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
         );
       }
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [collectionData, isOutliers, timeFrame, type]);
+  }, [collectionData, isOutliers, timeFrame, type, step]);
 
   return (
     <div className='ETH__container'>
+      {console.log(data)}
       <Chart
         style={{ paddingLeft: '0' }}
-        type='scatter'
+        type='bar'
         data={{
-          labels: ['6:55 AM', '9:55 AM', '10:55 AM', '11:55 AM', '12:55 AM'],
+          // labels: labels?.map((label) => label.label),
 
           datasets: [
             {
               label: false,
               data: data,
-              pointBackgroundColor: '#244677',
-              pointHoverBackgroundColor: '#244677ff',
-              pointRadius: 5,
-              pointHoverRadius: 7,
-              pointHoverBorderWidth: 8,
-              pointHoverBorderColor: 'rgb(100,100,100, 0.3)',
-              hoverBorderJoinStyle: 'bevel',
+              backgroundColor: labels?.map((label) => label.color),
+              barThickness: 4,
             },
+            // {
+            //   label: false,
+            //   data: [{ x: 3, y: 7 }],
+            //   backgroundColor: '#FD8F25',
+            //   barThickness: 4,
+            // },
           ],
         }}
         options={{
           maintainAspectRatio: false,
           responsive: true,
+
+          onClick: function (e, el) {
+            if (el[0]) {
+              const updated = [...labels];
+              const updateTarget = updated[el[0].index];
+              updateTarget.color =
+                updateTarget.color === '#AB7CE1' ? '#FD8F25' : '#AB7CE1';
+
+              callBack(updated);
+
+              setLabels(updated);
+            }
+
+            this.update();
+          },
 
           layout: {
             padding: {
@@ -198,6 +329,8 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
 
           scales: {
             x: {
+              type: 'linear',
+              // stacked: true,
               offset: true,
               grid: {
                 display: true,
@@ -210,15 +343,22 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
                 // padding: 30,
               },
               ticks: {
-                callback: function (val) {
-                  return this.getLabels()[val];
-                },
+                // callback: function (val) {
+                //   return this.getLabels()[val];
+                // },
+                stepSize: +step?.split('Ξ')[1] || 0.9,
+                // color: labels?.map((label) => label.labelColor),
+                autoSkip: true,
+                // maxRotation: 0,
+                // maxTicksLimit: 5,
               },
-              min: 0,
+              max: +max.current || 200,
+              min: +min.current || 0,
               beginAtZero: true,
             },
 
             y: {
+              type: 'linear',
               grid: {
                 color: '#244677',
                 lineWidth: 2,
@@ -228,10 +368,10 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
               },
 
               ticks: {
-                stepSize: max.current < 150 ? 3 : 40,
+                stepSize: 2,
               },
-              max: max.current + (max.current < 150 ? 10 : 40),
-              min: (max.current < 150 ? 3 : 40) * -1,
+              max: 10,
+              min: 0,
               // beginAtZero: true,
             },
           },
@@ -242,6 +382,7 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
               position: 'average',
               external: externalTooltipHandler,
             },
+
             legend: { display: false },
 
             chartAreaBorder: {
@@ -251,16 +392,16 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
                   borderColor: '#0b1e39',
                 },
                 tLbL: {
-                  borderWidth: 2,
+                  borderWidth: 0,
                   borderColor: '#244677',
                 },
                 tRbR: {
-                  borderTopWidth: 2,
+                  borderTopWidth: 0,
                   borderColor: 'transparent',
                   lineDashOffset: 5,
                 },
                 bLbR: {
-                  borderWidth: 2,
+                  borderWidth: 0,
                   borderColor: '#244677',
                 },
               },
@@ -269,10 +410,11 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
         }}
         plugins={[plugin]}
       />
-      <span className='ETH__hider_bottom'></span>
+      {/* <span className='ETH__hider_bottom'></span> */}
+      {console.log(data)}
       <span className='ETH__hider_top'></span>
     </div>
   );
 };
 
-export default ETHPrice;
+export default LargeChart;

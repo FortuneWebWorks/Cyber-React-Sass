@@ -10,8 +10,22 @@ const getOrCreateTooltip = (chart, tooltip) => {
   }
 
   tooltipEl.innerHTML = `
-      <span>Price: ${tooltipData?.price} ETH</span>
-      <span>Count: ${tooltipData?.count}</span>
+      <div>
+        <div>
+          <span>Price: ${tooltipData?.price} ETH</span>
+          <span>Count: ${tooltipData?.count}</span>
+        </div>
+        <div>
+          <div>
+            <span>Count</span>
+            <span></span>
+          </div>
+          <div>
+            <span>Cumulative</span>
+            <span></span>
+          </div>
+        </div>
+      </div>
     `;
 
   chart.canvas.parentNode.appendChild(tooltipEl);

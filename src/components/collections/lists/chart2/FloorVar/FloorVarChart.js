@@ -318,8 +318,8 @@ const FloorVarChart = ({
               ticks: {
                 stepSize: 2,
               },
-              max: minMax.max,
-              min: minMax.min,
+              // max: minMax.max,
+              // min: minMax.min,
               // beginAtZero: true,
             },
           },
