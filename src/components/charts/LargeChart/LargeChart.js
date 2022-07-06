@@ -122,15 +122,7 @@ const LargeChart = ({ type, isOutliers, timeFrame }) => {
     const maxPrice = Math.max(...outliers.map((item) => +item.price));
     max.current = maxPrice;
 
-    const outliersFiltered = outliers.map((item) => ({
-      y: +item.price,
-      x: +getTime(item.timestamp),
-      img: item.image_url,
-      price: item.price,
-      timestamp: item.timestamp,
-      tokenId: item.token_id,
-      tokenRank: item.token_rank,
-    }));
+    const outliersFiltered = outliers.map((item) => item);
 
     const result = [
       ...outliersFiltered
@@ -142,7 +134,38 @@ const LargeChart = ({ type, isOutliers, timeFrame }) => {
         .values(),
     ];
 
-    setData(result);
+    const formattedData = result
+      .map((item) => ({
+        y: +item.count,
+        x: +item.price,
+        price: item.price,
+        count: item.count,
+      }))
+      .sort((a, b) => +a.x - +b.x);
+
+    const ranges = getRange(formattedData.length, 0, 5);
+
+    const labels = formattedData.map((item, index) => {
+      index = index !== 0 ? index + 1 : index;
+
+      if (ranges.includes(index)) {
+        return {
+          label: index === 0 ? 0 : item.x,
+          color: '#AB7CE1',
+          labelColor: '#5B5E61',
+        };
+      }
+
+      return {
+        label: item.x,
+        color: '#AB7CE1',
+        labelColor: '#5B5E6100',
+      };
+    });
+
+    setLabels(labels);
+
+    setData(formattedData);
   };
 
   function getRange(upper, lower, steps) {
@@ -181,11 +204,8 @@ const LargeChart = ({ type, isOutliers, timeFrame }) => {
           .map((item) => ({
             y: +item.count,
             x: +item.price,
-            img: item.image_url,
             price: item.price,
-            timestamp: item.timestamp,
-            tokenId: item.token_id,
-            tokenRank: item.token_rank,
+            count: item.count,
           }))
           .sort((a, b) => +a.x - +b.x);
 
@@ -195,15 +215,19 @@ const LargeChart = ({ type, isOutliers, timeFrame }) => {
           index = index !== 0 ? index + 1 : index;
 
           if (ranges.includes(index)) {
-            return { label: item.x, color: '#AB7CE1' };
+            return {
+              label: index === 0 ? 0 : item.x,
+              color: '#AB7CE1',
+              labelColor: '#5B5E61',
+            };
           }
 
-          return { label: '', color: '#AB7CE1' };
+          return {
+            label: item.x,
+            color: '#AB7CE1',
+            labelColor: '#5B5E6100',
+          };
         });
-        //
-
-        console.log(formattedData);
-        console.log(labels);
 
         setLabels(labels);
 
@@ -304,6 +328,7 @@ const LargeChart = ({ type, isOutliers, timeFrame }) => {
                 // callback: function (val) {
                 //   return this.getLabels()[val];
                 // },
+                color: labels?.map((label) => label.labelColor),
                 autoSkip: false,
                 maxRotation: 0,
               },
