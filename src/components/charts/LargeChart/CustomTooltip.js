@@ -9,7 +9,6 @@ const getOrCreateTooltip = (chart, tooltip) => {
     tooltipEl.id = 'long_chart_custom__tooltip';
   }
 
-  console.log(tooltipData);
   tooltipEl.innerHTML = `
       <span>Price: ${tooltipData?.price} ETH</span>
       <span>Count: ${tooltipData?.count}</span>

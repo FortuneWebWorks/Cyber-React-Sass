@@ -6,7 +6,7 @@ import externalTooltipHandler from './CustomTooltip';
 import CollectionContext from 'contexts/collectionContext';
 import outlier from 'outliers';
 
-const LargeChart = ({ type, isOutliers, timeFrame }) => {
+const LargeChart = ({ type, isOutliers, timeFrame, callBack }) => {
   type = type === 'list' ? 'listings' : 'orders';
   const { collectionData } = useContext(CollectionContext);
   const [data, setData] = useState(null);
@@ -153,6 +153,8 @@ const LargeChart = ({ type, isOutliers, timeFrame }) => {
           label: index === 0 ? 0 : item.x,
           color: '#AB7CE1',
           labelColor: '#5B5E61',
+          y: +item.count,
+          x: +item.price,
         };
       }
 
@@ -160,6 +162,8 @@ const LargeChart = ({ type, isOutliers, timeFrame }) => {
         label: item.x,
         color: '#AB7CE1',
         labelColor: '#5B5E6100',
+        y: +item.count,
+        x: +item.price,
       };
     });
 
@@ -219,6 +223,8 @@ const LargeChart = ({ type, isOutliers, timeFrame }) => {
               label: index === 0 ? 0 : item.x,
               color: '#AB7CE1',
               labelColor: '#5B5E61',
+              y: +item.count,
+              x: +item.price,
             };
           }
 
@@ -226,6 +232,8 @@ const LargeChart = ({ type, isOutliers, timeFrame }) => {
             label: item.x,
             color: '#AB7CE1',
             labelColor: '#5B5E6100',
+            y: +item.count,
+            x: +item.price,
           };
         });
 
@@ -297,6 +305,8 @@ const LargeChart = ({ type, isOutliers, timeFrame }) => {
               updateTarget.color =
                 updateTarget.color === '#AB7CE1' ? '#FD8F25' : '#AB7CE1';
 
+              callBack(updated);
+
               setLabels(updated);
             }
 
@@ -328,14 +338,14 @@ const LargeChart = ({ type, isOutliers, timeFrame }) => {
                 // callback: function (val) {
                 //   return this.getLabels()[val];
                 // },
-                stepSize: 0.009,
+                stepSize: 0.9,
                 // color: labels?.map((label) => label.labelColor),
                 autoSkip: true,
                 maxRotation: 0,
-                maxTicksLimit: 5,
+                maxTicksLimit: 6,
               },
               // min: 0,
-              beginAtZero: true,
+              // beginAtZero: true,
             },
 
             y: {

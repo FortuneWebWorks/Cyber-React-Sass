@@ -19,13 +19,14 @@ import CollectionsList from 'components/collections/CollectionsList';
 import DropDown from 'components/DropDown';
 import DropDownFloorVar from 'components/charts/FloorVar/FloorVarDropdown';
 import { useParams } from 'react-router-dom';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import ETHPrice from 'components/charts/ETHPrice/ETHPrice';
 import SwitchJs from 'components/SwitchJs';
 import { CollectionContextProvider } from 'contexts/collectionContext';
 import FloorVarChart from 'components/charts/FloorVar/FloorVarChart';
 import ButtonGroup from 'components/ButtonGroup';
 import LargeChart from 'components/charts/LargeChart/LargeChart';
+import LargeChartETHPrice from 'components/charts/LargeChart/LargeChartETHPrice';
 
 const Collection = () => {
   const params = useParams();
@@ -36,10 +37,17 @@ const Collection = () => {
   const [floorTimeFrame, setFloorTimeFrame] = useState('4 Hours');
   const [listingsSort, setListingsSort] = useState('null');
   const [floorVar, setFloorVar] = useState('null');
+  const [rarityRank, setRarityRank] = useState(null);
 
   const [metaData, metaLoading] = useFetcher(
     `https://api.cyberdash.app/v1/collections/${slug}`
   );
+
+  const setRarity = (data) => {
+    const dataToSet = data.filter((item) => item.color === '#FD8F25');
+
+    setRarityRank(dataToSet);
+  };
 
   return (
     <CollectionContextProvider>
@@ -415,6 +423,7 @@ const Collection = () => {
                   type={activeChart}
                   isOutliers={outliers}
                   timeFrame={timeFrame}
+                  callBack={setRarity}
                 />
               </div>
             </div>
@@ -426,10 +435,11 @@ const Collection = () => {
               <span className='list-sails_title_y'>Price in ETH</span>
 
               <div className='ETHPrice_chart'>
-                <ETHPrice
+                <LargeChartETHPrice
                   type={activeChart}
                   isOutliers={outliers}
                   timeFrame={timeFrame}
+                  data={rarityRank}
                 />
               </div>
             </div>
