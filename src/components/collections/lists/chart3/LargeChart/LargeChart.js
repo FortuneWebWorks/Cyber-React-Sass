@@ -28,33 +28,31 @@ const LargeChart = ({
     var interval = seconds / 31536000;
 
     if (interval > 1) {
-      return Math.floor(interval) + ' years';
+      return Math.floor(interval) + ' Years';
     }
     interval = seconds / 2592000;
     if (interval > 1) {
-      return Math.floor(interval) + ' months';
+      return Math.floor(interval) + ' Months';
     }
     interval = seconds / 86400;
     if (interval > 1) {
-      return Math.floor(interval) + ' days';
+      return Math.floor(interval) + ' Days';
     }
     interval = seconds / 3600;
     if (interval > 1) {
-      return Math.floor(interval) + ' hours';
+      return Math.floor(interval) + ' Hours';
     }
     interval = seconds / 60;
     if (interval > 1) {
-      return Math.floor(interval) + ' minutes';
+      return Math.floor(interval) + ' Minutes';
     }
-    return Math.floor(seconds) + ' seconds';
+    return Math.floor(seconds) + ' Seconds';
   }
 
   const getTime = (timestamp, unit) => {
     const hours = new Date(+timestamp);
     const now = new Date();
     const test = new Date(now - hours);
-
-    timeSince();
 
     // console.log(Math.floor((((now - hours) / 1000) % 60)));
 
@@ -235,14 +233,41 @@ const LargeChart = ({
     setData(formattedData);
   };
 
+  const comparison = (time, ref) => {
+    const units = {
+      Seconds: 1,
+      Minutes: 2,
+      Hours: 3,
+      Days: 4,
+      Months: 5,
+      Years: 6,
+    };
+
+    const timeUnit = time.split(' ');
+    const unitRef = ref.split(' ');
+
+    if (units[timeUnit[1]] === units[unitRef[1]]) {
+      // Here we can check if it's ecual to eachother or not. i'm not setting it now
+      if (timeUnit[0] < unitRef[0]) {
+        return true;
+      } else {
+        return false;
+      }
+    } else if (units[timeUnit[1]] > units[unitRef[1]]) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   useEffect(() => {
     if (collectionData && collectionData[type]) {
       if (timeFrame) {
-        const time = timeFrame.split(' ');
-
         const filteredData = collectionData[type].filter((item) => {
-          return getTime(item.timestamp, time[1]) <= +time[0];
+          return comparison(timeSince(new Date(+item.timestamp)), timeFrame);
         });
+
+        console.log(filteredData);
 
         const result = [
           ...filteredData
