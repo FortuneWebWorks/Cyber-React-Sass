@@ -4,25 +4,35 @@ const getOrCreateTooltip = (chart, tooltip) => {
   let tooltipEl = chart.canvas.parentNode.querySelector('div');
   const tooltipData = tooltip?.dataPoints?.at(0)?.raw;
 
+  const data = JSON.parse(localStorage.getItem('selected')).filter(
+    (item) => item.color !== '#AB7CE1'
+  );
+
+  const count =
+    data &&
+    data.reduce(function (a, s) {
+      return (a += s.count);
+    }, 0);
+
   if (!tooltipEl) {
     tooltipEl = document.createElement('div');
     tooltipEl.id = 'long_chart_custom__tooltip';
   }
 
   tooltipEl.innerHTML = `
-      <div>
-        <div>
-          <span>Price: ${tooltipData?.price} ETH</span>
+      <div class="tooltip__container">
+        <div class="tooltip__head">
+          <span>Price: ${tooltipData?.price}</span>
           <span>Count: ${tooltipData?.count}</span>
         </div>
-        <div>
-          <div>
+        <div class="tooltip__body">
+          <div class="tooltip__bottom_value">
             <span>Count</span>
-            <span></span>
+            <span>${tooltipData?.count}</span>
           </div>
-          <div>
+          <div class="tooltip__bottom_value">
             <span>Cumulative</span>
-            <span></span>
+            <span>${count}</span>
           </div>
         </div>
       </div>

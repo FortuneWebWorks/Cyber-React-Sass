@@ -20,6 +20,18 @@ const LargeChart = ({ type, isOutliers = true, timeFrame, callBack, step }) => {
     return hours;
   };
 
+  function getRange(upper, lower, steps) {
+    const difference = upper - lower;
+    const increment = difference / (steps - 1);
+    return [
+      lower,
+      ...Array(steps - 2)
+        .fill('')
+        .map((_, index) => Math.ceil(lower + increment * (index + 1))),
+      upper,
+    ];
+  }
+
   const plugin = {
     id: 'chartAreaBorder',
     afterDraw: (chart, args, opts) => {
@@ -137,8 +149,6 @@ const LargeChart = ({ type, isOutliers = true, timeFrame, callBack, step }) => {
         .values(),
     ];
 
-    console.log(outliersFiltered);
-
     const formattedData = result
       .map((item) => ({
         y: +item.count,
@@ -151,15 +161,16 @@ const LargeChart = ({ type, isOutliers = true, timeFrame, callBack, step }) => {
     const ranges = getRange(formattedData.length, 0, 5);
 
     const labels = formattedData.map((item, index) => {
-      index = index !== 0 ? index + 1 : index;
+      // index = index !== 0 ? index + 1 : index;
 
-      if (ranges.includes(index)) {
+      if (index === 0 || index === formattedData.length - 1) {
         return {
           label: index === 0 ? 0 : item.x,
           color: '#AB7CE1',
           labelColor: '#5B5E61',
           y: +item.count,
           x: +item.price,
+          count: item.count,
         };
       }
 
@@ -169,25 +180,15 @@ const LargeChart = ({ type, isOutliers = true, timeFrame, callBack, step }) => {
         labelColor: '#5B5E61',
         y: +item.count,
         x: +item.price,
+        count: item.count,
       };
     });
 
+    localStorage.setItem('selected', JSON.stringify(labels));
     setLabels(labels);
 
     setData(formattedData);
   };
-
-  function getRange(upper, lower, steps) {
-    const difference = upper - lower;
-    const increment = difference / (steps - 1);
-    return [
-      lower,
-      ...Array(steps - 2)
-        .fill('')
-        .map((_, index) => Math.ceil(lower + increment * (index + 1))),
-      upper,
-    ];
-  }
 
   useEffect(() => {
     if (collectionData && collectionData[type]) {
@@ -230,6 +231,7 @@ const LargeChart = ({ type, isOutliers = true, timeFrame, callBack, step }) => {
               labelColor: '#5B5E61',
               y: +item.count,
               x: +item.price,
+              count: item.count,
             };
           }
 
@@ -239,9 +241,11 @@ const LargeChart = ({ type, isOutliers = true, timeFrame, callBack, step }) => {
             labelColor: '#5B5E61',
             y: +item.count,
             x: +item.price,
+            count: item.count,
           };
         });
 
+        localStorage.setItem('selected', JSON.stringify(labels));
         setLabels(labels);
 
         const maxPrice = Math.max(...filteredData.map((item) => +item.price));
@@ -280,19 +284,21 @@ const LargeChart = ({ type, isOutliers = true, timeFrame, callBack, step }) => {
 
   return (
     <div className='ETH__container'>
-      {console.log(data)}
       <Chart
         style={{ paddingLeft: '0' }}
         type='bar'
         data={{
-          // labels: labels?.map((label) => label.label),
+          // labels: ['l', 'l', 'l', 'l', 'l', 'l', 'l'],
 
           datasets: [
             {
               label: false,
               data: data,
               backgroundColor: labels?.map((label) => label.color),
-              barThickness: 4,
+              barThickness:
+                +step?.split('Ξ')[1] <= 3 ? +step?.split('Ξ')[1] : 4 || 4,
+              barPercentage: 2,
+              categoryPercentage: 2,
             },
             // {
             //   label: false,
@@ -315,6 +321,7 @@ const LargeChart = ({ type, isOutliers = true, timeFrame, callBack, step }) => {
 
               callBack(updated);
 
+              localStorage.setItem('selected', JSON.stringify(updated));
               setLabels(updated);
             }
 
@@ -331,7 +338,7 @@ const LargeChart = ({ type, isOutliers = true, timeFrame, callBack, step }) => {
             x: {
               type: 'linear',
               // stacked: true,
-              offset: true,
+              // offset: true,
               grid: {
                 display: true,
                 drawBorder: true,
@@ -347,14 +354,14 @@ const LargeChart = ({ type, isOutliers = true, timeFrame, callBack, step }) => {
                 //   return this.getLabels()[val];
                 // },
                 stepSize: +step?.split('Ξ')[1] || 0.9,
-                // color: labels?.map((label) => label.labelColor),
-                autoSkip: true,
+                color: labels?.map((label) => label.labelColor),
+                autoSkip: false,
                 // maxRotation: 0,
-                // maxTicksLimit: 5,
+                maxTicksLimit: 7,
               },
-              max: +max.current || 200,
-              min: +min.current || 0,
-              beginAtZero: true,
+              max: max.current || 200,
+              min: min.current || 0,
+              beginAtZero: false,
             },
 
             y: {
@@ -411,7 +418,6 @@ const LargeChart = ({ type, isOutliers = true, timeFrame, callBack, step }) => {
         plugins={[plugin]}
       />
       {/* <span className='ETH__hider_bottom'></span> */}
-      {console.log(data)}
       <span className='ETH__hider_top'></span>
     </div>
   );
