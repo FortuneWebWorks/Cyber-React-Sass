@@ -5,6 +5,7 @@ import { Chart } from 'react-chartjs-2';
 import externalTooltipHandler from './CustomTooltip';
 import CollectionContext from 'contexts/collectionContext';
 import outlier from 'outliers';
+import { comparison, timeSince } from 'components/TimeFrameTools';
 
 const LargeChart = ({
   type,
@@ -21,33 +22,6 @@ const LargeChart = ({
   const [labels, setLabels] = useState(null);
   const max = useRef(240);
   const min = useRef(240);
-
-  function timeSince(date) {
-    var seconds = Math.floor((new Date() - date) / 1000);
-
-    var interval = seconds / 31536000;
-
-    if (interval > 1) {
-      return Math.floor(interval) + ' Years';
-    }
-    interval = seconds / 2592000;
-    if (interval > 1) {
-      return Math.floor(interval) + ' Months';
-    }
-    interval = seconds / 86400;
-    if (interval > 1) {
-      return Math.floor(interval) + ' Days';
-    }
-    interval = seconds / 3600;
-    if (interval > 1) {
-      return Math.floor(interval) + ' Hours';
-    }
-    interval = seconds / 60;
-    if (interval > 1) {
-      return Math.floor(interval) + ' Minutes';
-    }
-    return Math.floor(seconds) + ' Seconds';
-  }
 
   const getTime = (timestamp, unit) => {
     const hours = new Date(+timestamp);
@@ -233,41 +207,12 @@ const LargeChart = ({
     setData(formattedData);
   };
 
-  const comparison = (time, ref) => {
-    const units = {
-      Seconds: 1,
-      Minutes: 2,
-      Hours: 3,
-      Days: 4,
-      Months: 5,
-      Years: 6,
-    };
-
-    const timeUnit = time.split(' ');
-    const unitRef = ref.split(' ');
-
-    if (units[timeUnit[1]] === units[unitRef[1]]) {
-      // Here we can check if it's ecual to eachother or not. i'm not setting it now
-      if (timeUnit[0] < unitRef[0]) {
-        return true;
-      } else {
-        return false;
-      }
-    } else if (units[timeUnit[1]] > units[unitRef[1]]) {
-      return false;
-    } else {
-      return true;
-    }
-  };
-
   useEffect(() => {
     if (collectionData && collectionData[type]) {
       if (timeFrame) {
         const filteredData = collectionData[type].filter((item) => {
           return comparison(timeSince(new Date(+item.timestamp)), timeFrame);
         });
-
-        console.log(filteredData);
 
         const result = [
           ...filteredData
@@ -457,8 +402,8 @@ const LargeChart = ({
                 // maxRotation: 0,
                 maxTicksLimit: 7,
               },
-              max: max.current || 200,
-              min: min.current || 0,
+              max: Math.ceil(max.current) || 200,
+              min: Math.floor(min.current) || 0,
               beginAtZero: false,
             },
 

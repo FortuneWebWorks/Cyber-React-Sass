@@ -52,9 +52,11 @@ const SecondChart = ({ data }) => {
             innerColor='#244677'
             minWidth='111px'
             items={[
+              { name: '1 Minutes' },
+              { name: '5 Minutes' },
+              { name: '15 Minutes' },
+              { name: '1 Hours' },
               { name: '4 Hours' },
-              { name: '7 Hours' },
-              { name: '2 Hours' },
             ]}
             placeholder={'4 Hours'}
             callBack={(value) => setFloorTimeFrame(value)}

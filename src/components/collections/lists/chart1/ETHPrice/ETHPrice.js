@@ -5,6 +5,7 @@ import { Chart } from 'react-chartjs-2';
 import externalTooltipHandler from './CustomTooltip';
 import CollectionContext from 'contexts/collectionContext';
 import outlier from 'outliers';
+import { comparison, timeSince } from 'components/TimeFrameTools';
 
 const ETHPrice = ({ type, isOutliers, timeFrame }) => {
   type = type === 'list' ? 'listings' : 'orders';
@@ -108,11 +109,9 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
   useEffect(() => {
     if (collectionData && collectionData[type]) {
       if (timeFrame) {
-        const time = +timeFrame.split(' ')[0];
-
         const filteredData = collectionData[type].filter(
           (item) =>
-            getTime(item.timestamp) <= time && {
+            comparison(timeSince(item.timestamp), timeFrame) && {
               y: +item.price,
               x: +getTime(item.timestamp),
               img: item.image_url,
