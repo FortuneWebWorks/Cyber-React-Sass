@@ -6,7 +6,15 @@ import externalTooltipHandler from './CustomTooltip';
 import CollectionContext from 'contexts/collectionContext';
 import outlier from 'outliers';
 
-const LargeChart = ({ type, isOutliers = true, timeFrame, callBack, step }) => {
+const LargeChart = ({
+  type,
+  isOutliers = true,
+  timeFrame,
+  callBack,
+  step,
+  handleThreshold,
+  threshold,
+}) => {
   type = type === 'list' ? 'listings' : 'orders';
   const { collectionData } = useContext(CollectionContext);
   const [data, setData] = useState(null);
@@ -14,10 +22,47 @@ const LargeChart = ({ type, isOutliers = true, timeFrame, callBack, step }) => {
   const max = useRef(240);
   const min = useRef(240);
 
-  const getTime = (timestamp) => {
-    const hours = new Date(+timestamp).getHours();
+  function timeSince(date) {
+    var seconds = Math.floor((new Date() - date) / 1000);
 
-    return hours;
+    var interval = seconds / 31536000;
+
+    if (interval > 1) {
+      return Math.floor(interval) + ' years';
+    }
+    interval = seconds / 2592000;
+    if (interval > 1) {
+      return Math.floor(interval) + ' months';
+    }
+    interval = seconds / 86400;
+    if (interval > 1) {
+      return Math.floor(interval) + ' days';
+    }
+    interval = seconds / 3600;
+    if (interval > 1) {
+      return Math.floor(interval) + ' hours';
+    }
+    interval = seconds / 60;
+    if (interval > 1) {
+      return Math.floor(interval) + ' minutes';
+    }
+    return Math.floor(seconds) + ' seconds';
+  }
+
+  const getTime = (timestamp, unit) => {
+    const hours = new Date(+timestamp);
+    const now = new Date();
+    const test = new Date(now - hours);
+
+    timeSince();
+
+    // console.log(Math.floor((((now - hours) / 1000) % 60)));
+
+    if (unit === 'Hourse') {
+      return test.getHours();
+    } else {
+      return Math.floor(((now - hours) / 1000) % 60);
+    }
   };
 
   function getRange(upper, lower, steps) {
@@ -193,11 +238,11 @@ const LargeChart = ({ type, isOutliers = true, timeFrame, callBack, step }) => {
   useEffect(() => {
     if (collectionData && collectionData[type]) {
       if (timeFrame) {
-        const time = +timeFrame.split(' ')[0];
+        const time = timeFrame.split(' ');
 
-        const filteredData = collectionData[type].filter(
-          (item) => getTime(item.timestamp) <= time
-        );
+        const filteredData = collectionData[type].filter((item) => {
+          return getTime(item.timestamp, time[1]) <= +time[0];
+        });
 
         const result = [
           ...filteredData
@@ -282,6 +327,20 @@ const LargeChart = ({ type, isOutliers = true, timeFrame, callBack, step }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [collectionData, isOutliers, timeFrame, type, step]);
 
+  useEffect(() => {
+    if (labels && threshold) {
+      const beforeLast = labels.map((item) => {
+        item.x <= +threshold
+          ? (item.color = '#FD8F25')
+          : (item.color = '#AB7CE1');
+        return item;
+      });
+
+      setLabels(beforeLast);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [handleThreshold, threshold]);
+
   return (
     <div className='ETH__container'>
       <Chart
@@ -313,16 +372,30 @@ const LargeChart = ({ type, isOutliers = true, timeFrame, callBack, step }) => {
           responsive: true,
 
           onClick: function (e, el) {
-            if (el[0]) {
-              const updated = [...labels];
+            if (el[0] && labels) {
+              let updated = [...labels];
+              // updated = updated.map((item) => (item.color = '#AB7CE1'));
               const updateTarget = updated[el[0].index];
               updateTarget.color =
                 updateTarget.color === '#AB7CE1' ? '#FD8F25' : '#AB7CE1';
 
               callBack(updated);
 
+              const lastPrice = updated.filter(
+                (item) => item.color !== '#AB7CE1'
+              );
+
+              handleThreshold(lastPrice.at(-1)?.x);
+
+              const beforeLast = labels.map((item) => {
+                item.x <= +updateTarget.x
+                  ? (item.color = '#FD8F25')
+                  : (item.color = '#AB7CE1');
+                return item;
+              });
+
               localStorage.setItem('selected', JSON.stringify(updated));
-              setLabels(updated);
+              setLabels(beforeLast);
             }
 
             this.update();

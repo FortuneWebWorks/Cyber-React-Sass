@@ -11,6 +11,7 @@ const ThirdChart = () => {
   const [rarityRank, setRarityRank] = useState(null);
   const [activePriceRange, setActivePriceRange] = useState('%');
   const [priceRange, setPriceRange] = useState(null);
+  const [threshold, setThreshold] = useState('');
 
   const setRarity = (data) => {
     const dataToSet = data.filter((item) => item.color === '#FD8F25');
@@ -34,7 +35,7 @@ const ThirdChart = () => {
                 name='threshold'
                 id='threshold'
                 className='threshold__input'
-                placeholder='45'
+                placeholder='4545'
               />
             </div>
           ) : (
@@ -91,9 +92,11 @@ const ThirdChart = () => {
             innerColor='#244677'
             minWidth='111px'
             items={[
+              { name: '1 Minutes' },
+              { name: '5 Minutes' },
+              { name: '15 Minutes' },
+              { name: '1 Hours' },
               { name: '4 Hours' },
-              { name: '7 Hours' },
-              { name: '2 Hours' },
             ]}
             placeholder={'4 Hours'}
             callBack={(value) => setTimeFrame(value)}
@@ -102,12 +105,15 @@ const ThirdChart = () => {
 
         <div className='collection__filters_dropdown'>
           <span className='dropdown_title'>Threshold</span>
+          {console.log(threshold)}
           <input
             type='number'
             name='threshold'
             id='threshold'
             className='threshold__input'
-            placeholder='45'
+            placeholder={threshold}
+            value={threshold}
+            onChange={(e) => setThreshold(e.target.value)}
           />
         </div>
 
@@ -144,6 +150,8 @@ const ThirdChart = () => {
               timeFrame={timeFrame}
               callBack={setRarity}
               step={priceRange}
+              handleThreshold={setThreshold}
+              threshold={threshold}
             />
           </div>
         </div>

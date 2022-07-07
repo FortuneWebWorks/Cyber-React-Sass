@@ -54,4 +54,8 @@
     display: flex;
     flex-direction: column;
   }
+
+  .tooltip__bottom_value:last-of-type {
+    margin-right: auto;
+  }
 }
