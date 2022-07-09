@@ -30,12 +30,14 @@ const CollectionFilter = () => {
             </button>
           ))}
 
-          <button className='collection__filter__menu_resetall delete'>
-            Reset All
-          </button>
-          <button className='collection__filter__menu_reset delete'>
-            Reset
-          </button>
+          <div className='collection__filter_buttons'>
+            <button className='collection__filter__menu_resetall delete'>
+              Reset All
+            </button>
+            <button className='collection__filter__menu_reset delete'>
+              Reset
+            </button>
+          </div>
         </div>
 
         <div className='collection__filter__content_content'>

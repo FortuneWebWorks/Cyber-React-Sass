@@ -1,5 +1,5 @@
-import FloorVarChart from 'components/collections/lists/chart2/FloorVar/FloorVarChart';
-import DropDownFloorVar from 'components/collections/lists/chart2/FloorVar/FloorVarDropdown';
+import FloorVarChart from 'components/collections/trending/lists/chart2/FloorVar/FloorVarChart';
+import DropDownFloorVar from 'components/collections/trending/lists/chart2/FloorVar/FloorVarDropdown';
 import DropDown from 'components/DropDown';
 import React, { useState } from 'react';
 

@@ -190,6 +190,7 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
         options={{
           maintainAspectRatio: false,
           responsive: true,
+          resizeDelay: 0,
 
           layout: {
             padding: {
@@ -270,8 +271,8 @@ const ETHPrice = ({ type, isOutliers, timeFrame }) => {
         }}
         plugins={[plugin]}
       />
-      <span className='ETH__hider_bottom'></span>
-      <span className='ETH__hider_top'></span>
+      {/* <span className='ETH__hider_bottom'></span>
+      <span className='ETH__hider_top'></span> */}
     </div>
   );
 };

@@ -1,8 +1,10 @@
 import ButtonGroup from 'components/ButtonGroup';
-import LargeChart from 'components/collections/lists/chart3/LargeChart/LargeChart';
-import LargeChartETHPrice from 'components/collections/lists/chart3/LargeChart/LargeChartETHPrice';
+import LargeChart from 'components/collections/trending/lists/chart3/LargeChart/LargeChart';
+import LargeChartETHPrice from 'components/collections/trending/lists/chart3/LargeChart/LargeChartETHPrice';
 import DropDown from 'components/DropDown';
 import SwitchJs from 'components/SwitchJs';
+import 'styles/collections/mainCollection.scss';
+import 'styles/largeChart/largeChart.scss';
 import { useState } from 'react';
 
 const ThirdChart = () => {

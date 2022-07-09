@@ -1,23 +1,22 @@
-import "../styles/timer.scss";
-import { ReactComponent as Clock } from "../assets/icons/clock.svg";
+import '../styles/timer.scss';
+import { ReactComponent as Clock } from '../assets/icons/clock.svg';
 
 const Timer = ({ items, activeTimeFrame, setActiveTimeFrame, callBack }) => {
   const onTimeChangeHandler = (item) => {
-    setActiveTimeFrame(item);
-    callBack(item);
+    setActiveTimeFrame && setActiveTimeFrame(item);
+    callBack && callBack(item);
   };
 
   return (
-    <div className="timer">
+    <div className='timer'>
       <Clock />
 
       {items &&
         items.map((item) => (
           <button
             key={item}
-            className={activeTimeFrame === item ? "active" : ""}
-            onClick={onTimeChangeHandler.bind(null, item)}
-          >
+            className={activeTimeFrame === item ? 'active' : ''}
+            onClick={onTimeChangeHandler.bind(null, item)}>
             {item}
           </button>
         ))}

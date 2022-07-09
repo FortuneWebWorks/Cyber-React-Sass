@@ -183,31 +183,33 @@ const FloorVarChart = ({
   }, [collectionData, isOutliers, timeFrame, type, flooredData, floorPrice]);
 
   useEffect(() => {
-    const floor = floorVar.split(' ');
-    const unit = floor.filter((item) => !parseInt(item))[0];
-    let max = null;
-    let min = null;
-    if (unit === 'X') {
-      min = parseInt(floor[1]) * floorPrice;
-      max = parseInt(floor[2]) * floorPrice;
+    if (floorVar) {
+      const floor = floorVar?.split(' ');
+      const unit = floor.filter((item) => !parseInt(item))[0];
+      let max = null;
+      let min = null;
+      if (unit === 'X') {
+        min = parseInt(floor[1]) * floorPrice;
+        max = parseInt(floor[2]) * floorPrice;
 
-      setFlooredData(
-        collectionData[type].filter(
-          (item) => +item.price <= max && +item.price >= min
-        )
-      );
-    } else {
-      min = parseInt(floor[0]);
-      max = parseInt(floor[1]);
-
-      collectionData &&
         setFlooredData(
-          collectionData[type]?.filter(
-            (item) =>
-              +Math.floor((+item.price / floorPrice) * 100) <= max &&
-              +Math.floor((+item.price / floorPrice) * 100) >= min
+          collectionData[type].filter(
+            (item) => +item.price <= max && +item.price >= min
           )
         );
+      } else {
+        min = parseInt(floor[0]);
+        max = parseInt(floor[1]);
+
+        collectionData &&
+          setFlooredData(
+            collectionData[type]?.filter(
+              (item) =>
+                +Math.floor((+item.price / floorPrice) * 100) <= max &&
+                +Math.floor((+item.price / floorPrice) * 100) >= min
+            )
+          );
+      }
     }
   }, [collectionData, floorPrice, floorVar, type]);
 

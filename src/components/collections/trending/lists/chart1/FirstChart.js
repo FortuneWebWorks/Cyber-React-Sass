@@ -1,4 +1,4 @@
-import ETHPrice from 'components/collections/lists/chart1/ETHPrice/ETHPrice';
+import ETHPrice from 'components/collections/trending/lists/chart1/ETHPrice/ETHPrice';
 import DropDown from 'components/DropDown';
 import SwitchJs from 'components/SwitchJs';
 import React, { useState } from 'react';
@@ -9,7 +9,7 @@ const FirstChart = () => {
   const [outliers, setOutliers] = useState(false);
 
   return (
-    <div className='collection__charts'>
+    <div className='collection__charts first__collection_chart'>
       {/* Titles */}
       <span className='list-sails_title_x'>Time</span>
       <span className='list-sails_title_y'>ETH Price</span>
@@ -46,19 +46,21 @@ const FirstChart = () => {
           />
         </div>
 
-        <div className='collection__filters_toggle'>
-          <span>LOG Scale</span>
-          <SwitchJs style={{ backgroundColor: '#24467750' }} />
-        </div>
+        <div className='collection__filters_switches'>
+          <div className='collection__filters_toggle'>
+            <span>LOG Scale</span>
+            <SwitchJs style={{ backgroundColor: '#24467750' }} />
+          </div>
 
-        <div className='collection__filters_toggle'>
-          <span>OUTLIERS</span>
-          <SwitchJs
-            style={{ backgroundColor: '#24467750' }}
-            onClick={(e) => {
-              setOutliers((prev) => !prev);
-            }}
-          />
+          <div className='collection__filters_toggle'>
+            <span>OUTLIERS</span>
+            <SwitchJs
+              style={{ backgroundColor: '#24467750' }}
+              onClick={(e) => {
+                setOutliers((prev) => !prev);
+              }}
+            />
+          </div>
         </div>
       </div>
 
