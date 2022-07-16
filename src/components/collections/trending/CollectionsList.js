@@ -1,11 +1,11 @@
-import 'styles/collections/collectionList.scss';
-import useFetcher from 'hooks/useFetcher';
-import CollectionModal from './CollectionModal';
-import { ReactComponent as OpenSeaIcon } from 'assets/images/openSea-logo-circle-collections.svg';
-import { ReactComponent as EtherScanIcon } from 'assets/images/etherscan-logo-circle-orders.svg';
-import { ReactComponent as EthIcon } from 'assets/images/eth-icon.svg';
-import { useCallback, useContext, useEffect, useRef, useState } from 'react';
-import CollectionContext from 'contexts/collectionContext';
+import 'styles/collections/collectionList.scss'
+import useFetcher from 'hooks/useFetcher'
+import CollectionModal from './CollectionModal'
+import { ReactComponent as OpenSeaIcon } from 'assets/images/openSea-logo-circle-collections.svg'
+import { ReactComponent as EtherScanIcon } from 'assets/images/etherscan-logo-circle-orders.svg'
+import { ReactComponent as EthIcon } from 'assets/images/eth-icon.svg'
+import { useCallback, useContext, useEffect, useRef, useState } from 'react'
+import CollectionContext from 'contexts/collectionContext'
 
 const defData = [
   { id: 201 },
@@ -28,84 +28,84 @@ const defData = [
   { id: 218 },
   { id: 219 },
   { id: 220 },
-];
+]
 
 const CollectionsList = ({ slug, type, sort }) => {
-  if (sort === 'Date') sort = 'timestamp';
-  if (sort === 'Rank') sort = 'token_rank';
-  if (sort === 'Price') sort = 'price';
+  if (sort === 'Date') sort = 'timestamp'
+  if (sort === 'Rank') sort = 'token_rank'
+  if (sort === 'Price') sort = 'price'
 
   const [listingsData, listingsLoading] = useFetcher(
     `https://api.cyberdash.app/v1/collections/${slug}/${type}`
-  );
+  )
 
-  const { collectionData, setCollectionData } = useContext(CollectionContext);
+  const { collectionData, setCollectionData } = useContext(CollectionContext)
 
-  const [modal, setModal] = useState(null);
-  const [render, setRender] = useState(false);
-  const [currentViewData, setCurrentViewData] = useState(defData);
-  const timeOut = useRef(null);
-  const observer = useRef(null);
-  const nothing = useRef(null);
+  const [modal, setModal] = useState(null)
+  const [render, setRender] = useState(false)
+  const [currentViewData, setCurrentViewData] = useState(defData)
+  const timeOut = useRef(null)
+  const observer = useRef(null)
+  const nothing = useRef(null)
   const lastElement = useCallback(
     (el) => {
-      if (listingsLoading) return;
+      if (listingsLoading) return
 
-      if (observer.current) observer.current.disconnect();
+      if (observer.current) observer.current.disconnect()
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) {
           setCurrentViewData(
             listingsData.rows.slice(0, currentViewData.length + 20)
-          );
+          )
         }
-      });
+      })
 
-      if (el) observer.current.observe(el);
+      if (el) observer.current.observe(el)
     },
     [currentViewData?.length, listingsData?.rows, listingsLoading]
-  );
+  )
 
   const showModal = (item) => {
-    setModal(item);
-  };
+    setModal(item)
+  }
 
   const timestampToDate = (timestamp) => {
-    const date = new Date(timestamp * 1000);
-    return date.getMinutes();
-  };
+    const date = new Date(timestamp * 1000)
+    return date.getMinutes()
+  }
 
   useEffect(() => {
     if (listingsData) {
       if (sort === 'price' || sort === 'token_rank') {
         setCurrentViewData(
           listingsData.rows.sort((a, b) => +a[sort] - +b[sort])
-        );
+        )
       } else if (sort === 'timestamp') {
         setCurrentViewData(
           listingsData.rows.sort(
             (a, b) => timestampToDate(+a[sort]) - timestampToDate(+b[sort])
           )
-        );
+        )
       } else {
-        setCurrentViewData(listingsData.rows);
+        setCurrentViewData(listingsData.rows)
       }
-      setCollectionData((prev) => ({ ...prev, [type]: listingsData.rows }));
+      setCollectionData((prev) => ({ ...prev, [type]: listingsData.rows }))
     }
-  }, [listingsData, setCollectionData, sort, type]);
+  }, [listingsData, setCollectionData, sort, type])
 
   useEffect(() => {
     timeOut.current = setTimeout(() => {
-      setRender((prev) => !prev);
-    }, 2000);
+      setRender((prev) => !prev)
+    }, 1000)
 
     return () => {
-      clearTimeout(timeOut.current);
-      timeOut.current = null;
-    };
-  }, [render]);
+      clearTimeout(timeOut.current)
+      timeOut.current = null
+    }
+  }, [render])
 
   if (!slug) {
-    return <h1>Loading...</h1>;
+    return <h1>Loading...</h1>
   }
 
   return (
@@ -115,7 +115,7 @@ const CollectionsList = ({ slug, type, sort }) => {
       )}
 
       <div className='collection__list'>
-        {currentViewData[0].collectionId
+        {currentViewData?.at(0)?.collectionId
           ? currentViewData?.map((item) => (
               <div
                 key={item.id}
@@ -194,7 +194,7 @@ const CollectionsList = ({ slug, type, sort }) => {
             ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CollectionsList;
+export default CollectionsList

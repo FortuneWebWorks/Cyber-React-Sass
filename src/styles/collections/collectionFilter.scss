@@ -203,6 +203,15 @@
         color: #d1d1d1;
       }
 
+      input:not(:placeholder-shown) + label {
+        top: -10%;
+        left: 10px;
+        padding: 0 1rem;
+        font: normal normal normal 12px/14px Roboto;
+        color: #d1d1d1;
+        transform: translateY(0);
+      }
+
       label {
         position: absolute;
         top: 50%;

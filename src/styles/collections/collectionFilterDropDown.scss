@@ -42,17 +42,20 @@
   }
 
   .a__dropdown__items {
+    max-height: 6rem;
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
     align-items: flex-start;
     gap: 5px;
     margin: 11px 0;
+    overflow: auto;
   }
 
   .a__dropdown__item {
     min-width: 100px;
     min-height: 29px;
+    width: 90%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -87,6 +90,7 @@
     left: 0;
     width: 298px;
     height: fit-content;
+    max-height: 30rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -99,6 +103,7 @@
     user-select: none;
     pointer-events: none;
     transition: opacity 0.1s ease;
+    overflow: auto;
 
     &.open {
       opacity: 1;

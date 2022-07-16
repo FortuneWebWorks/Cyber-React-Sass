@@ -24,21 +24,31 @@ import FirstChart from 'components/collections/trending/lists/chart1/FirstChart'
 import SecondChart from 'components/collections/trending/lists/chart2/SecondChart';
 import ThirdChart from 'components/collections/trending/lists/chart3/ThirdChart';
 import Analytical from 'components/collections/analytical/Analytical';
+import CollectionModal from 'components/collections/trending/CollectionModal';
 
 const Collection = () => {
   const params = useParams();
   const slug = params.slug;
   const [listingsSort, setListingsSort] = useState('null');
   const [view, setView] = useState('Trending');
+  const [searchResult, setSearchResult] = useState(null);
 
   const [metaData] = useFetcher(
     `https://api.cyberdash.app/v1/collections/${slug}`
   );
 
+  const searchHandler = (val) => val && setSearchResult(val);
+
   return (
     <CollectionContextProvider>
       {metaData && (
         <div className='collection__container'>
+          {searchResult && (
+            <CollectionModal
+              data={searchResult}
+              callBack={() => setSearchResult(null)}
+            />
+          )}
           <div className='collection__head_header'>
             <img
               src={metaData?.banner_image_url}
@@ -93,7 +103,7 @@ const Collection = () => {
                   <EtherScanIcon />
                 </a>
               </div>
-              <Search />
+              <Search callBack={searchHandler} />
             </div>
           </div>
 

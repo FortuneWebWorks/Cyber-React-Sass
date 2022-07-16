@@ -1,7 +1,7 @@
-import 'styles/collections/collectionFilterDropDown.scss';
-import { ReactComponent as ArrowIcon } from 'assets/images/downArrow.svg';
-import { ReactComponent as CloseIcon } from 'assets/images/close.svg';
-import { useEffect, useState } from 'react';
+import 'styles/collections/collectionFilterDropDown.scss'
+import { ReactComponent as ArrowIcon } from 'assets/images/downArrow.svg'
+import { ReactComponent as CloseIcon } from 'assets/images/close.svg'
+import { useEffect, useState } from 'react'
 
 const tempListItems = [
   '74 (0.5%)',
@@ -9,41 +9,49 @@ const tempListItems = [
   '74 (0.1%)',
   '74 (0.25%)',
   '74 (0.75%)',
-];
+]
 
-const CollectionFilterDropDown = () => {
-  const [open, setOpen] = useState(false);
-  const [items, setItems] = useState([]);
+const CollectionFilterDropDown = ({ data }) => {
+  console.log(data)
+  const [open, setOpen] = useState(false)
+  const [items, setItems] = useState([])
 
   const addToListHandler = (e) => {
     if (
       e.target.tagName === 'SPAN' &&
       !e.target.classList.contains('checked')
     ) {
-      const newItems = [...items];
-      newItems.push(e.target.textContent);
-      setItems(newItems);
+      const newItems = [...items]
+      newItems.push(e.target.textContent)
+      setItems(newItems)
     }
-  };
+  }
 
   const removeItemHandler = (item) => {
-    const newItems = [...items].filter((i) => i !== item);
+    const newItems = [...items].filter((i) => i !== item)
 
-    setItems(newItems);
-  };
+    setItems(newItems)
+  }
 
   useEffect(() => {
     const closer = (e) => {
       if (!e.target.closest('.a__dropdown')) {
-        setOpen(false);
+        setOpen(false)
       }
-    };
-    window && window.addEventListener('mouseup', closer);
+    }
+    window && window.addEventListener('mouseup', closer)
 
     return () => {
-      window.removeEventListener('mouseup', closer);
-    };
-  }, []);
+      window.removeEventListener('mouseup', closer)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (data.length <= 0) {
+      console.log(data)
+      setItems([])
+    }
+  }, [data])
 
   return (
     <div className='a__dropdown'>
@@ -66,17 +74,18 @@ const CollectionFilterDropDown = () => {
       </div>
 
       <div className={`a__dropdown_list ${open ? 'open' : ''}`}>
-        {tempListItems.map((item, index) => (
-          <span
-            key={index}
-            className={`${items.includes(item) ? 'checked' : ''}`}
-            onClick={addToListHandler}>
-            {item}
-          </span>
-        ))}
+        {data?.length > 0 &&
+          data[0].counts.map((item, index) => (
+            <span
+              key={index}
+              className={`${items.includes(item.value) ? 'checked' : ''}`}
+              onClick={addToListHandler}>
+              {item.value}
+            </span>
+          ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CollectionFilterDropDown;
+export default CollectionFilterDropDown

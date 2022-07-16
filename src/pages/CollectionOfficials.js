@@ -60,7 +60,7 @@ const CollectionOfficials = () => {
               </div>
               <div>
                 <div className='collection__charts_mode_point'></div>
-                <span>SUPER RARE</span>
+                <span>ULTRA RARE</span>
               </div>
               <div>
                 <div className='collection__charts_mode_point'></div>
