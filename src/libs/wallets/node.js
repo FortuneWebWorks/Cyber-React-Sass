@@ -285,6 +285,24 @@ class Node {
       };
     }
   };
+  sendTxWithPrivateKey = async (txData, privateKey, isFlashbot) => {
+    try {
+      const ethNodeWeb3 = new Web3(this.web3Endpoint);
+      const signedTx = await ethNodeWeb3.eth.accounts.signTransaction(
+        txData,
+        privateKey
+      );
+
+      const resTx = await this.sendRawTx(signedTx?.rawTransaction, isFlashbot);
+
+      return resTx;
+    } catch (e) {
+      return {
+        success: false,
+        message: e.message
+      };
+    }
+  };
 }
 
 export default Node;

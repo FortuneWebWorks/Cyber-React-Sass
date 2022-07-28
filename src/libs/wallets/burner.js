@@ -1,18 +1,16 @@
-import Web3 from 'web3';
-const web3Endpoint =
-  'https://eth.getblock.io/mainnet/?api_key=91953f06-fc0a-4a48-87fc-145e8cf6d385';
-const web3 = new Web3(web3Endpoint);
+import Node from './node';
 
-const signTxData = async (txData) => {
+const sendTx = async (txData, privateKey, isFlashBot) => {
   try {
-    const signedTx = await web3.eth.accounts.signTransaction(
-      txData,
-      privateKey
+    const node = new Node(
+      'https://eth.getblock.io/mainnet/?api_key=91953f06-fc0a-4a48-87fc-145e8cf6d385'
     );
-    return {
-      success: true,
-      raw: signedTx?.rawTransaction
-    };
+    const resTx = await node.sendTxWithPrivateKey(
+      txData,
+      privateKey,
+      isFlashBot
+    );
+    return resTx;
   } catch (e) {
     return {
       success: false,
@@ -21,4 +19,4 @@ const signTxData = async (txData) => {
   }
 };
 
-export default signTxData;
+export default { sendTx };

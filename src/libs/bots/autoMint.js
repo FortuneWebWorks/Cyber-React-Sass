@@ -1,6 +1,6 @@
 import Web3 from 'web3';
 import { ethers } from 'ethers';
-import { MetaMask, Node } from '../wallets';
+import { MetaMask, Node, Burner } from '../wallets';
 const AbiCoder = require('web3-eth-abi');
 
 const checkScamToken = async (contractAddress) => {
@@ -34,9 +34,7 @@ class AutoMint {
     maxPriorityFeePerGas,
     contractAddress,
     mintAbi,
-    flagAbi,
-    mintArgs,
-    flagArgs
+    mintArgs
   ) => {
     try {
       if (maxFeePerGas <= maxPriorityFeePerGas)
@@ -52,8 +50,6 @@ class AutoMint {
         web3.utils.toWei(Number(maxPriorityFeePerGas).toString(), 'gwei')
       );
 
-      const oldValue = value;
-
       value = web3.utils.toHex(
         web3.utils.toWei(Number(value).toString(), 'ether')
       );
@@ -62,28 +58,6 @@ class AutoMint {
         throw new Error('Please Select Your Mint ABI Function.');
 
       const data = AbiCoder.encodeFunctionCall(mintAbi, mintArgs);
-
-      if (!String(flagAbi.name).toLowerCase().includes('main')) {
-        if (flagAbi === null) throw new Error('Please Select Your Flag.');
-
-        const resCheckFlag = await this.checkFlag(
-          contractAddress,
-          flagAbi,
-          flagArgs
-        );
-
-        if (!resCheckFlag.success) throw new Error(resCheckFlag?.message);
-      } else {
-        const resEstimateGas = await this.estimateGas(
-          address,
-          contractAddress,
-          data,
-          oldValue,
-          maxFeePerGas,
-          maxPriorityFeePerGas
-        );
-        if (resEstimateGas.status === 400) return resEstimateGas;
-      }
 
       const nonce = await web3.eth.getTransactionCount(address, 'pending');
 
@@ -105,15 +79,24 @@ class AutoMint {
     }
   };
 
-  preSign = async (txData) => {
+  signData = async (txData, isPresign, privateKey, isFlashBot) => {
     try {
-      const metaMask = new MetaMask(this.ethereum);
-      const preSignTx = await metaMask.preSignTx(address, txData);
-      if (!preSignTx.success) throw new Error(preSignTx?.message);
-      const rawTx = preSignTx.raw;
-      const node = new Node(this.web3Endpoint);
-      const resRawTx = await node.sendRawTx(rawTx);
-      return resRawTx;
+      if (isPresign && String(this.wallet).toLowerCase() === 'metamask') {
+        const metaMask = new MetaMask(this.ethereum);
+        const preSignTx = await metaMask.preSignTx(address, txData);
+        //if (!preSignTx.success) throw new Error(preSignTx?.message);
+        return preSignTx;
+      } else if (
+        !isPresign &&
+        String(this.wallet).toLowerCase() === 'metamask'
+      ) {
+        const metaMask = new MetaMask(this.ethereum);
+        const sendTx = await metaMask.sendTx(txData);
+        //if (!preSignTx.success) throw new Error(preSignTx?.message);
+        return sendTx;
+      }
+      const resTx = await Burner.sendTx(txData, privateKey, isFlashBot);
+      return resTx;
     } catch (e) {
       return { sucess: true, message: e.message };
     }
