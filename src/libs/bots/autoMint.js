@@ -75,7 +75,7 @@ class AutoMint {
 
       return { sucess: true, tx: txData };
     } catch (e) {
-      return { sucess: true, message: e.message };
+      return { sucess: false, message: e.message };
     }
   };
 
@@ -98,7 +98,22 @@ class AutoMint {
       const resTx = await Burner.sendTx(txData, privateKey, isFlashBot);
       return resTx;
     } catch (e) {
-      return { sucess: true, message: e.message };
+      return { sucess: false, message: e.message };
+    }
+  };
+
+  sendPresignData = async (rawTx) => {
+    try {
+      const node = new Node(
+        'https://eth.getblock.io/mainnet/?api_key=91953f06-fc0a-4a48-87fc-145e8cf6d385'
+      );
+      const resTx = await node.sendTxWithPrivateKey(
+        txData,
+        privateKey,
+        isFlashBot
+      );
+    } catch (e) {
+      return { sucess: false, message: e.message };
     }
   };
 

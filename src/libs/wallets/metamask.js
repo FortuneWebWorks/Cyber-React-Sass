@@ -1,4 +1,5 @@
 import { ethers } from 'ethers';
+import Node from './node';
 
 class MetaMask {
   constructor(ethereum) {
@@ -66,6 +67,19 @@ class MetaMask {
         success: true,
         raw: signedTransaction
       };
+    } catch (e) {
+      return {
+        success: false,
+        message: e.message
+      };
+    }
+  };
+
+  SendPreSignTx = async (rawTx, isFlashbot = false) => {
+    try {
+      const node = new Node();
+      const resTx = await node.sendRawTx(rawTx, isFlashbot);
+      return resTx;
     } catch (e) {
       return {
         success: false,
