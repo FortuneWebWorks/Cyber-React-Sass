@@ -10,14 +10,7 @@ const checkScamToken = async (contractAddress) => {
     );
   } catch (e) {}
 };
-/*
-const getFirstTransactions = async (contractAddress) => {
-  try {
-  } catch (e) {
-    return {};
-  }
-};
-*/
+
 class AutoMint {
   constructor(ethereum, wallet) {
     this.wallet = wallet;
@@ -73,26 +66,34 @@ class AutoMint {
         to: contractAddress
       };
 
-      return { sucess: true, tx: txData };
+      return { sucess: true, txData: txData };
     } catch (e) {
       return { sucess: false, message: e.message };
     }
   };
 
-  signData = async (txData, isPresign, privateKey, isFlashBot) => {
+  preSign = async (address, txData) => {
     try {
-      if (isPresign && String(this.wallet).toLowerCase() === 'metamask') {
-        const metaMask = new MetaMask(this.ethereum);
-        const preSignTx = await metaMask.preSignTx(address, txData);
-        //if (!preSignTx.success) throw new Error(preSignTx?.message);
-        return preSignTx;
-      } else if (
-        !isPresign &&
-        String(this.wallet).toLowerCase() === 'metamask'
+      if (String(this.wallet).toLowerCase() !== 'metamask')
+        throw new Error('Only work with metamask');
+
+      const metaMask = new MetaMask(this.ethereum);
+      const preSignTx = await metaMask.preSignTx(address, txData);
+      if (!preSignTx.success) throw new Error(preSignTx?.message);
+      return preSignTx;
+    } catch (e) {
+      return { success: false, message: e.message };
+    }
+  };
+
+  sendData = async (txData, isFlashBot, privateKey = null) => {
+    try {
+      if (
+        String(this.wallet).toLowerCase() === 'metamask' &&
+        privateKey === null
       ) {
         const metaMask = new MetaMask(this.ethereum);
         const sendTx = await metaMask.sendTx(txData);
-        //if (!preSignTx.success) throw new Error(preSignTx?.message);
         return sendTx;
       }
       const resTx = await Burner.sendTx(txData, privateKey, isFlashBot);
@@ -102,16 +103,14 @@ class AutoMint {
     }
   };
 
-  sendPresignData = async (rawTx) => {
+  sendPreSignData = async (rawTx) => {
     try {
       const node = new Node(
         'https://eth.getblock.io/mainnet/?api_key=91953f06-fc0a-4a48-87fc-145e8cf6d385'
       );
-      const resTx = await node.sendTxWithPrivateKey(
-        txData,
-        privateKey,
-        isFlashBot
-      );
+      const resTx = await node.sendRawTx(rawTx, isFlashBot);
+
+      return resTx;
     } catch (e) {
       return { sucess: false, message: e.message };
     }
@@ -126,7 +125,9 @@ class AutoMint {
     fromAddress,
     value,
     maxFeePerGas,
-    maxPriorityFeePerGas
+    maxPriorityFeePerGas,
+    gasMultiplier = 1,
+    gasInHeader
   ) => {
     try {
       if (String(flagAbi?.name).includes('main')) {

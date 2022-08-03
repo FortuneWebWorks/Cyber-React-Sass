@@ -189,7 +189,9 @@ class Node {
     value,
     maxFeePerGas,
     maxPriorityFeePerGas,
-    gasLimit
+    gasLimit,
+    gasMultiplier,
+    gasInHeader
   ) => {
     const etherValue = toFixed(
       parseInt(gasLimit) * parseFloat(maxFeePerGas / 1e9) +

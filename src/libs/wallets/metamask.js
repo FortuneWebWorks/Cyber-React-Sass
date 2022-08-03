@@ -75,7 +75,7 @@ class MetaMask {
     }
   };
 
-  SendPreSignTx = async (rawTx, isFlashbot = false) => {
+  sendPreSignTx = async (rawTx, isFlashbot = false) => {
     try {
       const node = new Node();
       const resTx = await node.sendRawTx(rawTx, isFlashbot);
