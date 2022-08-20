@@ -17,6 +17,7 @@
     "i": "^0.3.7",
     "mui": "^0.0.1",
     "npm": "^8.12.1",
+    "prettier": "^2.7.1",
     "react": "^17.0.2",
     "react-alice-carousel": "^2.5.1",
     "react-chartjs-2": "^4.1.0",
