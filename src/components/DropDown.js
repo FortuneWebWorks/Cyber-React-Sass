@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import 'styles/dropdown.scss';
-import { ReactComponent as Arrow } from 'assets/images/chevron-down.svg';
+import { useEffect, useState } from 'react'
+import 'styles/dropdown.scss'
+import { ReactComponent as Arrow } from 'assets/images/chevron-down.svg'
 
 const DropDown = ({
   title,
@@ -11,40 +11,41 @@ const DropDown = ({
   value,
   innerColor,
   minWidth,
+  defaultValue,
 }) => {
   // const [data, setData] = useState('');
-  const [placeHolder, setPlaceHolder] = useState(value || placeholder);
-  const [open, setOpen] = useState(false);
+  const [placeHolder, setPlaceHolder] = useState(value || defaultValue?.name)
+  const [open, setOpen] = useState(false)
 
   const onClick = (e) => {
     if (e.target.classList.contains('dropdown')) {
-      setOpen((prev) => !prev);
+      setOpen((prev) => !prev)
     }
 
     if (e.target.tagName === 'LI') {
       // setData(e.target.getAttribute('data'));
-      setPlaceHolder(e.target.textContent);
-      setOpen((prev) => !prev);
+      setPlaceHolder(e.target.textContent)
+      setOpen((prev) => !prev)
       callBack &&
         callBack(
           e.target.textContent,
           JSON.parse(e.target.getAttribute('data'))
-        );
+        )
     }
-  };
+  }
 
   useEffect(() => {
     window &&
       window.addEventListener('pointerdown', (e) => {
         if (!e.target.getAttribute('dropdown')) {
-          setOpen(false);
+          setOpen(false)
         }
-      });
-  }, []);
+      })
+  }, [])
 
   useEffect(() => {
-    setPlaceHolder(placeholder);
-  }, [placeholder]);
+    setPlaceHolder(defaultValue?.name || placeholder)
+  }, [placeholder, defaultValue])
 
   return (
     <div className='dropdown__container' dropdown='true'>
@@ -78,7 +79,7 @@ const DropDown = ({
         </div>
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default DropDown;
+export default DropDown

@@ -1,62 +1,62 @@
-import { useEffect, useState } from 'react';
-import 'styles/trending.scss';
-import ButtonGroup from 'components/ButtonGroup';
-import Timer from 'components/Timer';
-import { ReactComponent as FilterIcon } from 'assets/icons/filtr.svg';
-import Filter from 'components/Filter';
-import TrendingTable from 'components/trending/TrendingTable';
+import { useEffect, useState } from 'react'
+import 'styles/trending.scss'
+import ButtonGroup from 'components/ButtonGroup'
+import Timer from 'components/Timer'
+import { ReactComponent as FilterIcon } from 'assets/icons/filtr.svg'
+import Filter from 'components/Filter'
+import TrendingTable from 'components/trending/TrendingTable'
 
-const timeFrameMoreThan1Day = ['1d', '7d'];
-const timeFrameLessThan1Day = ['1m', '5m', '15m', '1h', '6h', '12h'];
+const timeFrameMoreThan1Day = ['1d', '7d']
+const timeFrameLessThan1Day = ['1m', '5m', '15m', '1h', '6h', '12h']
 
 const Traits = () => {
-  const [data, setData] = useState(null);
-  const [openFilter, setOpenFiter] = useState(false);
-  const [sort, setSort] = useState('High/Low');
-  const [activeTimeFrame, setActiveTimeFrame] = useState('1h');
-  const loading = true;
+  const [data, setData] = useState(null)
+  const [openFilter, setOpenFiter] = useState(false)
+  const [sort, setSort] = useState('High/Low')
+  const [activeTimeFrame, setActiveTimeFrame] = useState('1h')
+  const loading = true
 
   const onClick = (e) => {
-    setOpenFiter((prev) => !prev);
-  };
+    setOpenFiter((prev) => !prev)
+  }
 
   const activeButtonsChange = (value) => {
-    setSort(value);
-  };
+    setSort(value)
+  }
 
   const closer = () => {
-    setOpenFiter(false);
-  };
+    setOpenFiter(false)
+  }
 
   const fetchData = (time) => {
     const fetcher = async () => {
       const res = await fetch(
         `https://api.cyberdash.app/v1/tables/trending/ticker/${time}`
-      );
+      )
 
-      const data = await res.json();
+      const data = await res.json()
 
-      setData(data);
-    };
+      setData(data)
+    }
 
-    fetcher();
-  };
+    fetcher()
+  }
 
   useEffect(() => {
-    fetchData('1h');
+    // fetchData('1h');
 
     const closer = (e) => {
       if (!e.target.closest('.filter') && e.target.id !== 'filter') {
-        setOpenFiter(false);
+        setOpenFiter(false)
       }
-    };
+    }
 
-    window && window.addEventListener('mouseup', closer);
+    window && window.addEventListener('mouseup', closer)
 
     return () => {
-      window.removeEventListener('mouseup', closer);
-    };
-  }, []);
+      window.removeEventListener('mouseup', closer)
+    }
+  }, [])
 
   return (
     <div className='traits'>
@@ -108,7 +108,7 @@ const Traits = () => {
         {<TrendingTable data={data?.rows} sort={sort} info={true} />}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Traits;
+export default Traits
