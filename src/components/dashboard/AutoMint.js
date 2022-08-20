@@ -1,38 +1,40 @@
-import { Fragment, useContext } from 'react'
-import 'styles/dashboard/autoMint.scss'
-import DropDown from 'components/DropDown'
-import Input from 'components/Input'
-import Button from 'components/Button'
-import ButtonGroup from 'components/ButtonGroup'
-import Proggress from 'components/Proggress'
-import Switch from 'components/Switch'
-import { AutoMintContext } from 'contexts/autoMintContext'
-// import { VcheckValidateMintInputs } from 'apiHandler/inputChecking';
+import { Fragment, useContext } from 'react';
+import 'styles/dashboard/autoMint.scss';
+import DropDown from 'components/DropDown';
+import Input from 'components/Input';
+import Button from 'components/Button';
+import ButtonGroup from 'components/ButtonGroup';
+import Proggress from 'components/Proggress';
+import Switch from 'components/Switch';
+import { AutoMintContext } from 'contexts/autoMintContext';
+import AutoMintLib from 'libs/bots/autoMint';
+import WalletsHandler from 'libs/wallets/node';
+import { VcheckValidateMintInputs } from 'apiHandler/inputChecking';
 
-import ApiHandler from 'apiHandler/node'
-import Result from 'components/Result'
+import ApiHandler from 'apiHandler/node';
+import Result from 'components/Result';
 
-import { toast } from 'react-toastify'
+import { toast } from 'react-toastify';
 
 const dropdownData = [
   { title: 'Your Wallet', data: 'Your Wallet' },
-  { title: 'Private', data: 'priveate' },
-]
+  { title: 'Private', data: 'priveate' }
+];
 
 const selectWalletData = [
   { title: 'MetaMask Wallet', data: 'MetaMask Wallet' },
-  { title: 'Burner Wallet', data: 'Burner Wallet' },
-]
+  { title: 'Burner Wallet', data: 'Burner Wallet' }
+];
 
 const signatureData = [
   { title: 'Signed', data: 'Signed' },
-  { title: 'Pre Signed', data: 'Pre Signed' },
-]
+  { title: 'Pre Signed', data: 'Pre Signed' }
+];
 
 const modeData = [
   { title: 'Flash Bot', data: 'Flash Bot' },
-  { title: 'Normal', data: 'Normal' },
-]
+  { title: 'Normal', data: 'Normal' }
+];
 
 const AutoMint = ({ callBack }) => {
   const {
@@ -56,115 +58,152 @@ const AutoMint = ({ callBack }) => {
     mintPrice,
     mintInputsRendered,
     edit,
-  } = useContext(AutoMintContext)
-  const node = new ApiHandler()
+    maxFeePerGas,
+    setMaxFeePerGas,
+    maxPriorityFeePerGas,
+    setMaxPriorityFeePerGas
+  } = useContext(AutoMintContext);
+  const node = new ApiHandler();
+  const wallet = new WalletsHandler();
+  const autoMintLib = new AutoMintLib();
 
   const getFromContractAdress = async () => {
     try {
-      let response = await node.checkContract(contractAddress.current)
+      let response = await node.checkContract(contractAddress.current);
       setFlagAbi({
         items: response.flagAbi.allFlagFunctions,
         defaultValue:
           response.flagAbi.defaultFlagFunction ||
-          response.flagAbi.allFlagFunctions[0],
-      })
+          response.flagAbi.allFlagFunctions[0]
+      });
       setMintAbi({
         items: response.mintAbi.allMintFunctions,
         defaultValue:
           response.mintAbi.defaultMintFunction ||
-          response.mintAbi.allMintFunctions[0],
-      })
+          response.mintAbi.allMintFunctions[0]
+      });
 
       toast('Success', {
         type: 'success',
-        style: { fontSize: '1.5rem' },
-      })
+        style: { fontSize: '1.5rem' }
+      });
     } catch (error) {
       toast('The contract isn’t correct, check the address again', {
         type: 'error',
-        style: { fontSize: '1.5rem' },
-      })
+        style: { fontSize: '1.5rem' }
+      });
     }
-  }
+  };
 
   const getContractAddress = (value) => {
-    contractAddress.current = value
-  }
+    contractAddress.current = value;
+  };
 
   const mintCallBack = (key, data) => {
-    setMintInputs(data.inputs)
+    setMintInputs(data.inputs);
 
-    mintInputsRendered.current = {}
-  }
+    mintInputsRendered.current = {};
+  };
 
   const flagCallBack = (key, data) => {
-    setFlagOutputs(data.outputs)
-  }
+    setFlagOutputs(data.outputs);
+  };
 
   const onButtonGroupChange = (activeBtn) => {
-    setActiveBtn(activeBtn)
-  }
+    setActiveBtn(activeBtn);
+  };
 
   const onSelectWalletChange = (key, data) => {
-    setSelectWallet(key)
-  }
+    setSelectWallet(key);
+  };
 
   const onModeChange = (key, data) => {
-    setMode(key)
-  }
+    setMode(key);
+  };
 
   const onSetMintPrice = (value) => {
-    mintPrice.current = value
-  }
+    mintPrice.current = value;
+  };
 
   const onMintInputsChange = (value, title) => {
     mintInputsRendered.current = {
       ...mintInputsRendered.current,
-      [title]: value,
+      [title]: value
+    };
+  };
+
+  const maxPeiorityFeeHandler = (value, label, e) => {
+    if (Number(value) >= Number(maxFeePerGas)) {
+      console.log(maxFeePerGas);
+      e.target.value = maxPriorityFeePerGas;
+      toast.error('The input number must be grater than (Max Fee Per Gas)');
+    } else {
+      setMaxPriorityFeePerGas(value);
     }
-  }
+  };
 
   // Create Task
   const onCreateTask = () => {
     // Placeholder for validate
 
-    const editTarget = tasks.filter((task) => task.id === edit.current.id)[0]
+    const editTarget = tasks.filter((task) => task.id === edit.current.id)[0];
 
     if (editTarget) {
-      editTarget.contractAddress = contractAddress.current
-      editTarget.mintPrice = mintPrice.current
-      editTarget.mode = mode
+      editTarget.contractAddress = contractAddress.current;
+      editTarget.mintPrice = mintPrice.current;
+      editTarget.mode = mode;
     } else {
-      setTasks((prev) => [
-        ...prev,
-        {
-          id: tasks.length,
-          contractAddress: contractAddress.current,
-          mintPrice: mintPrice.current,
-          fee: 12,
-          mode: mode,
-          status: 'idl',
-        },
-      ])
+      // console.log({
+      //   ...tasks,
+      //   id: tasks.length,
+      //   contractAddress: contractAddress.current,
+      //   mintPrice: mintPrice.current,
+      //   fee: 12,
+      //   mode: mode,
+      //   status: 'idl'
+      // });
+
+      const calculateData = {
+        value: mintPrice.current,
+        maxFeePerGas,
+        maxPriorityFeePerGas
+      };
+
+      console.log(calculateData);
+
+      // Prev code **
+      // wallet.calculateEtherValue()
+
+      // setTasks((prev) => [
+      //   ...prev,
+      // {
+      //   id: tasks.length,
+      //   contractAddress: contractAddress.current,
+      //   mintPrice: mintPrice.current,
+      //   fee: 12,
+      //   mode: mode,
+      //   status: 'idl'
+      // }
+      // ]);
     }
 
-    edit.current = null
+    // edit.current = null
 
-    callBack()
-  }
+    // callBack()
+  };
 
   return (
-    <div className='container'>
-      <div className='container__scroll'>
+    <div className="container">
+      <div className="container__scroll">
         <DropDown
-          title='Select Wallet'
+          title="Select Wallet"
           placeholder={'Your Wallet'}
           items={selectWalletData}
           callBack={onSelectWalletChange}
         />
 
         {selectWallet === 'Private Key' && (
-          <Input title='Your Private Key' placeholder='54132136463fdsa' />
+          <Input title="Your Private Key" placeholder="54132136463fdsa" />
         )}
 
         {/* <DropDown
@@ -178,32 +217,32 @@ const AutoMint = ({ callBack }) => {
         <Input title="RPC WSS URL *" placeholder="https://google.com" /> */}
 
         <Input
-          title='Contract Address *'
-          placeholder='dsf21135413541sdfa'
+          title="Contract Address *"
+          placeholder="dsf21135413541sdfa"
           callBack={getContractAddress}
           value={edit?.current?.contractAddress}
           require={true}
         />
 
-        <div className='container__multi-input'>
-          <Input title='ABI *' placeholder='Fetch' />
+        <div className="container__multi-input">
+          <Input title="ABI *" placeholder="Fetch" />
           <Button
-            text='Get'
+            text="Get"
             callBack={getFromContractAdress}
-            padding='0.7rem 1rem'
+            padding="0.7rem 1rem"
           />
         </div>
 
         {selectWallet !== 'Private Key' && (
           <DropDown
-            title='Signature Type'
+            title="Signature Type"
             placeholder={'Normal'}
             items={signatureData}
           />
         )}
 
         <DropDown
-          title='Mode'
+          title="Mode"
           placeholder={'Normal'}
           items={modeData}
           callBack={onModeChange}
@@ -212,7 +251,7 @@ const AutoMint = ({ callBack }) => {
 
         {console.log(mintAbi)}
         <DropDown
-          title='Mint Function'
+          title="Mint Function"
           placeholder={'Mint -[1]'}
           items={mintAbi?.items || []}
           defaultValue={mintAbi?.defaultValue || []}
@@ -220,7 +259,7 @@ const AutoMint = ({ callBack }) => {
         />
 
         {/* Mint function input generating */}
-        <div className='container__2row-input'>
+        <div className="container__2row-input">
           {mintInputs.map((item, index) => (
             <Fragment key={index}>
               <Input
@@ -232,16 +271,16 @@ const AutoMint = ({ callBack }) => {
           ))}
         </div>
 
-        <div className='container__multi-input'>
+        <div className="container__multi-input">
           <Input
-            title='Mint Price *'
-            placeholder='[1]'
+            title="Mint Price *"
+            placeholder="[1]"
             callBack={onSetMintPrice}
             value={edit?.current?.mintPrice}
           />
 
           {selectWallet === 'Private Key' && (
-            <Input title='Ton Count/Repeat' placeholder='3' />
+            <Input title="Ton Count/Repeat" placeholder="3" />
           )}
         </div>
 
@@ -251,35 +290,40 @@ const AutoMint = ({ callBack }) => {
           callBack={onButtonGroupChange}
         />
 
-        {activeBtn === 'Multiplier' && <Proggress min={0} max={100} sign='%' />}
+        {activeBtn === 'Multiplier' && <Proggress min={0} max={100} sign="%" />}
 
         {activeBtn === 'Custom' && (
-          <div className='container__multi-input'>
-            <DropDown
-              title='Max Fee Per Gas'
+          <div className="container__multi-input">
+            <Input
+              title="Max Fee Per Gas"
+              type={'number'}
               placeholder={'8'}
-              items={dropdownData}
-              fontSize='1rem'
+              callBack={(value) => setMaxFeePerGas(value)}
+              value={maxFeePerGas}
+              // fontSize="1rem"
             />
-            <DropDown
-              title='Max Peiority Fee'
+            <Input
+              title="Max Peiority Fee"
               placeholder={'8'}
-              items={dropdownData}
-              fontSize='1rem'
+              type={'number'}
+              callBack={maxPeiorityFeeHandler}
+              value={maxPriorityFeePerGas}
+              // fontSize="1rem"
             />
-            <DropDown
-              title='Gas Limit'
+            {/* <Input
+              title="Gas Limit"
               placeholder={'8'}
-              items={dropdownData}
-              fontSize='1rem'
-            />
+              callBack={() => ''}
+              value={edit?.current?.mintPrice}
+              fontSize="1rem"
+            /> */}
           </div>
         )}
 
         {mode !== 'Main Flag' && (
-          <div className='container__multi-input'>
+          <div className="container__multi-input">
             <DropDown
-              title='Flip State Function'
+              title="Flip State Function"
               placeholder={'Mint -[1]'}
               items={flagAbi?.items || []}
               defaultValue={flagAbi?.defaultValue || []}
@@ -289,23 +333,23 @@ const AutoMint = ({ callBack }) => {
         )}
         {/* Flag function input generating */}
         {flagOutputs.map((item, index) => (
-          <div className='container__multi-input' key={index}>
-            <Input title={item.type} placeholder={item.type} />
+          <div className="container__multi-input" key={index}>
+            <Input title={`baseURI { ${item.type} }`} placeholder={item.type} />
           </div>
         ))}
 
         <Input
-          title='Custom Hex Data'
-          placeholder='dsf21135413541sdfa'
+          title="Custom Hex Data"
+          placeholder="dsf21135413541sdfa"
           callBack={getContractAddress}
         />
 
         {activeBtn !== 'Multiplier' && (
-          <div className='container__multi-input'>
+          <div className="container__multi-input">
             {activeBtn !== 'Custom' && (
               <Input
-                title='Custom Gas Limit'
-                placeholder='50000'
+                title="Custom Gas Limit"
+                placeholder="50000"
                 callBack={getContractAddress}
               />
             )}
@@ -314,44 +358,44 @@ const AutoMint = ({ callBack }) => {
           </div>
         )}
 
-        <Switch title='Timer Enable?' mode='row' />
+        <Switch title="Timer Enable?" mode="row" />
 
-        <div className='container__multi-input'>
+        <div className="container__multi-input">
           <DropDown
-            title='Years'
+            title="Years"
             placeholder={'8'}
             items={flagAbi?.items || []}
             callBack={flagCallBack}
           />
           <DropDown
-            title='Mounth'
+            title="Mounth"
             placeholder={'8'}
             items={flagAbi?.items || []}
             callBack={flagCallBack}
           />
           <DropDown
-            title='Day'
+            title="Day"
             placeholder={'8'}
             items={flagAbi?.items || []}
             callBack={flagCallBack}
           />
         </div>
 
-        <div className='container__multi-input'>
+        <div className="container__multi-input">
           <DropDown
-            title='Hours'
+            title="Hours"
             placeholder={'8'}
             items={flagAbi?.items || []}
             callBack={flagCallBack}
           />
           <DropDown
-            title='Minutes'
+            title="Minutes"
             placeholder={'8'}
             items={flagAbi?.items || []}
             callBack={flagCallBack}
           />
           <DropDown
-            title='Seconds'
+            title="Seconds"
             placeholder={'8'}
             items={flagAbi?.items || []}
             callBack={flagCallBack}
@@ -364,7 +408,7 @@ const AutoMint = ({ callBack }) => {
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AutoMint
+export default AutoMint;

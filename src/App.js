@@ -1,8 +1,8 @@
 import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from './routes/index';
-import './styles/app.scss';
 import Header from './components/header/Header2';
 import 'react-toastify/dist/ReactToastify.css';
+import './styles/app.scss';
 import { ToastContainer } from 'react-toastify';
 import MintContextProvider from './contexts/autoMintContext';
 import SnipeContextProvider from './contexts/snipeContext';
