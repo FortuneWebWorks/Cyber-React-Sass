@@ -1,6 +1,10 @@
 import { ethers } from 'ethers';
 import Node from './node';
 
+const r = async() => {
+  
+}
+
 class MetaMask {
   constructor(ethereum) {
     this.ethereum = ethereum;
