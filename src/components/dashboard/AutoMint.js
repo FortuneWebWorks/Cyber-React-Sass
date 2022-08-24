@@ -1,4 +1,4 @@
-import { Fragment, useContext } from 'react';
+import { Fragment, useContext, useEffect } from 'react';
 import 'styles/dashboard/autoMint.scss';
 import DropDown from 'components/DropDown';
 import Input from 'components/Input';
@@ -55,13 +55,18 @@ const AutoMint = ({ callBack }) => {
     setMode,
     tasks,
     setTasks,
+    setMintPrice,
     mintPrice,
     mintInputsRendered,
     edit,
     maxFeePerGas,
     setMaxFeePerGas,
     maxPriorityFeePerGas,
-    setMaxPriorityFeePerGas
+    setMaxPriorityFeePerGas,
+    gasLimit,
+    setGasLimit,
+    estimatedTotal,
+    setEstimatedTotal
   } = useContext(AutoMintContext);
   const node = new ApiHandler();
   const wallet = new WalletsHandler();
@@ -121,10 +126,6 @@ const AutoMint = ({ callBack }) => {
     setMode(key);
   };
 
-  const onSetMintPrice = (value) => {
-    mintPrice.current = value;
-  };
-
   const onMintInputsChange = (value, title) => {
     mintInputsRendered.current = {
       ...mintInputsRendered.current,
@@ -150,36 +151,48 @@ const AutoMint = ({ callBack }) => {
 
     if (editTarget) {
       editTarget.contractAddress = contractAddress.current;
-      editTarget.mintPrice = mintPrice.current;
+      editTarget.mintPrice = mintPrice;
       editTarget.mode = mode;
     } else {
       // console.log({
       //   ...tasks,
       //   id: tasks.length,
       //   contractAddress: contractAddress.current,
-      //   mintPrice: mintPrice.current,
+      //   mintPrice: mintPrice,
       //   fee: 12,
       //   mode: mode,
       //   status: 'idl'
       // });
 
       const calculateData = {
-        value: mintPrice.current,
+        value: mintPrice,
         maxFeePerGas,
-        maxPriorityFeePerGas
+        maxPriorityFeePerGas,
+        gasLimit,
+        gasMultiplier: null,
+        gasInHeader: null
       };
 
       console.log(calculateData);
 
       // Prev code **
-      // wallet.calculateEtherValue()
+      wallet
+        .calculateEtherValue(
+          mintPrice,
+          maxFeePerGas,
+          maxPriorityFeePerGas,
+          gasLimit,
+          null,
+          null
+        )
+        .then((data) => console.log(data));
 
       // setTasks((prev) => [
       //   ...prev,
       // {
       //   id: tasks.length,
       //   contractAddress: contractAddress.current,
-      //   mintPrice: mintPrice.current,
+      //   mintPrice: mintPrice,
       //   fee: 12,
       //   mode: mode,
       //   status: 'idl'
@@ -191,6 +204,35 @@ const AutoMint = ({ callBack }) => {
 
     // callBack()
   };
+
+  useEffect(() => {
+    console.log('object');
+
+    const calculateData = {
+      value: mintPrice,
+      maxFeePerGas,
+      maxPriorityFeePerGas,
+      gasLimit,
+      gasMultiplier: null,
+      gasInHeader: null
+    };
+
+    // Prev code **
+    wallet
+      .calculateEtherValue(
+        mintPrice,
+        maxFeePerGas,
+        maxPriorityFeePerGas,
+        gasLimit,
+        null,
+        null
+      )
+      .then((data) => {
+        if (data && data !== NaN) {
+          setEstimatedTotal(data);
+        }
+      });
+  }, [mintPrice, maxFeePerGas, maxPriorityFeePerGas, gasLimit]);
 
   return (
     <div className="container">
@@ -249,7 +291,6 @@ const AutoMint = ({ callBack }) => {
           value={edit?.current?.mode}
         />
 
-        {console.log(mintAbi)}
         <DropDown
           title="Mint Function"
           placeholder={'Mint -[1]'}
@@ -275,8 +316,10 @@ const AutoMint = ({ callBack }) => {
           <Input
             title="Mint Price *"
             placeholder="[1]"
-            callBack={onSetMintPrice}
-            value={edit?.current?.mintPrice}
+            type={'number'}
+            callBack={(value) => setMintPrice(value)}
+            value={mintPrice}
+            require={true}
           />
 
           {selectWallet === 'Private Key' && (
@@ -300,7 +343,7 @@ const AutoMint = ({ callBack }) => {
               placeholder={'8'}
               callBack={(value) => setMaxFeePerGas(value)}
               value={maxFeePerGas}
-              // fontSize="1rem"
+              fontSize="1rem"
             />
             <Input
               title="Max Peiority Fee"
@@ -308,15 +351,16 @@ const AutoMint = ({ callBack }) => {
               type={'number'}
               callBack={maxPeiorityFeeHandler}
               value={maxPriorityFeePerGas}
-              // fontSize="1rem"
+              fontSize="1rem"
             />
-            {/* <Input
+            <Input
               title="Gas Limit"
               placeholder={'8'}
-              callBack={() => ''}
-              value={edit?.current?.mintPrice}
+              type={'number'}
+              callBack={(value) => setGasLimit(value)}
+              value={gasLimit}
               fontSize="1rem"
-            /> */}
+            />
           </div>
         )}
 
@@ -354,7 +398,7 @@ const AutoMint = ({ callBack }) => {
               />
             )}
 
-            <Result />
+            <Result value={estimatedTotal} />
           </div>
         )}
 
