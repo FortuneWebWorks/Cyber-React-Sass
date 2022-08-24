@@ -27,8 +27,14 @@ const Header = () => {
   }, []);
 
   const metaMask = new MetaMask(provider);
+  const node = new Node();
 
-  const handleConnectWallet = () => {
+  const handleConnectWallet = async () => {
+    const contract = await node.checkContract(
+      '0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d'
+    );
+    console.log(contract);
+    /*
     metaMask.onClickConnect().then((item) => {
       if (item.status === 400) {
         toast(
@@ -45,9 +51,8 @@ const Header = () => {
         sessionStorage.setItem('key', item.content.address);
       }
     });
+    */
   };
-
-  const node = new Node();
 
   useEffect(() => {
     setInterval(async () => {
@@ -92,8 +97,7 @@ const Header = () => {
 
           <button
             className="header__connect-wallet"
-            onClick={handleConnectWallet}
-          >
+            onClick={handleConnectWallet}>
             {wallet
               ? `${wallet.substring(0, 5)}...${wallet.substring(
                   wallet.length - 5

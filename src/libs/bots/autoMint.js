@@ -25,6 +25,8 @@ class AutoMint {
     gasLimit,
     maxFeePerGas,
     maxPriorityFeePerGas,
+    gasMultiplier,
+    gasInHeader,
     contractAddress,
     mintAbi,
     mintArgs
@@ -86,7 +88,7 @@ class AutoMint {
     }
   };
 
-  sendData = async (txData, isFlashBot, privateKey = null) => {
+  sendData = async (txData, isFlashBot = false, privateKey = null) => {
     try {
       if (
         String(this.wallet).toLowerCase() === 'metamask' &&
@@ -103,7 +105,7 @@ class AutoMint {
     }
   };
 
-  sendPreSignData = async (rawTx) => {
+  sendPreSignData = async (rawTx, isFlashBot = false) => {
     try {
       const node = new Node(
         'https://eth.getblock.io/mainnet/?api_key=91953f06-fc0a-4a48-87fc-145e8cf6d385'
