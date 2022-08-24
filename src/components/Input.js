@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import '../styles/input.scss';
 
 const Input = ({
@@ -7,10 +8,18 @@ const Input = ({
   callBack,
   fontSize,
   value,
-  require
+  require,
+  cleaner,
+  uniqueType
 }) => {
+  const form = useRef(null);
+
+  useEffect(() => {
+    form.current.reset();
+  }, [cleaner]);
+
   return (
-    <div className="input__container">
+    <form className="input__container" ref={form}>
       <div
         className={`input__title-contianer ${title.length > 22 ? 'over' : ''}`}>
         <span style={{ fontSize: fontSize || '' }} className="input__title">
@@ -25,7 +34,7 @@ const Input = ({
         defaultValue={value}
         required={require || false}
       />
-    </div>
+    </form>
   );
 };
 

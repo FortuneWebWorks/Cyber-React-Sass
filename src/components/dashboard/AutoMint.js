@@ -22,8 +22,8 @@ const dropdownData = [
 ];
 
 const selectWalletData = [
-  { title: 'MetaMask Wallet', data: 'MetaMask Wallet' },
-  { title: 'Burner Wallet', data: 'Burner Wallet' }
+  { title: 'MetaMask Wallet', data: 'metamask' },
+  { title: 'Burner Wallet', data: 'burner' }
 ];
 
 const signatureData = [
@@ -58,6 +58,7 @@ const AutoMint = ({ callBack }) => {
     setMintPrice,
     mintPrice,
     mintInputsRendered,
+    setMintInputsRendered,
     edit,
     maxFeePerGas,
     setMaxFeePerGas,
@@ -69,11 +70,11 @@ const AutoMint = ({ callBack }) => {
     setEstimatedTotal,
     multiplierProgress,
     setMultiplierProgress,
+    gwei,
     wallet
   } = useContext(AutoMintContext);
   const node = new ApiHandler();
-  const walletClass = new WalletsHandler();
-  const autoMintLib = new AutoMintLib();
+  const walletLib = new WalletsHandler();
 
   const getFromContractAdress = async () => {
     try {
@@ -108,9 +109,9 @@ const AutoMint = ({ callBack }) => {
   };
 
   const mintCallBack = (key, data) => {
-    setMintInputs(data.inputs);
+    setMintInputs(data);
 
-    mintInputsRendered.current = {};
+    setMintInputsRendered({});
   };
 
   const flagCallBack = (key, data) => {
@@ -118,7 +119,7 @@ const AutoMint = ({ callBack }) => {
   };
 
   const onSelectWalletChange = (key, data) => {
-    setSelectWallet(key);
+    setSelectWallet(data.data);
   };
 
   const onModeChange = (key, data) => {
@@ -126,10 +127,10 @@ const AutoMint = ({ callBack }) => {
   };
 
   const onMintInputsChange = (value, title) => {
-    mintInputsRendered.current = {
-      ...mintInputsRendered.current,
+    setMintInputsRendered((prev) => ({
+      ...prev,
       [title]: value
-    };
+    }));
   };
 
   const maxPeiorityFeeHandler = (value, label, e) => {
@@ -144,8 +145,43 @@ const AutoMint = ({ callBack }) => {
 
   // Create Task
   const onCreateTask = () => {
-    // Placeholder for validate
+    const test = VcheckValidateMintInputs(
+      mintInputs,
+      Object.values(mintInputsRendered)
+    );
+    console.log(test);
+    if (test.status !== 200) {
+      toast(test.content.message, {
+        type: 'error',
+        style: { fontSize: '1.5rem' }
+      });
+    }
+    if (selectWallet === 'metamask' && mode === 'presign') {
+      // generatetxdata needs to get call && first argument down here needs to change
+      const autoMintLib = new AutoMintLib('ethereum', 'metamask');
 
+      const gasMultiplier = activeBtn === 'Auto' ? 1 : multiplierProgress;
+      const mintArgs = VcheckValidateMintInputs(
+        mintInputs,
+        Object.values(mintInputsRendered)
+      );
+
+      autoMintLib.generateTxData(
+        wallet,
+        mintPrice,
+        gasLimit,
+        maxFeePerGas,
+        maxPriorityFeePerGas,
+        gasMultiplier,
+        gwei,
+        contractAddress.current,
+        mintInputs,
+        mintArgs.inputData
+      );
+    }
+
+    // ** OLD CODE **
+    // Placeholder for validate
     const editTarget = tasks.filter((task) => task.id === edit.current.id)[0];
 
     if (editTarget) {
@@ -182,7 +218,7 @@ const AutoMint = ({ callBack }) => {
 
   useEffect(() => {
     if (activeBtn === 'Custom') {
-      walletClass
+      walletLib
         .calculateEtherValue(
           mintPrice,
           maxFeePerGas,
@@ -197,14 +233,14 @@ const AutoMint = ({ callBack }) => {
           }
         });
     } else if (activeBtn === 'Multiplier') {
-      walletClass
+      walletLib
         .calculateEtherValue(
           mintPrice,
           maxFeePerGas,
           maxPriorityFeePerGas,
           gasLimit,
           multiplierProgress,
-          wallet
+          Number(gwei)
         )
         .then((data) => {
           if (data && data !== NaN) {
@@ -212,14 +248,14 @@ const AutoMint = ({ callBack }) => {
           }
         });
     } else {
-      walletClass
+      walletLib
         .calculateEtherValue(
           mintPrice,
           maxFeePerGas,
           maxPriorityFeePerGas,
           gasLimit,
           1,
-          wallet
+          Number(gwei)
         )
         .then((data) => {
           if (data && data !== NaN) {
@@ -234,7 +270,7 @@ const AutoMint = ({ callBack }) => {
     gasLimit,
     activeBtn,
     multiplierProgress,
-    wallet
+    gwei
   ]);
 
   return (
@@ -291,7 +327,7 @@ const AutoMint = ({ callBack }) => {
           placeholder={'Normal'}
           items={modeData}
           callBack={onModeChange}
-          value={edit?.current?.mode}
+          value={mode}
         />
 
         <DropDown
@@ -304,12 +340,14 @@ const AutoMint = ({ callBack }) => {
 
         {/* Mint function input generating */}
         <div className="container__2row-input">
-          {mintInputs.map((item, index) => (
+          {mintInputs?.inputs?.map((item, index) => (
             <Fragment key={index}>
               <Input
                 title={item.name}
                 placeholder={item.name}
                 callBack={onMintInputsChange}
+                cleaner={mintInputs}
+                uniqueType={item.type}
               />
             </Fragment>
           ))}
@@ -364,14 +402,14 @@ const AutoMint = ({ callBack }) => {
               value={maxPriorityFeePerGas}
               fontSize="1rem"
             />
-            <Input
+            {/* <Input
               title="Gas Limit"
               placeholder={'8'}
               type={'number'}
               callBack={(value) => setGasLimit(value)}
               value={gasLimit}
               fontSize="1rem"
-            />
+            /> */}
           </div>
         )}
 
@@ -399,15 +437,15 @@ const AutoMint = ({ callBack }) => {
           callBack={getContractAddress}
         />
 
-        {activeBtn !== 'Multiplier' && (
+        {activeBtn !== 'Auto' && (
           <div className="container__multi-input">
-            {activeBtn !== 'Custom' && (
-              <Input
-                title="Custom Gas Limit"
-                placeholder="50000"
-                callBack={getContractAddress}
-              />
-            )}
+            <Input
+              title="Custom Gas Limit"
+              placeholder="50000"
+              type={'number'}
+              value={gasLimit}
+              callBack={(value) => setGasLimit(value)}
+            />
 
             <Result value={estimatedTotal} />
           </div>

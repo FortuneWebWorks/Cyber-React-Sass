@@ -15,8 +15,7 @@ import { MetaMask, Node } from 'libs/wallets';
 const Header = () => {
   const navigate = useNavigate();
 
-  const { wallet, setwallet } = useContext(AutoMintContext);
-
+  const { setGwei, wallet, setwallet } = useContext(AutoMintContext);
   const [provider, setProvider] = useState({});
   const [gasValue, setgasValue] = useState(0);
 
@@ -36,14 +35,14 @@ const Header = () => {
       '0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d'
     );
     console.log(contract);
-    /*
+
     metaMask.onClickConnect().then((item) => {
       if (item.status === 400) {
         toast(
           item.content?.message ||
             'MetaMask Not Found ! \n Please Install MetaMask',
           {
-            type: 'error',
+            type: 'error'
           }
         );
       } else {
@@ -53,12 +52,12 @@ const Header = () => {
         sessionStorage.setItem('key', item.content.address);
       }
     });
-    */
   };
 
   useEffect(() => {
     setInterval(async () => {
       const response = await node.getGas();
+      setGwei(response);
       setgasValue(response);
     }, 10000);
     setInterval(async () => {

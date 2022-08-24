@@ -4,7 +4,7 @@ export const AutoMintContext = createContext();
 
 const MintContextProvider = ({ children }) => {
   const contractAddress = useRef('');
-  const mintInputsRendered = useRef([]);
+  const [mintInputsRendered, setMintInputsRendered] = useState([]);
   const edit = useRef(null);
   const [mintPrice, setMintPrice] = useState(0);
   const [flagAbi, setFlagAbi] = useState([]);
@@ -13,13 +13,14 @@ const MintContextProvider = ({ children }) => {
   const [flagOutputs, setFlagOutputs] = useState([]);
   const [activeBtn, setActiveBtn] = useState('Auto');
   const [selectWallet, setSelectWallet] = useState('');
-  const [wallet, setwallet] = useState('');
+  const [gwei, setGwei] = useState(0);
   const [maxFeePerGas, setMaxFeePerGas] = useState(0);
   const [maxPriorityFeePerGas, setMaxPriorityFeePerGas] = useState(0);
   const [estimatedTotal, setEstimatedTotal] = useState(0);
   const [gasLimit, setGasLimit] = useState(0);
   const [multiplierProgress, setMultiplierProgress] = useState(0);
   const [mode, setMode] = useState('');
+  const [wallet, setwallet] = useState('');
 
   // All tasks
   const [tasks, setTasks] = useState([]);
@@ -30,6 +31,7 @@ const MintContextProvider = ({ children }) => {
   const value = {
     contractAddress,
     mintInputsRendered,
+    setMintInputsRendered,
     edit,
     setMintPrice,
     mintPrice,
@@ -45,8 +47,8 @@ const MintContextProvider = ({ children }) => {
     setActiveBtn,
     selectWallet,
     setSelectWallet,
-    wallet,
-    setwallet,
+    gwei,
+    setGwei,
     mode,
     setMode,
     tasks,
@@ -62,7 +64,9 @@ const MintContextProvider = ({ children }) => {
     estimatedTotal,
     setEstimatedTotal,
     multiplierProgress,
-    setMultiplierProgress
+    setMultiplierProgress,
+    wallet,
+    setwallet
   };
 
   return (
