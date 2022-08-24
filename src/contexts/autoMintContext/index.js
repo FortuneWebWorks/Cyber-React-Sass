@@ -13,10 +13,12 @@ const MintContextProvider = ({ children }) => {
   const [flagOutputs, setFlagOutputs] = useState([]);
   const [activeBtn, setActiveBtn] = useState('Auto');
   const [selectWallet, setSelectWallet] = useState('');
+  const [wallet, setwallet] = useState('');
   const [maxFeePerGas, setMaxFeePerGas] = useState(0);
   const [maxPriorityFeePerGas, setMaxPriorityFeePerGas] = useState(0);
   const [estimatedTotal, setEstimatedTotal] = useState(0);
   const [gasLimit, setGasLimit] = useState(0);
+  const [multiplierProgress, setMultiplierProgress] = useState(0);
   const [mode, setMode] = useState('');
 
   // All tasks
@@ -43,6 +45,8 @@ const MintContextProvider = ({ children }) => {
     setActiveBtn,
     selectWallet,
     setSelectWallet,
+    wallet,
+    setwallet,
     mode,
     setMode,
     tasks,
@@ -56,7 +60,9 @@ const MintContextProvider = ({ children }) => {
     gasLimit,
     setGasLimit,
     estimatedTotal,
-    setEstimatedTotal
+    setEstimatedTotal,
+    multiplierProgress,
+    setMultiplierProgress
   };
 
   return (

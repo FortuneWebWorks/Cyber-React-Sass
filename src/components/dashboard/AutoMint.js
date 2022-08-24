@@ -66,10 +66,13 @@ const AutoMint = ({ callBack }) => {
     gasLimit,
     setGasLimit,
     estimatedTotal,
-    setEstimatedTotal
+    setEstimatedTotal,
+    multiplierProgress,
+    setMultiplierProgress,
+    wallet
   } = useContext(AutoMintContext);
   const node = new ApiHandler();
-  const wallet = new WalletsHandler();
+  const walletClass = new WalletsHandler();
   const autoMintLib = new AutoMintLib();
 
   const getFromContractAdress = async () => {
@@ -112,10 +115,6 @@ const AutoMint = ({ callBack }) => {
 
   const flagCallBack = (key, data) => {
     setFlagOutputs(data.outputs);
-  };
-
-  const onButtonGroupChange = (activeBtn) => {
-    setActiveBtn(activeBtn);
   };
 
   const onSelectWalletChange = (key, data) => {
@@ -163,30 +162,6 @@ const AutoMint = ({ callBack }) => {
       //   mode: mode,
       //   status: 'idl'
       // });
-
-      const calculateData = {
-        value: mintPrice,
-        maxFeePerGas,
-        maxPriorityFeePerGas,
-        gasLimit,
-        gasMultiplier: null,
-        gasInHeader: null
-      };
-
-      console.log(calculateData);
-
-      // Prev code **
-      wallet
-        .calculateEtherValue(
-          mintPrice,
-          maxFeePerGas,
-          maxPriorityFeePerGas,
-          gasLimit,
-          null,
-          null
-        )
-        .then((data) => console.log(data));
-
       // setTasks((prev) => [
       //   ...prev,
       // {
@@ -206,33 +181,61 @@ const AutoMint = ({ callBack }) => {
   };
 
   useEffect(() => {
-    console.log('object');
-
-    const calculateData = {
-      value: mintPrice,
-      maxFeePerGas,
-      maxPriorityFeePerGas,
-      gasLimit,
-      gasMultiplier: null,
-      gasInHeader: null
-    };
-
-    // Prev code **
+    if (activeBtn === 'Custom') {
+      walletClass
+        .calculateEtherValue(
+          mintPrice,
+          maxFeePerGas,
+          maxPriorityFeePerGas,
+          gasLimit,
+          null,
+          null
+        )
+        .then((data) => {
+          if (data && data !== NaN) {
+            setEstimatedTotal(data);
+          }
+        });
+    } else if (activeBtn === 'Multiplier') {
+      walletClass
+        .calculateEtherValue(
+          mintPrice,
+          maxFeePerGas,
+          maxPriorityFeePerGas,
+          gasLimit,
+          multiplierProgress,
+          wallet
+        )
+        .then((data) => {
+          if (data && data !== NaN) {
+            setEstimatedTotal(data);
+          }
+        });
+    } else {
+      walletClass
+        .calculateEtherValue(
+          mintPrice,
+          maxFeePerGas,
+          maxPriorityFeePerGas,
+          gasLimit,
+          1,
+          wallet
+        )
+        .then((data) => {
+          if (data && data !== NaN) {
+            setEstimatedTotal(data);
+          }
+        });
+    }
+  }, [
+    mintPrice,
+    maxFeePerGas,
+    maxPriorityFeePerGas,
+    gasLimit,
+    activeBtn,
+    multiplierProgress,
     wallet
-      .calculateEtherValue(
-        mintPrice,
-        maxFeePerGas,
-        maxPriorityFeePerGas,
-        gasLimit,
-        null,
-        null
-      )
-      .then((data) => {
-        if (data && data !== NaN) {
-          setEstimatedTotal(data);
-        }
-      });
-  }, [mintPrice, maxFeePerGas, maxPriorityFeePerGas, gasLimit]);
+  ]);
 
   return (
     <div className="container">
@@ -330,10 +333,18 @@ const AutoMint = ({ callBack }) => {
         <ButtonGroup
           items={['Auto', 'Multiplier', 'Custom']}
           activeDefault={0}
-          callBack={onButtonGroupChange}
+          callBack={(value) => setActiveBtn(value)}
         />
 
-        {activeBtn === 'Multiplier' && <Proggress min={0} max={100} sign="%" />}
+        {activeBtn === 'Multiplier' && (
+          <Proggress
+            min={0}
+            max={100}
+            sign="%"
+            value={multiplierProgress}
+            callBack={(value) => setMultiplierProgress(value)}
+          />
+        )}
 
         {activeBtn === 'Custom' && (
           <div className="container__multi-input">

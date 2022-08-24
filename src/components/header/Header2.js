@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'styles/header/header2.scss';
 import { ReactComponent as DiscordIcon } from 'assets/images/discord.svg';
@@ -8,14 +8,16 @@ import { ReactComponent as GasIcon } from 'assets/images/gas.svg';
 import HeaderMenu from './HeaderMenu';
 import Search from 'components/Search';
 import { toast } from 'react-toastify';
+import { AutoMintContext } from 'contexts/autoMintContext';
 
 import { MetaMask, Node } from 'libs/wallets';
 
 const Header = () => {
   const navigate = useNavigate();
 
+  const { wallet, setwallet } = useContext(AutoMintContext);
+
   const [provider, setProvider] = useState({});
-  const [wallet, setwallet] = useState('');
   const [gasValue, setgasValue] = useState(0);
 
   useEffect(() => {

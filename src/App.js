@@ -13,10 +13,10 @@ const App = () => {
   return (
     <div className="App">
       <Router>
-        <Header />
         <MintContextProvider>
           <SnipeContextProvider>
             <BulkContextProvider>
+              <Header />
               <Routes />
             </BulkContextProvider>
           </SnipeContextProvider>
